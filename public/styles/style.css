@@ -12,7 +12,8 @@ body
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #e0e5ec;
+  background-color: #8EC5FC;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
 }
 
 .player
@@ -22,7 +23,12 @@ body
   padding: 20px 14px 8px 14px;
   border: none;
   border-radius: 10px;
-  box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+  background: rgba( 255, 255, 255, 0.15 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 15px );
+  -webkit-backdrop-filter: blur( 15px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .imgBx img
@@ -32,7 +38,7 @@ body
   height: auto;
   border: none;
   border-radius: 10px;
-  box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .player audio
@@ -74,18 +80,20 @@ h1{
 .box1{
    background: #e0e5ec;
     border: 0;
-    border-radius: 2%;
-    box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .button{
     background: #e0e5ec;
     border: 0;
+    border-radius: 15px;
     width: 70px;
-    box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .name{
+    margin-top: 20px;
     font-size: 25px;
 }
 
