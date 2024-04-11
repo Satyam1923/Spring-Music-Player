@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Steam</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <h1>Songer</h1>
+    <form action="/search">
+        <input type="text" name="song" id="song" required>
+        <input type="submit" value="search">
+    </form>
+
+    <% if(data !== null && data !== undefined){ %>
+        <ul>
+            <% if(data.img){ %>
+            <img src='<%= data.img %>'  height="250px" width="250px">
+            <% }else{ %>
+                <img src="/public/images/no-image.jpg"  height="250px" width="250px">
+                <% } %>
+            <li>Name : <%= data.name %></li>
+            <li>Artist : <%= data.artist %></li>
+            <li>Year : <%= data.year %></li>
+        </ul>
+        <audio id="audioPlayer" controls autoplay>
+            <source src="<%= data.url %>" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    <% } %>
+</body>
+</html>
