@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Steam</title>
-    <link rel="stylesheet" href="/styles/style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <title>Music Stream</title>
 </head>
 <body>
-    <h1>Songer</h1>
-    <form action="/search">
-        <input type="text" name="song" id="song" required>
-        <input type="submit" value="search">
-    </form>
-
+  
+    <div class="player">
+      <h1 >Songer</h1>
+      <div class="search">
+      <form action="/search" class="box">
+        <input type="text" name="song" id="song" class="box1" required>
+        <input type="submit" value="search" class="button">
+      </form>
+      </div>
     <% if(data !== null && data !== undefined){ %>
-        <ul>
-            <% if(data.img){ %>
-            <img src='<%= data.img %>'  height="250px" width="250px">
-            <% }else{ %>
-                <img src="/public/images/no-image.jpg"  height="250px" width="250px">
-                <% } %>
-            <li>Name : <%= data.name %></li>
-            <li>Artist : <%= data.artist %></li>
-            <li>Year : <%= data.year %></li>
-        </ul>
-        <audio id="audioPlayer" controls autoplay>
-            <source src="<%= data.url %>" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
+    <div class="imgBx">
+    <% if(data.img){ %>
+    <img src='<%= data.img %>' height="250px" width="250px">
+    <% }else{ %>
+    <img src="/images/no-image.jpg" height="250px" width="250px">
     <% } %>
+     </div>
+
+    <ul class="details">
+    <li class="name"><%= data.name %></li>
+    <li class="author"> <%= data.artist %></li>
+    </ul>
+  <audio controls>
+    <source src="<%= data.url %>">
+  </audio>
+  </div>
+  <% } %>
 </body>
 </html>

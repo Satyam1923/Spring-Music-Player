@@ -1,32 +1,88 @@
-
-.card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
-.card img {
-    border-radius: 5px;
-    margin-bottom: 10px;
-    max-width: 100%;
+body
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #e0e5ec;
 }
 
-.card ul {
+.player
+{
+  width: 300px;
+  background: #e0e5ec;
+  padding: 20px 14px 8px 14px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+}
+
+.imgBx img
+{
+    margin-top: 10px;
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 10px;
+  box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+}
+
+.player audio
+{
+  width: 100%;
+  border-radius: 6px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 0;
+  border: none;
+  box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+}
+
+
+li{
     list-style-type: none;
-    padding: 0;
 }
 
-.card li {
-    margin-bottom: 8px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 8px;
+.details{
+    text-align: center;
+    gap: 2px;
 }
 
-#audioPlayer {
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+h1{
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 3rem;
+}
+
+.box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 5%;
+    gap: 5%;
+    height: 30px;
+}
+
+.box1{
+    border-radius: 5%;
+    box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+}
+
+.button{
+    background: #e0e5ec;
+    border: 0;
+    width: 70px;
+    box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
+}
+
+.name{
+    font-size: 25px;
 }
