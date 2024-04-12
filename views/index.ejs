@@ -1,109 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/logo.png" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" type="image/x-icon" />
   <title>Music Stream</title>
 </head>
 <body>
-  
-  <div class="player">
-    <div class="search">
-      <form  class="box">
-        <input type="text" name="song" id="song" class="box1"  required>
-        <input id="get" type="submit" value="Search" class="button" formaction="/search">
-      </form>
-    </div>
-    <% if(data !== null && data !== undefined){ %>
-    <div class="imgBx">
-      <% if(data.img){ %>
-      <img src='<%= data.img %>' height="250px" width="250px">
-      <% }else{ %>
-      <img src="images/no-image.png" height="250px" width="250px">
+  <div class="ui">
+    <div class="player">
+      <% if(data !== null && data !== undefined){ %>
+      <div class="imgBx">
+        <img src="<%= data[0].img %>" height="250px" width="250px" />
+      </div>
+
+      <ul class="details">
+        <li class="name"><%= data[0].name %></li>
+        <li class="author"><%= data[0].artist %></li>
+      </ul>
+
+      <div class="controls">
+        <div class="seekbar">
+          <span id="currentTime">00:00</span>
+          <input type="range" id="seekSlider" min="0" max="100" value="0" />
+          <span id="duration">00:00</span>
+        </div>
+        <div class="btn-cntrl">
+          <button id="seekBackward">
+            <img src="images/backward.png" height="20px" width="20px" alt="" />
+          </button>
+          <button id="playPauseBtn">
+            <img id="buttonicon" src="images/play.png" height="30px" width="30px" alt="" />
+          </button>
+          <button id="seekForward">
+            <img src="images/fw.png" height="20px" width="20px" alt="" />
+          </button>
+        </div>
+      </div>
+
+      <audio id="music" autoplay>
+        <source src="<%= data[0].url %>" />
+      </audio>
+      <% } else { %>
+      <div class="st">
+        <p>What do you want to listen to ?</p>
+      </div>
       <% } %>
     </div>
 
-    <ul class="details">
-      <li class="name"><%= data.name %></li>
-      <li class="author"><%= data.artist %></li>
-    </ul>
-
-    <div class="controls">
-      <div class="seekbar">
-      <span id="currentTime">00:00</span>
-      <input type="range" id="seekSlider" min="0" max="100" value="0">
-      <span id="duration">00:00</span>
+    <div class="search-box">
+      <div class="search">
+        <form class="box">
+          <input type="text" name="song" id="song" class="box1" required />
+          <input id="get" type="image" src="images/search.svg" alt="search" class="button" formaction="/search" />
+        </form>
       </div>
-      <div class="btn-cntrl">
-      <button id="seekBackward"><img src="images/backward.png" height="20px" width="20px" alt=""></button>
-     <button id="playPauseBtn"><img  id="buttonicon" src="images/play.png" height="30px" width="30px" alt=""></button>
-     <button id="seekForward"><img src="images/fw.png" height="20px" width="20px" alt=""></button>
-     </div>
+
+        <div class="results">
+          <% if(data !== null && data !== undefined){ %>
+              <% data.forEach(element => { %>
+                  <div class="result-item" data-url="<%= element.url %>">
+                      <div class="songresult">
+                          <img src="<%= element.img %>" height="20px" width="20px" />
+                          <div class="search-details">
+                              <h4><%= element.name %></h4>
+                              <p><%= element.artist %> - <%= element.year %></p>
+                          </div>
+                      </div>
+                  </div>
+              <% }); %>
+          <% } else { %>
+              <p>No results found.</p>
+          <% } %>
+      </div>
+      
+      </div>
     </div>
-
-    <audio id="music"  autoplay>
-      <source src="<%= data.url %>">
-    </audio>
-    <% } %>
   </div>
-
-  <script>
-  const audio = document.getElementById('music');
-const playPauseBtn = document.getElementById('playPauseBtn');
-const seekSlider = document.getElementById('seekSlider');
-const currentTime = document.getElementById('currentTime');
-const duration = document.getElementById('duration');
-const icon = document.getElementById('buttonicon');
-const seekfwd = document.getElementById("seekForward");
-const seekBck = document.getElementById("seekBackward");
-function togglePlayPause() {
-  if (audio.paused) {
-    audio.play();
-    icon.setAttribute('src',"images/play.png");
-  } else {
-    audio.pause();
-    icon.setAttribute('src',"images/pause.png")
-  }
-}
-
-function updateProgress() {
-  const progress = (audio.currentTime / audio.duration) * 100;
-  seekSlider.value = progress;
-  const mins = Math.floor(audio.currentTime / 60);
-  const secs = Math.floor(audio.currentTime % 60);
-  currentTime.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-}
-
-function seek(e) {
-  const seekTime = (audio.duration / 100) * e.target.value;
-  audio.currentTime = seekTime;
-}
-
-function seekforward(){
-  audio.currentTime += 10;
-}
-
-function seekbackward(){
-  audio.currentTime -= 10;
-}
-playPauseBtn.addEventListener('click', togglePlayPause);
-audio.addEventListener('timeupdate', updateProgress);
-seekSlider.addEventListener('input', seek);
-seekfwd.addEventListener('click', seekforward);
-seekBck.addEventListener('click', seekbackward);
-
-audio.addEventListener('loadedmetadata', () => {
-  const mins = Math.floor(audio.duration / 60);
-  const secs = Math.floor(audio.duration % 60);
-  duration.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-});
-
-  </script>
+<script>
+  document.getElementById('get').innerHTML = '<img src="images/search.svg" />';
+</script>
+  <script src="js/script.js"></script>
 </body>
 </html>
