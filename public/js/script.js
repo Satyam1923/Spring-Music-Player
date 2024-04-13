@@ -46,12 +46,11 @@
       
       document.querySelectorAll('.result-item').forEach(item => {
         item.addEventListener('click', () => {
-            item.classList.add('click-animation'); // Add click animation class
+            item.classList.add('click-animation'); 
             setTimeout(() => {
-                item.classList.remove('click-animation'); // Remove click animation class after 300ms
+                item.classList.remove('click-animation'); 
             }, 300);
     
-            // Your existing code to handle audio playback and other functionality
             const imgElement = document.querySelector('.imgBx img');
             const nameElement = document.querySelector('.details .name');
             const authorElement = document.querySelector('.details .author');
@@ -65,7 +64,7 @@
             nameElement.textContent = name;
             authorElement.textContent = `${artist} - ${year}`;
     
-            const url = item.getAttribute('data-url'); // Accessing data-url attribute
+            const url = item.getAttribute('data-url'); 
     
             const audio = document.getElementById("music");
             audio.src = url;
