@@ -16,7 +16,8 @@ body {
 }
 
 .player {
-  width: 300px;
+  width: 70vh;
+  height: 90vh; 
   padding: 20px 14px 8px 14px;
   border: none;
   border-top-left-radius: 15px;
@@ -25,10 +26,15 @@ body {
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .search-box {
-  width: 300px;
+  width: 70vh;
+  height: 90vh;
+  max-height: 90vh; 
   padding: 20px 14px 8px 14px;
   border: none;
   border-top-right-radius: 15px;
@@ -41,11 +47,17 @@ body {
   flex-direction: column;
 }
 
+.imgBx{
+  display: flex;
+  justify-content: center;
+}
+
 .imgBx img {
-  width: 100%;
-  height: auto;
+  width:360px;
+  height: 360px;
   border: none;
   border-radius: 10px;
+  align-items: center;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
@@ -70,6 +82,9 @@ li {
 }
 
 .details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   gap: 2px;
 }
@@ -103,7 +118,7 @@ li {
 
 .name {
   margin-top: 20px;
-  font-size: 25px;
+  font-size: x-large;
 }
 
 .controls {
@@ -113,6 +128,7 @@ li {
   justify-content: space-between;
   margin-top: 10px;
 }
+
 
 
 input[type="range"] {
@@ -133,6 +149,7 @@ input[type="range"] {
 }
 
 #playPauseBtn {
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,20 +161,38 @@ input[type="range"] {
 }
 
 #seekForward,
-#seekBackward {
-  margin-top: 8px;
+#seekBackward,
+#next,
+#previous {
   background: #e0e5ec;
   border: 0;
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  margin-top: 10px; 
 }
 
+#next,
+#previous {
+  width: 50px;
+  height: 50px;
+  margin-top: 15px; 
+}
+
+#seekForward,
+#seekBackward {
+  background: #e0e5ec;
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-top: 19px; 
+}
 
 .btn-cntrl {
   display: flex;
   flex-direction: row;
-  gap: 10px
+  gap: 5px
 }
 
 .ui {
@@ -176,7 +211,10 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow-y: auto;
+  align-items: center;
 }
+
 
 .songresult {
   display: flex;
@@ -185,7 +223,6 @@ input[type="range"] {
   border-radius: 5px;
   margin-bottom: 10px;
 }
-
 
 .songresult img {
   width: 50px;
@@ -208,10 +245,10 @@ input[type="range"] {
 }
 
 .result-item {
-  border-radius: 12px;
+  border-radius: 10px;
+  width: 98%;
 }
 
-.search-details
 @media (prefers-color-scheme: dark) {
   html {
     background-color: #000;
@@ -365,13 +402,13 @@ input[type="range"]:disabled::-moz-range-thumb {
   cursor: not-allowed;
 }
 
-#get,
-#song {
+#get{
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
 }
 
+#get
 
 .btn-cntrl button,
 #get,
@@ -393,3 +430,14 @@ input[type="range"]:disabled::-moz-range-thumb {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+.box{
+  gap: 10px;
+}
+
+#song{
+  width: 70%;
+}
+
+.name{
+  width: 300px;
+}

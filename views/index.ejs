@@ -32,10 +32,16 @@
         </div>
         <div class="btn-cntrl">
           <button id="seekBackward">
-            <img src="images/backward.png" height="20px" width="20px" alt="" />
+            <img src="images/backward.png" height="20px" width="20px" alt="previous" />
+          </button>
+          <button id="previous">
+            <img src="images/previous.png" height="20px" width="20px" alt="" />
           </button>
           <button id="playPauseBtn">
-            <img id="buttonicon" src="images/play.png" height="30px" width="30px" alt="" />
+            <img id="buttonicon" src="images/pause.png" height="30px" width="30px" alt="" />
+          </button>
+          <button id="next">
+            <img src="images/next.png" height="20px" width="20px" alt="next" />
           </button>
           <button id="seekForward">
             <img src="images/fw.png" height="20px" width="20px" alt="" />
@@ -63,26 +69,24 @@
 
         <div class="results">
           <% if(data !== null && data !== undefined){ %>
-              <% data.forEach(element => { %>
-                  <div class="result-item" data-url="<%= element.url %>">
-                      <div class="songresult">
-                          <img src="<%= element.img %>" height="20px" width="20px" />
-                          <div class="search-details">
-                              <h4><%= element.name %></h4>
-                              <p><%= element.artist %> - <%= element.year %></p>
-                          </div>
+            <% for (let i = 0; i < data.length; i++) { %>
+              <% const element = data[i]; %>
+              <div class="result-item" >
+                  <div class="songresult">
+                      <img src="<%= element.img %>" height="20px" width="20px" />
+                      <div class="search-details">
+                          <h4><%= element.name %></h4>
+                          <p><%= element.artist %> - <%= element.year %></p>
                       </div>
                   </div>
-              <% }); %>
+              </div>
+          <% } %>          
           <% } %>
       </div>
       
       </div>
     </div>
   </div>
-<script>
-  document.getElementById('get').innerHTML = '<img src="images/search.svg" />';
-</script>
-  <script src="js/script.js"></script>
+  <script differ src="js/script.js"></script>
 </body>
 </html>
