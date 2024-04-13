@@ -211,6 +211,7 @@ input[type="range"] {
   border-radius: 12px;
 }
 
+.search-details
 @media (prefers-color-scheme: dark) {
   html {
     background-color: #000;
@@ -371,6 +372,7 @@ input[type="range"]:disabled::-moz-range-thumb {
   -webkit-backdrop-filter: blur(15px);
 }
 
+
 .btn-cntrl button,
 #get,
 .result-item {
@@ -390,3 +392,4 @@ input[type="range"]:disabled::-moz-range-thumb {
 .result-item:active {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+
