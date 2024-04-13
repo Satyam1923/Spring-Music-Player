@@ -47,6 +47,9 @@ body {
   flex-direction: column;
 }
 
+.st p{
+  font-size: xx-large;
+}
 .imgBx{
   display: flex;
   justify-content: center;

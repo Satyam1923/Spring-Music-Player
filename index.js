@@ -1,13 +1,14 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 const cache = new Map();
 
 const app = express();
 const port = 3000;
 let name = "";
-
+app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
