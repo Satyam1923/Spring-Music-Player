@@ -46,7 +46,6 @@ app.get("/search", async (req, res) => {
     console.error("Failed to make request:", error.message);
     res.render("index.ejs", {
       error: "Error fetching song. Please try again later.",
-      data: null,
     });
   }
 });
