@@ -8,7 +8,6 @@ const cache = new Map();
 const app = express();
 const port = 3000;
 let name = "";
-app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -38,7 +37,7 @@ app.get("/search", async (req, res) => {
             img: result.image[2].url,
           }));
         cache.set(name, musicArray);
-        res.render("index.ejs", { data: musicArray });
+        res.render("index.ejs", { data: JSON.stringify(musicArray) });
       } else {
         res.render("index.ejs", { data: null });
       }

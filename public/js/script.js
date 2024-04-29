@@ -8,7 +8,6 @@ const seekfwd = document.getElementById("seekForward");
 const seekBck = document.getElementById("seekBackward");
 const next = document.getElementById("next");
 const previous = document.getElementById("previous");
-let globalData = [];
 let currplaying = 0;
 const p = async () => {
   try {
@@ -22,6 +21,7 @@ const p = async () => {
 };
 
 p();
+
 
 function togglePlayPause() {
   if (audio.paused) {
