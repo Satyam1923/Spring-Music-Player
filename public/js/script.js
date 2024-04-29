@@ -11,7 +11,7 @@ const previous = document.getElementById("previous");
 let currplaying = 0;
 const p = async () => {
   try {
-    const response = await fetch("http://localhost:3000/search1");
+    const response = await fetch("https://music-stream-a261.onrender.com/search1");
     const data = await response.json();
     globalData = data;
     console.log(data);
