@@ -9,6 +9,7 @@ const seekBck = document.getElementById("seekBackward");
 const next = document.getElementById("next");
 const previous = document.getElementById("previous");
 let currplaying = 0;
+let globalData = null;
 const p = async () => {
   try {
     const response = await fetch("https://music-stream-a261.onrender.com/search1");
