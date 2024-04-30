@@ -444,3 +444,19 @@ input[type="range"]:disabled::-moz-range-thumb {
 .name{
   width: 300px;
 }
+
+
+@media(max-width:1080px){
+  .ui{
+    display: flex;
+    flex-direction: column;
+  }
+   .player{
+    height: 600px;
+    max-width: 50vh;
+   }
+   .search-box{
+    max-width: 50vh;
+    height: 600px;
+   } 
+  }
