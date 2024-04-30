@@ -11,8 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #8EC5FC;
-  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+  background-color: #d9dbe6;
 }
 
 .player {
@@ -22,27 +21,21 @@ body {
   border: none;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
   display: flex;
   flex-direction: column;
+  background-color: #f1f4f5;
   justify-content: space-evenly;
 }
 
 .search-box {
-  width: 70vh;
+  width: 50vh;
   height: 90vh;
   max-height: 90vh; 
   padding: 20px 14px 8px 14px;
   border: none;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color:#e8ecef;
   display: flex;
   flex-direction: column;
 }
@@ -156,7 +149,7 @@ input[type="range"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e0e5ec;
+  background-color: white;
   border: 0;
   border-radius: 50%;
   width: 60px;
@@ -167,7 +160,7 @@ input[type="range"] {
 #seekBackward,
 #next,
 #previous {
-  background: #e0e5ec;
+  background: #f1f4f5;
   border: 0;
   border-radius: 50%;
   width: 40px;
@@ -184,7 +177,7 @@ input[type="range"] {
 
 #seekForward,
 #seekBackward {
-  background: #e0e5ec;
+  background: #f1f4f5;
   border: 0;
   border-radius: 50%;
   width: 40px;
@@ -201,7 +194,6 @@ input[type="range"] {
 .ui {
   display: flex;
   flex-direction: row;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 15px;
 }
 
@@ -406,12 +398,9 @@ input[type="range"]:disabled::-moz-range-thumb {
 }
 
 #get{
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+background-color: #5773ff;
 }
 
-#get
 
 .btn-cntrl button,
 #get,
