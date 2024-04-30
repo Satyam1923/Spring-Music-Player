@@ -14,7 +14,7 @@ let globalData = null;
 
 const p = async () => {
   try {
-    const response = await fetch("http://localhost:3030/search1");
+    const response = await fetch("https://music-stream-a261.onrender.com/search1");
     const data = await response.json();
     globalData = data;
     console.log(data);
