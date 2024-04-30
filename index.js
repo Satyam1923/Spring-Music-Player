@@ -14,7 +14,7 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
     res.render("index.ejs", { data: null });
 });
-c
+
 app.get("/search", async (req, res) => {
   name = req.query.song;
   try {
