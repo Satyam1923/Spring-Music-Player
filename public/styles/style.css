@@ -446,17 +446,14 @@ input[type="range"]:disabled::-moz-range-thumb {
 }
 
 
-@media(max-width:1080px){
-  .ui{
+@media(max-width: 768px) {
+  .ui {
     display: flex;
     flex-direction: column;
   }
-   .player{
+  
+  .player, .search-box {
     height: 600px;
-    max-width: 50vh;
-   }
-   .search-box{
-    max-width: 50vh;
-    height: 600px;
-   } 
+    width: 40vh;
   }
+}
