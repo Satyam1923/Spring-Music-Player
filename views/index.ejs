@@ -15,6 +15,7 @@
   <div class="ui">
     <div class="player">
       <% if(data !== null && data !== undefined){ %>
+        
       <div class="imgBx">
         <img src="<%= data[0].img %>" height="250px" width="250px" />
       </div>
@@ -63,7 +64,7 @@
       <div class="search">
         <form class="box">
           <input type="text" name="song" id="song" class="box1" required />
-          <input id="get" type="image" src="images/search.svg" alt="search" class="button" formaction="/search" />
+          <input id="get" type="image" src="images/search.svg" alt="search" class="button" onclick="p()" formaction="/search" />
         </form>
       </div>
 
