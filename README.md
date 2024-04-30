@@ -28,8 +28,6 @@ The front end of a music player application built with React by integrating Fire
 
 
 https://music-stream-a261.onrender.com/
-### Note
-Need reload page after search song in order to fetch data
 
 ## Getting Started
 1. Clone the repo
