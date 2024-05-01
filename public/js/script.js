@@ -130,6 +130,7 @@ for (let i = 0; i < items.length; i++) {
   });
 }
 
+
 playPauseBtn.addEventListener("click", togglePlayPause);
 audio.addEventListener("timeupdate", updateProgress);
 seekSlider.addEventListener("input", seek);
