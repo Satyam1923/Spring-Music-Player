@@ -1,12 +1,11 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
-import cors from "cors";
 
 const cache = new Map();
 
 const app = express();
-const port = 3000;
+const port = 3030;
 let name = "";
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,7 +36,7 @@ app.get("/search", async (req, res) => {
             img: result.image[2].url,
           }));
         cache.set(name, musicArray);
-        res.render("index.ejs", { data: JSON.stringify(musicArray) });
+        res.render("index.ejs", { data: musicArray});
       } else {
         res.render("index.ejs", { data: null });
       }
