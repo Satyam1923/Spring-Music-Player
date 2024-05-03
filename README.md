@@ -9,7 +9,6 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 - Playback Controls
 - Top 10 search list
 - Loop Playback
-- Gradient glass effect UI
 
 ## Tech Stack
 
