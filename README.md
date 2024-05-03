@@ -46,7 +46,7 @@ node index.js
 
 4. Go to local host:
 ```sh
-http://localhost:3000/
+http://localhost:3030/
 ```
 ## Contributing
 
