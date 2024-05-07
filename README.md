@@ -90,7 +90,7 @@ git push origin fix-issue-<ISSUE-NUMBER>
 8. Open a Pull Request 
 
 ## Enhancement
-Expect design for player : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
+Expected design for player : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
 
 ## Future Ideas
 Wanna try it as desktop app using electronjs
