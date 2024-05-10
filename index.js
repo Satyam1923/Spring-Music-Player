@@ -24,7 +24,7 @@ app.get("/search", async (req, res) => {
       res.render("index.ejs", { data: music });
     } else {
       const response = await axios.get(
-        `http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app/api/search/songs?query=${name}`
+        `https://jio-savaan-private.vercel.app/api/search/songs?query=${name}`
       );
       if (response.data.data.results && response.data.data.results.length > 0) {
         const musicArray = response.data.data.results
@@ -58,7 +58,7 @@ app.get("/search1", async (req, res) => {
       res.send(music);
     } else {
       const response = await axios.get(
-        `http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app/api/search/songs?query=${name}`
+        `https://jio-savaan-private.vercel.app/api/search/songs?query=${name}`
       );
       if (response.data.data.results && response.data.data.results.length > 0) {
         const musicArray = response.data.data.results
