@@ -20,9 +20,8 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app )
 
 
-## Future Enhancement
-
-The front end of a music player application built with React by integrating Firebase for user authentication, which could help user to have their own playlist and recommendations.
+## Discord Channel link
+https://discord.gg/W2yzrBEN
 ## Demo
 
 
