@@ -38,7 +38,7 @@ app.get("/search", async (req, res) => {
                     url: result.downloadUrl[4]?.url||'',
                     name: result.name||'',
                     year: result.year||'',
-                    artist: result.artists.primary[0]?.name|'',
+                    artist: result.artists.primary[0]?.name||'',
                     img: result.image[2]?.url||'',
                 }));
                 cache.set(name, musicArray);
