@@ -22,10 +22,7 @@ http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app )
 ## Discord Channel link
 https://discord.gg/W2yzrBEN
 ## Demo
-
-
-https://music-stream-a261.onrender.com/
-
+https://spring-music-player.vercel.app/
 ## Getting Started
 1. Clone the repo
 
