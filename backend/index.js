@@ -1,7 +1,7 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
-import cors from "cors"; // Import the cors middleware
+import cors from "cors"; 
 
 const cache = new Map();
 
@@ -11,7 +11,6 @@ let name = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Use CORS middleware
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -35,10 +34,10 @@ app.get("/search", async (req, res) => {
                 response.data.data.results.length > 0
             ) {
                 const musicArray = response.data.data.results.map((result) => ({
-                    url: result.downloadUrl[4]?.url||'',
+                    returnurl: result.downloadUrl[4]?.url||'',
                     name: result.name||'',
                     year: result.year||'',
-                    artist: result.artists.primary[0]?.name||'',
+                    artist: result.artists.primary[0]?.name.replace(/&amp;/g, '&') || "",
                     img: result.image[2]?.url||'',
                 }));
                 cache.set(name, musicArray);
