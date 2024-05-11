@@ -99,7 +99,7 @@ const App = () => {
                             className="button"
                             onClick={(e) => {
                                 e.preventDefault();
-                                fetchSongData();
+                                if (searchQuery !== "") fetchSongData();
                             }}
                         >
                             <img src="/seach.svg" className="w-4 h-4" alt="" />
