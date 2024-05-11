@@ -18,7 +18,7 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 **Api:** Jio Saavn API unofficial (
 http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app )
 
-##Expected Design 
+## Expected Design 
 link : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
 
 
@@ -30,19 +30,28 @@ https://spring-music-player.vercel.app/
 ```sh
  git clone https://github.com/Satyam1923/Spring.git
 ```
-2. Install npm packages
+
+2. Change to backend folder
+```
+cd backend
+```
+
+3. Install npm packages
 ```sh
 npm install .
 ```
+4. Change to frontend folder
+ ```
+npm install .
+```
+
 3. Start it local host
 ```sh
-node index.js
+npm run dev
 ```
 
 4. Go to local host:
-```sh
-http://localhost:3030/
-```
+
 ## Contributing
 
 Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
