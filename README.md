@@ -31,26 +31,35 @@ https://spring-music-player.vercel.app/
  git clone https://github.com/Satyam1923/Spring.git
 ```
 
-2. Change to backend folder
-```
+### For backend
+1. Change to backend folder
+```sh
 cd backend
 ```
-
-3. Install npm packages
+2. Install npm packages
 ```sh
 npm install .
 ```
-4. Change to frontend folder
- ```
+3. Run server
+```sh
+node index.js
+```
+4. Start it in local host
+Go to this url : http://localhost:3030/
+### For frontend 
+1. Change to frontend folder
+```sh
+cd backend
+```
+2. Install npm packages
+```sh
 npm install .
 ```
-
-3. Start it local host
+3. Run server
 ```sh
 npm run dev
 ```
-
-4. Go to local host:
+4. You'll have local host link in terminal
 
 ## Contributing
 
