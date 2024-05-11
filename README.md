@@ -13,15 +13,16 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 **Client:** React, TailwindCSS
 
-**Server:** Node, Express, Firebase, Axios, EJS
+**Server:** Node, Express, Firebase, Axios
 
 **Api:** Jio Saavn API unofficial (
 http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app )
 
+##Expected Design 
+link : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
 
-## Discord Channel link
-https://discord.gg/W2yzrBEN
-## Demo
+
+## WebPage link
 https://spring-music-player.vercel.app/
 ## Getting Started
 1. Clone the repo
@@ -84,8 +85,4 @@ git push origin fix-issue-<ISSUE-NUMBER>
 ```
 8. Open a Pull Request 
 
-## Enhancement
-Expected design for player : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
 
-## Future Ideas
-Wanna try it as desktop app using electronjs
