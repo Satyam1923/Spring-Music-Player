@@ -69,9 +69,14 @@ Contributions are what makes the open source community such an amazing place to 
 - Please make sure you check your spelling and grammar.
 - Create individual PR for each suggestion.
 
-## Contributing readme.
+## Contributing Readme.
 
 ### For someone working on backend
+1. Change directory
+```sh
+cd backend
+```
+
 
 
 ## Creating Pull Request
