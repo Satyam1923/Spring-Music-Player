@@ -50,20 +50,20 @@ Go to http://localhost:3030/
 
 
 ### For Frontend 
-1. Navigate to the frontend folder
+1. **Navigate to the frontend folder**
 
 ```sh
 cd backend
 ```
-2. Install npm packages
+2. **Install npm packages**
 ```sh
 npm install .
 ```
-3. Run the development server
+3. **Run the development server**
 ```sh
 npm run dev
 ```
-4. Access the local server
+4. **Access the local server**
 You will receive a link in your terminal.
 
 ## 🤝 Contributing
