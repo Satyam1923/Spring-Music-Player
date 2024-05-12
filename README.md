@@ -31,7 +31,7 @@ Visit the Spring Music Player [here](https://spring-music-player.vercel.app/)
  git clone https://github.com/Satyam1923/Spring.git
 ```
 
-### For backend
+### For Backend
 1. Navigate to the backend folder
 ```sh
 cd backend
@@ -48,7 +48,7 @@ node index.js
 Go to this url : http://localhost:3030/
 
 
-### For frontend 
+### For Frontend 
 1. Navigate to the frontend folder
 
 ```sh
@@ -65,7 +65,7 @@ npm run dev
 4. Access the local server
 You will receive a link in your terminal.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
