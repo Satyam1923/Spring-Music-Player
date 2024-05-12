@@ -3,7 +3,8 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
-
+import MusicCarousel from './components/MusicCarousel'
+import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -56,7 +57,11 @@ const App = () => {
                             width="250px"
                         />
                     ) : (
-                        "Choose a song to play"
+                        <div>
+                            <MusicCarousel/>
+                            <span className="titleSpan">Search from a wide range of songs</span>
+                        </div>
+                        
                     )}
                 </div>
                 <ul className="details">

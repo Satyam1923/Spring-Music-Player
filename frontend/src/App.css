@@ -446,3 +446,8 @@ background-color: #5773ff;
     width: 40vh;
   }
 }
+.titleSpan{
+  display: flex;
+  margin-top: 15px;
+  justify-content: center;
+}
