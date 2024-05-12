@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
@@ -10,6 +10,7 @@ const App = () => {
     const [totalTime, setTotalTime] = useState(0);
     const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
+    const audioElement = useRef(null);
 
     const fetchSongData = async () => {
         try {
@@ -73,6 +74,13 @@ const App = () => {
                         autoPlay
                         src={data && data[currplaying].url}
                         preload="metadata"
+                        id="audio"
+                        ref={audioElement}
+                        onEnded={() => {
+                            currplaying + 1 < data.length
+                                ? setCurrplaying(currplaying + 1)
+                                : setCurrplaying(0);
+                        }}
                     />
                 )}
             </div>
