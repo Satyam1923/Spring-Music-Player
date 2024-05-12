@@ -68,14 +68,15 @@ You will receive a link in your terminal.
 
 ## 🤝 Contributing
 
-Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-- If you have any suggestions for the projects, like reporting a bug, improving UI, or improving the README.md file, feel free to **open an issue** to discuss it, or directly create a pull request with the necessary changes.
+- If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it, or directly create a pull request with the necessary changes.
+- Please ensure your pull request adheres to good practices and standards.
 - Please make sure you check your spelling and grammar.
-- Create individual PR for each suggestion.
+- Create individual Pull Requests for each suggestion.
 
 
-## Creating Pull Request
+## 🔧Creating a Pull Request
 1. Fork the Project
 2. Clone your forked repository
 
