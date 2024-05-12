@@ -17,8 +17,9 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 **API:** JioSaavn API (unofficial) - [API Link] (
 http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app )
 
-## Expected Design 
-link : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
+## 🎨 Expected Design
+Check the design in [Figma]
+(https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1)
 
 
 ## WebPage link
