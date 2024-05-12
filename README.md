@@ -13,38 +13,54 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 **Client:** React, TailwindCSS
 
-**Server:** Node, Express, Firebase, Axios, EJS
+**Server:** Node, Express, Firebase, Axios
 
 **Api:** Jio Saavn API unofficial (
 http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app )
 
-
-## Discord Channel link
-https://discord.gg/W2yzrBEN
-## Demo
+## Expected Design 
+link : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
 
 
-https://music-stream-a261.onrender.com/
-
+## WebPage link
+https://spring-music-player.vercel.app/
 ## Getting Started
 1. Clone the repo
 
 ```sh
  git clone https://github.com/Satyam1923/Spring.git
 ```
+
+### For backend
+1. Change to backend folder
+```sh
+cd backend
+```
 2. Install npm packages
 ```sh
 npm install .
 ```
-3. Start it local host
+3. Run server
 ```sh
 node index.js
 ```
-
-4. Go to local host:
+4. Start it in local host
+Go to this url : http://localhost:3030/
+### For frontend 
+1. Change to frontend folder
 ```sh
-http://localhost:3030/
+cd backend
 ```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Run server
+```sh
+npm run dev
+```
+4. You'll have local host link in terminal
+
 ## Contributing
 
 Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -87,8 +103,4 @@ git push origin fix-issue-<ISSUE-NUMBER>
 ```
 8. Open a Pull Request 
 
-## Enhancement
-Expected design for player : https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1
 
-## Future Ideas
-Wanna try it as desktop app using electronjs
