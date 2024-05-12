@@ -34,7 +34,7 @@ app.get("/search", async (req, res) => {
                 response.data.data.results.length > 0
             ) {
                 const musicArray = response.data.data.results.map((result) => ({
-                    returnurl: result.downloadUrl[4]?.url,
+                    url: result.downloadUrl[4]?.url||'',
                     name: result.name||'',
                     year: result.year||'',
                     artist: result.artists.primary[0]?.name.replace(/&amp;/g, '&') || "",
