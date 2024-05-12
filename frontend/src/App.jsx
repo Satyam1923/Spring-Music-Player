@@ -3,6 +3,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
+import he from "he";
 
 const App = () => {
     const [data, setData] = useState(null);
@@ -11,10 +12,14 @@ const App = () => {
     const [shuffle, setShuffle] = useState(false); // State for shuffle play
     const audioElement = useRef(null);
 
+    const decodeEntities = (str) => {
+        return he.decode(str);
+    };
+
     const fetchSongData = async () => {
         try {
             const response = await axios.get(
-                "https://spring-music-player-3hyj.vercel.app/search",
+                "https://spring-music-player-backend.vercel.app/search",
                 {
                     params: { song: searchQuery },
                 }
@@ -69,11 +74,20 @@ const App = () => {
                 </div>
                 <ul className="details">
                     <li className="name">
-                        {data && data.length > 0 && data[currplaying].name}
+                        {data &&
+                            data.length > 0 &&
+                            data[currplaying] &&
+                            decodeEntities(data[currplaying].name)}
                     </li>
                     <li className="author">
-                        {data && data.length > 0 && data[currplaying].artist}{" "}
-                        {data && data.length > 0 && data[currplaying].year}
+                        {data &&
+                            data.length > 0 &&
+                            data[currplaying] &&
+                            decodeEntities(data[currplaying].artist)}{" "}
+                        {data &&
+                            data.length > 0 &&
+                            data[currplaying] &&
+                            data[currplaying].year}
                     </li>
                 </ul>
                 {data && (
