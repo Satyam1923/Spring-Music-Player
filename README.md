@@ -25,26 +25,26 @@ Check the design in [Figma](https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Sp
 Visit the Spring Music Player [here](https://spring-music-player.vercel.app/)
 
 ## 🛠️ Getting Started
-1. Clone the repo
+1. **Clone the repository**
 
 ```sh
  git clone https://github.com/Satyam1923/Spring.git
 ```
 
 ### For Backend
-1. Navigate to the backend folder
+1. **Navigate to the backend folder**
 ```sh
 cd backend
 ```
-2. Install npm packages
+2. **Install npm packages**
 ```sh
 npm install .
 ```
-3. Run the server
+3. **Run the server**
 ```sh
 node index.js
 ```
-4. Access it locally
+4. **Access it locally**
    
 Go to http://localhost:3030/
 
