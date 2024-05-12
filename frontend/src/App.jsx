@@ -14,7 +14,7 @@ const App = () => {
     const fetchSongData = async () => {
         try {
             const response = await axios.get(
-                "https://spring-music-player-backend.vercel.app/search",
+                "https://spring-music-player-3hyj.vercel.app/search",
                 {
                     params: { song: searchQuery },
                 }
