@@ -7,8 +7,6 @@ import axios from "axios";
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
-    const [totalTime, setTotalTime] = useState(0);
-    const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
     const audioElement = useRef(null);
 
@@ -27,19 +25,11 @@ const App = () => {
     };
 
     const nextPlay = () => {
-        setCurrplaying(
-            currplaying + 1 >= globalData.length ? 0 : currplaying + 1
-        );
-        const selectedMusic = globalData[currplaying];
-        updateAudio(selectedMusic);
+        setCurrplaying(currplaying + 1 >= data.length ? 0 : currplaying + 1);
     };
 
     const previousPlay = () => {
-        setCurrplaying(
-            currplaying - 1 < 0 ? globalData.length - 1 : currplaying - 1
-        );
-        const selectedMusic = globalData[currplaying];
-        updateAudio(selectedMusic);
+        setCurrplaying(currplaying - 1 < 0 ? data.length - 1 : currplaying - 1);
     };
 
     const playSong = (index) => {
@@ -52,7 +42,7 @@ const App = () => {
                 <div className="imgBx">
                     {data && data.length > 0 ? (
                         <img
-                            src={data && data[currplaying].img}
+                            src={data[currplaying].img}
                             height="250px"
                             width="250px"
                         />
@@ -72,15 +62,11 @@ const App = () => {
                 {data && (
                     <AudioPlayer
                         autoPlay
-                        src={data && data[currplaying].url}
+                        src={data[currplaying].url}
                         preload="metadata"
                         id="audio"
                         ref={audioElement}
-                        onEnded={() => {
-                            currplaying + 1 < data.length
-                                ? setCurrplaying(currplaying + 1)
-                                : setCurrplaying(0);
-                        }}
+                        onEnded={nextPlay}
                     />
                 )}
             </div>
@@ -116,8 +102,7 @@ const App = () => {
                 </div>
 
                 <div className="results">
-                    {data !== null &&
-                        data !== undefined &&
+                    {data &&
                         data.map((element, index) => (
                             <div
                                 className="result-item"
@@ -143,8 +128,6 @@ const App = () => {
                 </div>
             </div>
         </div>
-        //{" "}
-        // </div>
     );
 };
 
