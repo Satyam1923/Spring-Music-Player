@@ -49,7 +49,7 @@ Go to this url : http://localhost:3030/
 ### For frontend 
 1. Change to frontend folder
 ```sh
-cd backend
+cd frontend
 ```
 2. Install npm packages
 ```sh
