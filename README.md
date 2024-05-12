@@ -76,6 +76,55 @@ Contributions are what makes the open source community such an amazing place to 
 ```sh
 cd backend
 ```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Go to localhost
+```sh
+https://localhost:3030/
+```
+### For someone working on frontend
+1. Change directory
+```sh
+cd frontend
+```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Run server
+```sh
+npm run dev
+```
+
+## For someone working on backend+frontend
+1. Change directory
+```sh
+cd backend
+```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Go to localhost
+```sh 
+https://localhost:3030/
+```
+4. Change directory
+```sh
+cd frontend
+```
+5. Install npm packages
+```sh
+npm install .
+```
+6. Change directory
+```sh
+cd  src
+```
+7. change in app.jsx under app component  fetchSongData function
+change this url https://spring-music-player-3hyj.vercel.app/search with https://localhost:3030/search
 
 
 
