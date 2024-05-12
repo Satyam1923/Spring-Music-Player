@@ -1,12 +1,12 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
-import cors from "cors"; 
+import cors from "cors";
 
 const cache = new Map();
 
 const app = express();
-const port = 3030;
+const PORT = 3030;
 let name = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,11 +34,15 @@ app.get("/search", async (req, res) => {
                 response.data.data.results.length > 0
             ) {
                 const musicArray = response.data.data.results.map((result) => ({
-                    url: result.downloadUrl[4]?.url||'',
-                    name: result.name||'',
-                    year: result.year||'',
-                    artist: result.artists.primary[0]?.name.replace(/&amp;/g, '&') || "",
-                    img: result.image[2]?.url||'',
+                    url: result.downloadUrl[4]?.url || "",
+                    name: result.name || "",
+                    year: result.year || "",
+                    artist:
+                        result.artists.primary[0]?.name.replace(
+                            /&amp;/g,
+                            "&"
+                        ) || "",
+                    img: result.image[2]?.url || "",
                 }));
                 cache.set(name, musicArray);
                 res.json(musicArray);
@@ -54,8 +58,6 @@ app.get("/search", async (req, res) => {
     }
 });
 
-
-
-app.listen(port, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${port}`);
 });
