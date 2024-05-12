@@ -3,7 +3,8 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
-
+import { BrowserRouter as Router,Route,Routes,Link } from "react-router-dom";
+import SignIn from "./components/signin";
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -46,7 +47,13 @@ const App = () => {
     };
 
     return (
+        <Router>
+            <Routes>
+                <Route path="/" element={
         <div className="ui">
+            <Link to="/signin">
+        <button className="top-right-button">Sign In</button>
+        </Link>
             <div className="player">
                 <div className="imgBx">
                     {data && data.length > 0 ? (
@@ -135,8 +142,12 @@ const App = () => {
                 </div>
             </div>
         </div>
-        //{" "}
-        // </div>
+                }/>
+        <Route path="/signin" element={<SignIn />}/>
+        
+        
+        </Routes>
+        </Router>
     );
 };
 
