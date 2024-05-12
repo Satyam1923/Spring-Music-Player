@@ -2,7 +2,7 @@
 The Spring Music Player with JioSaavn API Integration is a web application that allows users to listen to their favorite music tracks using the JioSaavn music streaming service. It provides a seamless and user-friendly interface for discovering, playing, and managing music playlists.
 
 
-## Features
+##  ✨ Features  ✨
 - Music/Album/Playlists/Singer Search
 - Playback Controls
 - Top 10 search list
