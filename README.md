@@ -22,8 +22,10 @@ Check the design in [Figma]
 (https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1)
 
 
-## WebPage link
-https://spring-music-player.vercel.app/
+## 🌐 WebPage link
+
+Visit the Spring Music Player [here](https://spring-music-player.vercel.app/)
+
 ## Getting Started
 1. Clone the repo
 
