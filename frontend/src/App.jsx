@@ -8,6 +8,7 @@ const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [currplaying, setCurrplaying] = useState(0);
+    const [shuffle, setShuffle] = useState(false); // State for shuffle play
     const audioElement = useRef(null);
 
     const fetchSongData = async () => {
@@ -21,6 +22,22 @@ const App = () => {
             setData(response.data);
         } catch (error) {
             console.error(error);
+        }
+    };
+
+    // Function to shuffle the playlist
+    const shufflePlaylist = () => {
+        if (data) {
+            const shuffledData = [...data];
+            for (let i = shuffledData.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledData[i], shuffledData[j]] = [
+                    shuffledData[j],
+                    shuffledData[i],
+                ];
+            }
+            setData(shuffledData);
+            setCurrplaying(0);
         }
     };
 
@@ -55,25 +72,49 @@ const App = () => {
                         {data && data.length > 0 && data[currplaying].name}
                     </li>
                     <li className="author">
-                        {data && data[currplaying].artist}{" "}
-                        {data && data[currplaying].year}
+                        {data && data.length > 0 && data[currplaying].artist}{" "}
+                        {data && data.length > 0 && data[currplaying].year}
                     </li>
                 </ul>
                 {data && (
-                    <AudioPlayer
-                        autoPlay
-                        src={data[currplaying].url}
-                        preload="metadata"
-                        id="audio"
-                        ref={audioElement}
-                        onEnded={nextPlay}
-                    />
+                    <>
+                        <AudioPlayer
+                            autoPlay
+                            src={data[currplaying].url}
+                            preload="metadata"
+                            id="audio"
+                            ref={audioElement}
+                            onEnded={nextPlay}
+                        />
+                        <div className="flex justify-between p-3 items-center">
+                            <button
+                                className="bg-gray-400 p-2 rounded-lg"
+                                onClick={previousPlay}
+                            >
+                                Previous
+                            </button>
+                            <button
+                                className="bg-gray-400 p-2 rounded-lg"
+                                onClick={() => {
+                                    shufflePlaylist();
+                                }}
+                            >
+                                Shuffle
+                            </button>
+                            <button
+                                className="bg-gray-400 p-2 rounded-lg"
+                                onClick={nextPlay}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </>
                 )}
             </div>
 
             <div className="search-box">
                 <div className="search">
-                    <form className="box">
+                    <form className="flex ">
                         <input
                             type="text"
                             name="song"
@@ -87,16 +128,14 @@ const App = () => {
                         />
                         <button
                             id="get"
-                            type="image"
-                            src="search.svg"
                             alt="search"
-                            className="button"
+                            className="flex items-center justify-center p-3 px-6 rounded-xl"
                             onClick={(e) => {
                                 e.preventDefault();
                                 if (searchQuery !== "") fetchSongData();
                             }}
                         >
-                            <img src="/seach.svg" className="w-4 h-4" alt="" />
+                            <img src="/search.svg" className="w-4 h-4" alt="" />
                         </button>
                     </form>
                 </div>
