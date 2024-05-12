@@ -435,14 +435,30 @@ background-color: #5773ff;
 }
 
 
-@media(max-width: 768px) {
+@media(max-width: 1072px) {
   .ui {
-    display: flex;
+    width: 100vw;
+    padding: 5vh 4vw;
     flex-direction: column;
+  }
+
+  .player {
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 15px;
+  }
+
+  .imgBx img {
+    min-width: 300px;
+  }
+
+  .search-box {
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 0px;
   }
   
   .player, .search-box {
     height: 600px;
     width: 40vh;
+    width: 100%;
   }
 }
