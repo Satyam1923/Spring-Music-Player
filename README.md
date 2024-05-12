@@ -46,7 +46,7 @@ node index.js
 ```
 4. Access it locally
    
-Go to this url : http://localhost:3030/
+Go to http://localhost:3030/
 
 
 ### For Frontend 
@@ -73,6 +73,8 @@ Contributions are what makes the open source community such an amazing place to 
 - If you have any suggestions for the projects, like reporting a bug, improving UI, or improving the README.md file, feel free to **open an issue** to discuss it, or directly create a pull request with the necessary changes.
 - Please make sure you check your spelling and grammar.
 - Create individual PR for each suggestion.
+
+
 ## Creating Pull Request
 1. Fork the Project
 2. Clone your forked repository
