@@ -12,7 +12,17 @@ const App = () => {
     const [currplaying, setCurrplaying] = useState(0);
     const [searchResults,setSearchResults]=useState(null)
 
-    const fetchSongData = async (query) => {
+    const fetchSongData = async () => {
+        try {
+            const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
+                params: { song: searchQuery },
+            });
+            setData(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const initialData = async (query) => {
         try {
             const response = await axios.get(
                 "https://spring-music-player-3hyj.vercel.app/search",
@@ -24,9 +34,9 @@ const App = () => {
         } catch (error) {
             console.error(error);
         }
-    };
+    }
     useEffect(()=>{
-      fetchSongData("s")
+      initialData("s")
     },[])
     useEffect(()=>{
     if(searchQuery.length>1){
@@ -34,7 +44,7 @@ const App = () => {
         setSearchResults(filteredResults)
     }
     else if(searchQuery.length===1){
-        const fetchSongData = async () => {
+        const fetchSongdata = async () => {
             try {
                 const response = await axios.get(
                     "https://spring-music-player-3hyj.vercel.app/search",
@@ -46,7 +56,7 @@ const App = () => {
                 }
                 catch(err){console.log(err)}
              }
-         fetchSongData()
+         fetchSongdata()
     }
     else{
         setSearchResults(null)
@@ -126,7 +136,7 @@ const App = () => {
                             className="button"
                             onClick={(e) => {
                                 e.preventDefault();
-                                if (searchQuery !== "") fetchSongData(searchQuery);
+                                if (searchQuery !== "") initialData(searchQuery);
                             }}
                         >
                             <p>Search</p>
@@ -137,7 +147,7 @@ const App = () => {
                         {
                             searchResults!==null?
                                 searchResults.map((item,index)=>(
-                                    <button key={`search_results${index}`} onClick={()=>{setSearchQuery("");fetchSongData(item)}}>
+                                    <button key={`search_results${index}`} onClick={()=>{setSearchQuery("");initialData(item)}}>
                                               {item}
                                     </button>
                                 ))
