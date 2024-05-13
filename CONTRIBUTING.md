@@ -30,6 +30,6 @@ Thank you for contributing to our project! Please follow these guidelines before
 4. Verify that your PR meets the project's acceptance criteria.
 
 ## Contact Information
-If you have any questions or need assistance, you contace me on https://discord.gg/UAC2Ys2m or open an issue for discussion.
+If you have any questions or need assistance, you contact me on https://discord.gg/UAC2Ys2m or open an issue for discussion.
 
 We appreciate your contributions to the project!
