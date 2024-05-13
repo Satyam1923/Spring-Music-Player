@@ -435,7 +435,7 @@ background-color: #5773ff;
 }
 
 
-@media(max-width: 1700px) {
+@media(max-width: 1450px) {
   .player {
     width: 50vh;
     height: 80vh; 
