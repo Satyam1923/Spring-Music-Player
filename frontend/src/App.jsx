@@ -11,17 +11,6 @@ const App = () => {
     const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
     const [searchResults,setSearchResults]=useState(null)
-
-    const fetchSongData = async () => {
-        try {
-            const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
-                params: { song: searchQuery },
-            });
-            setData(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
     const initialData = async (query) => {
         try {
             const response = await axios.get(
