@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-Thank you for contributing to our project! Please follow these guidelines before submitting a pull request (PR).
+Thank you for contributing to our project! Please follow these guidelines before submitting a pull request (PR). </br>
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 - If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it.
@@ -37,6 +37,6 @@ Contributions are what make the open source community such an amazing place to l
 4. Verify that your PR meets the project's acceptance criteria.
 
 ## Contact Information
-If you have any questions or need assistance, you contace me on https://discord.gg/UAC2Ys2m or open an issue for discussion.
+If you have any questions or need assistance, you contact me on https://discord.gg/UAC2Ys2m or open an issue for discussion.
 
 We appreciate your contributions to the project!
