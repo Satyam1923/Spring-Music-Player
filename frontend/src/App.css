@@ -51,7 +51,8 @@ body {
   background-color: white;
   border-radius: 12px;
   max-height: 35rem;
-  overflow: scroll;
+ overflow-y: scroll;
+ overflow-x: hidden;
 }
 .search_results button{
   background-color: transparent;
