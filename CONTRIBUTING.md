@@ -1,6 +1,9 @@
 # Contribution Guidelines
 
 Thank you for contributing to our project! Please follow these guidelines before submitting a pull request (PR).
+- If you have any suggestions for the projects, like reporting a bug, improving UI, or improving the README.md file, feel free to **open an issue** to discuss it, or directly create a pull request with the necessary changes.
+- Please make sure you check your spelling and grammar.
+- Create individual PR for each suggestion.
 
 ## Setup Instructions
 1. Clone the repository to your local machine.
