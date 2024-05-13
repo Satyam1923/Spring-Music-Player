@@ -10,13 +10,14 @@ const App = () => {
     const [totalTime, setTotalTime] = useState(0);
     const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
+    const [searchResults,setSearchResults]=useState(null)
 
-    const fetchSongData = async () => {
+    const fetchSongData = async (query) => {
         try {
             const response = await axios.get(
                 "https://spring-music-player-3hyj.vercel.app/search",
                 {
-                    params: { song: searchQuery },
+                    params: { song: query },
                 }
             );
             setData(response.data);
@@ -24,7 +25,33 @@ const App = () => {
             console.error(error);
         }
     };
-
+    useEffect(()=>{
+      fetchSongData("s")
+    },[])
+    useEffect(()=>{
+    if(searchQuery.length>1){
+        const filteredResults = searchResults.filter(result => result.toLowerCase().includes(searchQuery));
+        setSearchResults(filteredResults)
+    }
+    else if(searchQuery.length===1){
+        const fetchSongData = async () => {
+            try {
+                const response = await axios.get(
+                    "https://spring-music-player-3hyj.vercel.app/search",
+                    {
+                        params: { song: searchQuery },
+                    })
+                    const name=response.data.map(item=>item.name)
+                    setSearchResults(name)
+                }
+                catch(err){console.log(err)}
+             }
+         fetchSongData()
+    }
+    else{
+        setSearchResults(null)
+    }
+    },[searchQuery])
     const nextPlay = () => {
         setCurrplaying(
             currplaying + 1 >= globalData.length ? 0 : currplaying + 1
@@ -85,7 +112,7 @@ const App = () => {
                             name="song"
                             id="song"
                             className="box1"
-                            required
+                            requiredsetSearchQuery
                             onChange={(e) => {
                                 e.preventDefault();
                                 setSearchQuery(e.target.value);
@@ -99,12 +126,24 @@ const App = () => {
                             className="button"
                             onClick={(e) => {
                                 e.preventDefault();
-                                if (searchQuery !== "") fetchSongData();
+                                if (searchQuery !== "") fetchSongData(searchQuery);
                             }}
                         >
-                            <img src="/seach.svg" className="w-4 h-4" alt="" />
+                            <p>Search</p>
+                            <img src="https://cdn-icons-png.flaticon.com/128/711/711319.png" alt="search" />
                         </button>
                     </form>
+                    <div className="search_results">
+                        {
+                            searchResults!==null?
+                                searchResults.map((item,index)=>(
+                                    <button key={`search_results${index}`} onClick={()=>{setSearchQuery("");fetchSongData(item)}}>
+                                              {item}
+                                    </button>
+                                ))
+                            :<></>
+                        }
+                    </div>
                 </div>
 
                 <div className="results">

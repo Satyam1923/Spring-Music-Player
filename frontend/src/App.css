@@ -38,8 +38,29 @@ body {
   background-color:#e8ecef;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
-
+.search_results{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 92%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background-color: white;
+  border-radius: 12px;
+  max-height: 35rem;
+  overflow: scroll;
+}
+.search_results button{
+  background-color: transparent;
+  border: none;
+  padding:1rem;
+  border-bottom: 0.1rem solid rgb(53, 52, 52);
+  text-align: left;
+  font-size: 1rem;
+}
 .st p{
   font-size: xx-large;
 }
@@ -105,9 +126,18 @@ li {
 .button {
   border: 0;
   border-radius: 15px;
-  width: 70px;
+  width: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
 }
-
+.button  img{
+  height:1.3rem;
+  width: 1.3rem;
+  filter: invert(100%);
+}
 .btn-cntrl button {
   background-color: #000;
 }
