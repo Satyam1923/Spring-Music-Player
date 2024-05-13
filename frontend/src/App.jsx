@@ -113,7 +113,7 @@ const App = () => {
                                 if (searchQuery !== "") fetchSongData();
                             }}
                         >
-                            <img src="/seach.svg" className="w-4 h-4" alt="" />
+                            Search
                         </button>
                     </form>
                 </div>
