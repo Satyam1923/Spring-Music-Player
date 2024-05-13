@@ -1,6 +1,6 @@
 # Contribution Guidelines
-
 Thank you for contributing to our project! Please follow these guidelines before submitting a pull request (PR). 
+
 - If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it.
 - Please ensure your pull request adheres to good practices and standards.
 - Pleae ensure your pull request have reference to the issue assigned.
