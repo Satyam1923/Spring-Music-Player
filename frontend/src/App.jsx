@@ -16,7 +16,7 @@ const App = () => {
 
     const fetchSongData = async () => {
         try {
-            const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
+            const response = await axios.get("http://localhost:3030/search", {
                 params: { song: searchQuery },
             });
             setData(response.data);
@@ -24,16 +24,26 @@ const App = () => {
             console.error(error);
         }
     };
+<<<<<<< Updated upstream
     // changing the like button to liked on clicking on it
     const toggleLike = (index) => {
+=======
+     // changing the like button to liked on clicking on it
+     const toggleLike = (index) => {
+>>>>>>> Stashed changes
         setData(prevData => {
             const newData = [...prevData];
             newData[index].liked = !newData[index].liked;
             return newData;
         });
     };
+<<<<<<< Updated upstream
      // Function to shuffle the playlist
      const shufflePlaylist = () => {
+=======
+    // Function to shuffle the playlist
+    const shufflePlaylist = () => {
+>>>>>>> Stashed changes
         if (data) {
             const shuffledData = [...data];
             for (let i = shuffledData.length - 1; i > 0; i--) {
