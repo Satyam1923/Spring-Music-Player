@@ -10,6 +10,10 @@ const App = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [currplaying, setCurrplaying] = useState(0);
 
+    const decodeEntities = (str) => {
+        return he.decode(str);
+    };
+
     const fetchSongData = async () => {
         try {
             const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
