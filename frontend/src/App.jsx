@@ -6,7 +6,6 @@ import axios from "axios";
 
 const App = () => {
     const [data, setData] = useState(null);
-    // const [playlist, setPlaylist] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [currplaying, setCurrplaying] = useState(0);
     const [shuffle, setShuffle] = useState(false); // State for shuffle play
