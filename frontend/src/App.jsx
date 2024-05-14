@@ -26,7 +26,14 @@ const App = () => {
             console.error(error);
         }
     };
-
+    // changing the like button to liked on clicking on it
+    const toggleLike = (index) => {
+        setData(prevData => {
+            const newData = [...prevData];
+            newData[index].liked = !newData[index].liked;
+            return newData;
+        });
+    };
     // Function to shuffle the playlist
     const shufflePlaylist = () => {
         if (data) {
@@ -85,6 +92,13 @@ const App = () => {
                             data.length > 0 &&
                             data[currplaying] &&
                             data[currplaying].year}
+                    </li>
+                    <li className="like-button">
+                        {data && data[currplaying] && (
+                            <button onClick={() => toggleLike(currplaying)}>
+                                {data[currplaying].liked ? "Liked" : "Like"}
+                            </button>
+                        )}
                     </li>
                 </ul>
                 {data && (
