@@ -118,6 +118,15 @@ const App = () => {
                         >
                             <img src="/seach.svg" className="w-4 h-4" alt="" />
                         </button>
+                        <button
+                            className="bg-gray-400 p-2 px-6 rounded-lg"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                shufflePlaylist();
+                            }}
+                        >
+                            Shuffle
+                        </button>
                     </form>
                 </div>
 
