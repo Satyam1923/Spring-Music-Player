@@ -3,12 +3,12 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
+import he from "he";
 
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [currplaying, setCurrplaying] = useState(0);
-    const [shuffle, setShuffle] = useState(false); // State for shuffle play
 
     const fetchSongData = async () => {
         try {
@@ -66,11 +66,14 @@ const App = () => {
                 </div>
                 <ul className="details">
                     <li className="name">
-                        {data && data.length > 0 && data[currplaying].name}
+                        {data &&
+                            data.length > 0 &&
+                            data[currplaying] &&
+                            decodeEntities(data[currplaying].name)}
                     </li>
                     <li className="author">
-                        {data && data.length > 0 && data[currplaying].artist}{" "}
-                        {data && data.length > 0 && data[currplaying].year}
+                        {data && data[currplaying].artist}{" "}
+                        {data && data[currplaying].year}
                     </li>
                 </ul>
                 {data && (
@@ -113,16 +116,7 @@ const App = () => {
                                 if (searchQuery !== "") fetchSongData();
                             }}
                         >
-                            <img src="/search.svg" className="w-4 h-4" alt="" />
-                        </button>
-                        <button
-                            className="bg-gray-400 p-2 px-6 rounded-lg"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                shufflePlaylist();
-                            }}
-                        >
-                            Shuffle
+                            <img src="/seach.svg" className="w-4 h-4" alt="" />
                         </button>
                     </form>
                 </div>
@@ -143,9 +137,12 @@ const App = () => {
                                         width="20px"
                                     />
                                     <div className="search-details">
-                                        <h4 id="elementname">{element.name}</h4>
+                                        <h4 id="elementname">
+                                            {decodeEntities(element.name)}
+                                        </h4>
                                         <p>
-                                            {element.artist} - {element.year}
+                                            {decodeEntities(element.artist)} -{" "}
+                                            {element.year}
                                         </p>
                                     </div>
                                 </div>
