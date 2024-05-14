@@ -28,7 +28,7 @@ body {
 }
 
 .search-box {
-  width: 50vh;
+  width: 80vh;
   height: 90vh;
   max-height: 90vh; 
   padding: 20px 14px 8px 14px;
@@ -422,10 +422,6 @@ background-color: #5773ff;
 
 .box{
   gap: 10px;
-}
-
-#song{
-  width: 70%;
 }
 
 .name{

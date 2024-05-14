@@ -6,20 +6,18 @@ import axios from "axios";
 
 const App = () => {
     const [data, setData] = useState(null);
+    // const [playlist, setPlaylist] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [currplaying, setCurrplaying] = useState(0);
     const [shuffle, setShuffle] = useState(false); // State for shuffle play
-    const audioElement = useRef(null);
 
     const fetchSongData = async () => {
         try {
-            const response = await axios.get(
-                "https://spring-music-player-backend.vercel.app/search",
-                {
-                    params: { song: searchQuery },
-                }
-            );
+            const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
+                params: { song: searchQuery },
+            });
             setData(response.data);
+            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -77,49 +75,30 @@ const App = () => {
                     </li>
                 </ul>
                 {data && (
-                    <>
-                        <AudioPlayer
-                            autoPlay
-                            src={data[currplaying].url}
-                            preload="metadata"
-                            id="audio"
-                            ref={audioElement}
-                            onEnded={nextPlay}
-                        />
-                        <div className="flex justify-between p-3 items-center">
-                            <button
-                                className="bg-gray-400 p-2 rounded-lg"
-                                onClick={previousPlay}
-                            >
-                                Previous
-                            </button>
-                            <button
-                                className="bg-gray-400 p-2 rounded-lg"
-                                onClick={() => {
-                                    shufflePlaylist();
-                                }}
-                            >
-                                Shuffle
-                            </button>
-                            <button
-                                className="bg-gray-400 p-2 rounded-lg"
-                                onClick={nextPlay}
-                            >
-                                Next
-                            </button>
-                        </div>
-                    </>
+                    <AudioPlayer
+                        className="rounded-lg py-5 px-8"
+                        autoPlay
+                        src={data[currplaying].url}
+                        preload="metadata"
+                        id="audio"
+                        showSkipControls
+                        onClickNext={nextPlay}
+                        onClickPrevious={previousPlay}
+                        onEnded={nextPlay}
+                        onError={(error) => {
+                            console.log("Error :", error);
+                        }}
+                    />
                 )}
             </div>
 
             <div className="search-box">
                 <div className="search">
-                    <form className="flex ">
+                    <form className="flex justify-between px-6 mb-4">
                         <input
                             type="text"
                             name="song"
-                            id="song"
-                            className="box1"
+                            className="box1 w-[50%]"
                             required
                             onChange={(e) => {
                                 e.preventDefault();
@@ -136,6 +115,15 @@ const App = () => {
                             }}
                         >
                             <img src="/search.svg" className="w-4 h-4" alt="" />
+                        </button>
+                        <button
+                            className="bg-gray-400 p-2 px-6 rounded-lg"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                shufflePlaylist();
+                            }}
+                        >
+                            Shuffle
                         </button>
                     </form>
                 </div>
