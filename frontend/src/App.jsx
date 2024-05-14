@@ -8,8 +8,6 @@ import he from "he";
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
-    const [totalTime, setTotalTime] = useState(0);
-    const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
 
     const decodeEntities = (str) => {
@@ -18,7 +16,7 @@ const App = () => {
 
     const fetchSongData = async () => {
         try {
-            const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
+            const response = await axios.get("http://localhost:3030/search", {
                 params: { song: searchQuery },
             });
             setData(response.data);
@@ -26,25 +24,13 @@ const App = () => {
             console.error(error);
         }
     };
-
-    const nextPlay = () => {
-        setCurrplaying(
-            currplaying + 1 >= globalData.length ? 0 : currplaying + 1
-        );
-        const selectedMusic = globalData[currplaying];
-        updateAudio(selectedMusic);
-    };
-
-    const previousPlay = () => {
-        setCurrplaying(
-            currplaying - 1 < 0 ? globalData.length - 1 : currplaying - 1
-        );
-        const selectedMusic = globalData[currplaying];
-        updateAudio(selectedMusic);
-    };
-
-    const playSong = (index) => {
-        setCurrplaying(index);
+    // changing the like button to liked on clicking on it
+    const toggleLike = (index) => {
+        setData(prevData => {
+            const newData = [...prevData];
+            newData[index].liked = !newData[index].liked;
+            return newData;
+        });
     };
 
     return (
@@ -77,6 +63,13 @@ const App = () => {
                             data.length > 0 &&
                             data[currplaying] &&
                             data[currplaying].year}
+                    </li>
+                    <li className="like-button">
+                        {data && data[currplaying] && (
+                            <button onClick={() => toggleLike(currplaying)}>
+                                {data[currplaying].liked ? "Liked" : "Like"}
+                            </button>
+                        )}
                     </li>
                 </ul>
                 {data && (
@@ -125,7 +118,7 @@ const App = () => {
                             <div
                                 className="result-item"
                                 key={index}
-                                onClick={() => playSong(index)}
+                                onClick={() => setCurrplaying(index)}
                             >
                                 <div className="songresult">
                                     <img
@@ -143,14 +136,15 @@ const App = () => {
                                             {element.year}
                                         </p>
                                     </div>
+                                    <button onClick={(e) => { e.stopPropagation(); toggleLike(index); }}>
+                                        {element.liked ? "Liked" : "Like"}
+                                    </button>
                                 </div>
                             </div>
                         ))}
                 </div>
             </div>
         </div>
-        //{" "}
-        // </div>
     );
 };
 
