@@ -3,6 +3,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
+import { useKeyDown } from 'react';
 
 const App = () => {
     const [data, setData] = useState(null);
@@ -10,6 +11,15 @@ const App = () => {
     const [totalTime, setTotalTime] = useState(0);
     const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
+    const handleKeySpace = (event) => {
+        if (event.key === 'Space') {
+          if (audioElement.paused) {
+            audioElement.play();
+          } else {
+            audioElement.pause();
+          }
+        }
+      };
 
     const fetchSongData = async () => {
         try {
@@ -30,7 +40,8 @@ const App = () => {
             currplaying + 1 >= globalData.length ? 0 : currplaying + 1
         );
         const selectedMusic = globalData[currplaying];
-        updateAudio(selectedMusic);
+        updateAudio(selectedMusic);  
+        onKeyPress='ArrowRight'; 
     };
 
     const previousPlay = () => {
@@ -70,9 +81,9 @@ const App = () => {
                 </ul>
                 {data && (
                     <AudioPlayer
-                        autoPlay
+                        autoplay
                         src={data && data[currplaying].url}
-                        preload="metadata"
+                        preload="metadata"  
                     />
                 )}
             </div>
