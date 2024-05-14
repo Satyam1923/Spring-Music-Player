@@ -1,3 +1,5 @@
 .gitignore
 .package-lock.json
 .package.json
+.env
+backend/serviceAccountKey

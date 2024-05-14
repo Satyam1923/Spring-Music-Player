@@ -1,16 +1,16 @@
-import express from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
-import cors from "cors";
+// backend/index.js
+import express from 'express';
+import axios from 'axios';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import admin from './firebaseAdmin.js';
 
 const cache = new Map();
 
 const app = express();
 const PORT = 3030;
-let name = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-    name = req.query.song;
+    const name = req.query.song;
     console.log("Name is", name);
     try {
         if (cache.has(name)) {
@@ -37,11 +37,7 @@ app.get("/search", async (req, res) => {
                     url: result.downloadUrl[4]?.url || "",
                     name: result.name || "",
                     year: result.year || "",
-                    artist:
-                        result.artists.primary[0]?.name.replace(
-                            /&amp;/g,
-                            "&"
-                        ) || "",
+                    artist: result.artists.primary[0]?.name.replace(/&amp;/g, "&") || "",
                     img: result.image[2]?.url || "",
                 }));
                 cache.set(name, musicArray);
@@ -59,5 +55,5 @@ app.get("/search", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${PORT}`);
 });
