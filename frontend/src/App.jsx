@@ -62,8 +62,8 @@ const App = () => {
                     {data && data.length > 0 ? (
                         <img
                             src={data && data[currplaying].img}
-                            height="250px"
-                            width="250px"
+                            height="200px"
+                            width="200px"
                         />
                     ) : (
                         "Choose a song to play"
