@@ -107,7 +107,7 @@ const App = () => {
 
             <div className="search-box">
                 <div className="w-full">
-                    <form className="flex items-center gap-4 ">
+                    <form className="flex items-center gap-4  flex-wrap">
                         <input
                             type="text"
                             name="song"

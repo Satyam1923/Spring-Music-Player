@@ -229,7 +229,7 @@ li {
 .button {
   border: 0;
   border-radius: 15px;
-  width: 70px;
+  width: 90px;
 }
 
 .btn-cntrl button {
@@ -551,7 +551,7 @@ background-color: #5773ff;
 }
 
 #song{
-  width: 70%;
+  width: 25%;
 }
 
 .name{
@@ -588,6 +588,9 @@ background-color: #5773ff;
 }
 
 @media(max-width: 1200px) {
+  #song{
+    width: 40%;
+  }
   .player {
     width: 40vh;
     height: 60vh; 
@@ -616,6 +619,7 @@ background-color: #5773ff;
 }
 
 @media(max-width: 980px) {
+    
   .ui {
     width: 100vw;
     padding: 5vh 4vw;
