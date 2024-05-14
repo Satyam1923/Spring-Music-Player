@@ -17,6 +17,7 @@
     "react-h5-audio-player": "^3.9.1"
   },
   "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.5",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",

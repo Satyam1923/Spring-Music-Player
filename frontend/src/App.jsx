@@ -16,7 +16,7 @@ const App = () => {
 
     const fetchSongData = async () => {
         try {
-            const response = await axios.get("http://localhost:3030/search", {
+            const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
                 params: { song: searchQuery },
             });
             setData(response.data);
@@ -32,7 +32,33 @@ const App = () => {
             return newData;
         });
     };
+     // Function to shuffle the playlist
+     const shufflePlaylist = () => {
+        if (data) {
+            const shuffledData = [...data];
+            for (let i = shuffledData.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledData[i], shuffledData[j]] = [
+                    shuffledData[j],
+                    shuffledData[i],
+                ];
+            }
+            setData(shuffledData);
+            setCurrplaying(0);
+        }
+    };
 
+    const nextPlay = () => {
+        setCurrplaying(currplaying + 1 >= data.length ? 0 : currplaying + 1);
+    };
+
+    const previousPlay = () => {
+        setCurrplaying(currplaying - 1 < 0 ? data.length - 1 : currplaying - 1);
+    };
+
+    const playSong = (index) => {
+        setCurrplaying(index);
+    };
     return (
         <div className="ui">
             <div className="player">
