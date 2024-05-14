@@ -4,7 +4,6 @@ import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
 
-
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -40,7 +39,7 @@ const App = () => {
             currplaying + 1 >= globalData.length ? 0 : currplaying + 1
         );
         const selectedMusic = globalData[currplaying];
-        updateAudio(selectedMusic);  
+        updateAudio(selectedMusic);
     };
 
     const previousPlay = () => {
