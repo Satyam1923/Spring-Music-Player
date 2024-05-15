@@ -1,0 +1,192 @@
+.sidebar {
+  width: 250px;
+  border-right: 2px solid #848484d3;
+  height: 100%;
+  background: #4141415e;
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 40px 5px;
+  gap: 30%;
+  color: #fff !important;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+}
+
+.search-container .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  transform: translateY(-50%);
+}
+
+.search-container input {
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  padding: 23px;
+  border: 1px solid #fff;
+  outline: none;
+  border-radius: 16px;
+  color: #fff;
+  padding-left: 18%;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 15px;
+  color: #fff;
+  padding: 10px;
+}
+
+.menu h1 {
+  color: #ffffffa2;
+  font-size: 20px;
+  margin: 10px 0;
+}
+.menu .menu-card {
+  width: 100%;
+}
+
+.menu .menu-icons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.menu .menu-icons span {
+  font-size: 17px;
+  width: 70%;
+  color: #ffffffc7;
+}
+.i {
+  color: #ffffffb9;
+  transition: all 0.4s ease;
+  font-size: 22px;
+}
+.menu .menu-icons:hover > .i {
+  color: rgb(255, 255, 255);
+}
+
+.menu .menu-icons:hover > span {
+  color: rgb(255, 255, 255);
+}
+
+/* Header
+ */
+
+.header {
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-icons .i {
+  font-size: 40px;
+  background: #ffffff59;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.music-card {
+  width: 200px;
+  height: 250px;
+}
+
+.music-card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.music-card .song-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+  padding: 2px 5px;
+}
+
+.music-card .song-details .text p {
+  font-size: 15px;
+}
+.music-card .song-details .text span {
+  font-size: 14px;
+  color: #ffffff96;
+}
+
+.music-card .song-details .i {
+  font-size: 40px;
+  background: rgb(212, 1, 212);
+  padding: 8px;
+  border: 0.5px solid #ffffff5e;
+  border-radius: 100%;
+  color: #000000;
+  font-weight: 800;
+  backdrop-filter: blur(30px);
+}
+.music-card .song-details .i:hover {
+  color: #ffffff;
+}
+
+.hambergure {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  right: 5%;
+  top: 7.3%;
+  font-size: 33px;
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    left: -100%;
+    transition: all 0.5s ease;
+  }
+  .search {
+    width: 70%;
+  }
+  .menu {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .hambergure {
+    display: block;
+  }
+  .sidebar--active {
+    left: 0;
+  }
+  .close {
+    display: block;
+  }
+}
