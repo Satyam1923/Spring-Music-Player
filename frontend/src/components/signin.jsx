@@ -61,7 +61,7 @@ const SignIn = () => {
         </div>
         {formStep === 1 ? (
           <>
-            <label className="email" htmlFor="email-input">What's your email?</label>
+            <label className="email" htmlFor="email-input"> Whats your email?</label>
             <input
               className="input-field" 
               type="email" 
