@@ -16,7 +16,8 @@ const ViewIcon = (props) => (
   </svg>
 );
 const SignIn = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('')
+  ;
   const [emailError, setEmailError] = useState('');
   const [formStep, setFormStep] = useState(1);
   const [password, setPassword] = useState('');
