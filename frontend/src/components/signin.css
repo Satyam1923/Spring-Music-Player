@@ -1,16 +1,5 @@
 /* General styles */
-@font-face {
-    font-family: 'Poppinsbold';
-    src: url(../Poppins/Poppins-Bold.ttf) format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Poppinslight';
-    src: url(../Poppins/Poppins-Light.ttf) format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
+
 body {
     
     background-image: url('../../public/SignUp_step1.png');
@@ -38,7 +27,7 @@ body {
    
   }
   h2{
-    font-family: 'Poppinsbold';
+    font-family: "Roboto", sans-serif;
     color: #fff;
     text-align: center;
     margin-top: 1.5vw;
@@ -50,7 +39,7 @@ body {
     
   }
   p{
-    font-family: 'Poppinslight';
+    font-family: "Roboto", sans-serif;
     text-align: center;
     margin-top:.5vw;
   }
@@ -179,7 +168,7 @@ body {
     text-align: center; /* Add this line */
     border-radius: 40px;
     height: 3vw;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
 
   }
   
@@ -220,7 +209,7 @@ body {
     align-items: center;
     margin-top: 20px;
     padding: 0 8vw 0px 8vw;
-    font-family: 'Poppinslight';
+    font-family: "Roboto", sans-serif;
   }
   .input-field {
     display: block;
@@ -234,13 +223,13 @@ body {
     background-color: transparent;
     color: #fff;
     padding-top: 0;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
   }
   .input-field::placeholder {
     color: #ffffff;
     font-size:1.3rem;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
     line-height: 50px;
   }
   .input-field1 {
@@ -257,19 +246,19 @@ body {
     background-color: transparent;
     color: #fff;
     padding-top: 0;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
   }
   .input-field1::placeholder {
     color: #ffffff;
     font-size:1.3rem;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
     line-height: 50px;
   }
   .email{
     font-size:2rem;
     margin-left: 9.5vw;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
   }
   .separator {
     margin-top: 4vw;
@@ -277,7 +266,7 @@ body {
     align-items: center;
     text-align: center;
     color: #fff;
-    font-family: Poppinslight;
+    font-family: "Roboto", sans-serif;
     padding: 0 150px;
     font-size: 1.5rem;
   }
