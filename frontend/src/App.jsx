@@ -4,6 +4,7 @@ import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
 import he from "he";
+import Home from "./components/Home";
 
 const App = () => {
     const [data, setData] = useState(null);
@@ -54,6 +55,10 @@ const App = () => {
     const playSong = (index) => {
         setCurrplaying(index);
     };
+
+    // return(
+    //     <Home />
+    // )
 
     return (
         <div className="ui">
