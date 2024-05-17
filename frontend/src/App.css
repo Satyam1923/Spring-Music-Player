@@ -376,6 +376,7 @@ margin-bottom:15px;
 }
 
 .player {
+
   width: 70vh;
   height: 90vh;
   padding: 20px 14px 8px 14px;
@@ -386,6 +387,7 @@ margin-bottom:15px;
   flex-direction: column;
   background-color: #f1f4f5;
   justify-content: space-evenly;
+  
 }
 
 .search-box {
@@ -407,6 +409,9 @@ margin-bottom:15px;
 .imgBx {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80%;
 }
 
 .imgBx img {
@@ -793,34 +798,6 @@ input[type="range"]:disabled::-moz-range-thumb {
   width: 300px;
 }
 
-/* @media (max-width: 1072px) {
-  .ui {
-    width: 100vw;
-    padding: 5vh 4vw;
-    flex-direction: column;
-  }
-
-  .player {
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 15px;
-  }
-
-  .imgBx img {
-    min-width: 300px;
-  }
-
-  .search-box {
-    border-bottom-left-radius: 15px;
-    border-top-right-radius: 0px;
-  }
-
-  .player,
-  .search-box {
-    height: 600px;
-    width: 40vh;
-    width: 100%;
-  }
-} */
 
 .mySwiper {
   width: 90%;

@@ -18,7 +18,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            Congratulations, @${{ github.actor }}! 🎉 Thank you for creating your issue. Your contribution is greatly appreciated and we look forward to working with you to resolve the issue. Keep up the great work!
+            Congratulations, @${{ github.actor }}! 🎉 Thank you for creating your issue. Your contribution is greatly appreciated and we look forward to working with you to resolve the issue. Keep up the great work! As per GSSoC'24 guidelines the person who raises the issue should be assigned for that issue. But if that person doesn't want to work on that issue the first come fist policy is follwed.
 
             We'd also like to invite you to our Discord server! Join us on [discord](https://discord.gg/Dy6xxxRD).
           pr-message: |

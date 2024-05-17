@@ -17,7 +17,9 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 **API:** JioSaavn API (unofficial) - [API Link](http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app)
 
 ## 🎨 Expected Design
+![Screenshot 2024-05-13 143315](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/efe5fe9e-e049-4b00-bbd1-5182caff35de)
 Check the design in [Figma](https://www.figma.com/file/mrTzLDEAtHPOsDl99R3kOY/Spring-Music-Player?type=design&node-id=0%3A1&mode=design&t=WCOysEPxmfpAsN12-1)
+
 
 
 ## 🌐 WebPage link
@@ -66,14 +68,72 @@ npm run dev
 4. **Access the local server**
 You will receive a link in your terminal.
 
+## Contributing Readme.
+
+### For someone working on backend
+1. Change directory
+```sh
+cd backend
+```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Go to localhost
+```sh
+https://localhost:3030/
+```
+### For someone working on frontend
+1. Change directory
+```sh
+cd frontend
+```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Run server
+```sh
+npm run dev
+```
+
+## For someone working on backend+frontend
+1. Change directory
+```sh
+cd backend
+```
+2. Install npm packages
+```sh
+npm install .
+```
+3. Go to localhost
+```sh 
+https://localhost:3030/
+```
+4. Change directory
+```sh
+cd frontend
+```
+5. Install npm packages
+```sh
+npm install .
+```
+6. Change directory
+```sh
+cd  src
+```
+7. change in app.jsx under app component  fetchSongData function
+change this url https://spring-music-player-3hyj.vercel.app/search with https://localhost:3030/search
+
 ## 🤝 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-- If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it, or directly create a pull request with the necessary changes.
+- If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it.
 - Please ensure your pull request adheres to good practices and standards.
+- Pleae ensure your pull request have reference to the issue assigned.
 - Please make sure you check your spelling and grammar.
-- Create individual Pull Requests for each suggestion.
+- Create individual Pull Requests for each issues.
 
 
 ## 🔧Creating a Pull Request
