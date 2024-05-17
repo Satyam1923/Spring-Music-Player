@@ -5,6 +5,7 @@ import "./App.css";
 import axios from "axios";
 import he from "he";
 
+
 const App = () => {
     const [data, setData] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -56,6 +57,7 @@ const App = () => {
     };
 
     return (
+
         <div className="ui">
             <div className="player">
                 <div className="imgBx">
