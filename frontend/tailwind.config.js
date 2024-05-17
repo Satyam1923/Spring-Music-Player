@@ -1,8 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+  "./index.html",
+  "./src/**/*.{js,ts,jsx,tsx}",
+],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: theme => ({
+        'gradient-to-20': 
+            'linear-gradient(20deg, #000000 10%,#ff00ff 40%,#090088  , #000000 70%)',
+        'gradient-to-135': 
+            'linear-gradient(135deg, #ffed4a, #ff3860)',
+       
+      })
+    },
   },
   plugins: [],
 }
