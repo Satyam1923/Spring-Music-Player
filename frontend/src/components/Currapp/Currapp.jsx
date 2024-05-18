@@ -10,6 +10,7 @@ const CurrApp = () => {
     const [totalTime, setTotalTime] = useState(0);
     const [timePassed, setTimePassed] = useState(0);
     const [currplaying, setCurrplaying] = useState(0);
+    
 
     const fetchSongData = async () => {
         try {
