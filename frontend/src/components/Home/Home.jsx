@@ -85,12 +85,12 @@ const Home = () => {
                 {/* Navigation Links */}
                 <div className="navs w-full h-full ">
                     <div className="menu-library w-full h-1/2 flex flex-col items-left justify-around text-white text-xl">
-                        <h1 className="px-8 font-bold">MENU</h1>
+                        <h1 className="px-8 font-bold text-white">MENU</h1>
                         <div className="flex justify-left items-center px-8">
                             <CiHome />
                             <span className="p-2"></span>Home
                         </div>
-                        <h1 className="px-8 font-bold">LIBRARY</h1>
+                        <h1 className="px-8 font-bold text-white">LIBRARY</h1>
                         <div className="flex justify-left items-center px-8">
                             <IoMdPhotos />
                             <span className="p-2"></span>Albums
@@ -106,7 +106,7 @@ const Home = () => {
                     </div>
 
                     <div className="playlist w-full h-2/5 text-white text-xl flex flex-col justify-around items-left lg:max-xl:text-lg md:max-lg:text-md">
-                        <h1 className="px-8 font-bold">PLAYLISTS</h1>
+                        <h1 className="px-8 font-bold text-white">PLAYLISTS</h1>
                         <div className="px-8 flex justify-left items-center">
                             <TbPlaylist />
                             <span className="px-2">playlist 1</span>
@@ -176,7 +176,7 @@ const Home = () => {
                     <div className="head flex justify-stretch items-center w-full h-auto">
                         <div className="w-1/2 h-auto">
                             <h1 className="text-white text-2xl font-bold w-full h-auto ">Search Results</h1></div>
-                        <h1 className="text-white text-2xl font-bold w-1/2 h-auto text-right"
+                        <h1 className="text-white text-2xl font-bold w-1/2 h-auto text-right cursor-pointer"
                             onClick={handleNext}       >See More</h1>
                     </div>
 
