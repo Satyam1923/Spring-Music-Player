@@ -14,8 +14,10 @@
     "he": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-h5-audio-player": "^3.9.1",
-    "react-router-dom": "^6.23.1"
+    "react-h5-audio-player": "^3.9.homepage,
+    "react-router-dom": "^6.23.1",
+    "react-icons": "^5.2.1",
+    "swiper": "^11.
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
