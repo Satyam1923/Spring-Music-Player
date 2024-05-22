@@ -55,7 +55,7 @@ Go to http://localhost:3030/
 1. **Navigate to the frontend folder**
 
 ```sh
-cd backend
+cd frontend
 ```
 2. **Install npm packages**
 ```sh
