@@ -4,12 +4,10 @@ import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
 import he from "he";
-import Sidebar from "./components/Sidebar";
 import Section3 from "./components/Section3";
 import { CiSearch } from "react-icons/ci";
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
 import waiting2 from "./Images/waiting2.gif";
-
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -18,6 +16,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import NavBar from "./components/NavBar";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -83,7 +82,7 @@ const App = () => {
 
   return (
     <div className="ui">
-      <Sidebar />
+      <NavBar />
       <div className="section2">
         <div className="searchbar searchbar2">
           <input
@@ -100,18 +99,17 @@ const App = () => {
           <button
             id="get"
             type="image"
-            src="search.svg"
             alt="search"
-            className="button"
+            className="h-[2.5rem] w-[1rem] ml-2 flex justify-center items-center"
             onClick={(e) => {
               e.preventDefault();
               if (searchQuery !== "") fetchSongData();
             }}
           >
-            <CiSearch fontSize={"25px"} /> Search
+            <CiSearch className="font-extrabold text-3xl"/>
           </button>
         </div>
-       
+
         <div className="song_content">
           <b>Song Results</b>
 

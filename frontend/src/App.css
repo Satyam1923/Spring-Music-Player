@@ -178,9 +178,6 @@ input[type="search"] {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.option1 {
-  margin-top: 3rem;
-}
 ::placeholder {
   color: #fcfbfb; /* Change the color to your desired color */
 }
@@ -224,12 +221,6 @@ aside a:hover {
   border-bottom-left-radius: 25px;
 }
 
-.delete{
-  margin-left: 50px;
-  font-size: 20px;
-}
-
-
 @media screen and (max-width: 1100px){
   aside{
     width:10%;
@@ -241,9 +232,6 @@ aside a:hover {
     display: none;
   }
   aside RiDeleteBin6Line{
-    display: none;
-  }
-  .delete{
     display: none;
   }
   aside b{
@@ -276,7 +264,7 @@ aside p {
   height:100%;
   display: flex;
   justify-content: center;
-    height: 4rem;
+  height: 4rem;
    
   align-items: center;
  
