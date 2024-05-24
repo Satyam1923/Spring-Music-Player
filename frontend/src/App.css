@@ -642,3 +642,11 @@ background-color: #5773ff;
     width: 100%;
   }
 }
+.sel {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+
