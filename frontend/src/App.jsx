@@ -113,7 +113,7 @@ const App = () => {
         </div>
        
         <div className="song_content">
-          <b>Song Results</b>
+          <b className="search_results">Search Results</b>
 
           <Swiper
             onSwiper={setSwiperRef}
@@ -152,7 +152,7 @@ const App = () => {
             )}
           </Swiper>
 
-          <h3>Recents</h3>
+          <h3 className="recent">Recents</h3>
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
@@ -167,27 +167,27 @@ const App = () => {
           >
              {data == null ? (
 
-<SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting2} alt="" /></SwiperSlide>
+            <SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting2} alt="" /></SwiperSlide>
 
-) : (
-data !== null &&
-data !== undefined &&
-data.map((element, index) => (
-<div key={index} onClick={() => playSong(index)}>
-  <SwiperSlide className="song">
-    <img
-      src={element.img}
-      height={"60%"}
-      alt={element.name}
-      onClick={() => playSong(index)}
-    />
-    <p onClick={() => playSong(index)}>
-      {decodeEntities(element.name)}
-    </p>
-  </SwiperSlide>
-</div>
-))
-)}
+            ) : (
+            data !== null &&
+            data !== undefined &&
+            data.map((element, index) => (
+            <div key={index} onClick={() => playSong(index)}>
+              <SwiperSlide className="song">
+                <img
+                  src={element.img}
+                  height={"60%"}
+                  alt={element.name}
+                  onClick={() => playSong(index)}
+                />
+                <p onClick={() => playSong(index)}>
+                  {decodeEntities(element.name)}
+                </p>
+              </SwiperSlide>
+            </div>
+            ))
+            )}
           </Swiper>
         </div>
 
