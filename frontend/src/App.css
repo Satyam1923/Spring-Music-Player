@@ -765,6 +765,14 @@ input[type="range"]:disabled::-moz-range-thumb {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   width: 5rem;
+  width: 23%;
+  margin-left: 10px;
+  height: 40px;
+
+}
+.button svg{
+  position: absolute;
+    margin-left: 11px;
 }
 
 .btn-cntrl button,
