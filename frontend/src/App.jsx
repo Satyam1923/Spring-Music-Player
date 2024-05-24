@@ -10,7 +10,6 @@ import { CiSearch } from "react-icons/ci";
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
 import waiting2 from "./Images/waiting2.gif";
 
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -18,6 +17,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import SongCard from "./components/SongCard";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -45,6 +45,7 @@ const App = () => {
       console.error(error);
     }
   };
+  
 
   useEffect(() => {
     const fetchTopSong = async () => {
@@ -62,6 +63,9 @@ const App = () => {
     };
     fetchTopSong();
   }, []);
+
+
+  
 
   const nextPlay = () => {
     setCurrplaying(currplaying + 1 >= globalData.length ? 0 : currplaying + 1);
@@ -84,6 +88,8 @@ const App = () => {
   return (
     <div className="ui">
       <Sidebar />
+      
+      
       <div className="section2">
         <div className="searchbar searchbar2">
           <input
@@ -111,7 +117,7 @@ const App = () => {
             <CiSearch fontSize={"25px"} /> Search
           </button>
         </div>
-       
+
         <div className="song_content">
           <b>Song Results</b>
 
@@ -128,9 +134,19 @@ const App = () => {
             className="mySwiper"
           >
             {data == null ? (
-
-                <SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting} alt="" /></SwiperSlide>
-              
+              <SwiperSlide
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+               <SongCard/>
+               <SongCard/>
+               <SongCard/>
+               <SongCard/>
+               <SongCard/>
+               <SongCard/>
+               <SongCard/>
+               
+               
+              </SwiperSlide>
             ) : (
               data !== null &&
               data !== undefined &&
@@ -165,33 +181,33 @@ const App = () => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-             {data == null ? (
-
-<SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting2} alt="" /></SwiperSlide>
-
-) : (
-data !== null &&
-data !== undefined &&
-data.map((element, index) => (
-<div key={index} onClick={() => playSong(index)}>
-  <SwiperSlide className="song">
-    <img
-      src={element.img}
-      height={"60%"}
-      alt={element.name}
-      onClick={() => playSong(index)}
-    />
-    <p onClick={() => playSong(index)}>
-      {decodeEntities(element.name)}
-    </p>
-  </SwiperSlide>
-</div>
-))
-)}
+            {data == null ? (
+              <SwiperSlide
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <img src={waiting2} alt="" />
+              </SwiperSlide>
+            ) : (
+              data !== null &&
+              data !== undefined &&
+              data.map((element, index) => (
+                <div key={index} onClick={() => playSong(index)}>
+                  <SwiperSlide className="song">
+                    <img
+                      src={element.img}
+                      height={"60%"}
+                      alt={element.name}
+                      onClick={() => playSong(index)}
+                    />
+                    <p onClick={() => playSong(index)}>
+                      {decodeEntities(element.name)}
+                    </p>
+                  </SwiperSlide>
+                </div>
+              ))
+            )}
           </Swiper>
         </div>
-
-      
       </div>
 
       <Section3 data={data} currplaying={currplaying} topsongs={topsongs} />
