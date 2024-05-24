@@ -4,6 +4,7 @@ import "react-h5-audio-player/lib/styles.css";
 import he from "he";
 import { IoIosLogIn } from "react-icons/io";
 import { RiNotification3Fill } from "react-icons/ri";
+import { FaUser } from 'react-icons/fa'; // Import the profile icon
 import empty from "../Images/empty.png"
 
 const Section3 = ({data,currplaying,topsongs}) => {
@@ -17,6 +18,7 @@ const Section3 = ({data,currplaying,topsongs}) => {
      <div className="links">
         <div className="link"><IoIosLogIn fontSize={"25px"} color={"white"}/></div>
         <div className="link"><RiNotification3Fill  fontSize={"25px"} color={"white"}/></div>
+        <div className="link"><FaUser fontSize={"25px"} color={"white"} /></div> 
      </div>
 
 
