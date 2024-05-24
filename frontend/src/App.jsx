@@ -30,11 +30,10 @@ const fetchSongData = async () => {
         setData(response.data.length ? response.data : []);
     } catch (error) {
         console.error("Sorry, an error occurred:", error);
-        setData([]); // Set data to an empty array on error
+        setData([]); 
     }
 };
 
-    // Function to shuffle the playlist
     const shufflePlaylist = () => {
         if (data) {
             const shuffledData = [...data];
@@ -139,7 +138,7 @@ const fetchSongData = async () => {
                     <option value="gujarati">Gujarati</option>
                     <option value="telugu">Telugu</option>
                     <option value="bhojpuri">Bhojpuri</option>
-                    {/* Add more languages as needed */}
+                   
                 </select>
                         <button
                             id="get"
