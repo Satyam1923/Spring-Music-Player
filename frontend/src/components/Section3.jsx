@@ -61,9 +61,9 @@ const Section3 = ({data,currplaying,topsongs}) => {
                             width="100px"
                         />
                     ) : (
-                        <div style={{height:"100%" , width:"100%",display:"flex",alignItems:"center",flexDirection:"column",justifyContent:"center"}}>
+                        <div style={{ width:"100%",display:"flex",alignItems:"center",flexDirection:"column",justifyContent:"center"}}>
                         <p>"Choose a song to play"</p>
-                        <img src={empty} alt="" height={"50%"}/>
+                        <img src={empty} alt="" height={"50%"} style={{maxHeight:"18rem"}}/>
                         </div>
                        
                        
