@@ -17,14 +17,10 @@ const App = () => {
         return he.decode(str);
     };
 
-   // Inside the App component
-
-// Add this useEffect hook to log the value of language whenever it changes
 useEffect(() => {
     console.log("Selected language:", language);
 }, [language]);
 
-// Then, inside the fetchSongData function, log the parameters being sent to the backend API
 const fetchSongData = async () => {
     try {
         console.log("Fetching data for language:", language);
@@ -192,8 +188,7 @@ const fetchSongData = async () => {
 
             </div>
         </div>
-        //{" "}
-        // </div>
+ 
     );
 };
 
