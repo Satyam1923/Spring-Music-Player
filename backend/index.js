@@ -9,7 +9,7 @@ const cache = new Map();
 
 const app = express();
 const PORT = 3030;
-
+let name = "";
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,19 +20,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-    const song = req.query.song;    
-    const language = req.query.language;
-    console.log("Name is", song);
-    console.log("Language is", language);
+    name = req.query.song;
+    console.log("Name is", name);
     try {
-        if (cache.has(song)) {
+        if (cache.has(name)) {
             console.log("Fetching from cache...");
-            const music = cache.get(song);
-            const filteredMusic = language === "all" ? music : music.filter(m => m.language === language);
-            res.json(filteredMusic);
+            const music = cache.get(name);
+            res.json(music);
         } else {
             const response = await axios.get(
-                `https://jio-savaan-private.vercel.app/api/search/songs?query=${song}`
+                `https://jio-savaan-private.vercel.app/api/search/songs?query=${name}`
             );
             if (
                 response.data.data.results &&
@@ -48,11 +45,9 @@ app.get("/search", async (req, res) => {
                             "&"
                         ) || "",
                     img: result.image[2]?.url || "",
-                    language: result.language || ""
                 }));
-                cache.set(song, musicArray);
-                const filteredMusic = language === "all" ? musicArray : musicArray.filter(m => m.language === language);
-                res.json(filteredMusic);
+                cache.set(name, musicArray);
+                res.json(musicArray);
             } else {
                 res.json([]);
             }
