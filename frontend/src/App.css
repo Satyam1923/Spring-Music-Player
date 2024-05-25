@@ -10,6 +10,9 @@
 }
 
 :root {
+
+  
+ 
   --color-primary: #6f6af8;
 
   --color-white: #fff;
@@ -125,7 +128,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* background-color: #d9dbe6; */
+  background: rgb(2, 0, 36);
+   /* background-color: #d9dbe6;  */
 
   font-family: "Poppins", sans-serif;
   font-size: 1.6;
@@ -134,7 +138,7 @@ body {
   /* overflow: hidden; */
   margin: 0;
   height: 100vh;
-  background: linear-gradient(to left, #2c003e , #ff00cc , #000a12 );
+  background: linear-gradient(14deg, rgba(2,0,36,1) 0%, rgba(196,0,129,1) 11%, rgba(245,0,238,1) 37%, rgba(10,0,79,1) 60%, rgba(0,0,0,1) 70%);
   
   background-repeat: no-repeat;
   background-attachment: fixed;
