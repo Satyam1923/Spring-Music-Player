@@ -275,7 +275,7 @@ aside p {
   width: 100%;
   height:100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
     height: 4rem;
    
   align-items: center;
@@ -285,6 +285,7 @@ aside p {
 .section2 input[type="search"] {
   height: 2.5rem;
   width: 60%;
+ 
   
 }
 .section2 h2 {
@@ -318,6 +319,49 @@ aside p {
   margin-left: 2rem;
   padding-bottom: 0.5rem;
   padding-top: 2rem;
+}
+.custom-dropdown {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  
+  align-items: center;
+ 
+  height: 2.5rem; 
+  width: 6.6%;
+}
+
+.custom-dropdown select {
+  
+  
+  background-size: 20px; 
+  padding-left: 50px;
+ 
+  height: 2.75rem; 
+  width: 8.6%; 
+  border-radius: 50%; 
+  background-color: rgba(255, 255, 255, 0.25); 
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(18.5px);
+}
+
+
+
+.custom-dropdown select::-ms-expand {
+  display: none;
+}
+
+.dropico{
+  position: absolute;
+  z-index: 100;
+  left: 9px;
+ 
+}
+.custom-dropdown select option {
+  background-color: rgba(255, 255, 255, 0.25);
+  
+  color: black; 
+  text-align: star;
 }
 /*============================================= Section3 ==================================================*/
 
@@ -843,7 +887,7 @@ input[type="range"]:disabled::-moz-range-thumb {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .song p{
-  font-size: 12px;
+  font-size: 11.5px;
 }
 
 .song {
@@ -851,7 +895,7 @@ input[type="range"]:disabled::-moz-range-thumb {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 15px;
+  margin: 9.5px;
   border-radius: 5px;
 }
 .song img {
