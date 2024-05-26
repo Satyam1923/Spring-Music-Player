@@ -88,7 +88,7 @@ const App = () => {
   };
 
   return (
-    <div className="w-screen ">
+    <div className="w-screen">
       <div className="flex">
         {/* sidebar */}
         <div className="h-fit w-max">

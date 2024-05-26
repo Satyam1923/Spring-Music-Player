@@ -133,7 +133,7 @@ body {
 
   /* overflow: hidden; */
   margin: 0;
-  /* height: 100vh; */
+  height: fit-content;
   background: linear-gradient(to left, #2c003e, #ff00cc, #000a12);
 
   background-repeat: no-repeat;
