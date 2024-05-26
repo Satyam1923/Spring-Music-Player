@@ -18,6 +18,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import SignIn from "./components/SignIn";
 
 const App = () => {
   const [data, setData] = useState(null);
