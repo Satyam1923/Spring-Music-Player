@@ -133,9 +133,9 @@ body {
 
   /* overflow: hidden; */
   margin: 0;
-  height: 100vh;
-  background: linear-gradient(to left, #2c003e , #ff00cc , #000a12 );
-  
+  /* height: 100vh; */
+  background: linear-gradient(to left, #2c003e, #ff00cc, #000a12);
+
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
@@ -186,19 +186,18 @@ input[type="search"] {
 }
 
 aside a {
-  
   font-size: 15px;
   color: #fff;
   display: flex;
   padding: 7px;
- 
+
   height: 3rem;
   text-align: center;
   align-items: center;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
-aside p{
+aside p {
   margin-left: 10px;
   margin-top: 12px;
 }
@@ -224,34 +223,31 @@ aside a:hover {
   border-bottom-left-radius: 25px;
 }
 
-.delete{
+.delete {
   margin-left: 50px;
   font-size: 20px;
 }
 
-
-@media screen and (max-width: 1100px){
-  aside{
-    width:10%;
+@media screen and (max-width: 1100px) {
+  aside {
+    width: 10%;
   }
-  aside p{
-     display: none;
+  aside p {
+    display: none;
   }
   aside input[type="search"] {
     display: none;
   }
-  aside RiDeleteBin6Line{
+  aside RiDeleteBin6Line {
     display: none;
   }
-  .delete{
+  .delete {
     display: none;
   }
-  aside b{
+  aside b {
     font-weight: 400;
   }
 }
-
-
 
 aside p {
   margin-bottom: 11px;
@@ -259,56 +255,51 @@ aside p {
 
 /* ==========================================Section-2 ==================================== */
 .section2 {
-  width: 55%;
+  /* width: 55%; */
   display: flex;
- 
+
   align-items: center;
   flex-direction: column;
   justify-content: center;
-
 }
 /* .swiper {
   margin-left: 0px;
   margin-right: 0px;
 } */
-.searchbar2{
+.searchbar2 {
   width: 100%;
-  height:100%;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
-    height: 4rem;
-   
+  height: 4rem;
+
   align-items: center;
- 
 }
 
 .section2 input[type="search"] {
   height: 2.5rem;
   width: 60%;
- 
-  
 }
 .section2 h2 {
   color: white;
 }
 
-.song_content{
-  width:100%;
-  height:80vh;
+.song_content {
+  /* width:100%; */
+  height: 80vh;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 }
 
-.search_results{
+.search_results {
   font-size: xx-large;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 600;
   align-self: flex-start;
   margin-left: 2rem;
   padding-bottom: 0.5rem;
-
 }
 
 .recent {
@@ -324,43 +315,38 @@ aside p {
   position: relative;
   display: flex;
   justify-content: start;
-  
+
   align-items: center;
- 
-  height: 2.5rem; 
+
+  height: 2.5rem;
   width: 6.6%;
 }
 
 .custom-dropdown select {
-  
-  
-  background-size: 20px; 
+  background-size: 20px;
   padding-left: 50px;
- 
-  height: 2.75rem; 
-  width: 8.6%; 
-  border-radius: 50%; 
-  background-color: rgba(255, 255, 255, 0.25); 
+
+  height: 2.75rem;
+  width: 8.6%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(18.5px);
 }
-
-
 
 .custom-dropdown select::-ms-expand {
   display: none;
 }
 
-.dropico{
+.dropico {
   position: absolute;
   z-index: 100;
   left: 9px;
- 
 }
 .custom-dropdown select option {
   background-color: rgba(255, 255, 255, 0.25);
-  
-  color: black; 
+
+  color: black;
   text-align: star;
 }
 /*============================================= Section3 ==================================================*/
@@ -368,22 +354,20 @@ aside p {
 .section3 {
   width: 40%;
   display: flex;
-  
+
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  
+
   border-left: 0.2px solid rgba(255, 255, 255, 0.279);
 }
-.links
-{
+.links {
   display: flex;
   justify-content: center;
   align-items: center;
-margin-bottom:15px;
- 
+  margin-bottom: 15px;
 }
-.link{
+.link {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(18.5px);
@@ -406,7 +390,7 @@ margin-bottom:15px;
   width: 80%;
 }
 
-.search-details p{
+.search-details p {
   font-size: 12px;
 }
 .Card2 {
@@ -422,9 +406,9 @@ margin-bottom:15px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   height: auto;
-  max-height:20rem;
+  max-height: 20rem;
   width: 80%;
- margin-top: 1rem;
+  margin-top: 1rem;
 }
 .details2 {
   height: 5rem;
@@ -440,7 +424,6 @@ margin-bottom:15px;
 }
 
 .player {
-
   width: 70vh;
   height: 90vh;
   padding: 20px 14px 8px 14px;
@@ -451,7 +434,6 @@ margin-bottom:15px;
   flex-direction: column;
   background-color: #f1f4f5;
   justify-content: space-evenly;
-  
 }
 
 .search-box {
@@ -497,8 +479,6 @@ margin-bottom:15px;
   border: none;
   box-shadow: -5px -5px 15px 0px #ffffff9e, 5px 5px 15px 0px #a3b1c6a8;
 }
-
-
 
 li {
   list-style-type: none;
@@ -621,7 +601,6 @@ input[type="range"] {
   flex-direction: row;
   border-radius: 15px;
   width: 100vw;
-
   align-items: center;
   justify-content: space-between;
 }
@@ -645,7 +624,7 @@ input[type="range"] {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  border-bottom: .4px solid rgba(255, 255, 255, 0.171);
+  border-bottom: 0.4px solid rgba(255, 255, 255, 0.171);
 }
 
 .songresult img {
@@ -655,8 +634,6 @@ input[type="range"] {
   margin-right: 10px;
   align-items: center;
 }
-
-
 
 .result-item {
   border-radius: 10px;
@@ -831,11 +808,10 @@ input[type="range"]:disabled::-moz-range-thumb {
   width: 23%;
   margin-left: 10px;
   height: 40px;
-
 }
-.button svg{
+.button svg {
   position: absolute;
-    margin-left: 11px;
+  margin-left: 11px;
 }
 
 .btn-cntrl button,
@@ -870,15 +846,14 @@ input[type="range"]:disabled::-moz-range-thumb {
   width: 300px;
 }
 
-
 .mySwiper {
   width: 90%;
   overflow-x: scroll;
-  
+
   height: 14rem;
   margin: 0;
   padding: 20px;
-  
+
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(18.5px);
@@ -886,7 +861,7 @@ input[type="range"]:disabled::-moz-range-thumb {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-.song p{
+.song p {
   font-size: 11.5px;
 }
 
@@ -901,12 +876,13 @@ input[type="range"]:disabled::-moz-range-thumb {
 .song img {
   border-radius: 10px;
 }
- .swiper-button-prev,.swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   color: white !important;
   /* height:15px !important;
   width: 15px !important; */
   --swiper-navigation-size: 18px;
-  
+
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(18.5px);

@@ -34,20 +34,23 @@ const App = () => {
   };
   useEffect(() => {
     console.log("Selected language:", language);
-}, [language]);
+  }, [language]);
 
-const fetchSongData = async () => {
+  const fetchSongData = async () => {
     try {
-        console.log("Fetching data for language:", language);
-        const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
-            params: { song: searchQuery, language: language },
-        });
-        setData(response.data.length ? response.data : []);
+      console.log("Fetching data for language:", language);
+      const response = await axios.get(
+        "https://spring-music-player-3hyj.vercel.app/search",
+        {
+          params: { song: searchQuery, language: language },
+        }
+      );
+      setData(response.data.length ? response.data : []);
     } catch (error) {
-        console.error("Sorry, an error occurred:", error);
-        setData([]); 
+      console.error("Sorry, an error occurred:", error);
+      setData([]);
     }
-};
+  };
 
   useEffect(() => {
     const fetchTopSong = async () => {
@@ -85,140 +88,167 @@ const fetchSongData = async () => {
   };
 
   return (
-    <div className="ui">
-      <Sidebar />
-      <div className="section2 ">
-        <div className="searchbar searchbar2 ">
-          <input
-            type="search"
-            placeholder="Search Song"
-            name="song"
-            className="box1"
-            required
-            onChange={(e) => {
-              e.preventDefault();
-              setSearchQuery(e.target.value);
-            }}
-          />
-            <div className="custom-dropdown">
-
-  <GrLanguage color="white" fontSize={20} className="dropico" />
-  <select value={language} onChange={(e) => setLanguage(e.target.value)} className="dropdown">
-    <option value="all">All Languages</option>
-    <option value="hindi">Hindi</option>
-    <option value="english">English</option>
-    <option value="punjabi">Punjabi</option>
-    <option value="tamil">Tamil</option>
-    <option value="gujarati">Gujarati</option>
-    <option value="telugu">Telugu</option>
-    <option value="bhojpuri">Bhojpuri</option>
-  </select>
-</div>
-
-          <button
-            id="get"
-            type="image"
-            src="search.svg"
-            alt="search"
-            className="button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (searchQuery !== "") fetchSongData();
-            }}
-          >
-            <CiSearch fontSize={"25px"} /> Search
-          </button>
+    <div className="w-screen ">
+      <div className="flex">
+        {/* sidebar */}
+        <div className="h-fit w-max">
+          <Sidebar />
         </div>
-       
-        <div className="song_content">
-          <b className="search_results">Search Results</b>
+        <div className="flex w-full md:flex-row flex-col justify-evenly">
+          {/* section 2 */}
+          <div className={`section2 md:w-[50%] w-full `}>
+            <div className="searchbar searchbar2">
+              <input
+                type="search"
+                placeholder="Search Song"
+                name="song"
+                className="box1"
+                required
+                onChange={(e) => {
+                  e.preventDefault();
+                  setSearchQuery(e.target.value);
+                }}
+              />
+              <div className="custom-dropdown">
+                <GrLanguage color="white" fontSize={20} className="dropico" />
+                <select
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="dropdown"
+                >
+                  <option value="all">All Languages</option>
+                  <option value="hindi">Hindi</option>
+                  <option value="english">English</option>
+                  <option value="punjabi">Punjabi</option>
+                  <option value="tamil">Tamil</option>
+                  <option value="gujarati">Gujarati</option>
+                  <option value="telugu">Telugu</option>
+                  <option value="bhojpuri">Bhojpuri</option>
+                </select>
+              </div>
 
-          <Swiper
-            onSwiper={setSwiperRef}
-            slidesPerView={4}
-            centeredSlides={true}
-            spaceBetween={30}
-            pagination={{
-              type: "fraction",
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            {data == null ? (
-      <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
-        <img src={waiting} alt="" />
-      </SwiperSlide>
-    ) : data.length === 0 ? (
-
-      <SwiperSlide style={{ display: "flex" , alignItems:"center"}}> No data Found</SwiperSlide>
-    ) : (
-      data.map((element, index) => (
-        <div key={index} onClick={() => playSong(index)}>
-          <SwiperSlide className="song">
-            <img
-              src={element.img}
-              height={"60%"}
-              alt={element.name}
-              onClick={() => playSong(index)}
-            />
-            <div>
-              <p onClick={() => playSong(index)}>{decodeEntities(element.name)}</p>
-              <p className="capitalize">{element.language}</p>
+              <button
+                id="get"
+                type="image"
+                src="search.svg"
+                alt="search"
+                className="w-fit ml-2 md:px-2 flex items-center md:justify-around justify-center"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (searchQuery !== "") fetchSongData();
+                }}
+              >
+                <CiSearch fontSize={"30px"} />{" "}
+                <h2 className="lg:flex hidden">Search</h2>
+              </button>
             </div>
-          </SwiperSlide>
-        </div>
-      ))
-    )}
-  </Swiper>
+            <div className="song_content w-full">
+              <b className="search_results">Search Results</b>
 
+              <Swiper
+                onSwiper={setSwiperRef}
+                slidesPerView={4}
+                centeredSlides={true}
+                spaceBetween={30}
+                pagination={{
+                  type: "fraction",
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+              >
+                {data == null ? (
+                  <SwiperSlide
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <img src={waiting} alt="" />
+                  </SwiperSlide>
+                ) : data.length === 0 ? (
+                  <SwiperSlide
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    {" "}
+                    No data Found
+                  </SwiperSlide>
+                ) : (
+                  data.map((element, index) => (
+                    <div key={index} onClick={() => playSong(index)}>
+                      <SwiperSlide className="song">
+                        <img
+                          src={element.img}
+                          height={"60%"}
+                          alt={element.name}
+                          onClick={() => playSong(index)}
+                        />
+                        <div>
+                          <p onClick={() => playSong(index)}>
+                            {decodeEntities(element.name)}
+                          </p>
+                          <p className="capitalize">{element.language}</p>
+                        </div>
+                      </SwiperSlide>
+                    </div>
+                  ))
+                )}
+              </Swiper>
 
-  <h3 className="recent">Recents</h3>
-  <Swiper
-    slidesPerView={4}
-    centeredSlides={true}
-    spaceBetween={30}
-    pagination={{ type: "fraction" }}
-    navigation={true}
-    modules={[Pagination, Navigation]}
-    className="mySwiper"
-  >
-    {data == null ? (
-      <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
-        <img src={waiting2} alt="" />
-      </SwiperSlide>
-    ) : data.length === 0 ? (
-
-      <SwiperSlide style={{ display: "flex" , alignItems:"center"}}> No data Found</SwiperSlide>
-    ) : (
-      data.map((element, index) => (
-        <div key={index} onClick={() => playSong(index)}>
-          <SwiperSlide className="song">
-            <img
-              src={element.img}
-              height={"60%"}
-              alt={element.name}
-              onClick={() => playSong(index)}
-            />
-            <div>
-              <p onClick={() => playSong(index)}>{decodeEntities(element.name)}</p>
-              <p className="capitalize">{element.language}</p>
+              <h3 className="recent">Recents</h3>
+              <Swiper
+                slidesPerView={4}
+                centeredSlides={true}
+                spaceBetween={30}
+                pagination={{ type: "fraction" }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+              >
+                {data == null ? (
+                  <SwiperSlide
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <img src={waiting2} alt="" />
+                  </SwiperSlide>
+                ) : data.length === 0 ? (
+                  <SwiperSlide
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    {" "}
+                    No data Found
+                  </SwiperSlide>
+                ) : (
+                  data.map((element, index) => (
+                    <div key={index} onClick={() => playSong(index)}>
+                      <SwiperSlide className="song">
+                        <img
+                          src={element.img}
+                          height={"60%"}
+                          alt={element.name}
+                          onClick={() => playSong(index)}
+                        />
+                        <div>
+                          <p onClick={() => playSong(index)}>
+                            {decodeEntities(element.name)}
+                          </p>
+                          <p className="capitalize">{element.language}</p>
+                        </div>
+                      </SwiperSlide>
+                    </div>
+                  ))
+                )}
+              </Swiper>
             </div>
-          </SwiperSlide>
+          </div>
+          {/* section 3 */}
+          <div className={`md:w-[40%] w-full`}>
+            <Section3
+              data={data}
+              currplaying={currplaying}
+              topsongs={topsongs}
+            />
+          </div>
         </div>
-      ))
-    )}
-  </Swiper>
-
-        </div>
-
-      
       </div>
-
-      <Section3 data={data} currplaying={currplaying} topsongs={topsongs} />
     </div>
-    //{" "}
-    // </div>
   );
 };
 

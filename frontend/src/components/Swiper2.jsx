@@ -35,17 +35,22 @@ export default function Swiper2({ data }) {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-
         {data !== null &&
           data !== undefined &&
           data.map((element, index) => (
             <div key={index} className="song" onClick={() => playSong(index)}>
-            <SwiperSlide  >
-              <img src={element.img} height={"70%"} alt={element.name} onClick={() => playSong(index)} />
-              <p onClick={() => playSong(index)}>{decodeEntities(element.name)}</p>
-            </SwiperSlide>
+              <SwiperSlide>
+                <img
+                  src={element.img}
+                  height={"70%"}
+                  alt={element.name}
+                  onClick={() => playSong(index)}
+                />
+                <p onClick={() => playSong(index)}>
+                  {decodeEntities(element.name)}
+                </p>
+              </SwiperSlide>
             </div>
-            
           ))}
       </Swiper>
     </>
