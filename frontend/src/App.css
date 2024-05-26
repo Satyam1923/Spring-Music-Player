@@ -134,7 +134,7 @@ body {
   /* overflow: hidden; */
   margin: 0;
   height: fit-content;
-  background: linear-gradient(to left, #2c003e, #ff00cc, #000a12);
+  background: linear-gradient(14deg, rgba(2,0,36,1) 0%, rgba(196,0,129,1) 11%, rgba(245,0,238,1) 37%, rgba(10,0,79,1) 60%, rgba(0,0,0,1) 70%);
 
   background-repeat: no-repeat;
   background-attachment: fixed;
