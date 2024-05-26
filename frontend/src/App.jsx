@@ -9,7 +9,7 @@ import Section3 from "./components/Section3";
 import { CiSearch } from "react-icons/ci";
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
 import waiting2 from "./Images/waiting2.gif";
-import { GrLanguage } from "react-icons/gr";
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -27,27 +27,24 @@ const App = () => {
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
   const [swiperRef, setSwiperRef] = useState(null);
-  const [language, setLanguage] = useState("all");
 
   const decodeEntities = (str) => {
     return he.decode(str);
   };
-  useEffect(() => {
-    console.log("Selected language:", language);
-}, [language]);
 
-const fetchSongData = async () => {
+  const fetchSongData = async () => {
     try {
-        console.log("Fetching data for language:", language);
-        const response = await axios.get(import.meta.env.VITE_BACKEND_URL, {
-            params: { song: searchQuery, language: language },
-        });
-        setData(response.data.length ? response.data : []);
+      const response = await axios.get(
+        "https://spring-music-player-3hyj.vercel.app/search",
+        {
+          params: { song: searchQuery },
+        }
+      );
+      setData(response.data);
     } catch (error) {
-        console.error("Sorry, an error occurred:", error);
-        setData([]); 
+      console.error(error);
     }
-};
+  };
 
   useEffect(() => {
     const fetchTopSong = async () => {
@@ -87,8 +84,8 @@ const fetchSongData = async () => {
   return (
     <div className="ui">
       <Sidebar />
-      <div className="section2 ">
-        <div className="searchbar searchbar2 ">
+      <div className="section2">
+        <div className="searchbar searchbar2">
           <input
             type="search"
             placeholder="Search Song"
@@ -100,21 +97,6 @@ const fetchSongData = async () => {
               setSearchQuery(e.target.value);
             }}
           />
-            <div className="custom-dropdown">
-
-  <GrLanguage color="white" fontSize={20} className="dropico" />
-  <select value={language} onChange={(e) => setLanguage(e.target.value)} className="dropdown">
-    <option value="all">All Languages</option>
-    <option value="hindi">Hindi</option>
-    <option value="english">English</option>
-    <option value="punjabi">Punjabi</option>
-    <option value="tamil">Tamil</option>
-    <option value="gujarati">Gujarati</option>
-    <option value="telugu">Telugu</option>
-    <option value="bhojpuri">Bhojpuri</option>
-  </select>
-</div>
-
           <button
             id="get"
             type="image"
@@ -131,7 +113,7 @@ const fetchSongData = async () => {
         </div>
        
         <div className="song_content">
-          <b className="search_results">Search Results</b>
+          <b>Song Results</b>
 
           <Swiper
             onSwiper={setSwiperRef}
@@ -146,70 +128,67 @@ const fetchSongData = async () => {
             className="mySwiper"
           >
             {data == null ? (
-      <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
-        <img src={waiting} alt="" />
-      </SwiperSlide>
-    ) : data.length === 0 ? (
 
-      <SwiperSlide style={{ display: "flex" , alignItems:"center"}}> No data Found</SwiperSlide>
-    ) : (
-      data.map((element, index) => (
-        <div key={index} onClick={() => playSong(index)}>
-          <SwiperSlide className="song">
-            <img
-              src={element.img}
-              height={"60%"}
-              alt={element.name}
-              onClick={() => playSong(index)}
-            />
-            <div>
-              <p onClick={() => playSong(index)}>{decodeEntities(element.name)}</p>
-              <p className="capitalize">{element.language}</p>
-            </div>
-          </SwiperSlide>
-        </div>
-      ))
-    )}
-  </Swiper>
+                <SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting} alt="" /></SwiperSlide>
+              
+            ) : (
+              data !== null &&
+              data !== undefined &&
+              data.map((element, index) => (
+                <div key={index} onClick={() => playSong(index)}>
+                  <SwiperSlide className="song">
+                    <img
+                      src={element.img}
+                      height={"60%"}
+                      alt={element.name}
+                      onClick={() => playSong(index)}
+                    />
+                    <p onClick={() => playSong(index)}>
+                      {decodeEntities(element.name)}
+                    </p>
+                  </SwiperSlide>
+                </div>
+              ))
+            )}
+          </Swiper>
 
+          <h3>Recents</h3>
+          <Swiper
+            onSwiper={setSwiperRef}
+            slidesPerView={4}
+            centeredSlides={true}
+            spaceBetween={30}
+            pagination={{
+              type: "fraction",
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+             {data == null ? (
 
-  <h3 className="recent">Recents</h3>
-  <Swiper
-    slidesPerView={4}
-    centeredSlides={true}
-    spaceBetween={30}
-    pagination={{ type: "fraction" }}
-    navigation={true}
-    modules={[Pagination, Navigation]}
-    className="mySwiper"
-  >
-    {data == null ? (
-      <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
-        <img src={waiting2} alt="" />
-      </SwiperSlide>
-    ) : data.length === 0 ? (
+<SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting2} alt="" /></SwiperSlide>
 
-      <SwiperSlide style={{ display: "flex" , alignItems:"center"}}> No data Found</SwiperSlide>
-    ) : (
-      data.map((element, index) => (
-        <div key={index} onClick={() => playSong(index)}>
-          <SwiperSlide className="song">
-            <img
-              src={element.img}
-              height={"60%"}
-              alt={element.name}
-              onClick={() => playSong(index)}
-            />
-            <div>
-              <p onClick={() => playSong(index)}>{decodeEntities(element.name)}</p>
-              <p className="capitalize">{element.language}</p>
-            </div>
-          </SwiperSlide>
-        </div>
-      ))
-    )}
-  </Swiper>
-
+) : (
+data !== null &&
+data !== undefined &&
+data.map((element, index) => (
+<div key={index} onClick={() => playSong(index)}>
+  <SwiperSlide className="song">
+    <img
+      src={element.img}
+      height={"60%"}
+      alt={element.name}
+      onClick={() => playSong(index)}
+    />
+    <p onClick={() => playSong(index)}>
+      {decodeEntities(element.name)}
+    </p>
+  </SwiperSlide>
+</div>
+))
+)}
+          </Swiper>
         </div>
 
       

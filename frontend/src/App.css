@@ -1,5 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Anonymous+Pro");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -10,9 +11,6 @@
 }
 
 :root {
-
-  
- 
   --color-primary: #6f6af8;
 
   --color-white: #fff;
@@ -128,17 +126,17 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: rgb(2, 0, 36);
-   /* background-color: #d9dbe6;  */
+  background-color: #d9dbe6;
 
   font-family: "Poppins", sans-serif;
   font-size: 1.6;
   color: var(--color-gray-700);
 
-  /* overflow: hidden; */
+  overflow: hidden;
+  padding: 0;
   margin: 0;
   height: 100vh;
-  background: linear-gradient(14deg, rgba(2,0,36,1) 0%, rgba(196,0,129,1) 11%, rgba(245,0,238,1) 37%, rgba(10,0,79,1) 60%, rgba(0,0,0,1) 70%);
+  background: linear-gradient(to left, #2c003e , #ff00cc , #000a12 );
   
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -279,7 +277,7 @@ aside p {
   width: 100%;
   height:100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
     height: 4rem;
    
   align-items: center;
@@ -289,7 +287,6 @@ aside p {
 .section2 input[type="search"] {
   height: 2.5rem;
   width: 60%;
- 
   
 }
 .section2 h2 {
@@ -300,73 +297,11 @@ aside p {
   width:100%;
   height:80vh;
   display: flex;
-  flex-direction:column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.search_results{
-  font-size: xx-large;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  align-self: flex-start;
-  margin-left: 2rem;
-  padding-bottom: 0.5rem;
-
-}
-
-.recent {
-  font-size: xx-large;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  color: white;
-  margin-left: 2rem;
-  padding-bottom: 0.5rem;
-  padding-top: 2rem;
-}
-.custom-dropdown {
-  position: relative;
-  display: flex;
-  justify-content: start;
-  
+ 
   align-items: center;
- 
-  height: 2.5rem; 
-  width: 6.6%;
+  flex-direction:column;
 }
 
-.custom-dropdown select {
-  
-  
-  background-size: 20px; 
-  padding-left: 50px;
- 
-  height: 2.75rem; 
-  width: 8.6%; 
-  border-radius: 50%; 
-  background-color: rgba(255, 255, 255, 0.25); 
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(18.5px);
-}
-
-
-
-.custom-dropdown select::-ms-expand {
-  display: none;
-}
-
-.dropico{
-  position: absolute;
-  z-index: 100;
-  left: 9px;
- 
-}
-.custom-dropdown select option {
-  background-color: rgba(255, 255, 255, 0.25);
-  
-  color: black; 
-  text-align: star;
-}
 /*============================================= Section3 ==================================================*/
 
 .section3 {
@@ -426,7 +361,7 @@ margin-bottom:15px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   height: auto;
-  max-height:20rem;
+  max-height:18rem;
   width: 80%;
  margin-top: 1rem;
 }
@@ -832,14 +767,6 @@ input[type="range"]:disabled::-moz-range-thumb {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   width: 5rem;
-  width: 23%;
-  margin-left: 10px;
-  height: 40px;
-
-}
-.button svg{
-  position: absolute;
-    margin-left: 11px;
 }
 
 .btn-cntrl button,
@@ -891,7 +818,7 @@ input[type="range"]:disabled::-moz-range-thumb {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .song p{
-  font-size: 11.5px;
+  font-size: 12px;
 }
 
 .song {
@@ -899,7 +826,7 @@ input[type="range"]:disabled::-moz-range-thumb {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 9.5px;
+  margin: 15px;
   border-radius: 5px;
 }
 .song img {
