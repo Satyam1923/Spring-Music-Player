@@ -27,6 +27,8 @@ const App = () => {
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
   const [swiperRef, setSwiperRef] = useState(null);
+  const [token, setToken] = useState("")
+  const [songData, setsongData] = useState([])
 
   const decodeEntities = (str) => {
     return he.decode(str);
@@ -65,7 +67,49 @@ const App = () => {
   }, []);
 
 
-  
+  useEffect(() => {
+    // Function to get the access token
+    const getToken = async () => {
+      const clientId = 'ea0565133c404169ba2d7570aa10f75b'; // Replace with your client ID
+      const clientSecret ='1b0a383640f64d0ca13d14ad4ce65051'; // Replace with your client secret
+      const authUrl = 'https://accounts.spotify.com/api/token';
+      const authOptions = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+        }
+      };
+
+      const response = await axios.post(authUrl, 'grant_type=client_credentials', authOptions);
+      setToken(response.data.access_token);
+    };
+
+    getToken();
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const fetchSongs = async () => {
+        const response = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          params: {
+            limit: 50, 
+          }
+        });
+        const songsData = response.data.albums.items.map(item => ({
+          title: item.name,
+          artist: item.artists[0].name,
+          albumCover: item.images[0].url
+        }));
+        setsongData(songsData);
+        
+      };
+
+      fetchSongs();
+    }
+  }, [token]);
 
   const nextPlay = () => {
     setCurrplaying(currplaying + 1 >= globalData.length ? 0 : currplaying + 1);
@@ -119,7 +163,7 @@ const App = () => {
         </div>
 
         <div className="song_content">
-          <b>Song Results</b>
+          <b>Trending Songs</b>
 
           <Swiper
             onSwiper={setSwiperRef}
@@ -133,35 +177,20 @@ const App = () => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {data == null ? (
+            {songData == null ? (
               <SwiperSlide
                 style={{ display: "flex", justifyContent: "center" }}
               >
-               <SongCard/>
-               <SongCard/>
-               <SongCard/>
-               <SongCard/>
-               <SongCard/>
-               <SongCard/>
-               <SongCard/>
-               
+              <img src={waiting} alt="" />
                
               </SwiperSlide>
             ) : (
-              data !== null &&
-              data !== undefined &&
-              data.map((element, index) => (
+              songData !== null &&
+              songData !== undefined &&
+              songData.map((element, index) => (
                 <div key={index} onClick={() => playSong(index)}>
-                  <SwiperSlide className="song">
-                    <img
-                      src={element.img}
-                      height={"60%"}
-                      alt={element.name}
-                      onClick={() => playSong(index)}
-                    />
-                    <p onClick={() => playSong(index)}>
-                      {decodeEntities(element.name)}
-                    </p>
+                  <SwiperSlide className="song"> 
+                    <SongCard song={element}/>
                   </SwiperSlide>
                 </div>
               ))
@@ -201,6 +230,8 @@ const App = () => {
                     />
                     <p onClick={() => playSong(index)}>
                       {decodeEntities(element.name)}
+                     
+                      
                     </p>
                   </SwiperSlide>
                 </div>
