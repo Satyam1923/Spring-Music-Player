@@ -9,6 +9,7 @@ import Section3 from "./components/Section3";
 import { CiSearch } from "react-icons/ci";
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
 import waiting2 from "./Images/waiting2.gif";
+import Footer from "./components/Footer";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -82,7 +83,8 @@ const App = () => {
   };
 
   return (
-    <div className="ui">
+    <div className="">
+      <div className="ui">
       <Sidebar />
       <div className="section2">
         <div className="searchbar searchbar2">
@@ -195,7 +197,10 @@ data.map((element, index) => (
       </div>
 
       <Section3 data={data} currplaying={currplaying} topsongs={topsongs} />
+      </div>
+      <Footer/>
     </div>
+    
     //{" "}
     // </div>
   );

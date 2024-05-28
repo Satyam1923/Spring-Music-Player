@@ -132,10 +132,10 @@ body {
   font-size: 1.6;
   color: var(--color-gray-700);
 
-  overflow: hidden;
+  overflow-x: hidden;
   padding: 0;
   margin: 0;
-  height: 100vh;
+
   background: linear-gradient(to left, #2c003e , #ff00cc , #000a12 );
   
   background-repeat: no-repeat;
@@ -562,7 +562,7 @@ input[type="range"] {
   flex-direction: row;
   border-radius: 15px;
   width: 100vw;
-
+  
   align-items: center;
   justify-content: space-between;
 }
@@ -847,4 +847,159 @@ input[type="range"]:disabled::-moz-range-thumb {
   border-radius: 10px;
   padding: 15px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+/*css file for footer */
+.bgfooter{
+  background: rgba(255, 255, 255, 0.063);
+box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+}
+.sec1 {
+  width: 100%;
+  height: 15%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.divider {
+  width: 100%;
+  height: 0.04em;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.079),
+    #ffffffd1,
+    rgba(255, 255, 255, 0.079),
+    rgba(255, 255, 255, 0.01)
+  );
+}
+
+.sec2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+align-items: center;
+ width: 100%;
+ height: 65%;
+
+}
+.sec3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+ height: 12%;
+
+}
+.lastli{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid red;
+}
+.sec4{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 8%;
+ font-size:12px;
+}
+.icons {
+  background: transparent;
+  top: 0px;
+  color: blue;
+  
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.279);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.icons a::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  top: -30px;
+  left: 0;
+  background: linear-gradient(
+    40deg,
+    rgb(246, 126, 28),
+    rgb(221, 54, 54),
+    rgb(250, 41, 118),
+    rgb(214, 18, 214)
+  );
+  position: absolute;
+  transition: 0.5s;
+}
+.icons a .fab {
+  font-size: 27px;
+  z-index: 20;
+  position: absolute;
+  color: white;
+}
+.icons a:hover::after {
+  top: 0;
+}
+
+.icons:nth-child(1) a::after {
+  background: linear-gradient(
+    40deg,
+    rgb(246, 126, 28),
+    rgb(221, 54, 54),
+    rgb(250, 41, 118),
+    rgb(214, 18, 214)
+  );
+}
+
+.icons:nth-child(2) a::after {
+  background: linear-gradient(40deg, #96d4fb, #1da1f2);
+}
+.icons:nth-child(4) a::after {
+  background: linear-gradient(40deg, rgb(4, 51, 98), rgb(10, 102, 194));
+}
+
+.icons:nth-child(5) a::after {
+  background: linear-gradient(
+    40deg,
+    rgb(0, 255, 255),
+    rgb(0, 191, 255),
+    rgb(0, 128, 255),
+    rgb(0, 64, 255)
+  );
+}
+.icons:nth-child(3) a::after {
+  background: red;
+}
+
+.f01 {
+  position: absolute;
+  bottom: 0;
+}
+
+.ico {
+  @apply pl-1 pt-1 fab hover:text-white md:pt-[5px] md:pl-[5px]; /* Remove font-size property from here */
+}
+
+.head{
+  @apply xs:text-[12px]; /* Remove font-size property from here */
+}
+
+.sec2 ul h2{
+  padding-bottom: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color:#e5e1e1
+}
+.sec2 ul li{
+  font-size: 15px;
+  color: rgb(255, 255, 255);
 }
