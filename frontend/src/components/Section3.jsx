@@ -36,7 +36,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
                         >
                             <div className="songresult">
                                 <img
-                                    src={element.image[0].url}
+                                    src={element.image[2].url}
                                     alt={element.name}
                                     height="15px"
                                     width="15px"
@@ -61,11 +61,11 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
 
                     isTopSong ?
                         <img
-                            src={topsongs && topsongs[index].image[0].url}
+                            src={topsongs && topsongs[index].image[2].url}
                             height="100px"
                             width="100px"
                         /> : <img
-                            src={data && data[index].image[0].url}
+                            src={data && data[index].image[2].url}
                             height="100px"
                             width="100px"
                         />

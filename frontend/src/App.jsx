@@ -141,7 +141,6 @@ const App = () => {
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
-            centeredSlides={true}
             spaceBetween={30}
             pagination={{
               type: "fraction",
@@ -152,8 +151,7 @@ const App = () => {
           >
             {data == null ? (
 
-              <SwiperSlide style={{ display: "flex", justifyContent: "center" }}><img src={waiting} alt="" /></SwiperSlide>
-
+              ''
             ) : (
               data !== null &&
               data !== undefined &&
@@ -164,7 +162,7 @@ const App = () => {
                 }}>
                   <SwiperSlide className="song">
                     <img
-                      src={element.image[0].url}
+                      src={element.image[1].url}
                       alt={element.name}
                       onClick={() => {
                         setTopSong(false);
@@ -183,11 +181,11 @@ const App = () => {
             )}
           </Swiper>
 
-          <h3>Recents</h3>
+          <b>Recents</b>
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
-            centeredSlides={true}
+            // centeredSlides={true}
             spaceBetween={30}
             pagination={{
               type: "fraction",
@@ -197,8 +195,7 @@ const App = () => {
             className="mySwiper"
           >
             {data == null ? (
-
-              <SwiperSlide style={{ display: "flex", justifyContent: "center" }}><img src={waiting2} alt="" /></SwiperSlide>
+              ''
 
             ) : (
               data !== null &&
@@ -210,7 +207,7 @@ const App = () => {
                 }}>
                   <SwiperSlide className="song">
                     <img
-                      src={element.image[0].url}
+                      src={element.image[2].url}
                       height={"60%"}
                       alt={element.name}
                       onClick={() => {
