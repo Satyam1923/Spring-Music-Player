@@ -143,8 +143,7 @@ body {
   overflow-x: hidden;
   padding: 0;
   margin: 0;
-
-  height: 100vh;
+  /*removed the hieght attribute from here since it was cutting the upper half on addidng the footer*/
   /* background: linear-gradient(to left, #2c003e , #ff00cc , #000a12 ); */
   background: #000000;
 
