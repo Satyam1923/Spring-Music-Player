@@ -1,4 +1,3 @@
-import React from 'react'
 import { CiSearch } from "react-icons/ci";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoImages } from "react-icons/io5";
@@ -6,7 +5,10 @@ import { MdLibraryMusic } from "react-icons/md";
 import { GrUserManager } from "react-icons/gr";
 import { BsImages } from "react-icons/bs";
 import { RiDeleteBin6Line } from "react-icons/ri";
-const Sidebar = () => {
+import { FaHome } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
+import './sidebar.css';
+const Sidebar = ({handleFocus}) => {
   return (
     <aside>
 
@@ -21,6 +23,22 @@ const Sidebar = () => {
 
 
         <a href="javascript:void(0) px-52">
+      <div className="home">
+        <FaHome className="searchlogo" />
+        <p>      Home</p>
+      </div>
+      <div className="home">
+        <button onClick={handleFocus}>
+          <FaSearch className="searchlogo" />
+        </button>
+      </div>
+
+      <div className="option1">
+        <b>MENU</b>
+
+
+
+        <a style={{ cursor: 'pointer' }}>
           <IoHomeOutline fontSize={"20px"} />
           {/* <i className="fa fa-user-o" aria-hidden="true"></i> */}
           <p>My drive</p>
@@ -29,17 +47,20 @@ const Sidebar = () => {
 
 
         <a href="javascript:void(0) px-52">
+        <a style={{ cursor: 'pointer' }}>
           <IoImages fontSize={"20px"} />
           <p>Albums</p>
 
         </a>
         <a href="javascript:void(0) px-52">
+        <a style={{ cursor: 'pointer' }}>
           <MdLibraryMusic fontSize={"20px"} />
           {/* <i className="fa fa-clone" aria-hidden="true"></i> */}
           <p>Music</p>
 
         </a>
         <a href="javascript:void(0) px-52">
+        <a style={{ cursor: 'pointer' }}>
           <GrUserManager fontSize={"20px"} />
           {/* <i className="fa fa-star-o" aria-hidden="true"></i> */}
           <p>Artist</p>
@@ -53,6 +74,10 @@ const Sidebar = () => {
 
 
         <a href="javascript:void(0)">
+        <b>PlayList</b>
+
+
+        <a style={{ cursor: 'pointer' }}>
           <BsImages fontSize={"20px"} />
           {/* <i className="fa fa-user-o" aria-hidden="true"></i> */}
           <p> playlist1</p>
@@ -61,6 +86,7 @@ const Sidebar = () => {
           <RiDeleteBin6Line className='delete' />
         </a>
         <a href="javascript:void(0)">
+        <a style={{ cursor: 'pointer' }}>
           <BsImages fontSize={"20px"} />
           {/* <i className="fa fa-user-o" aria-hidden="true"></i> */}
           <p> playlist1</p>
