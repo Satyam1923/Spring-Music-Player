@@ -1,8 +1,9 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
+import fetch from 'node-fetch';
 
-import cors from "cors"  ; 
+import cors from "cors";
 
 
 const cache = new Map();
@@ -19,22 +20,32 @@ app.get("/", (req, res) => {
     res.send("Welcome to the music search API");
 });
 
-app.get("/search", async (req, res) => {
-    const song = req.query.song;    
-    const language = req.query.language;
-    console.log("Name is", song);
-    console.log("Language is", language);
+
+
+app.get('/search', async (req, res) => {
     try {
-        if (cache.has(song)) {
-            console.log("Fetching from cache...");
-            const music = cache.get(song);
-            const filteredMusic = language === "all" ? music : music.filter(m => m.language === language);
-            res.json(filteredMusic);
-        } else {
-            const response = await axios.get(
-                `https://jio-savaan-private.vercel.app/api/search/songs?query=${song}`
-            );
+        const { song } = req.query;
+        const language = req.query.language;
+        console.log("Name is", song);
+        // console.log("Language is", language);
+
+        const apiUrl = `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(song)}`;
+        console.log(apiUrl);
+
+
+        //correct till here,now manipulate data and send it:
+        try {
+
+            const response = await fetch(apiUrl);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data from the external API');
+            }
+
+            const data = await response.json();
+
             if (
+                response && response.data && response.data.data &&
                 response.data.data.results &&
                 response.data.data.results.length > 0
             ) {
@@ -50,20 +61,30 @@ app.get("/search", async (req, res) => {
                     img: result.image[2]?.url || "",
                     language: result.language || ""
                 }));
-                cache.set(song, musicArray);
+                // cache.set(song, musicArray);
                 const filteredMusic = language === "all" ? musicArray : musicArray.filter(m => m.language === language);
                 res.json(filteredMusic);
             } else {
+                console.log("response.data.data");
+                console.log(response);
                 res.json([]);
             }
+
+        } catch (error) {
+            console.log("gjdjss error");
+            console.log(error);
+            res.json([]);
         }
+
+
+        // res.json(data);
     } catch (error) {
-        console.error("Failed to make request:", error.message);
-        res.status(500).json({
-            error: "Error fetching song. Please try again later.",
-        });
+        // Handle errors
+        console.error('Error occurred while processing the request:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

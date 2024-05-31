@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
-import AudioPlayer from "react-h5-audio-player";
+import { useState, useEffect, useRef } from "react";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
 import he from "he";
 import Sidebar from "./components/Sidebar";
 import Section3 from "./components/Section3";
-import { CiSearch } from "react-icons/ci";
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
 import waiting2 from "./Images/waiting2.gif";
+
 import Footer from "./components/Footer";
+
+import { FaSearch, FaUser } from 'react-icons/fa'; // Import the profile icon
+
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -29,39 +31,59 @@ const App = () => {
   const [topsongs, setTopsongs] = useState([]);
   const [swiperRef, setSwiperRef] = useState(null);
 
+  const [isTopSong, setTopSong] = useState(false);
+  const inputRef = useRef(null);
+
   const decodeEntities = (str) => {
     return he.decode(str);
   };
 
   const fetchSongData = async () => {
-    try {
-      const response = await axios.get(
-        "https://spring-music-player-3hyj.vercel.app/search",
-        {
-          params: { song: searchQuery },
+
+    fetch(`https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(searchQuery)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        } else {
+          console.log("response.json()")
+          return response.json();
         }
-      );
-      setData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+      })
+      .then(data => {
+        console.log("data");
+        console.log(data.data.results);
+        setData(data.data.results);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      })
+
   };
 
   useEffect(() => {
     const fetchTopSong = async () => {
       try {
-        const response = await axios.get(
-          "https://spring-music-player-3hyj.vercel.app/search",
-          {
-            params: { song: "top songs" },
-          }
-        );
-        setTopsongs(response.data);
+        const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
+        setTopsongs(response.data.data.results);
+        // console.log("top songs");
+        // console.log(response.data.data.results);
       } catch (error) {
         console.error(error);
       }
     };
     fetchTopSong();
+
+    const fetchSuggestions = async () => {
+      try {
+        const response = await axios.get("http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app/api/albums?link=https://www.jiosaavn.com/album/houdini/OgwhbhtDRwM");
+        console.log("suggestions songs");
+        console.log(response);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchSuggestions();
   }, []);
 
   const nextPlay = () => {
@@ -79,19 +101,37 @@ const App = () => {
   };
 
   const playSong = (index) => {
+    console.log("index");
+    console.log(index);
     setCurrplaying(index);
   };
 
+  const handleFocus = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   return (
+
     <div className="">
-      <div className="ui">
-      <Sidebar />
+    <div className="ui">
+      <Sidebar handleFocus={handleFocus} />
+      <div className="avatar">
+        <div className="logo">
+          <FaUser fontSize="15px" color="white" />
+        </div>
+        <div className="text">Username</div>
+      </div>
+
       <div className="section2">
+
         <div className="searchbar searchbar2">
           <input
             type="search"
             placeholder="Search Song"
             name="song"
+            ref={inputRef}
             className="box1"
             required
             onChange={(e) => {
@@ -107,20 +147,27 @@ const App = () => {
             className="button"
             onClick={(e) => {
               e.preventDefault();
-              if (searchQuery !== "") fetchSongData();
+              if (searchQuery !== "") {
+                console.log("started fetching song....")
+                fetchSongData();
+              } else {
+                console.log("empty input query");
+              }
             }}
           >
-            <CiSearch fontSize={"25px"} /> Search
+            <div className="homesearchbar">
+              <FaSearch className="homesearchlogo" />
+              <p>Search</p>
+            </div>
           </button>
         </div>
-       
+
         <div className="song_content">
           <b>Song Results</b>
 
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
-            centeredSlides={true}
             spaceBetween={30}
             pagination={{
               type: "fraction",
@@ -131,21 +178,28 @@ const App = () => {
           >
             {data == null ? (
 
-                <SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting} alt="" /></SwiperSlide>
-              
+              ''
             ) : (
               data !== null &&
               data !== undefined &&
               data.map((element, index) => (
-                <div key={index} onClick={() => playSong(index)}>
+                <div key={element.id} onClick={() => {
+                  setTopSong(false);
+                  playSong(index)
+                }}>
                   <SwiperSlide className="song">
                     <img
-                      src={element.img}
-                      height={"60%"}
+                      src={element.image[1].url}
                       alt={element.name}
-                      onClick={() => playSong(index)}
+                      onClick={() => {
+                        setTopSong(false);
+                        playSong(index)
+                      }}
                     />
-                    <p onClick={() => playSong(index)}>
+                    <p onClick={() => {
+                      setTopSong(false);
+                      playSong(index)
+                    }}>
                       {decodeEntities(element.name)}
                     </p>
                   </SwiperSlide>
@@ -154,11 +208,11 @@ const App = () => {
             )}
           </Swiper>
 
-          <h3>Recents</h3>
+          <b>Recents</b>
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
-            centeredSlides={true}
+            // centeredSlides={true}
             spaceBetween={30}
             pagination={{
               type: "fraction",
@@ -167,42 +221,49 @@ const App = () => {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-             {data == null ? (
+            {data == null ? (
+              ''
 
-<SwiperSlide style={{display:"flex",justifyContent:"center"}}><img src={waiting2} alt="" /></SwiperSlide>
-
-) : (
-data !== null &&
-data !== undefined &&
-data.map((element, index) => (
-<div key={index} onClick={() => playSong(index)}>
-  <SwiperSlide className="song">
-    <img
-      src={element.img}
-      height={"60%"}
-      alt={element.name}
-      onClick={() => playSong(index)}
-    />
-    <p onClick={() => playSong(index)}>
-      {decodeEntities(element.name)}
-    </p>
-  </SwiperSlide>
-</div>
-))
-)}
+            ) : (
+              data !== null &&
+              data !== undefined &&
+              data.map((element, index) => (
+                <div key={element.id} onClick={() => {
+                  setTopSong(false);
+                  playSong(index)
+                }}>
+                  <SwiperSlide className="song">
+                    <img
+                      src={element.image[2].url}
+                      height={"60%"}
+                      alt={element.name}
+                      onClick={() => {
+                        setTopSong(false);
+                        playSong(index)
+                      }}
+                    />
+                    <p onClick={() => {
+                      setTopSong(false);
+                      playSong(index)
+                    }}>
+                      {decodeEntities(element.name)}
+                    </p>
+                  </SwiperSlide>
+                </div>
+              ))
+            )}
           </Swiper>
         </div>
 
-      
+
       </div>
 
-      <Section3 data={data} currplaying={currplaying} topsongs={topsongs} />
+
+      <Section3 data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} />
       </div>
       <Footer/>
     </div>
-    
-    //{" "}
-    // </div>
+
   );
 };
 
