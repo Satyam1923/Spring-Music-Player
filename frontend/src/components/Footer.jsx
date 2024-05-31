@@ -10,9 +10,9 @@ import { BsYoutube } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <div className='h-[500px] w-full flex flex-col bgfooter md:h-full'>
+    <div className='h-[300px] w-full flex flex-col bgfooter sm:h-full'>
            {/* //for logo and social links */}
-         <div className='sec1 md:text-[40px] xs:text-[36px]'>
+         <div className='sec1  xs:text-[36px]'>
             
             <div>
                 SPRING
@@ -22,52 +22,10 @@ const Footer = () => {
          <div class="divider md:h-[1.5px] sm:h-[1px]"></div>
          {/* //for links */}
          <div className='sec2 '>
-            <div className=' grid grid-cols-5 md:grid-cols-3 xs:grid-cols-2 gap-20 sm:gap-10 sm:p-6 md:p-10'>
-            <ul className='topsong'>
-                <h2 className='head'>Top Songs</h2>
-                <li>Dekhha Tenu</li>
-                <li>Satranga</li>
-                <li>Pehle bhi main</li>
-                <li>Sajjni</li>
-                <li>Chal tere ishq main</li>
-                <li>Din Chadheya</li>
-                <li>Dekha Jabse</li>
-                <li>Husn</li>
-                <li>Vida karo</li>
-            </ul>
-            <ul className='topartist'>
-            <h2 className='head'>Top Artist</h2>
-                <li>Arijit Singh</li>
-                <li>Shreya Ghoshal</li>
-                <li>Anuv Jain</li>
-                <li>B Praak</li>
-                <li>Zaeden</li>
-                <li>Atif Aslam</li>
-                <li>Vishal Shekhar</li>
-                <li>Aditya Gadhvi</li>
-            </ul>
-            <ul className='topplaylist'>
-            <h2 className='head'>Top Playlist</h2>
-                <li>Dekhha Tenu</li>
-                <li>Satranga</li>
-                <li>Pehle bhi main</li>
-                <li>Sajjni</li>
-                <li>Chal tere ishq main</li>
-                <li>Chal tere ishq main</li>
-            </ul>
-            <ul className='company'>
-            <h2 className='head'>Top Albums</h2>
-                <li>Dekhha Tenu</li>
-                <li>Satranga</li>
-                <li>Pehle bhi main</li>
-                <li>Pehle bhi main</li>
-                <li>Pehle bhi main</li>
-                <li>Pehle bhi main</li>
-                <li>Sajjni</li>
-                <li>Chal tere ishq main</li>
-            </ul>
-            <ul className='company'>
-            <h2 className='xs:text-[5px]'>Company</h2>
+           
+            
+            <ul className='company  sm:gap-[10px] sm:grid sm:grid-cols-1 sm:p-[10px] sm:text-center'>
+            
                 <li>About Us</li>
                 <li>Culture</li>
                 <li>Blog</li>
@@ -76,12 +34,11 @@ const Footer = () => {
                 
             </ul>
            
-            
-            </div>
+          
          </div>
          <div class="divider md:h-[1.5px] sm:h-[1px]"></div>
-         <div className='sec3 md:p-3'>
-        <span>FOLLOW US AT:</span>
+         <div className='sec3 md:p-3  '>
+        <span className='sm:text-[14px]'>FOLLOW US AT:</span>
         <div className='  flex flex-wrap  justify-center items-center gap-5 md:gap-2'>
         <span className='icons'>
                 <a
