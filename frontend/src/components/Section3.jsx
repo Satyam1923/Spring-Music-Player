@@ -3,6 +3,9 @@ import "react-h5-audio-player/lib/styles.css";
 import he from "he";
 import { IoIosLogIn } from "react-icons/io";
 import { RiNotification3Fill } from "react-icons/ri";
+import { IoSettings } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 
 const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) => {
 
@@ -16,6 +19,9 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
             <div className="links">
                 <div className="link"><IoIosLogIn fontSize={"25px"} color={"white"} /></div>
                 <div className="link"><RiNotification3Fill fontSize={"25px"} color={"white"} /></div>
+                <Link to="/settings">
+                    <div className="link"><IoSettings fontSize={"25px"} color={"white"} /></div>
+                </Link>
             </div>
 
 
