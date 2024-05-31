@@ -7,16 +7,16 @@ import Sidebar from "./components/Sidebar";
 import Section3 from "./components/Section3";
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
 import waiting2 from "./Images/waiting2.gif";
-import { FaSearch, FaUser } from 'react-icons/fa'; // Import the profile icon
-
+import { FaSearch, FaUser } from 'react-icons/fa';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import Settings from "./components/Settings";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -61,8 +61,6 @@ const App = () => {
       try {
         const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
         setTopsongs(response.data.data.results);
-        // console.log("top songs");
-        // console.log(response.data.data.results);
       } catch (error) {
         console.error(error);
       }
@@ -109,6 +107,7 @@ const App = () => {
   };
 
   return (
+
     <div className="ui">
       <Sidebar handleFocus={handleFocus} />
       <div className="avatar">
@@ -153,55 +152,108 @@ const App = () => {
             <div className="homesearchbar">
               <FaSearch className="homesearchlogo" />
               <p>Search</p>
+
+    <Router>
+      <Routes>
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={
+          <div className="ui">
+            <Sidebar handleFocus={handleFocus} />
+            <div className="avatar">
+              <div className="logo">
+                <FaUser fontSize="15px" color="white" />
+              </div>
+              <div className="text">Username</div>
+
             </div>
-          </button>
-        </div>
+            <div className="section2">
+
 
         <div className="song_content">
           <div className="pt-3 pb-5 font-bold">Song Results</div>
 
-          <Swiper
-            onSwiper={setSwiperRef}
-            slidesPerView={4}
-            spaceBetween={30}
-            pagination={{
-              type: "fraction",
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            {data == null ? (
+              <div className="searchbar searchbar2">
+                <input
+                  type="search"
+                  placeholder="Search Song"
+                  name="song"
+                  ref={inputRef}
+                  className="box1"
+                  required
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setSearchQuery(e.target.value);
+                  }}
+                />
+                <button
+                  id="get"
+                  type="image"
+                  src="search.svg"
+                  alt="search"
+                  className="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (searchQuery !== "") {
+                      console.log("started fetching song....")
+                      fetchSongData();
+                    } else {
+                      console.log("empty input query");
+                    }
+                  }}
+                >
+                  <div className="homesearchbar">
+                    <FaSearch className="homesearchlogo" />
+                    <p>Search</p>
+                  </div>
+                </button>
+              </div>
 
-              ''
-            ) : (
-              data !== null &&
-              data !== undefined &&
-              data.map((element, index) => (
-                <div key={element.id} onClick={() => {
-                  setTopSong(false);
-                  playSong(index)
-                }}>
-                  <SwiperSlide className="song">
-                    <img
-                      src={element.image[1].url}
-                      alt={element.name}
-                      onClick={() => {
+
+              <div className="song_content">
+                <b>Song Results</b>
+
+                <Swiper
+                  onSwiper={setSwiperRef}
+                  slidesPerView={4}
+                  spaceBetween={30}
+                  pagination={{
+                    type: "fraction",
+                  }}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  {data == null ? (
+                    ''
+                  ) : (
+                    data !== null &&
+                    data !== undefined &&
+                    data.map((element, index) => (
+                      <div key={element.id} onClick={() => {
                         setTopSong(false);
                         playSong(index)
-                      }}
-                    />
-                    <p onClick={() => {
-                      setTopSong(false);
-                      playSong(index)
-                    }}>
-                      {decodeEntities(element.name)}
-                    </p>
-                  </SwiperSlide>
-                </div>
-              ))
-            )}
-          </Swiper>
+                      }}>
+                        <SwiperSlide className="song">
+                          <img
+                            src={element.image[1].url}
+                            alt={element.name}
+                            onClick={() => {
+                              setTopSong(false);
+                              playSong(index)
+                            }}
+                          />
+                          <p onClick={() => {
+                            setTopSong(false);
+                            playSong(index)
+                          }}>
+                            {decodeEntities(element.name)}
+                          </p>
+                        </SwiperSlide>
+                      </div>
+                    ))
+                  )}
+                </Swiper>
+
 
           <h3 className="font-bold py-3">Recents</h3>
           <b>Recents</b>
@@ -234,28 +286,58 @@ const App = () => {
                       height={"60%"}
                       alt={element.name}
                       onClick={() => {
+
+                <b>Recents</b>
+                <Swiper
+                  onSwiper={setSwiperRef}
+                  slidesPerView={4}
+                  spaceBetween={30}
+                  pagination={{
+                    type: "fraction",
+                  }}
+                  navigation={true}
+                  modules={[Pagination, Navigation]}
+                  className="mySwiper"
+                >
+                  {data == null ? (
+                    ''
+                  ) : (
+                    data !== null &&
+                    data !== undefined &&
+                    data.map((element, index) => (
+                      <div key={element.id} onClick={() => {
+
                         setTopSong(false);
                         playSong(index)
-                      }}
-                    />
-                    <p onClick={() => {
-                      setTopSong(false);
-                      playSong(index)
-                    }}>
-                      {decodeEntities(element.name)}
-                    </p>
-                  </SwiperSlide>
-                </div>
-              ))
-            )}
-          </Swiper>
-        </div>
-
-
-      </div>
-
-      <Section3 data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} />
-    </div>
+                      }}>
+                        <SwiperSlide className="song">
+                          <img
+                            src={element.image[2].url}
+                            height={"60%"}
+                            alt={element.name}
+                            onClick={() => {
+                              setTopSong(false);
+                              playSong(index)
+                            }}
+                          />
+                          <p onClick={() => {
+                            setTopSong(false);
+                            playSong(index)
+                          }}>
+                            {decodeEntities(element.name)}
+                          </p>
+                        </SwiperSlide>
+                      </div>
+                    ))
+                  )}
+                </Swiper>
+              </div>
+            </div>
+            <Section3 data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} />
+          </div>
+        } />
+      </Routes>
+    </Router>
   );
 };
 
