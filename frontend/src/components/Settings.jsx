@@ -13,129 +13,6 @@ const Settings = () => {
 
     const renderTabContent = () => {
         switch (activeTab) {
-            case 'premium-plan':
-                return (
-                    <div>
-                        <h2 className='text-[#7373cc] mt-6  text-2xl ml-2  font-bold'>Premium Plan</h2>
-                        <section className=" ">
-                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                <div className="text-center mb-12">
-                                </div>
-
-                                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-
-                                    <div className="bg-[#30309E] rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
-                                        <div className="mb-8">
-                                            <h3 className="text-xl font-semibold text-white">Free</h3>
-                                            <p className="mt-4 text-gray-400">Get started with our basic features.</p>
-                                        </div>
-                                        <div className="mb-8">
-                                            <span className="text-5xl font-extrabold text-white">$0</span>
-                                            <span className="text-xl font-medium text-gray-400">/mo</span>
-                                        </div>
-                                        <ul className="mb-8 space-y-4 text-gray-400">
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>1 user account</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>10 Songs Download per month</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>Basic support</span>
-                                            </li>
-                                        </ul>
-                                        <a href="#" className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
-                                            Sign Up
-                                        </a>
-                                    </div>
-
-                                    <div className="bg-[#30309E] rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
-                                        <div className="mb-8">
-                                            <h3 className="text-xl font-semibold text-white">Starter</h3>
-                                            <p className="mt-4 text-gray-400">Perfect for Students and individuals.</p>
-                                        </div>
-                                        <div className="mb-8">
-                                            <span className="text-5xl font-extrabold text-white">$49</span>
-                                            <span className="text-xl font-medium text-gray-400">/mo</span>
-                                        </div>
-                                        <ul className="mb-8 space-y-4 text-gray-400">
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>5 user accounts</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>100 Songs Downloads per month</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>Standard support</span>
-                                            </li>
-                                        </ul>
-                                        <a href="#" className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 bottom-0">
-                                            Get Started
-                                        </a>
-                                    </div>
-
-                                    <div className="bg-[#30309E] rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
-                                        <div className="mb-8">
-                                            <h3 className="text-xl font-semibold text-white">Pro</h3>
-                                            <p className="mt-4 text-gray-400">Ideal for family and friend groups.</p>
-                                        </div>
-                                        <div className="mb-8">
-                                            <span className="text-5xl font-extrabold text-white">$99</span>
-                                            <span className="text-xl font-medium text-gray-400">/mo</span>
-                                        </div>
-                                        <ul className="mb-8 space-y-4 text-gray-400">
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>Unlimited user accounts</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>Unlimited Songs Download</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>Priority support</span>
-                                            </li>
-                                            <li className="flex items-center">
-                                                <svg className="h-6 w-6 text-green-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                </svg>
-                                                <span>Advanced analytics</span>
-                                            </li>
-                                        </ul>
-                                        <a href="#" className="block w-full py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
-                                            Get Started
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                );
             case 'offline-mode':
                 return (
                     <div>
@@ -293,7 +170,11 @@ const Settings = () => {
 
 
             default:
-                return <div>Premium Plan content goes here.</div>;
+                return <div><div>
+                    <h2 className='text-[#7373cc] mb-6 mt-6  text-2xl font-bold'>Offline Mode</h2>
+                    <p>Toggle offline mode to listen to your downloaded songs without an internet connection.</p>
+                    <a href="#" className="block w-52 mt-6 py-3 px-6 text-center rounded-md text-white font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">Enable Offline Mode</a>
+                </div></div>;
         }
     };
 
@@ -301,14 +182,13 @@ const Settings = () => {
 
         <div className="settings-page">
             <div className="settings-sidebar">
-                <div className='bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-2 py-1 rounded-2xl w-[40px]'>
+                <div className='bg-gradient-to-r mb-4 from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-2 py-1 rounded-2xl w-[40px]'>
                     <Link to="/" className="flex items-center text-indigo-500 hover:text-indigo-700">
-                        <MdKeyboardBackspace className="mr- text-xl" />
+                        <MdKeyboardBackspace className="text-xl" />
                     </Link>
                 </div>
 
                 <ul>
-                    <li className={activeTab === 'premium-plan' ? 'active' : ''} onClick={() => setActiveTab('premium-plan')}>Premium Plan</li>
                     <li className={activeTab === 'offline-mode' ? 'active' : ''} onClick={() => setActiveTab('offline-mode')}>Offline Mode</li>
                     <li className={activeTab === 'volume-settings' ? 'active' : ''} onClick={() => setActiveTab('volume-settings')}>Volume Settings</li>
                     <li className={activeTab === 'languages' ? 'active' : ''} onClick={() => setActiveTab('languages')}>Languages</li>
