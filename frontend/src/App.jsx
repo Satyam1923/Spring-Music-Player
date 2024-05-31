@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "react-h5-audio-player/lib/styles.css";
 import "./App.css";
 import axios from "axios";
@@ -28,6 +28,7 @@ const App = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   const [isTopSong, setTopSong] = useState(false);
+  const inputRef = useRef(null);
 
   const decodeEntities = (str) => {
     return he.decode(str);
@@ -60,13 +61,25 @@ const App = () => {
       try {
         const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
         setTopsongs(response.data.data.results);
-        console.log("top songs");
-        console.log(response.data.data.results);
+        // console.log("top songs");
+        // console.log(response.data.data.results);
       } catch (error) {
         console.error(error);
       }
     };
     fetchTopSong();
+
+    const fetchSuggestions = async () => {
+      try {
+        const response = await axios.get("http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app/api/albums?link=https://www.jiosaavn.com/album/houdini/OgwhbhtDRwM");
+        console.log("suggestions songs");
+        console.log(response);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchSuggestions();
   }, []);
 
   const nextPlay = () => {
@@ -89,9 +102,15 @@ const App = () => {
     setCurrplaying(index);
   };
 
+  const handleFocus = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
   return (
     <div className="ui">
-      <Sidebar />
+      <Sidebar handleFocus={handleFocus} />
       <div className="avatar">
         <div className="logo">
           <FaUser fontSize="15px" color="white" />
@@ -105,6 +124,7 @@ const App = () => {
             type="search"
             placeholder="Search Song"
             name="song"
+            ref={inputRef}
             className="box1"
             required
             onChange={(e) => {

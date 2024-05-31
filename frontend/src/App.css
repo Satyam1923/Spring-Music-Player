@@ -428,27 +428,33 @@ aside p {
 .Card2 {
   display: flex;
   align-items: center;
-
+  padding: 10px;
   flex-direction: column;
-  padding: 15px;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   height: auto;
-  max-height: 18rem;
-  width: 80%;
+  max-height: 22rem;
+  width: 70%;
   margin-top: 1rem;
 }
 
 .details2 {
-  height: 5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  height: 15rem;
+  width: 10rem;
 }
 
 .Card2 img {
-  border-radius: 15px;
+  border-radius: 5px;
+  width: 100%;
   margin-bottom: 15px;
 }
 
@@ -456,6 +462,10 @@ aside p {
   color: white;
   font-size: 14px;
   text-align: center;
+}
+.audioplayer{
+  width: 100%;
+  margin: 7px;
 }
 
 .player {
@@ -910,7 +920,8 @@ input[type="range"]:disabled::-moz-range-thumb {
   margin: auto 0;
   padding: 10px;
 }
-.song img{
+
+.song img {
   height: 100px;
 }
 

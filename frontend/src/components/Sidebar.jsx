@@ -8,17 +8,18 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaHome } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import './sidebar.css';
-const Sidebar = () => {
+const Sidebar = ({handleFocus}) => {
   return (
     <aside>
 
       <div className="home">
-        <FaHome className="searchlogo"/>
+        <FaHome className="searchlogo" />
         <p>      Home</p>
       </div>
       <div className="home">
-        <FaSearch className="searchlogo" />
-        <p>      Search</p>
+        <button onClick={handleFocus}>
+          <FaSearch className="searchlogo" />
+        </button>
       </div>
 
       <div className="option1">
