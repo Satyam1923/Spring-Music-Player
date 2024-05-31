@@ -90,7 +90,7 @@ const App = () => {
             type="search"
             placeholder="Search Song"
             name="song"
-            className="box1"
+            className="box1 placeholder:text-white"
             required
             onChange={(e) => {
               e.preventDefault();
@@ -102,18 +102,18 @@ const App = () => {
             type="image"
             src="search.svg"
             alt="search"
-            className="button"
+            className="button flex h-[60%] justify-center items-center mx-2"
             onClick={(e) => {
               e.preventDefault();
               if (searchQuery !== "") fetchSongData();
             }}
           >
-            <CiSearch fontSize={"25px"} /> Search
+            <CiSearch className="h-6" />Search
           </button>
         </div>
        
         <div className="song_content">
-          <b>Song Results</b>
+          <div className="pt-3 pb-5 font-bold">Song Results</div>
 
           <Swiper
             onSwiper={setSwiperRef}
@@ -152,7 +152,7 @@ const App = () => {
             )}
           </Swiper>
 
-          <h3>Recents</h3>
+          <h3 className="font-bold py-3">Recents</h3>
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}

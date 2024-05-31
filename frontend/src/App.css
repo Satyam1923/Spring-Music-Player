@@ -159,14 +159,14 @@ aside {
   justify-content: center;
   align-items: center;
   height: 3rem;
-  width: 70%;
+  width: 93%;
 }
 
 input[type="search"] {
-  height: 2rem;
+  height: 2.5rem;
   width: 100%;
   border-radius: 30px;
-  padding: 10px;
+  padding: 10px 15px;
   /* border: none; */
   color: white;
   outline: none;
@@ -176,7 +176,7 @@ input[type="search"] {
   -webkit-backdrop-filter: blur(18.5px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  margin-left: 25px;
+  margin-left: 10px;
 }
 .searchbar svg{
   font-size: 40px;
@@ -281,9 +281,8 @@ aside p {
   display: flex;
   justify-content: center;
     height: 4rem;
-   
+   gap: 5;
   align-items: center;
- 
 }
 
 .section2 input[type="search"] {
@@ -473,7 +472,8 @@ li {
 .button {
   border: 0;
   border-radius: 15px;
-  width: 70px;
+  width: 100%;
+  padding: 0px 0px;
 }
 
 .btn-cntrl button {

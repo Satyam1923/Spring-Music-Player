@@ -16,14 +16,14 @@ const Section3 = ({data,currplaying,topsongs}) => {
   return (
     <div className='section3'> 
      <div className="links">
-        <div className="link"><IoIosLogIn fontSize={"25px"} color={"white"}/></div>
-        <div className="link"><RiNotification3Fill  fontSize={"25px"} color={"white"}/></div>
-        <div className="link"><FaUser fontSize={"25px"} color={"white"} /></div> 
+        <div className="link transition-all duration-300 ease-in-out hover:scale-110"><IoIosLogIn fontSize={"25px"} color={"white"}/></div>
+        <div className="link transition-all duration-300 ease-in-out hover:scale-110"><RiNotification3Fill  fontSize={"25px"} color={"white"}/></div>
+        <div className="link transition-all duration-300 ease-in-out hover:scale-110"><FaUser fontSize={"25px"} color={"white"} /></div> 
      </div>
 
 
     <div className="Card1">
-    <p>Top Artist</p>
+    <p className="px-3 py-2">Top Artist</p>
     {topsongs !== null &&
         topsongs !== undefined &&
         topsongs.slice(0, 3).map((element, index) => (
