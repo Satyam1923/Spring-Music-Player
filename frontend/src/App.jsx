@@ -5,9 +5,7 @@ import axios from "axios";
 import he from "he";
 import Sidebar from "./components/Sidebar";
 import Section3 from "./components/Section3";
-import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
-import waiting2 from "./Images/waiting2.gif";
-import { FaSearch, FaUser } from 'react-icons/fa'; // Import the profile icon
+import { FaUser } from 'react-icons/fa';
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,15 +15,15 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation } from "swiper/modules";
+import TopArtists from "./components/TopArtists";
 
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [totalTime, setTotalTime] = useState(0);
-  const [timePassed, setTimePassed] = useState(0);
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
   const [swiperRef, setSwiperRef] = useState(null);
+  const [searchVisiblity, setSearchVisiblity] = useState(true);
 
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
@@ -61,8 +59,6 @@ const App = () => {
       try {
         const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
         setTopsongs(response.data.data.results);
-        // console.log("top songs");
-        // console.log(response.data.data.results);
       } catch (error) {
         console.error(error);
       }
@@ -79,7 +75,7 @@ const App = () => {
         console.log(error)
       }
     }
-    fetchSuggestions();
+    // fetchSuggestions();
   }, []);
 
   const nextPlay = () => {
@@ -103,68 +99,58 @@ const App = () => {
   };
 
   const handleFocus = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    setSearchVisiblity(true);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 0);
   };
 
   return (
     <div className="ui">
-      <Sidebar handleFocus={handleFocus} />
-      <div className="avatar">
-        <div className="logo">
-          <FaUser fontSize="15px" color="white" />
-        </div>
-        <div className="text">Username</div>
-      </div>
+      <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
+      
       <div className="section2">
-
         <div className="searchbar searchbar2">
-          <input
-            type="search"
-            placeholder="Search Song"
-            name="song"
-            ref={inputRef}
-            className="box1"
-            required
-            onChange={(e) => {
-              e.preventDefault();
-              setSearchQuery(e.target.value);
-            }}
-          />
-          <button
-            id="get"
-            type="image"
-            src="search.svg"
-            alt="search"
-            className="button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (searchQuery !== "") {
-                console.log("started fetching song....")
-                fetchSongData();
-              } else {
-                console.log("empty input query");
-              }
-            }}
-          >
-            <div className="homesearchbar">
-              <FaSearch className="homesearchlogo" />
-              <p>Search</p>
-            </div>
-          </button>
+          {
+            searchVisiblity ? <div className="search-container">
+              <i className="fas fa-search search-icon"></i>
+              <input
+                type="search"
+                placeholder="What do you want to play?"
+                name="song"
+                ref={inputRef}
+                className="box1"
+                required
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    if (searchQuery !== "") {
+                      console.log("started fetching song....")
+                      fetchSongData();
+                    } else {
+                      console.log("empty input query");
+                    }
+                  }
+                }}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setSearchQuery(e.target.value);
+                }}
+              />
+            </div> : ''
+          }
         </div>
 
+        <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
         <div className="song_content">
-          <b>Song Results</b>
+          <b>Search Results</b>
 
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
             spaceBetween={30}
-            pagination={{
-              type: "fraction",
-            }}
+            pagination={false}
             navigation={true}
             modules={[Pagination, Navigation]}
             className="mySwiper"
@@ -201,7 +187,7 @@ const App = () => {
             )}
           </Swiper>
 
-          <b>Recents</b>
+          {/* <b>Recents</b>
           <Swiper
             onSwiper={setSwiperRef}
             slidesPerView={4}
@@ -245,7 +231,7 @@ const App = () => {
                 </div>
               ))
             )}
-          </Swiper>
+          </Swiper> */}
         </div>
 
 

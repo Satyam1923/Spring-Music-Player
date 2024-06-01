@@ -20,7 +20,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
 
 
             <div className="Card1">
-                <p>Top Artist</p>
+                <p style={{"marginLeft":"10px","padding":"5px"}}>Top Artist</p>
                 {topsongs !== null &&
                     topsongs !== undefined &&
                     topsongs.slice(0, 3).map((element, index) => (
@@ -114,7 +114,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
                                     onError={() => {
                                         console.log("error playing audio");
                                     }}
-                                    style={{ backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
+                                    style={{ height:"110px",backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
                                 /> :
                                     data && data.length > 0 && data[index] && (
                                         <AudioPlayer
@@ -127,7 +127,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
                                             onError={() => {
                                                 console.log("error playing audio");
                                             }}
-                                            style={{ backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
+                                            style={{ height:"110px",backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
                                         />
                                     )
                             }

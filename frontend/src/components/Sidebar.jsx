@@ -8,80 +8,57 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaHome } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import './sidebar.css';
-const Sidebar = ({handleFocus}) => {
+const Sidebar = ({ handleFocus , setSearchVisiblity}) => {
   return (
     <aside>
-
-      <div className="home">
-        <FaHome className="searchlogo" />
-        <p>      Home</p>
+      <div className="sidebar-section1">
+        <div className="home">
+          <FaHome className="searchlogo" />
+          <p>      Home</p>
+        </div>
+        <div className="home">
+          <button onClick={handleFocus}>
+            <FaSearch className="searchlogo" />
+          </button>
+        </div>
       </div>
-      <div className="home">
-        <button onClick={handleFocus}>
-          <FaSearch className="searchlogo" />
-        </button>
-      </div>
-
-      <div className="option1">
-        <b>MENU</b>
-
-
-
-        <a style={{ cursor: 'pointer' }}>
-          <IoHomeOutline fontSize={"20px"} />
-          {/* <i className="fa fa-user-o" aria-hidden="true"></i> */}
-          <p>My drive</p>
-
-        </a>
-
-
-        <a style={{ cursor: 'pointer' }}>
-          <IoImages fontSize={"20px"} />
-          <p>Albums</p>
-
-        </a>
-        <a style={{ cursor: 'pointer' }}>
-          <MdLibraryMusic fontSize={"20px"} />
-          {/* <i className="fa fa-clone" aria-hidden="true"></i> */}
-          <p>Music</p>
-
-        </a>
-        <a style={{ cursor: 'pointer' }}>
-          <GrUserManager fontSize={"20px"} />
-          {/* <i className="fa fa-star-o" aria-hidden="true"></i> */}
-          <p>Artist</p>
-
-        </a>
-
+      <div className="sidebar-section2">
+        <div className="option1">
+          {/* <b>MENU</b> */}
+          <a style={{ cursor: 'pointer' }}>
+            <IoHomeOutline fontSize={"20px"} />
+            <p>My drive</p>
+          </a>
+          <a style={{ cursor: 'pointer' }}>
+            <IoImages fontSize={"20px"} />
+            <p>Albums</p>
+          </a>
+          <a style={{ cursor: 'pointer' }}>
+            <MdLibraryMusic fontSize={"20px"} />
+            <p>Music</p>
+          </a>
+          <a style={{ cursor: 'pointer' }}>
+            <GrUserManager fontSize={"20px"} />
+            <p>Artist</p>
+          </a>
+        </div>
       </div>
 
-      <div className="option1">
-        <b>PlayList</b>
-
-
-        <a style={{ cursor: 'pointer' }}>
-          <BsImages fontSize={"20px"} />
-          {/* <i className="fa fa-user-o" aria-hidden="true"></i> */}
-          <p> playlist1</p>
-
-
-          <RiDeleteBin6Line className='delete' />
-        </a>
-        <a style={{ cursor: 'pointer' }}>
-          <BsImages fontSize={"20px"} />
-          {/* <i className="fa fa-user-o" aria-hidden="true"></i> */}
-          <p> playlist1</p>
-
-
-          <RiDeleteBin6Line className='delete' />
-        </a>
-
-
-
-
+      <div className="sidebar-section2">
+        <div className="option1">
+          {/* <b>PlayList</b> */}
+          <a style={{ cursor: 'pointer' }}>
+            <BsImages fontSize={"20px"} />
+            <p> playlist1</p>
+            <RiDeleteBin6Line className='delete' />
+          </a>
+          <a style={{ cursor: 'pointer' }}>
+            <BsImages fontSize={"20px"} />
+            <p> playlist1</p>
+            <RiDeleteBin6Line className='delete' />
+          </a>
+        </div>
       </div>
-
-
     </aside>
   )
 }
