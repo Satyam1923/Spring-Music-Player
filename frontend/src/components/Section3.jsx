@@ -114,9 +114,6 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
                                     autoPlay
                                     src={topsongs && topsongs[index].downloadUrl[0].url}
                                     preload="metadata"
-                                    onPlay={() => {
-                                        console.log("playing top song");
-                                    }}
                                     onError={() => {
                                         console.log("error playing audio");
                                     }}
