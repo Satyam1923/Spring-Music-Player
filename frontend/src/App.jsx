@@ -33,6 +33,8 @@ const App = () => {
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [topEnglishsongs, setTopEnglishsongs] = useState([]);
+  const [isEnglishSong, setIsEnglishSong] = useState(false);
 
   const decodeEntities = (str) => {
     return he.decode(str);
@@ -70,7 +72,17 @@ const App = () => {
       }
     };
     fetchTopSong();
-
+    const fetchTopEnglish = async () => {
+      try {
+        const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top english songs");
+        setTopEnglishsongs(response.data.data.results);
+        console.log("top english");
+        console.log(topEnglishsongs);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchTopEnglish();
   }, []);
 
   const nextPlay = () => {
@@ -145,8 +157,6 @@ const App = () => {
                 }
               </div>
               <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
-
-
               {
                 showSearchResults ?
                   <div className="song_content">
@@ -166,6 +176,7 @@ const App = () => {
                         data.map((element, index) => (
                           <div key={element.id} onClick={() => {
                             setTopSong(false);
+                            setIsEnglishSong(false);
                             playSong(index)
                           }}>
                             <SwiperSlide className="song">
@@ -174,11 +185,13 @@ const App = () => {
                                 alt={element.name}
                                 onClick={() => {
                                   setTopSong(false);
+                                  setIsEnglishSong(false);
                                   playSong(index)
                                 }}
                               />
                               <p onClick={() => {
                                 setTopSong(false);
+                                setIsEnglishSong(false);
                                 playSong(index)
                               }}>
                                 {decodeEntities(element.name)}
@@ -188,61 +201,15 @@ const App = () => {
                         ))
                       )}
                     </Swiper>
-                    {/* <b>Recents</b>
-                <Swiper
-                  onSwiper={setSwiperRef}
-                  slidesPerView={4}
-                  spaceBetween={30}
-                  pagination={{
-                    type: "fraction",
-                  }}
-                  navigation={true}
-                  modules={[Pagination, Navigation]}
-                  className="mySwiper"
-                >
-                  {data == null ? (
-                    ''
-                  ) : (
-                    data !== null &&
-                    data !== undefined &&
-                    data.map((element, index) => (
-                      <div key={element.id} onClick={() => {
-                        setTopSong(false);
-                        playSong(index)
-                      }}>
-                        <SwiperSlide className="song">
-                          <img
-                            src={element.image[2].url}
-                            height={"60%"}
-                            alt={element.name}
-                            onClick={() => {
-                              setTopSong(false);
-                              playSong(index)
-                            }}
-                          />
-                          <p onClick={() => {
-                            setTopSong(false);
-                            playSong(index)
-                          }}>
-                            {decodeEntities(element.name)}
-                          </p>
-                        </SwiperSlide>
-                      </div>
-                    ))
-                  )}
-                </Swiper> */}
                   </div>
                   : <div className="genresAndTopcharts">
                     <Genres />
-                    <TopCharts />
+                    <TopCharts setTopSong={setTopSong} isEnglishSong={isEnglishSong} setIsEnglishSong={setIsEnglishSong} topEnglishsongs={topEnglishsongs} playSong={playSong} />
                   </div>
               }
 
-
-
-
             </div>
-            <Section3 data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} />
+            <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
           </div>
         } />
       </Routes>

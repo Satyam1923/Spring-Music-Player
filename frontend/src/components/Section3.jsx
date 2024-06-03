@@ -7,9 +7,8 @@ import { IoSettings } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 
-const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) => {
+const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong, setTopSong, isEnglishSong, topEnglishsongs }) => {
 
-    // const [isTopSong, setTopSong] = useState(false);
     const decodeEntities = (str) => {
         return he.decode(str);
     };
@@ -26,7 +25,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
 
 
             <div className="Card1">
-                <p style={{"marginLeft":"10px","padding":"5px"}}>Top Artist</p>
+                <p style={{ "marginLeft": "10px", "padding": "5px" }}>Top Artist</p>
                 {topsongs !== null &&
                     topsongs !== undefined &&
                     topsongs.slice(0, 3).map((element, index) => (
@@ -35,6 +34,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
                             key={element.id}
                             onClick={() => {
                                 setTopSong(true);
+                                setIsEnglishSong(false);
                                 playSong(index);
                             }}
                         >
@@ -59,7 +59,7 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
             <hr />
 
             {
-                isTopSong || data ?
+                isTopSong || data || isEnglishSong ?
                     <div className="Card2">
                         <div className="details2">
 
@@ -86,26 +86,46 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
 
                                         </p>
                                     </> :
-                                    <>
+                                    isEnglishSong ? <>
                                         <img
-                                            src={data && data[index].image[2].url}
+                                            src={topEnglishsongs && topEnglishsongs[index].image[2].url}
                                             height="100px"
                                             width="100px"
                                         />
                                         <p >
-                                            {data &&
-                                                data.length > 0 &&
-                                                data[index] &&
-                                                decodeEntities(data[index].name)}
+                                            {topEnglishsongs &&
+                                                topEnglishsongs.length > 0 &&
+                                                topEnglishsongs[index] &&
+                                                decodeEntities(topEnglishsongs[index].name)}
                                         </p>
                                         <p >
-                                            {data &&
-                                                data.length > 0 &&
-                                                data[index] &&
-                                                data[index].artists.primary[0].name
+                                            {topEnglishsongs &&
+                                                topEnglishsongs.length > 0 &&
+                                                topEnglishsongs[index] &&
+                                                topEnglishsongs[index].artists.primary[0].name
                                             }
                                         </p>
-                                    </>
+                                    </> :
+                                        <>
+                                            <img
+                                                src={data && data[index].image[2].url}
+                                                height="100px"
+                                                width="100px"
+                                            />
+                                            <p >
+                                                {data &&
+                                                    data.length > 0 &&
+                                                    data[index] &&
+                                                    decodeEntities(data[index].name)}
+                                            </p>
+                                            <p >
+                                                {data &&
+                                                    data.length > 0 &&
+                                                    data[index] &&
+                                                    data[index].artists.primary[0].name
+                                                }
+                                            </p>
+                                        </>
                             }
                         </div>
                         <div className="audioplayer">
@@ -117,22 +137,28 @@ const Section3 = ({ data, index, topsongs, playSong, isTopSong, setTopSong }) =>
                                     onError={() => {
                                         console.log("error playing audio");
                                     }}
-                                    style={{ height:"110px",backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
+                                    style={{ height: "110px", backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
                                 /> :
-                                    data && data.length > 0 && data[index] && (
-                                        <AudioPlayer
-                                            autoPlay
-                                            src={data && data[index].downloadUrl[0].url}
-                                            preload="metadata"
-                                            onPlay={() => {
-                                                console.log("playing..");
-                                            }}
-                                            onError={() => {
-                                                console.log("error playing audio");
-                                            }}
-                                            style={{ height:"110px",backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
-                                        />
-                                    )
+                                    isEnglishSong ? <AudioPlayer
+                                        autoPlay
+                                        src={topEnglishsongs && topEnglishsongs[index].downloadUrl[0].url}
+                                        preload="metadata"
+                                        onError={() => {
+                                            console.log("error playing audio");
+                                        }}
+                                        style={{ height: "110px", backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
+                                    /> :
+                                        data && data.length > 0 && data[index] && (
+                                            <AudioPlayer
+                                                autoPlay
+                                                src={data && data[index].downloadUrl[0].url}
+                                                preload="metadata"
+                                                onError={() => {
+                                                    console.log("error playing audio");
+                                                }}
+                                                style={{ height: "110px", backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
+                                            />
+                                        )
                             }
                         </div>
                     </div>

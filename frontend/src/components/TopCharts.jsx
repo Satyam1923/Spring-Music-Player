@@ -1,12 +1,6 @@
 import TrackItem from './TrackItem';
 
-const TopCharts = () => {
-  const tracks = [
-    { number: '01', title: 'Havanna', artist: 'Camila Cabello', duration: '3:00' },
-    { number: '02', title: 'Song 2', artist: 'Artist 2', duration: '4:00' },
-    { number: '03', title: 'Song 3', artist: 'Artist 3', duration: '2:30' },
-    { number: '03', title: 'Song 3', artist: 'Artist 3', duration: '2:30' },
-  ];
+const TopCharts = ({ topEnglishsongs ,playSong,setIsEnglishSong,setTopSong,isEnglishSong}) => {
   return (
     <div className='topCharts'>
       <div className='topCharts-header'>
@@ -14,8 +8,8 @@ const TopCharts = () => {
         <p>See all</p>
       </div>
       <div>
-        {tracks.map((track, index) => (
-          <TrackItem key={index} track={track} />
+        {topEnglishsongs.slice(0,5).map((track, index) => (
+          <TrackItem isEnglishSong={isEnglishSong} setTopSong={setTopSong} setIsEnglishSong={setIsEnglishSong} key={index} id={index+1} track={track} playSong={playSong}/>
         ))}
       </div>
     </div>
