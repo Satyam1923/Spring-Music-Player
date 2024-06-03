@@ -17,6 +17,7 @@ import "swiper/css/navigation";
 
 import { Pagination, Navigation } from "swiper/modules";
 import Settings from "./components/Settings";
+import Home from "./components/Home/Home";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -29,6 +30,22 @@ const App = () => {
 
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
+
+  // this is for debugging the ui
+  const [debug, setDebug] = useState(false)
+  useEffect(() => {
+    // Event handler function
+    const handleKeypress = (e) => {
+      console.log(e.key);
+      if (e.key === '`') {
+        setDebug((prevDebug) => !prevDebug);
+      }
+    };
+    window.addEventListener('keypress', handleKeypress);
+    return () => {
+      window.removeEventListener('keypress', handleKeypress);
+    };
+  }, []);
 
   const decodeEntities = (str) => {
     return he.decode(str);
@@ -106,6 +123,9 @@ const App = () => {
     }
   };
 
+  if (debug) {
+    return <Home/>
+  } else {
   return (
     <Router>
       <Routes>
@@ -253,6 +273,7 @@ const App = () => {
       </Routes>
     </Router>
   );
+  }
 };
 
 export default App;
