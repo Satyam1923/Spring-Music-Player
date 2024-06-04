@@ -1,6 +1,6 @@
 .sidebar {
   background-color: #000000;
-  width: 105px;
+  width: 125px;
   height: 100vh;
   transition: width 0.3s;
   overflow: hidden;
@@ -8,7 +8,7 @@
 }
 
 .sidebar.expanded {
-  width: 280px;
+  width: 450px;
 }
 
 .sidebar .toggle-button {
@@ -139,8 +139,3 @@
 .create-playlist-btn {
   transition: color 0.1s, background-color 0.5s;
 }
-.home .searchlogo{
-   margin-top: 9px;
-}
-
-
