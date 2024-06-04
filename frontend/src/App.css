@@ -144,7 +144,6 @@ body {
   padding: 0;
   margin: 0;
   height: 100vh;
-  /* background: linear-gradient(to left, #2c003e , #ff00cc , #000a12 ); */
   background: #000000;
 
   background-repeat: no-repeat;
@@ -154,13 +153,51 @@ body {
 /*================================================ Side bar ================================================= */
 
 aside {
+  width: 7%;
   color: #fff;
-  width: 30%;
-  padding-left: 20px;
   height: 100vh;
-  padding-top: 3rem;
+  padding: 10px;
+  box-sizing: border-box;
+}
 
-  border-right: 0.2px solid rgba(255, 255, 255, 0.279);
+aside p {
+  display: none;
+}
+
+aside input[type="search"] {
+  display: none;
+}
+
+aside RiDeleteBin6Line {
+  display: none;
+}
+
+.delete {
+  display: none;
+}
+
+aside b {
+  font-weight: 400;
+}
+
+.sidebar-section1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #18181d;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 6px 0;
+}
+
+.sidebar-section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #18181d;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 6px 0;
 }
 
 .searchbar {
@@ -172,33 +209,28 @@ aside {
 }
 
 input[type="search"] {
-  height: 2rem;
+  height: 3rem;
   width: 100%;
-  border-radius: 30px;
-  padding: 10px;
-  /* border: none; */
+  padding: 10px 10px 10px 30px;
   color: white;
   outline: none;
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(18.5px);
-  -webkit-backdrop-filter: blur(18.5px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #000000;
+  border-radius: 4px;
+  border: 2px solid #343440;
   margin-left: 25px;
+  box-sizing: border-box;
+}
+
+input[type="search"]::placeholder {
+  color: white;
 }
 
 .searchbar svg {
   font-size: 40px;
 }
 
-.option1 {
-  margin-top: 3rem;
-}
-
 ::placeholder {
   color: #fcfbfb;
-  /* Change the color to your desired color */
 }
 
 aside a {
@@ -281,45 +313,28 @@ aside p {
 
 /* ==========================================Section-2 ==================================== */
 .section2 {
-  background: linear-gradient(#3333a3,
-      #2d2d99 10%,
-      #27278f 20%,
-      #212185 30%,
-      #1b1b7a 40%,
-      #151570 50%,
-      #0f0f66 60%,
-      #09095c 70%,
-      #030352 80%,
-      #000048 90%,
-      #17172a);
+  background: #000000;
   height: 100vh;
-  width: 55%;
+  padding: 10px;
+  width: 67%;
   display: flex;
   position: relative;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-
+  box-sizing: border-box;
 }
 
-/* .swiper {
-  margin-left: 0px;
-  margin-right: 0px;
-} */
 .searchbar2 {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   height: 4rem;
-
   align-items: center;
-
 }
 
 .section2 input[type="search"] {
-  height: 2.5rem;
-  width: 60%;
+  width: 65%;
 
 }
 
@@ -339,23 +354,28 @@ aside p {
 .avatar {
   position: absolute;
   top: 0;
+  z-index: 1;
   right: 33%;
   height: 25px;
   display: flex;
   align-items: center;
-  background-color: #333;
-  border-radius: 20px;
-  padding: 10px;
+  background-color: #18181d;
+  border-radius: 4px;
+  padding: 15px;
   color: white;
   margin-top: 10px;
 }
 
 .logo {
-  margin-right: 7px;
+  padding: 5px;
+  margin: 3px;
+  background-color: #343440;
+  border-radius: 4px;
 }
 
 .text {
-  font-size: 16px;
+  font-size: 14px;
+  padding: 5px;
 }
 
 .homesearchbar {
@@ -375,19 +395,69 @@ aside p {
 }
 
 
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 10px;
+}
+
+.search-container input {
+  color: white;
+  background-color: black;
+}
+
+input:focus {
+  color: white;
+  background-color: black;
+  outline: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  color: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px black inset;
+  -webkit-text-fill-color: white;
+}
+
+input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px black inset;
+  -moz-text-fill-color: white;
+}
+
+
+
+.search-container .search-icon {
+  position: absolute;
+  left: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  pointer-events: none;
+}
+
+
+.genresAndTopcharts {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
 
 
 /*============================================= Section3 ==================================================*/
 
 .section3 {
-  width: 40%;
+  width: 26%;
   display: flex;
-
   align-items: center;
   flex-direction: column;
   height: 100vh;
-
-  border-left: 0.2px solid rgba(255, 255, 255, 0.279);
+  padding: 10px;
 }
 
 .links {
@@ -399,26 +469,22 @@ aside p {
 }
 
 .link {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: #18181d;
   backdrop-filter: blur(18.5px);
-  -webkit-backdrop-filter: blur(18.5px);
   border-radius: 10px;
   padding: 4px;
   margin: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
 }
 
 .Card1 {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: #18181d;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   height: auto;
-  width: 80%;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+
 }
 
 .search-details p {
@@ -428,18 +494,16 @@ aside p {
 .Card2 {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 6px;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: #18181d;
   border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   height: auto;
   max-height: 22rem;
-  width: 70%;
-  margin-top: 1rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: .5rem;
 }
 
 .details2 {
@@ -447,15 +511,15 @@ aside p {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 5px;
+  text-overflow: ellipsis;
   height: 15rem;
-  width: 10rem;
+  width: 11rem;
 }
 
 .Card2 img {
   border-radius: 5px;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .Card2 p {
@@ -463,9 +527,10 @@ aside p {
   font-size: 14px;
   text-align: center;
 }
-.audioplayer{
+
+.audioplayer {
   width: 100%;
-  margin: 7px;
+  margin:1px;
 }
 
 .player {
@@ -672,10 +737,10 @@ input[type="range"] {
 .songresult {
   display: flex;
   align-items: center;
+  background-color: #000000;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
-  border-bottom: .4px solid rgba(255, 255, 255, 0.171);
 }
 
 .songresult img {
@@ -889,20 +954,14 @@ input[type="range"]:disabled::-moz-range-thumb {
 
 
 .mySwiper {
-  width: 90%;
+  width: 100%;
   overflow-x: scroll;
-
   position: relative;
-  height: 14rem;
+  height: 12.5rem;
   margin: 0;
-  padding: 20px;
-
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(18.5px);
-  -webkit-backdrop-filter: blur(18.5px);
+  padding: 25px;
+  background: #18181d;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .song p {
@@ -947,4 +1006,209 @@ input[type="range"]:disabled::-moz-range-thumb {
   border-radius: 10px;
   padding: 15px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+
+/*============================================= TopArtists ==================================================*/
+
+.topArtistsContainer {
+  background-color: #18181d;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin: 10px 5px;
+  height: 190px;
+}
+
+.topArtistsHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.topArtists::-webkit-scrollbar {
+  display: none;
+}
+
+.topArtists {
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.topArtists .result-item {
+  flex: 0 0 auto;
+  width: 100px;
+  height: auto;
+  margin: 5px;
+}
+
+.topArtists .songresult {
+  display: flex;
+  flex-direction: column;
+  background-color: #18181d;
+  height: 90%;
+  overflow: hidden;
+}
+
+.topArtists .songresult img {
+  width: 100%;
+  height: auto;
+}
+
+.topArtists .search-details {
+  text-align: center;
+  padding: 5px;
+  overflow: scroll;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2.5;
+  -webkit-box-orient: vertical;
+  height: 3.6em;
+}
+
+.topArtists .search-details::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+/* Genres component stylings*/
+.genres {
+  width: 40%;
+  border-radius: 10px;
+  background-color: #18181d;
+  margin: 5px 5px 5px 0px;
+  padding: 10px;
+}
+.genres-header{
+  display: flex;
+  justify-content: space-between;
+}
+.genres-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.dance-electric {
+  background-color: #f47174;
+}
+
+.rock {
+  background-color: #a0ce67;
+}
+
+.party {
+  background-color: #49b1b6;
+}
+
+.afro {
+  background-color: #c9e76c;
+}
+
+.pop {
+  background-color: #c882d2;
+}
+
+.chill {
+  background-color: #c5e668;
+}
+
+.classic-retro {
+  background-color: #e47171;
+}
+
+
+
+
+
+
+
+
+/* topCharts component stylings */
+.topCharts {
+  width: 60%;
+  border-radius: 10px;
+  background-color: #18181d;
+  margin: 5px 0px 5px 5px;
+  padding: 10px;
+}
+.topCharts-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* track Item component which is use inside the Topcharts compoenent */
+.track-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.track-number {
+  width: 30px;
+  text-align: center;
+}
+
+.track-image {
+  width: 40px;
+  height: 40px;
+  background-color: #888;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.track-info {
+  flex-grow: 1;
+}
+
+.track-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.track-artist {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.track-duration {
+  width: 50px;
+  text-align: center;
+}
+
+.play-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.play-button:hover {
+  color: #aaa;
 }
