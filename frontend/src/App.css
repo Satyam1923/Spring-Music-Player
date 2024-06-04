@@ -494,14 +494,14 @@ input:-moz-autofill {
 .Card2 {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 6px;
   flex-direction: column;
   background: #18181d;
   border-radius: 5px;
   height: auto;
-  max-height: 23rem;
-  width: 90%;
-  /* overflow-y: scroll; */
+  max-height: 22rem;
+  width: 100%;
+  overflow: hidden;
   border-radius: 10px;
   margin-top: .5rem;
 }
@@ -511,7 +511,6 @@ input:-moz-autofill {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 5px;
   text-overflow: ellipsis;
   height: 15rem;
   width: 11rem;
@@ -520,7 +519,7 @@ input:-moz-autofill {
 .Card2 img {
   border-radius: 5px;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .Card2 p {
@@ -531,6 +530,7 @@ input:-moz-autofill {
 
 .audioplayer {
   width: 100%;
+  margin:1px;
 }
 
 .player {

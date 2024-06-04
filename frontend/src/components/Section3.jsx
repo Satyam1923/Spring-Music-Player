@@ -25,7 +25,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
 
 
             <div className="Card1">
-                <p style={{ "marginLeft": "10px", "padding": "5px" }}>Top Artist</p>
+                <p style={{ "marginLeft": "10px"}}>Top Artist</p>
                 {topsongs !== null &&
                     topsongs !== undefined &&
                     topsongs.slice(0, 3).map((element, index) => (
