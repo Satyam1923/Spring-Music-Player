@@ -406,7 +406,23 @@ aside p {
   color: white;
   background-color: black;
 }
-
+.search-container #searchResultsSuggestion{
+  position: absolute;
+  max-width: 100%;
+  max-height: 40rem;
+  margin-top: 1rem;
+  border: 0.2rem solid rgb(46, 44, 44);
+  z-index: 2;
+  border-radius: 0.5rem;
+  background: black;
+  color: white;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.search-container #searchResultsSuggestion p{
+ padding: 1rem;
+ border-bottom: 0.1rem solid white;
+}
 input:focus {
   color: white;
   background-color: black;

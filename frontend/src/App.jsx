@@ -31,7 +31,7 @@ const App = () => {
   const [topsongs, setTopsongs] = useState([]);
   const [swiperRef, setSwiperRef] = useState(null);
   const [searchVisiblity, setSearchVisiblity] = useState(true);
-
+  const [songSuggestion,setSongSuggestion]=useState([])
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -79,6 +79,34 @@ const App = () => {
       })
 
   };
+  useEffect(()=>{
+const searchSongSuggestions=()=>{
+  fetch(`https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(searchQuery)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        } else {
+          return response.json();
+        }
+      })
+      .then(data => {
+        setSongSuggestion(data.data.results);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      })
+}
+if(searchQuery.length===1){
+  searchSongSuggestions()
+}
+else if(searchQuery.length>1){
+  let filtering=songSuggestion.filter(ele=>ele.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  setSongSuggestion(filtering)
+}
+else{
+  setSongSuggestion([])
+}
+},[searchQuery])
 
   useEffect(() => {
     const fetchTopSong = async () => {
@@ -150,7 +178,8 @@ const App = () => {
 
               <div className="searchbar searchbar2">
                 {
-                  searchVisiblity ? <div className="search-container">
+                  searchVisiblity ? 
+                  <div className="search-container">
                     <i className="fas fa-search search-icon"></i>
                     <input
                       type="search"
@@ -159,6 +188,7 @@ const App = () => {
                       ref={inputRef}
                       className="box1"
                       required
+                      value={searchQuery}
                       onKeyDown={(event) => {
                         if (event.key === 'Enter') {
                           if (searchQuery !== "") {
@@ -174,6 +204,13 @@ const App = () => {
                         setSearchQuery(e.target.value);
                       }}
                     />
+                    <div id="searchResultsSuggestion">
+                      {
+                        songSuggestion?.map((item,index)=>(
+                          <p  key={`song_name${index}`} onClick={()=>{setSearchQuery(item.name);setSongSuggestion([]);fetchSongData();}}>{item.name}</p>
+                        ))
+                      }
+                    </div>
                   </div> : ''
                 }
               </div>
