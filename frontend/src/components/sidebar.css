@@ -139,3 +139,8 @@
 .create-playlist-btn {
   transition: color 0.1s, background-color 0.5s;
 }
+.home .searchlogo{
+   margin-top: 9px;
+}
+
+
