@@ -6,7 +6,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 
-import './Sidebar.css';
+import './sidebar.css';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
