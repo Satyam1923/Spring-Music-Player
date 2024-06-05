@@ -9,7 +9,8 @@ import Genres from "./components/Genres";
 import TopCharts from "./components/TopCharts";
 
 import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
-import waiting2 from "./Images/waiting2.gif";
+
+import Home from "./components/Home/Home";import waiting2 from "./Images/waiting2.gif";
 import { FaSearch, FaUser } from 'react-icons/fa';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
@@ -22,7 +23,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import TopArtists from "./components/TopArtists";
 import Settings from "./components/Settings";
-import Home from "./components/Home/Home";
+import Search from "./components/Search/Search";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -131,7 +132,7 @@ const App = () => {
   };
 
   if (debug) {
-    return <Home/>
+    return <Search />
   } else {
   return (
     <Router>
