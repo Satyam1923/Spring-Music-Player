@@ -98,19 +98,7 @@ const App = () => {
     fetchTopEnglish();
   }, []);
 
-  // const nextPlay = () => {
-  //   setCurrplaying(currplaying + 1 >= globalData.length ? 0 : currplaying + 1);
-  //   const selectedMusic = globalData[currplaying];
-  //   updateAudio(selectedMusic);
-  // };
-
-  // const previousPlay = () => {
-  //   setCurrplaying(
-  //     currplaying - 1 < 0 ? globalData.length - 1 : currplaying - 1
-  //   );
-  //   const selectedMusic = globalData[currplaying];
-  //   updateAudio(selectedMusic);
-  // };
+  
 
   const playSong = (index) => {
     setCurrplaying(index);

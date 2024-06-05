@@ -75,6 +75,7 @@ aside a {
   aside {
     width: 10%;
   }
+
   aside input[type="search"] {
     display: none;
   }
@@ -462,6 +463,7 @@ input:-moz-autofill {
   border-radius: 5px;
 }
 
+
 .track-info {
   flex-grow: 1;
 }
@@ -492,3 +494,61 @@ input:-moz-autofill {
 .play-button:hover {
   color: #aaa;
 }
+
+
+.mySwiper {
+  width: 56%;
+  overflow-x: scroll;
+  position: relative;
+  height: 12.5rem;
+  margin: 0;
+  padding: 25px;
+  background: #18181d;
+  border-radius: 10px;
+}
+
+.song p {
+  font-size: 12px;
+  padding: 20px;
+}
+
+.song {
+  width: 150px !important;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin: auto 0;
+  padding: 10px;
+}
+
+.song img {
+  height: 100px;
+}
+
+
+.swiper-slide {
+  height: 90% !important;
+}
+
+
+.song img {
+  border-radius: 10px;
+}
+
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+  --swiper-navigation-size: 18px;
+
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(18.5px);
+  -webkit-backdrop-filter: blur(18.5px);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
