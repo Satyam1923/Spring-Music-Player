@@ -1,31 +1,15 @@
 import React from "react";
 import Navbar from "../Navbar";
-import { AiFillLike } from "react-icons/ai";
-import { PiPlaylistBold } from "react-icons/pi";
 import { FaPlayCircle } from "react-icons/fa";
-import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-
-function TopSection({ username }) {
-  return (
-    <div className="w-full min-h-12 relative hover:cursor-pointer">
-      <div className="h-full flex justify-end">
-        <div className="flex h-full bg-[#18181D] rounded-md">
-          <div className="bg-[#343440] h-full aspect-square rounded-md"></div>
-          <div className="bg-[#18181D] pl-5 pr-5 h-full max-w-[200px] basis-24 flex rounded-lg items-center justify-center">
-            <h2 className="text-white">{username}</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import MusicPlayer from "../MusicPlayer";
+import UserIconSection from "../UserIconSection";
 
 function Main() {
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
-      <TopSection username="Agent47" />
+      <UserIconSection username="Agent47" />
 
       {/* Middle */}
       <div className="w-full h-[25%]">
@@ -49,45 +33,6 @@ function Main() {
           <div className="w-[30%] min-w-[300px]  relative">
             <MusicPlayer songName="Reminder" artistName="The Weeknd" />
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MusicPlayer({ songName, artistName, audioUrl }) {
-  return (
-    <div className="bg-[#18181D] w-full h-full rounded-lg">
-      <div className="flex flex-col h-full justify-between p-2">
-        {/* Image and like details */}
-        <div className="flex h-[60%] pt-6">
-          <div className="flex justify-center h-full w-[20%]">
-            <AiFillLike className="scale-[1.5] mt-2 hover:cursor-pointer" />
-          </div>
-          {/* Song Image */}
-          <div className="flex flex-col justify-start gap-4 h-full w-[60%]">
-            <img
-              src="https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452"
-              alt="song image"
-              className="rounded-2xl w-full aspect-square"
-            />
-            <div className="flex flex-col gap-1">
-              <h2 className="text-white font-medium text-2xl">{songName}</h2>
-              <h3 className="text-white">{artistName}</h3>
-            </div>
-          </div>
-          <div className="flex justify-center h-full w-[20%]">
-            <PiPlaylistBold className="scale-[1.5] mt-2 hover:cursor-pointer" />
-          </div>
-        </div>
-
-        {/* Audio Player */}
-        <div className="h-[40%] rounded-lg">
-          <AudioPlayer
-            className="rounded-lg bg-[#5773FF] text-white h-full"
-            autoPlay
-            src={audioUrl}
-          />
         </div>
       </div>
     </div>

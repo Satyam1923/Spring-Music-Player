@@ -132,7 +132,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                             {
                                 isTopSong ? <AudioPlayer
                                     autoPlay
-                                    src={topsongs && topsongs[index].downloadUrl[0].url}
+                                    src={topsongs && topsongs[index].downloadUrl[4].url}
                                     preload="metadata"
                                     onError={() => {
                                         console.log("error playing audio");
@@ -141,7 +141,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                                 /> :
                                     isEnglishSong ? <AudioPlayer
                                         autoPlay
-                                        src={topEnglishsongs && topEnglishsongs[index].downloadUrl[0].url}
+                                        src={topEnglishsongs && topEnglishsongs[index].downloadUrl[4].url}
                                         preload="metadata"
                                         onError={() => {
                                             console.log("error playing audio");
@@ -151,7 +151,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                                         data && data.length > 0 && data[index] && (
                                             <AudioPlayer
                                                 autoPlay
-                                                src={data && data[index].downloadUrl[0].url}
+                                                src={data && data[index].downloadUrl[4].url}
                                                 preload="metadata"
                                                 onError={() => {
                                                     console.log("error playing audio");
