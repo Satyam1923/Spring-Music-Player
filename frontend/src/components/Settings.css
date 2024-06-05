@@ -2,20 +2,15 @@
     display: flex;
     height: 100vh;
     width: 100vw;
-    /* Adjusted to cover the full viewport width */
 }
 
 .settings-sidebar {
     width: 250px;
-    /* Adjusted width for a typical sidebar */
     background-color: #1e1e1e;
     padding: 20px;
     position: fixed;
-    /* Make the sidebar stick to the left */
     height: 100vh;
-    /* Ensure the sidebar covers the full height of the viewport */
     overflow-y: auto;
-    /* Enable scrolling if content exceeds the height */
 }
 
 .settings-sidebar ul {
@@ -25,26 +20,20 @@
 
 .settings-sidebar li {
     margin: 20px 0;
-    /* Increased margin for more bottom gap */
     cursor: pointer;
     color: #ffffff;
-    /* Default color */
 }
 
 .settings-sidebar li:hover,
 .settings-sidebar li.active {
     color: #7373cc;
-    /* Highlight color */
 }
 
 .settings-content {
     margin-left: 250px;
-    /* Same as the sidebar width */
     flex-grow: 1;
     padding: 25px;
     background-color: #282828;
     overflow-y: auto;
-    /* Enable scrolling if content exceeds the height */
     height: 100vh;
-    /* Ensure the content area covers the full height of the viewport */
 }
