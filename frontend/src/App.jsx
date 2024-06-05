@@ -13,7 +13,7 @@ import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the
 import Home from "./components/Home/Home";import waiting2 from "./Images/waiting2.gif";
 import { FaSearch, FaUser } from 'react-icons/fa';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PagenotFound from "./components/PagenotFound";
+import PagenotFound from "./components/PagenotFound";  
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
