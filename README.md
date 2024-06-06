@@ -26,7 +26,8 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 
 ## 🎨 Expected Design
-![Screenshot 2024-06-06 112840](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/068bb849-6830-44ca-a9e5-47e75874f172)
+
+![Screenshot 2024-06-07 012636](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/34b12993-4a35-431b-bebb-b390591de6ae)
 
 
 Check the design in [Figma](https://www.figma.com/design/WQnt0qRFSdaV3jW5XF8NSc/Spring-Music-player-new-design?node-id=0-1&t=Q8iDfJsPXtkoDLTG-1)
