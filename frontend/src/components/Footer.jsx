@@ -8,6 +8,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const Footer = () => {
    const currentYear = new Date().getFullYear();
   return (
@@ -27,11 +28,11 @@ const Footer = () => {
             
             <ul className='company  sm:gap-[10px] sm:grid sm:grid-cols-1 sm:p-[10px] sm:text-center'>
             
-                <li>About Us</li>
+                <li><Link to="/aboutus">About Us</Link></li>
                 <li>Culture</li>
                 <li>Blog</li>
                 <li>Terms and Policy</li>
-                <li>Help and Support</li>
+                <li><Link to="/contactus">Help and Support</Link></li>
                 
             </ul>
            
