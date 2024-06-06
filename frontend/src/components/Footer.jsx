@@ -9,6 +9,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 
 const Footer = () => {
+   const currentYear = new Date().getFullYear();
   return (
     <div className='h-[300px] w-full flex flex-col bgfooter sm:h-full'>
            {/* //for logo and social links */}
@@ -83,7 +84,7 @@ const Footer = () => {
 </div>
 <div class="divider md:h-[1.5px] sm:h-[1px] "></div>
 <div className='sec4 md:p-3 sm:text-[10px]'>
-© Entertainment Network India Ltd. 2024, All Rights Reserved
+© Entertainment Network India Ltd. {currentYear}, All Rights Reserved
 </div>
         </div>
   )
