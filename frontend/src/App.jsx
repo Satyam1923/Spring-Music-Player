@@ -7,8 +7,8 @@ import Sidebar from "./components/Sidebar";
 import Section3 from "./components/Section3";
 import Genres from "./components/Genres";
 import TopCharts from "./components/TopCharts";
-
-
+import Aboutus from "./pages/Aboutus"
+import Contactus from "./pages/Contactus"
 import { FaUser } from 'react-icons/fa';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
@@ -222,6 +222,8 @@ const App = () => {
              <Footer/>
             </div>
           } />
+          <Route path="/aboutus" element={<Aboutus/>}/>
+          <Route path="/contactus" element={<Contactus/>}/>
           <Route path="*" element={<PagenotFound />} />
         </Routes>
       </Router>
