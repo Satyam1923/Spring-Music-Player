@@ -71,7 +71,7 @@ const Sidebar = () => {
         {activePage === page ? (
           <FilledIcon
             // fontSize={"50px"}
-            fontSize={isExpanded ? "45px" : "45px"}
+            fontSize={isExpanded ? "40px" : "40px"}
             className="icon"
             style={{
               fill: hoveredIcon === page || activePage === page ? "white" : "grey",
@@ -80,7 +80,7 @@ const Sidebar = () => {
           />
         ) : (
           <Icon
-            fontSize={isExpanded ? "45px" : "45px"}
+            fontSize={isExpanded ? "40px" : "40px"}
             
             className="icon"
             style={{
@@ -108,7 +108,7 @@ const Sidebar = () => {
         {activePage === playlist.id ? (
           <RiPlayListFill
             // fontSize={"50px"}
-            fontSize={isExpanded ? "45px" : "45px"}
+            fontSize={isExpanded ? "40px" : "40px"}
 
             className="icon"
             style={{
@@ -120,7 +120,7 @@ const Sidebar = () => {
         ) : (
           <RiPlayListLine
             // fontSize={"50px"}
-            fontSize={isExpanded ? "45px" : "45px"}
+            fontSize={isExpanded ? "40px" : "40px"}
 
             className="icon"
             style={{
@@ -191,18 +191,24 @@ const Sidebar = () => {
         onMouseLeave={handleMouseLeave}
       >
         {!isExpanded ? (
-          <div className="search-home-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px", }}>
+          // <div className="search-home-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px", }}>
+          // <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
+            // <div  className="option1">
+            <div className="icon-text-container" style={{ background: "#18181D", marginRight: "16px", borderRadius: "6px", padding: "19px"}}>
+
             <FaSearch
               className="search-icon"
               style={{
-                fontSize: "40px",
+                fontSize: "32px",
                 fill: hoveredIcon === 'search' ? "white" : "grey",
                 transition: "fill 0.1s ease-in-out"
               }}
             />
           </div>
         ) : (
-          <div className="input-container" style={{ background: "#18181D", marginRight: "-25px", borderRadius: "16px" }}>
+          // <div className="input-container" style={{ background: "#18181D", marginRight: "-25px", borderRadius: "16px" }}>
+          // <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}> 
+         <div > 
             <input type="search" placeholder="Search Song" />
             <FaSearch
               className="search-icon expanded-icon"
@@ -214,6 +220,7 @@ const Sidebar = () => {
             />
           </div>
         )}
+        
       </div>
       <div className="option1">
         <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
@@ -264,7 +271,6 @@ const Sidebar = () => {
           )}
         </div>
       </div>
-      {/* <BsPlusCircleFill /> */}
     </div>
   );
 };
