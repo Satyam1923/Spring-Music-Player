@@ -23,9 +23,11 @@
   align-items: center;
   cursor: pointer;
   /* margin: 15px; */
-  /* padding-bottom: 10px; */
+  padding: 10px;
 }
-
+.toggle-button{
+  margin-left: 23px;
+}
 .search-home-container {
   background: #18181D;
   display: flex;
@@ -44,17 +46,19 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin: 15px;
-  bottom: 7px;
+  margin: 20px;
+  top:1px;
+  bottom: -5px;
   height: 50px;
+  margin-left: 20px;
 }
 
-.input-container {
+/* .input-container {
   align-items: center;
   width: 100%;
   position: relative;
   border-radius: 20px;
-}
+} */
 
 .searchbar input {
   flex-grow: 1;
@@ -74,7 +78,7 @@
 .expanded-icon {
   position: absolute;
   top: 9px;
-  right: -28px;
+  right: 8px;
   color: grey;
 
 }
@@ -84,17 +88,17 @@
   /* flex-direction: column; */
   margin: 10px 0;
   margin-left: 3px;
-  padding-left: 15px;
+  padding-left: 22px;
 }
 
 .option1 a {
   display: flex;
   align-items: center;
   margin: 12px 0;
-  /* margin-left: 5px; */
+  margin-left: 5px;
   text-decoration: none;
   color: grey;
-  /* padding-right: 55px; */
+  padding-right: 5px;
 }
 
 .option1 a p {
