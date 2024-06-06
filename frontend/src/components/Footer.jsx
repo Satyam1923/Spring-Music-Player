@@ -84,7 +84,7 @@ const Footer = () => {
 </div>
 <div class="divider md:h-[1.5px] sm:h-[1px] "></div>
 <div className='sec4 md:p-3 sm:text-[10px]'>
-© Entertainment Network India Ltd. {currentYear}, All Rights Reserved
+© Spring Ltd. {currentYear}, All Rights Reserved
 </div>
         </div>
   )
