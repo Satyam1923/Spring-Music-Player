@@ -16,7 +16,7 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 ## 🚀 Tech Stack
 
-**Client:** React, TailwindCSS
+**Client:** React
 
 **Server:** Node, Express, Firebase, Axios
 
@@ -26,8 +26,9 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 
 ## 🎨 Expected Design
+![Screenshot 2024-06-06 112840](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/068bb849-6830-44ca-a9e5-47e75874f172)
 
-![Screenshot 2024-05-27 162247](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/6d37e86f-8e45-40d8-893d-3bc318953bc9)
+
 Check the design in [Figma](https://www.figma.com/design/WQnt0qRFSdaV3jW5XF8NSc/Spring-Music-player-new-design?node-id=0-1&t=Q8iDfJsPXtkoDLTG-1)
 
 
@@ -36,6 +37,53 @@ Check the design in [Figma](https://www.figma.com/design/WQnt0qRFSdaV3jW5XF8NSc/
 <hr>
 
 ## 🛠️ Getting Started
+
+### With Docker
+1. **Clone the repository**
+
+```sh
+ git clone https://github.com/Satyam1923/Spring.git
+```
+
+### For Backend
+1. **Navigate to the backend folder**
+```sh
+cd backend
+```
+2. **Build Docker Image**
+```sh
+docker build -t backend:v1 .      
+```
+3. **Run Docker Image**
+```sh
+docker run -p 3030:3030 backend:v1 
+```
+4. **Access it locally**
+
+Go to http://localhost:3030/
+
+
+### For Frontend 
+1. **Navigate to the frontend folder**
+
+```sh
+cd frontend
+```
+2. **Build Docker Image**
+```sh
+docker build -t frontend:v1 .      
+```
+3. **Run Docker Image**
+```sh
+docker run -p 3000:3000 frontend:v1
+```
+4. **Access it locally**
+
+Go to http://localhost:3000/
+
+
+### Without Docker 
+
 1. **Clone the repository**
 
 ```sh
@@ -131,9 +179,6 @@ npm install .
 ```sh
 cd  src
 ```
-7. change in app.jsx under app component  fetchSongData function
-
-change this url https://spring-music-player-3hyj.vercel.app/search with https://localhost:3030/search
 
 <hr>
 

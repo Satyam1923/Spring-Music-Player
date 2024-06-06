@@ -1,0 +1,39 @@
+.settings-page {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.settings-sidebar {
+    width: 250px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.settings-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.settings-sidebar li {
+    margin: 20px 0;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.settings-sidebar li:hover,
+.settings-sidebar li.active {
+    color: #7373cc;
+}
+
+.settings-content {
+    margin-left: 250px;
+    flex-grow: 1;
+    padding: 25px;
+    background-color: #282828;
+    overflow-y: auto;
+    height: 100vh;
+}

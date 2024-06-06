@@ -5,13 +5,13 @@ import axios from "axios";
 import he from "he";
 import Sidebar from "./components/Sidebar";
 import Section3 from "./components/Section3";
-import waiting from "./Images/neo-sakura-girl-and-dog-waiting-for-the-bus-in-the-rain.gif";
-import waiting2 from "./Images/waiting2.gif";
+import Genres from "./components/Genres";
+import TopCharts from "./components/TopCharts";
 
-import Footer from "./components/Footer";
 
-import { FaSearch, FaUser } from 'react-icons/fa'; // Import the profile icon
-
+import { FaUser } from 'react-icons/fa';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PagenotFound from "./components/PagenotFound";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,20 +19,39 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import required modules
 import { Pagination, Navigation } from "swiper/modules";
-
+import TopArtists from "./components/TopArtists";
+import Settings from "./components/Settings";
+import Search from "./components/Search/Search";
+import Footer from "./components/Footer";
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [totalTime, setTotalTime] = useState(0);
-  const [timePassed, setTimePassed] = useState(0);
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
-  const [swiperRef, setSwiperRef] = useState(null);
+  const [searchVisiblity, setSearchVisiblity] = useState(true);
 
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [topEnglishsongs, setTopEnglishsongs] = useState([]);
+  const [isEnglishSong, setIsEnglishSong] = useState(false);
+
+  // this is for debugging the ui
+  const [debug, setDebug] = useState(false)
+  useEffect(() => {
+    // Event handler function
+    const handleKeypress = (e) => {
+      console.log(e.key);
+      if (e.key === '`') {
+        setDebug((prevDebug) => !prevDebug);
+      }
+    };
+    window.addEventListener('keypress', handleKeypress);
+    return () => {
+      window.removeEventListener('keypress', handleKeypress);
+    };
+  }, []);
 
   const decodeEntities = (str) => {
     return he.decode(str);
@@ -45,7 +64,6 @@ const App = () => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         } else {
-          console.log("response.json()")
           return response.json();
         }
       })
@@ -53,6 +71,7 @@ const App = () => {
         console.log("data");
         console.log(data.data.results);
         setData(data.data.results);
+        setShowSearchResults(true);
       })
       .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -65,206 +84,150 @@ const App = () => {
       try {
         const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
         setTopsongs(response.data.data.results);
-        // console.log("top songs");
-        // console.log(response.data.data.results);
       } catch (error) {
         console.error(error);
       }
     };
     fetchTopSong();
-
-    const fetchSuggestions = async () => {
+    const fetchTopEnglish = async () => {
       try {
-        const response = await axios.get("http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app/api/albums?link=https://www.jiosaavn.com/album/houdini/OgwhbhtDRwM");
-        console.log("suggestions songs");
-        console.log(response);
-
+        const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top english songs");
+        setTopEnglishsongs(response.data.data.results);
       } catch (error) {
-        console.log(error)
+        console.error(error);
       }
     }
-    fetchSuggestions();
+    fetchTopEnglish();
   }, []);
 
-  const nextPlay = () => {
-    setCurrplaying(currplaying + 1 >= globalData.length ? 0 : currplaying + 1);
-    const selectedMusic = globalData[currplaying];
-    updateAudio(selectedMusic);
-  };
-
-  const previousPlay = () => {
-    setCurrplaying(
-      currplaying - 1 < 0 ? globalData.length - 1 : currplaying - 1
-    );
-    const selectedMusic = globalData[currplaying];
-    updateAudio(selectedMusic);
-  };
+  
 
   const playSong = (index) => {
-    console.log("index");
-    console.log(index);
     setCurrplaying(index);
   };
 
   const handleFocus = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    setSearchVisiblity(true);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 0);
   };
 
-  return (
 
-    <div className="">
-    <div className="ui">
-      <Sidebar handleFocus={handleFocus} />
-      <div className="avatar">
-        <div className="logo">
-          <FaUser fontSize="15px" color="white" />
-        </div>
-        <div className="text">Username</div>
-      </div>
+  if (debug) {
+    return <Search />
+  } else {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/" element={
+            <div>
+            <div className="ui">
+              <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
+              <div className="avatar">
+                <div className="logo">
+                  <FaUser fontSize="15px" color="white" />
 
-      <div className="section2">
+                </div>
+                <div className="text">Username</div>
+              </div>
+              <div className="section2">
+                <div className="searchbar searchbar2">
+                  {
+                    searchVisiblity ? <div className="search-container">
+                      <i className="fas fa-search search-icon"></i>
+                      <input
+                        type="search"
+                        placeholder="What do you want to play?"
+                        name="song"
+                        ref={inputRef}
+                        className="box1"
+                        required
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            if (searchQuery !== "") {
+                              console.log("started fetching song....")
+                              fetchSongData();
+                            } else {
+                              console.log("empty input query");
+                            }
+                          }
+                        }}
+                        onChange={(e) => {
+                          e.preventDefault();
+                          setSearchQuery(e.target.value);
+                        }}
+                      />
+                    </div> : ''
+                  }
+                </div>
 
-        <div className="searchbar searchbar2">
-          <input
-            type="search"
-            placeholder="Search Song"
-            name="song"
-            ref={inputRef}
-            className="box1"
-            required
-            onChange={(e) => {
-              e.preventDefault();
-              setSearchQuery(e.target.value);
-            }}
-          />
-          <button
-            id="get"
-            type="image"
-            src="search.svg"
-            alt="search"
-            className="button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (searchQuery !== "") {
-                console.log("started fetching song....")
-                fetchSongData();
-              } else {
-                console.log("empty input query");
-              }
-            }}
-          >
-            <div className="homesearchbar">
-              <FaSearch className="homesearchlogo" />
-              <p>Search</p>
+                <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
+                {
+                  showSearchResults ?
+                    <div className="song_content">
+                      <Swiper
+                        slidesPerView={4}
+                        spaceBetween={30}
+                        navigation={true}
+                        modules={[Pagination, Navigation]}
+                        className="mySwiper"
+                      >
+                        {data == null ? (
+                          ''
+                        ) : (
+                          data !== null &&
+                          data !== undefined &&
+                          data.map((element, index) => (
+                            <div key={element.id} onClick={() => {
+                              setTopSong(false);
+                              setIsEnglishSong(false);
+                              playSong(index)
+                            }}>
+                              <SwiperSlide className="song">
+                                <img
+                                  src={element.image[1].url}
+                                  alt={element.name}
+                                  onClick={() => {
+                                    setTopSong(false);
+                                    setIsEnglishSong(false);
+                                    playSong(index)
+                                  }}
+                                />
+                                <p onClick={() => {
+                                  setTopSong(false);
+                                  setIsEnglishSong(false);
+                                  playSong(index)
+                                }}>
+                                  {decodeEntities(element.name)}
+                                </p>
+                              </SwiperSlide>
+                            </div>
+                          ))
+                        )}
+                      </Swiper>
+                    </div>
+                    : <div className="genresAndTopcharts">
+                      <Genres />
+                      <TopCharts setTopSong={setTopSong} isEnglishSong={isEnglishSong} setIsEnglishSong={setIsEnglishSong} topEnglishsongs={topEnglishsongs} playSong={playSong} />
+                    </div>
+                }
+
+              </div>
+              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
             </div>
-          </button>
-        </div>
+             <Footer/>
+            </div>
+          } />
+          <Route path="*" element={<PagenotFound />} />
+        </Routes>
+      </Router>
+    );
+  }
 
-        <div className="song_content">
-          <b>Song Results</b>
-
-          <Swiper
-            onSwiper={setSwiperRef}
-            slidesPerView={4}
-            spaceBetween={30}
-            pagination={{
-              type: "fraction",
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            {data == null ? (
-
-              ''
-            ) : (
-              data !== null &&
-              data !== undefined &&
-              data.map((element, index) => (
-                <div key={element.id} onClick={() => {
-                  setTopSong(false);
-                  playSong(index)
-                }}>
-                  <SwiperSlide className="song">
-                    <img
-                      src={element.image[1].url}
-                      alt={element.name}
-                      onClick={() => {
-                        setTopSong(false);
-                        playSong(index)
-                      }}
-                    />
-                    <p onClick={() => {
-                      setTopSong(false);
-                      playSong(index)
-                    }}>
-                      {decodeEntities(element.name)}
-                    </p>
-                  </SwiperSlide>
-                </div>
-              ))
-            )}
-          </Swiper>
-
-          <b>Recents</b>
-          <Swiper
-            onSwiper={setSwiperRef}
-            slidesPerView={4}
-            // centeredSlides={true}
-            spaceBetween={30}
-            pagination={{
-              type: "fraction",
-            }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
-            className="mySwiper"
-          >
-            {data == null ? (
-              ''
-
-            ) : (
-              data !== null &&
-              data !== undefined &&
-              data.map((element, index) => (
-                <div key={element.id} onClick={() => {
-                  setTopSong(false);
-                  playSong(index)
-                }}>
-                  <SwiperSlide className="song">
-                    <img
-                      src={element.image[2].url}
-                      height={"60%"}
-                      alt={element.name}
-                      onClick={() => {
-                        setTopSong(false);
-                        playSong(index)
-                      }}
-                    />
-                    <p onClick={() => {
-                      setTopSong(false);
-                      playSong(index)
-                    }}>
-                      {decodeEntities(element.name)}
-                    </p>
-                  </SwiperSlide>
-                </div>
-              ))
-            )}
-          </Swiper>
-        </div>
-
-
-      </div>
-
-
-      <Section3 data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} />
-      </div>
-      <Footer/>
-    </div>
-
-  );
 };
 
 export default App;
