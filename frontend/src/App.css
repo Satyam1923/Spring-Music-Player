@@ -30,8 +30,8 @@ aside {
   align-items: center;
   background-color: #18181d;
   border-radius: 5px;
-  padding: 10px;
-  margin: 6px 0;
+/*   padding: 10px;
+  margin: 6px 0; */
 }
 
 .sidebar-section2 {
@@ -40,8 +40,8 @@ aside {
   align-items: center;
   background-color: #18181d;
   border-radius: 5px;
-  padding: 10px;
-  margin: 6px 0;
+/*   padding: 10px;
+  margin: 6px 0; */
 }
 
 input[type="search"] {
@@ -53,7 +53,7 @@ input[type="search"] {
   background: #000000;
   border-radius: 4px;
   border: 2px solid #343440;
-  margin-left: 25px;
+  /* margin-left: 3px; */
   box-sizing: border-box;
 }
 
