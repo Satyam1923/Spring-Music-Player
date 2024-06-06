@@ -7,7 +7,7 @@ import { AiOutlineTwitter } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
-
+import { FaGithub } from "react-icons/fa";
 const Footer = () => {
    const currentYear = new Date().getFullYear();
   return (
@@ -79,7 +79,12 @@ const Footer = () => {
                   rel="noopener noreferrer"
                 >
                   <FaFacebookF color="white" size={26} className="ico " />
-                </a></span> 
+                </a></span>
+                <span className='icons'> <a 
+                href="https://github.com/Satyam1923/Spring-Music-Player">
+                <FaGithub color="white" size={26} className="ico"/>
+                </a>
+                </span>
         </div>
 </div>
 <div class="divider md:h-[1.5px] sm:h-[1px] "></div>
