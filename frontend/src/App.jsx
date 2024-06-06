@@ -8,9 +8,11 @@ import Section3 from "./components/Section3";
 import Genres from "./components/Genres";
 import TopCharts from "./components/TopCharts";
 
+
 import { FaUser } from 'react-icons/fa';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -21,7 +23,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import TopArtists from "./components/TopArtists";
 import Settings from "./components/Settings";
 import Search from "./components/Search/Search";
-
+import Footer from "./components/Footer";
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -113,6 +115,7 @@ const App = () => {
     }, 0);
   };
 
+
   if (debug) {
     return <Search />
   } else {
@@ -121,11 +124,13 @@ const App = () => {
         <Routes>
           <Route path="/settings" element={<Settings />} />
           <Route path="/" element={
+            <div>
             <div className="ui">
               <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
               <div className="avatar">
                 <div className="logo">
                   <FaUser fontSize="15px" color="white" />
+
                 </div>
                 <div className="text">Username</div>
               </div>
@@ -159,6 +164,7 @@ const App = () => {
                     </div> : ''
                   }
                 </div>
+
                 <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
                 {
                   showSearchResults ?
@@ -213,12 +219,15 @@ const App = () => {
               </div>
               <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
             </div>
+             <Footer/>
+            </div>
           } />
           <Route path="*" element={<PagenotFound />} />
         </Routes>
       </Router>
     );
   }
+
 };
 
 export default App;
