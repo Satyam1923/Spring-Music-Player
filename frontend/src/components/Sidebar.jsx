@@ -251,7 +251,8 @@ const Sidebar = () => {
                 {isExpanded && <BsPlusCircleFill
                   style={{
                     fill: hoveredIcon === 'newPlaylist' ? "white" : "grey",
-                    transition: "fill 0.1s ease-in-out"
+                    transition: "fill 0.1s ease-in-out",
+                    
                   }}
                   className={isNewPlaylistHovered ? 'delete hovered' : 'delete'} 
                   onMouseEnter={() => setNewPlaylistHovered(true)} 
@@ -263,6 +264,7 @@ const Sidebar = () => {
           )}
         </div>
       </div>
+      {/* <BsPlusCircleFill /> */}
     </div>
   );
 };
