@@ -6,7 +6,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 
-import './sidebar.css';
+import './Sidebar.css';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -14,6 +14,7 @@ const Sidebar = () => {
   const [activePage, setActivePage] = useState('');
   const [playlists, setPlaylists] = useState([{ id: 'playlist1', name: 'Playlist-1' }, { id: 'playlist2', name: 'Playlist-2' }]);
   const [editMode, setEditMode] = useState({});
+  const [hoveredDeleteIcon, setHoveredDeleteIcon] = useState(null);
   const [newPlaylistName, setNewPlaylistName] = useState('');
   const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
   const [isNewPlaylistHovered, setNewPlaylistHovered] = useState(false);
@@ -58,13 +59,6 @@ const Sidebar = () => {
       setIsCreatingPlaylist(false);
     }
   };
-  const handlePlaylistNameChange = (playlistNumber, newName) => {
-    if (playlistNumber === 1) {
-      setPlaylist1Name(newName);
-    } else if (playlistNumber === 2) {
-      setPlaylist2Name(newName);
-    }
-  };
   
   const renderIcon = (Icon, FilledIcon, page, label) => (
     <div
@@ -76,7 +70,8 @@ const Sidebar = () => {
       <a href="javascript:void(0)">
         {activePage === page ? (
           <FilledIcon
-            fontSize={"35px"}
+            // fontSize={"50px"}
+            fontSize={isExpanded ? "45px" : "45px"}
             className="icon"
             style={{
               fill: hoveredIcon === page || activePage === page ? "white" : "grey",
@@ -85,7 +80,8 @@ const Sidebar = () => {
           />
         ) : (
           <Icon
-            fontSize={"35px"}
+            fontSize={isExpanded ? "45px" : "45px"}
+            
             className="icon"
             style={{
               fill: hoveredIcon === page ? "white" : "grey",
@@ -98,18 +94,22 @@ const Sidebar = () => {
     </div>
   );
 
-  const renderPlaylist = (playlist, deleteHover, setDeleteHover) => (
+  // const renderPlaylist = (playlist, deleteHover, setDeleteHover) => (
+    const renderPlaylist = (playlist) => (
+
     <div
       key={playlist.id}
       className='icon-text'
       onMouseEnter={() => handleMouseEnter(playlist.id)}
       onMouseLeave={handleMouseLeave}
-      style={{ display: 'flex', alignItems: 'center' }}
+      // style={{ display: 'flex', alignItems: 'center' }}
     >
-      <a href="javascript:void(0)" style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+      <a href="javascript:void(0)" >
         {activePage === playlist.id ? (
           <RiPlayListFill
-            fontSize={"35px"}
+            // fontSize={"50px"}
+            fontSize={isExpanded ? "45px" : "45px"}
+
             className="icon"
             style={{
               fill: hoveredIcon === playlist.id || activePage === playlist.id ? "white" : "grey",
@@ -119,7 +119,9 @@ const Sidebar = () => {
           />
         ) : (
           <RiPlayListLine
-            fontSize={"35px"}
+            // fontSize={"50px"}
+            fontSize={isExpanded ? "45px" : "45px"}
+
             className="icon"
             style={{
               fill: hoveredIcon === playlist.id ? "white" : "grey",
@@ -127,7 +129,9 @@ const Sidebar = () => {
             }}
             onClick={() => handlePageChange(playlist.id)}
           />
-        )}
+          
+        )
+        }
         {isExpanded && (
           <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
             {editMode[playlist.id] ? (
@@ -147,15 +151,17 @@ const Sidebar = () => {
               >
                 {playlist.name}
               </p>
+              
             )}
             <RiDeleteBin6Line
               style={{
-                fill: deleteHover ? "red" : "grey",
-                transition: "fill 0.1s ease-in-out"
+                fill: hoveredDeleteIcon === playlist.id ? "red" : "grey",
+                transform: hoveredDeleteIcon === playlist.id ? "scale(1.1)" : "scale(1)",
+                transition: "fill 0.1s ease-in-out, transform 0.1s ease-in-out"
               }}
-              className={deleteHover ? 'delete hovered' : 'delete'}
-              onMouseEnter={() => setDeleteHover(true)}
-              onMouseLeave={() => setDeleteHover(false)}
+              className={hoveredDeleteIcon === playlist.id ? 'delete hovered' : 'delete'}
+              onMouseEnter={() => setHoveredDeleteIcon(playlist.id)}
+              onMouseLeave={() => setHoveredDeleteIcon(null)}
               onClick={() => handleDelete(playlist.id)}
             />
           </div>
@@ -164,13 +170,20 @@ const Sidebar = () => {
     </div>
   );
 
-  const [isDeleteHovered1, setIsDeleteHovered1] = useState(false);
-  const [isDeleteHovered2, setIsDeleteHovered2] = useState(false);
-  const [isDeleteHovered3, setIsDeleteHovered3] = useState(false);
   return (
     <div className={isExpanded ? "sidebar expanded" : "sidebar collapsed"}>
-      <div className="toggle-button" onClick={toggleSidebar}>
-        <IoReorderThreeOutline fontSize={"25px"} />
+      <div className="toggle-button" 
+      onMouseEnter={() => setHoveredIcon('toggle')}
+      onMouseLeave={() => setHoveredIcon('')}
+      onClick={toggleSidebar}
+      >
+        <IoReorderThreeOutline 
+        fontSize={"45px"} 
+        style={{
+          fill: hoveredIcon === 'toggle' ? "white" : "grey",
+          transition: "fill 0.1s ease-in-out"
+        }}
+        />
       </div>
       <div
         className={`searchbar ${isExpanded ? 'expanded' : ''}`}
@@ -178,23 +191,23 @@ const Sidebar = () => {
         onMouseLeave={handleMouseLeave}
       >
         {!isExpanded ? (
-          <div className="search-home-container" style={{ background: "#18181D", borderRadius: "10px" }}>
+          <div className="search-home-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px", }}>
             <FaSearch
               className="search-icon"
               style={{
-                fontSize: "25px",
+                fontSize: "40px",
                 fill: hoveredIcon === 'search' ? "white" : "grey",
                 transition: "fill 0.1s ease-in-out"
               }}
             />
           </div>
         ) : (
-          <div className="input-container" style={{ background: "#18181D", borderRadius: "10px" }}>
+          <div className="input-container" style={{ background: "#18181D", marginRight: "-25px", borderRadius: "16px" }}>
             <input type="search" placeholder="Search Song" />
             <FaSearch
               className="search-icon expanded-icon"
               style={{
-                fontSize: "20px",
+                fontSize: "30px",
                 fill: hoveredIcon === 'search' ? "white" : "grey",
                 transition: "fill 0.1s ease-in-out"
               }}
@@ -203,15 +216,15 @@ const Sidebar = () => {
         )}
       </div>
       <div className="option1">
-        <div className="icon-text-container" style={{ background: "#18181D", marginRight: "12px", borderRadius: "10px" }}>
+        <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
           {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
           {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
           {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
         </div>
       </div>
       <div className="option1">
-        <div className="icon-text-container" style={{ background: "#18181D", marginRight: "12px", borderRadius: "10px" }}>
-          {playlists.map((playlist, index) => renderPlaylist(playlist, index === 0 ? isDeleteHovered1 : isDeleteHovered2, index === 0 ? setIsDeleteHovered1 : setIsDeleteHovered2))}
+        <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px" }}>
+          {playlists.map(playlist => renderPlaylist(playlist))}
           {isCreatingPlaylist ? (
             <div style={{ display: 'flex', alignItems: 'center', marginLeft: '15px' }}>
               <input
@@ -221,9 +234,6 @@ const Sidebar = () => {
                 onBlur={handleCreatePlaylist}
                 placeholder="New Playlist"
                 onKeyPress={(e) => e.key === 'Enter' && handleCreatePlaylist()}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') handleCreatePlaylist();
-                }}
                 autoFocus
                 style={{ flexGrow: 1, color: 'white', background: 'transparent', border: 'none', outline: 'none' }}
               />
@@ -243,7 +253,6 @@ const Sidebar = () => {
                     fill: hoveredIcon === 'newPlaylist' ? "white" : "grey",
                     transition: "fill 0.1s ease-in-out"
                   }}
-                  // className={hoveredIcon === 'newPlaylist' ? 'delete hovered' : 'delete'}
                   className={isNewPlaylistHovered ? 'delete hovered' : 'delete'} 
                   onMouseEnter={() => setNewPlaylistHovered(true)} 
                   onMouseLeave={() => setNewPlaylistHovered(false)}
@@ -252,7 +261,6 @@ const Sidebar = () => {
               </a>
             </div>
           )}
-
         </div>
       </div>
     </div>
