@@ -16,7 +16,7 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 ## 🚀 Tech Stack
 
-**Client:** React, TailwindCSS
+**Client:** React
 
 **Server:** Node, Express, Firebase, Axios
 
@@ -131,9 +131,6 @@ npm install .
 ```sh
 cd  src
 ```
-7. change in app.jsx under app component  fetchSongData function
-
-change this url https://spring-music-player-3hyj.vercel.app/search with https://localhost:3030/search
 
 <hr>
 
