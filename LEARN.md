@@ -62,8 +62,7 @@ The Spring Music Player web application is a simple yet functional platform for 
 6. Repeat track option for continuous playback.
 
 # <a id="snap">Snap</a>
-
-![Spring Music Player Screenshot](https://github.com/Satyam1923/Spring-Music-Player/assets/128183101/903d9df3-cd87-44cf-a5a6-1e4bc3b3927f)
+![Screenshot 2024-06-07 011315](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/574d157e-f2b7-4329-9e90-65383a2bdb75)
 
 Check the design in [Figma](https://www.figma.com/design/WQnt0qRFSdaV3jW5XF8NSc/Spring-Music-player-new-design?node-id=0-1&t=Q8iDfJsPXtkoDLTG-1)
 
