@@ -26,7 +26,7 @@ aside {
 
 .sidebar-section1 {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   background-color: #18181d;
   border-radius: 5px;
@@ -100,9 +100,9 @@ aside a {
   height: 4rem;
 }
 
-.section2 input[type="search"] {
+/* .section2 input[type="search"] {
   width: 65%;
-}
+} */
 
 .avatar {
   position: absolute;
@@ -192,7 +192,7 @@ input:-moz-autofill {
 .genresAndTopcharts {
   display: flex;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 /*===================== Section3 ============================*/
@@ -202,7 +202,7 @@ input:-moz-autofill {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 10px;
 }
 
@@ -210,7 +210,7 @@ input:-moz-autofill {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 .link {
@@ -291,7 +291,7 @@ input:-moz-autofill {
 
 .ui {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   border-radius: 15px;
   width: 100vw;
   
@@ -387,7 +387,7 @@ input:-moz-autofill {
 
 /* Genres component stylings*/
 .genres {
-  width: 40%;
+  /* width: 40%; */
   border-radius: 10px;
   background-color: #18181d;
   margin: 5px 5px 5px 0px;
@@ -401,9 +401,9 @@ input:-moz-autofill {
 
 .genres-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .box {
@@ -454,8 +454,8 @@ input:-moz-autofill {
   width: 60%;
   border-radius: 10px;
   background-color: #18181d;
-  margin: 5px 0px 5px 5px;
-  padding: 10px;
+  /* margin: 5px 0px 5px 5px;
+  padding: 10px; */
 }
 
 .topCharts-header {

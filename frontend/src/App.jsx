@@ -27,6 +27,11 @@ import Search from "./components/Search/Search";
 import Footer from "./components/Footer";
 import Contactus from "./pages/Contactus";
 
+import { IoIosLogIn } from "react-icons/io";
+import { RiNotification3Fill } from "react-icons/ri";
+import { IoSettings } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -34,7 +39,7 @@ const App = () => {
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
   const [searchVisiblity, setSearchVisiblity] = useState(true);
-  const [songSuggestion,setSongSuggestion]=useState([])
+  const [songSuggestion, setSongSuggestion] = useState([])
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -56,34 +61,34 @@ const App = () => {
       window.removeEventListener('keypress', handleKeypress);
     };
   }, []);
-  useEffect(()=>{
-    const searchSongSuggestions=()=>{
+  useEffect(() => {
+    const searchSongSuggestions = () => {
       fetch(`https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(searchQuery)}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            } else {
-              return response.json();
-            }
-          })
-          .then(data => {
-            setSongSuggestion(data.data.results);
-          })
-          .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-          })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          } else {
+            return response.json();
+          }
+        })
+        .then(data => {
+          setSongSuggestion(data.data.results);
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        })
     }
-    if(searchQuery.length===1){
+    if (searchQuery.length === 1) {
       searchSongSuggestions()
     }
-    else if(searchQuery.length>1){
-      let filtering=songSuggestion.filter(ele=>ele.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    else if (searchQuery.length > 1) {
+      let filtering = songSuggestion.filter(ele => ele.name.toLowerCase().includes(searchQuery.toLowerCase()))
       setSongSuggestion(filtering)
     }
-    else{
+    else {
       setSongSuggestion([])
     }
-    },[searchQuery])
+  }, [searchQuery])
   const decodeEntities = (str) => {
     return he.decode(str);
   };
@@ -131,7 +136,7 @@ const App = () => {
     fetchTopEnglish();
   }, []);
 
-  
+
 
   const playSong = (index) => {
     setCurrplaying(index);
@@ -156,114 +161,124 @@ const App = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/" element={
             <div>
-            <div className="ui">
-              <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
-              <div className="avatar">
-                <div className="logo">
-                  <FaUser fontSize="15px" color="white" />
+              <div className="ui flex-row px-2">
+                <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
+                {/* <div className="avatar">
+                  <div className="logo">
+                    <FaUser fontSize="15px" color="white" />
 
-                </div>
-                <div className="text">Username</div>
-              </div>
-              <div className="section2">
-                <div className="searchbar searchbar2">
-                  {
-                    searchVisiblity ? <div className="search-container">
-                      <i className="fas fa-search search-icon"></i>
-                      <input
-                        type="search"
-                        placeholder="What do you want to play?"
-                        name="song"
-                        ref={inputRef}
-                        className="box1"
-                        required
-                        onKeyDown={(event) => {
-                          if (event.key === 'Enter') {
-                            if (searchQuery !== "") {
-                              console.log("started fetching song....")
-                              fetchSongData();
-                            } else {
-                              console.log("empty input query");
+                  </div>
+                  <div className="text">Username</div>
+                </div> */}
+
+                <div className="flex flex-row md:flex-col w-full py-2">
+                  <div className="section2  w-8/12 md:w-full">
+                    <div className="searchbar searchbar2">
+                      {
+                        searchVisiblity ? <div className="search-container w-3/5  md:w-full flex justify-center items-center ">
+                          <i className="fas fa-search search-icon"></i>
+                          <input
+                            type="search"
+                            placeholder="What do you want to play?"
+                            name="song"
+                            ref={inputRef}
+                            className="box1"
+                            required
+                            onKeyDown={(event) => {
+                              if (event.key === 'Enter') {
+                                if (searchQuery !== "") {
+                                  console.log("started fetching song....")
+                                  fetchSongData();
+                                } else {
+                                  console.log("empty input query");
+                                }
+                              }
+                            }}
+                            onChange={(e) => {
+                              e.preventDefault();
+                              setSearchQuery(e.target.value);
+                            }}
+                          />
+                          <div className="links w-2/5 md:w-full">
+                            <div className="link"><IoIosLogIn fontSize={"25px"} color={"white"} /></div>
+                            <div className="link"><RiNotification3Fill fontSize={"25px"} color={"white"} /></div>
+                            <Link to="/settings">
+                                <div className="link"><IoSettings fontSize={"25px"} color={"white"} /></div>
+                            </Link>
+                        </div>
+
+                          <div id="searchResultsSuggestion">
+                            {
+                              songSuggestion?.map((item, index) => (
+                                <p key={`song_name${index}`} onClick={() => { setSearchQuery(item.name); setSongSuggestion([]); fetchSongData(); }}>{item.name}</p>
+                              ))
                             }
-                          }
-                        }}
-                        onChange={(e) => {
-                          e.preventDefault();
-                          setSearchQuery(e.target.value);
-                        }}
-                      />
-                          
-<div id="searchResultsSuggestion">
-{
-  songSuggestion?.map((item,index)=>(
-    <p  key={`song_name${index}`} onClick={()=>{setSearchQuery(item.name);setSongSuggestion([]);fetchSongData();}}>{item.name}</p>
-  ))
-}
-</div>
-                    </div> : ''
-                  }
-                </div>
+                          </div>
+                        </div> : ''
+                      }
+                    </div>
 
-                <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
-                {
-                  showSearchResults ?
-                    <div className="song_content">
-                      <Swiper
-                        slidesPerView={4}
-                        spaceBetween={30}
-                        navigation={true}
-                        modules={[Pagination, Navigation]}
-                        className="mySwiper"
-                      >
-                        {data == null ? (
-                          ''
-                        ) : (
-                          data !== null &&
-                          data !== undefined &&
-                          data.map((element, index) => (
-                            <div key={element.id} onClick={() => {
-                              setTopSong(false);
-                              setIsEnglishSong(false);
-                              playSong(index)
-                            }}>
-                              <SwiperSlide className="song">
-                                <img
-                                  src={element.image[1].url}
-                                  alt={element.name}
-                                  onClick={() => {
-                                    setTopSong(false);
-                                    setIsEnglishSong(false);
-                                    playSong(index)
-                                  }}
-                                />
-                                <p onClick={() => {
+                    <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
+                    {
+                      showSearchResults ?
+                        <div className="song_content">
+                          <Swiper
+                            slidesPerView={4}
+                            spaceBetween={30}
+                            navigation={true}
+                            modules={[Pagination, Navigation]}
+                            className="mySwiper"
+                          >
+                            {data == null ? (
+                              ''
+                            ) : (
+                              data !== null &&
+                              data !== undefined &&
+                              data.map((element, index) => (
+                                <div key={element.id} onClick={() => {
                                   setTopSong(false);
                                   setIsEnglishSong(false);
                                   playSong(index)
                                 }}>
-                                  {decodeEntities(element.name)}
-                                </p>
-                              </SwiperSlide>
-                            </div>
-                          ))
-                        )}
-                      </Swiper>
-                    </div>
-                    : <div className="genresAndTopcharts">
-                      <Genres />
-                      <TopCharts setTopSong={setTopSong} isEnglishSong={isEnglishSong} setIsEnglishSong={setIsEnglishSong} topEnglishsongs={topEnglishsongs} playSong={playSong} />
-                    </div>
-                }
+                                  <SwiperSlide className="song">
+                                    <img
+                                      src={element.image[1].url}
+                                      alt={element.name}
+                                      onClick={() => {
+                                        setTopSong(false);
+                                        setIsEnglishSong(false);
+                                        playSong(index)
+                                      }}
+                                    />
+                                    <p onClick={() => {
+                                      setTopSong(false);
+                                      setIsEnglishSong(false);
+                                      playSong(index)
+                                    }}>
+                                      {decodeEntities(element.name)}
+                                    </p>
+                                  </SwiperSlide>
+                                </div>
+                              ))
+                            )}
+                          </Swiper>
+                        </div>
+                        : <div className="genresAndTopcharts flex-row md:flex-col">
+                          <Genres />
+                          <TopCharts setTopSong={setTopSong} isEnglishSong={isEnglishSong} setIsEnglishSong={setIsEnglishSong} topEnglishsongs={topEnglishsongs} playSong={playSong} />
+                        </div>
+                    }
 
+                  </div>
+                <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
+                </div>
               </div>
-              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
-            </div>
-             <Footer/>
+              <Footer />
             </div>
           } />
-          <Route path="/aboutus" element={<Aboutus/>}/>
-          <Route path="/terms" element={<Terms/>}/>
-          <Route path="/contactus" element={<Contactus/>}/>
+          <Route path="/aboutus" element={<Aboutus />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/contactus" element={<Contactus />} />
           <Route path="*" element={<PagenotFound />} />
         </Routes>
       </Router>

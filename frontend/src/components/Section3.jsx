@@ -14,18 +14,10 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
     };
 
     return (
-        <div className='section3'>
-            <div className="links">
-                <div className="link"><IoIosLogIn fontSize={"25px"} color={"white"} /></div>
-                <div className="link"><RiNotification3Fill fontSize={"25px"} color={"white"} /></div>
-                <Link to="/settings">
-                    <div className="link"><IoSettings fontSize={"25px"} color={"white"} /></div>
-                </Link>
-            </div>
+        <div className='section3 flex w-4/12 md:w-full mt-4 md:mt-[68vh]'>
 
-
-            <div className="Card1">
-                <p style={{ "marginLeft": "10px"}}>Top Artist</p>
+            <div className="Card1 flex flex-col">
+                <p className="pl-2">Top Artist</p>
                 {topsongs !== null &&
                     topsongs !== undefined &&
                     topsongs.slice(0, 3).map((element, index) => (

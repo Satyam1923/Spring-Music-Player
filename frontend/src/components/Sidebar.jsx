@@ -59,7 +59,7 @@ const Sidebar = () => {
       setIsCreatingPlaylist(false);
     }
   };
-  
+
   const renderIcon = (Icon, FilledIcon, page, label) => (
     <div
       className='icon-text'
@@ -81,7 +81,7 @@ const Sidebar = () => {
         ) : (
           <Icon
             fontSize={isExpanded ? "40px" : "40px"}
-            
+
             className="icon"
             style={{
               fill: hoveredIcon === page ? "white" : "grey",
@@ -95,14 +95,14 @@ const Sidebar = () => {
   );
 
   // const renderPlaylist = (playlist, deleteHover, setDeleteHover) => (
-    const renderPlaylist = (playlist) => (
+  const renderPlaylist = (playlist) => (
 
     <div
       key={playlist.id}
       className='icon-text'
       onMouseEnter={() => handleMouseEnter(playlist.id)}
       onMouseLeave={handleMouseLeave}
-      // style={{ display: 'flex', alignItems: 'center' }}
+    // style={{ display: 'flex', alignItems: 'center' }}
     >
       <a href="javascript:void(0)" >
         {activePage === playlist.id ? (
@@ -129,7 +129,7 @@ const Sidebar = () => {
             }}
             onClick={() => handlePageChange(playlist.id)}
           />
-          
+
         )
         }
         {isExpanded && (
@@ -151,7 +151,7 @@ const Sidebar = () => {
               >
                 {playlist.name}
               </p>
-              
+
             )}
             <RiDeleteBin6Line
               style={{
@@ -171,69 +171,67 @@ const Sidebar = () => {
   );
 
   return (
-    <div className={isExpanded ? "sidebar expanded" : "sidebar collapsed"}>
-      <div className="toggle-button" 
-      onMouseEnter={() => setHoveredIcon('toggle')}
-      onMouseLeave={() => setHoveredIcon('')}
-      onClick={toggleSidebar}
+    <div className={`fixed top-0 left-0 h-full ${isExpanded ? 'w-64 bg-gray-900' : 'w-16'} transition-all duration-300 z-50`}>
+      <div
+        className="toggle-button cursor-pointer p-2"
+        onMouseEnter={() => setHoveredIcon('toggle')}
+        onMouseLeave={() => setHoveredIcon('')}
+        onClick={toggleSidebar}
       >
-        <IoReorderThreeOutline 
-        fontSize={"45px"} 
-        style={{
-          fill: hoveredIcon === 'toggle' ? "white" : "grey",
-          transition: "fill 0.1s ease-in-out"
-        }}
+        <IoReorderThreeOutline
+          fontSize={"45px"}
+          style={{
+            fill: hoveredIcon === 'toggle' ? "white" : "grey",
+            transition: "fill 0.1s ease-in-out",
+          }}
         />
       </div>
       <div
-        className={`searchbar ${isExpanded ? 'expanded' : ''}`}
+        className={`searchbar ${isExpanded ? 'expanded' : 'invisible'} flex items-center p-2`}
         onMouseEnter={() => handleMouseEnter('search')}
         onMouseLeave={handleMouseLeave}
       >
         {!isExpanded ? (
-          // <div className="search-home-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px", }}>
-          // <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
-            // <div  className="option1">
-            <div className="icon-text-container" style={{ background: "#18181D", marginRight: "16px", borderRadius: "6px", padding: "19px"}}>
-
+          <div className="icon-text-container bg-gray-900 mr-4 rounded-lg p-4 flex items-center">
             <FaSearch
               className="search-icon"
               style={{
                 fontSize: "32px",
                 fill: hoveredIcon === 'search' ? "white" : "grey",
-                transition: "fill 0.1s ease-in-out"
+                transition: "fill 0.1s ease-in-out",
               }}
             />
           </div>
         ) : (
-          // <div className="input-container" style={{ background: "#18181D", marginRight: "-25px", borderRadius: "16px" }}>
-          // <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}> 
-         <div > 
-            <input type="search" placeholder="Search Song" />
+          <div className="flex items-center w-full">
+            <input
+              type="search"
+              placeholder="Search Song"
+              className="bg-transparent text-white border-none outline-none flex-grow p-2"
+            />
             <FaSearch
               className="search-icon expanded-icon"
               style={{
                 fontSize: "30px",
                 fill: hoveredIcon === 'search' ? "white" : "grey",
-                transition: "fill 0.1s ease-in-out"
+                transition: "fill 0.1s ease-in-out",
               }}
             />
           </div>
         )}
-        
       </div>
-      <div className="option1">
-        <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
+      <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'invisible'}`}>
+        <div className={`icon-text-container bg-gray-900 mr-2 rounded-lg flex flex-col `}>
           {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
           {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
           {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
         </div>
       </div>
-      <div className="option1">
-        <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px" }}>
+      <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'invisible'}`}>
+        <div className="icon-text-container bg-gray-900 mr-2 rounded-lg flex flex-col">
           {playlists.map(playlist => renderPlaylist(playlist))}
           {isCreatingPlaylist ? (
-            <div style={{ display: 'flex', alignItems: 'center', marginLeft: '15px' }}>
+            <div className="flex items-center ml-4">
               <input
                 type="text"
                 value={newPlaylistName}
@@ -242,36 +240,43 @@ const Sidebar = () => {
                 placeholder="New Playlist"
                 onKeyPress={(e) => e.key === 'Enter' && handleCreatePlaylist()}
                 autoFocus
-                style={{ flexGrow: 1, color: 'white', background: 'transparent', border: 'none', outline: 'none' }}
+                className="flex-grow text-white bg-transparent border-none outline-none"
               />
               <button
-                style={{ background: 'transparent', border: 'none', outline: 'none', color: 'white', marginLeft: '5px', cursor: 'pointer' }}
+                className="bg-transparent border-none outline-none text-white ml-2 cursor-pointer"
                 onClick={handleCreatePlaylist}
               >
                 Create
               </button>
             </div>
           ) : (
-            <div className='icon-text' onMouseEnter={() => handleMouseEnter('newPlaylist')} onMouseLeave={handleMouseLeave} onClick={() => setIsCreatingPlaylist(true)}>
+            <div
+              className="icon-text cursor-pointer"
+              onMouseEnter={() => handleMouseEnter('newPlaylist')}
+              onMouseLeave={handleMouseLeave}
+              onClick={() => setIsCreatingPlaylist(true)}
+            >
               <a href="javascript:void(0)">
-                {isExpanded && <p style={{ color: hoveredIcon === 'newPlaylist' ? "white" : "grey" }}>Create Playlist</p>}
-                {isExpanded && <BsPlusCircleFill
-                  style={{
-                    fill: hoveredIcon === 'newPlaylist' ? "white" : "grey",
-                    transition: "fill 0.1s ease-in-out",
-                    
-                  }}
-                  className={isNewPlaylistHovered ? 'delete hovered' : 'delete'} 
-                  onMouseEnter={() => setNewPlaylistHovered(true)} 
-                  onMouseLeave={() => setNewPlaylistHovered(false)}
-                  onClick={() => setNewPlaylistHovered(true)}
-                />}
+                {isExpanded && (
+                  <p className={`text-${hoveredIcon === 'newPlaylist' ? "white" : "grey"}`}>
+                    Create Playlist
+                  </p>
+                )}
+                {isExpanded && (
+                  <BsPlusCircleFill
+                    className={`fill-${hoveredIcon === 'newPlaylist' ? "white" : "grey"} transition-all`}
+                    onMouseEnter={() => setNewPlaylistHovered(true)}
+                    onMouseLeave={() => setNewPlaylistHovered(false)}
+                    onClick={() => setNewPlaylistHovered(true)}
+                  />
+                )}
               </a>
             </div>
           )}
         </div>
       </div>
     </div>
+
   );
 };
 
