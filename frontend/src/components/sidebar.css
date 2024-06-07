@@ -86,7 +86,7 @@
 .option1 {
   display: flex;
   /* flex-direction: column; */
-  margin: 10px 0;
+  /* margin: 10px 0; */
   margin-left: 3px;
   padding-left: 22px;
 }
@@ -94,12 +94,19 @@
 .option1 a {
   display: flex;
   align-items: center;
-  margin: 12px 0;
+  /* margin: 12px 0; */
+  margin: 0px 0;
   margin-left: 5px;
   text-decoration: none;
   color: grey;
   padding-right: 5px;
 }
+@media screen and (min-width: 900px) {
+  .option1 a  {
+    margin: 12px 0;
+  }
+}
+
 
 .option1 a p {
   margin-left: 20px;

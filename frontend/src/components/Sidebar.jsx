@@ -171,9 +171,10 @@ const Sidebar = () => {
   );
 
   return (
-    <div className={`fixed top-0 left-0 h-full ${isExpanded ? 'w-64 bg-gray-900' : 'w-16'} transition-all duration-300 z-50`}>
+    <div className={`fixed top-0 left-0 h-full ${isExpanded ? 'w-64 bg-[#18181d]' : 'w-16'} transition-all duration-300 z-50`}>
+
       <div
-        className="toggle-button cursor-pointer p-2"
+        className="toggle-button cursor-pointer p-2 md:p-0"
         onMouseEnter={() => setHoveredIcon('toggle')}
         onMouseLeave={() => setHoveredIcon('')}
         onClick={toggleSidebar}
@@ -186,13 +187,14 @@ const Sidebar = () => {
           }}
         />
       </div>
+
       <div
-        className={`searchbar ${isExpanded ? 'expanded' : 'invisible'} flex items-center p-2`}
+        className={`searchbar ${isExpanded ? 'expanded' : 'invisible'} flex items-center p-2 md:p-0`}
         onMouseEnter={() => handleMouseEnter('search')}
         onMouseLeave={handleMouseLeave}
       >
         {!isExpanded ? (
-          <div className="icon-text-container bg-gray-900 mr-4 rounded-lg p-4 flex items-center">
+          <div className="icon-text-container bg-[#18181d] mr-4 rounded-lg p-4 flex items-center">
             <FaSearch
               className="search-icon"
               style={{
@@ -207,7 +209,7 @@ const Sidebar = () => {
             <input
               type="search"
               placeholder="Search Song"
-              className="bg-transparent text-white border-none outline-none flex-grow p-2"
+              className="bg-transparent text-white outline-none flex-grow p-2 border-[#000000]"
             />
             <FaSearch
               className="search-icon expanded-icon"
@@ -220,15 +222,15 @@ const Sidebar = () => {
           </div>
         )}
       </div>
-      <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'invisible'}`}>
-        <div className={`icon-text-container bg-gray-900 mr-2 rounded-lg flex flex-col `}>
+      <div className={`option1 p-2 ${isExpanded ? 'expanded mb-2 md:mb-0' : 'invisible'}`}>
+        <div className={`icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col `}>
           {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
           {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
           {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
         </div>
       </div>
       <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'invisible'}`}>
-        <div className="icon-text-container bg-gray-900 mr-2 rounded-lg flex flex-col">
+        <div className="icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col">
           {playlists.map(playlist => renderPlaylist(playlist))}
           {isCreatingPlaylist ? (
             <div className="flex items-center ml-4">
@@ -256,7 +258,7 @@ const Sidebar = () => {
               onMouseLeave={handleMouseLeave}
               onClick={() => setIsCreatingPlaylist(true)}
             >
-              <a href="javascript:void(0)">
+              <a href="javascript:void(0)" className='my-6 md:my-1'>
                 {isExpanded && (
                   <p className={`text-${hoveredIcon === 'newPlaylist' ? "white" : "grey"}`}>
                     Create Playlist
