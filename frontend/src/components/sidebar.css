@@ -26,7 +26,7 @@
   padding: 10px;
 }
 .toggle-button{
-  margin-left: 23px;
+  margin-left: 10px;
 }
 .search-home-container {
   background: #18181D;
@@ -46,11 +46,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin: 20px;
+  margin: 10px;
   top:1px;
   bottom: -5px;
   height: 50px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 /* .input-container {

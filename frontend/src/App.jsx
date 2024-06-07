@@ -161,8 +161,8 @@ const App = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/" element={
             <div>
-              <div className="ui flex-row px-2">
-                <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
+              <div className="ui flex-row px-2 justify-end">
+                <Sidebar className='w-full' handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
                 {/* <div className="avatar">
                   <div className="logo">
                     <FaUser fontSize="15px" color="white" />
@@ -171,7 +171,7 @@ const App = () => {
                   <div className="text">Username</div>
                 </div> */}
 
-                <div className="flex flex-row md:flex-col w-full py-2">
+                <div className="flex flex-row md:flex-col w-[95%] md:w-full py-2">
                   <div className="section2  w-8/12 md:w-full">
                     <div className="searchbar searchbar2">
                       {

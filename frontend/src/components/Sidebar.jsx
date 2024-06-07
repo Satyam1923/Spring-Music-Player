@@ -189,12 +189,12 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`searchbar ${isExpanded ? 'expanded' : 'invisible'} flex items-center p-2 md:p-0`}
+        className={`searchbar ${isExpanded ? 'expanded' : 'md:invisible'} flex items-center  md:p-0`}
         onMouseEnter={() => handleMouseEnter('search')}
         onMouseLeave={handleMouseLeave}
       >
         {!isExpanded ? (
-          <div className="icon-text-container bg-[#18181d] mr-4 rounded-lg p-4 flex items-center">
+          <div className="icon-text-container bg-[#18181d] rounded-lg p-4 flex items-center">
             <FaSearch
               className="search-icon"
               style={{
@@ -222,14 +222,14 @@ const Sidebar = () => {
           </div>
         )}
       </div>
-      <div className={`option1 p-2 ${isExpanded ? 'expanded mb-2 md:mb-0' : 'invisible'}`}>
+      <div className={`option1 p-2 ${isExpanded ? 'expanded mb-2 md:mb-0' : 'md:invisible'}`}>
         <div className={`icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col `}>
           {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
           {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
           {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
         </div>
       </div>
-      <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'invisible'}`}>
+      <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'md:invisible'}`}>
         <div className="icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col">
           {playlists.map(playlist => renderPlaylist(playlist))}
           {isCreatingPlaylist ? (
