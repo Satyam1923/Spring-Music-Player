@@ -1,22 +1,80 @@
-Project Overview:
+# Spring-Music-Player
 
-    Spring Music Player is a web application designed to offer users a seamless music streaming experience by integrating with the JioSaavn API. Users can search for music, albums, playlists, and singers, control playback, view top searches, and loop playback. The application is built using a client-server architecture with React on the client-side and Node.js, Express, and Firebase on the server-side.
+<!-- TABLE OF CONTENTS -->
 
-Features:
+<details open="open">
+  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <ol>
+    <li>
+      <a href="#introduction">Introduction</a>
+    </li>
+    <li>
+      <a href="#tech-stacks">Tech Stacks</a>
+    </li>
+    <li>
+      <a href="#features">Features</a>
+    </li>
+    <li>
+      <a href="#snap">Snap</a>
+    </li>
+    <li>
+      <a href="#learning-outcomes">Learning Outcomes</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    <li>
+      <a href="#conclusion">Conclusion</a>
+    </li>
+  </ol>
+</details>
 
-    Music/Album/Playlists/Singer Search: Users can search for music, albums, playlists, and singers.
-    Playback Controls: Users can control playback, including play, pause, skip, and loop options.
-    Top 10 Search List: Displays a list of the top 10 searched items for easy discovery.
-    Loop Playback: Allows users to loop playback for continuous listening.
+# <a id="introduction">Introduction</a>
 
-Tech Stack:
+The Spring Music Player web application is a simple yet functional platform for playing a list of songs. Developed using HTML, CSS, and JavaScript, it provides a user-friendly interface to control playback, adjust volume, and navigate through the playlist. The project is built using HTML for structure, CSS for styling, and JavaScript for functionality.
 
-    Client: EJS, CSS , JS
-    Server: Node.js, Express,  Axios
-    API: JioSaavn API (unofficial)
+# <a id="tech-stacks">Tech Stacks</a>
 
+- **HTML:** Provides the structural foundation for the Music Player. Key elements include:
 
-Getting Started:
+  1. Details section for displaying current track information.
+  2. Slider containers for time and volume controls.
+  3. Buttons for random track, previous track, play/pause, next track, and repeat track.
+
+- **CSS:** Handled by an external CSS file:
+
+  1. Layout adjustments for responsiveness.
+  2. Stylized buttons, sliders, and track information display.
+  3. Dynamic background color changes for a visually engaging experience.
+
+- **JavaScript:** Logic for various functionalities:
+  - Various DOM elements are selected using document.querySelector.
+  - The audio element (curr_track) is created dynamically to load and play songs.
+  - Track index, play state, and random play state are managed using variables.
+
+# <a id="features">Features</a>
+
+1. Play, pause, and control the playback of songs.
+2. Navigate to the next and previous tracks in the playlist.
+3. Adjust the volume using a slider.
+4. Display real-time information such as current time and total duration.
+5. Random track functionality for a dynamic listening experience.
+6. Repeat track option for continuous playback.
+
+# <a id="snap">Snap</a>
+![Screenshot 2024-06-07 011315](https://github.com/Satyam1923/Spring-Music-Player/assets/104068640/574d157e-f2b7-4329-9e90-65383a2bdb75)
+
+Check the design in [Figma](https://www.figma.com/design/WQnt0qRFSdaV3jW5XF8NSc/Spring-Music-player-new-design?node-id=0-1&t=Q8iDfJsPXtkoDLTG-1)
+
+# <a id="learning-outcomes">Learning Outcomes</a>
+
+- **Client-Side Development:** Understanding how to build a user-friendly interface using React and TailwindCSS.
+- **Server-Side Development:** Utilizing Node.js and Express for server-side logic and API integrations.
+- **Firebase Integration:** Learning to integrate Firebase for user authentication and data storage.
+- **Git Workflow:** Understanding the Git workflow for contributing to open-source projects, including forking, branching, committing, and creating pull requests.
+- **Contribution:** Feel free to explore and contribute to the Spring Music Player project to make it even better!
+
+# <a id="getting-started">Getting Started</a>
 
     Clone the repo:
 
@@ -45,7 +103,7 @@ Creating Pull Request:
      git clone https://github.com/Satyam1923/Spring.git
 
 Create a new branch and switch to it:
-     git checkout -b fix-issue-<ISSUE-NUMBER>
+git checkout -b fix-issue-<ISSUE-NUMBER>
 
 Add your changes:
 
@@ -56,15 +114,10 @@ Commit your changes:
     git commit -m "<EXPLAIN-YOUR_CHANGES>"
 
 Push your changes:
-    git push origin fix-issue-<ISSUE-NUMBER>
+git push origin fix-issue-<ISSUE-NUMBER>
 
     Open a Pull Request
 
-Learnings:
+# <a id="conclusion">Conclusion:</a>
 
-    Client-Side Development: Understanding how to build a user-friendly interface using React and TailwindCSS.
-    Server-Side Development: Utilizing Node.js and Express for server-side logic and API integrations.
-    Firebase Integration: Learning to integrate Firebase for user authentication and data storage.
-    Git Workflow: Understanding the Git workflow for contributing to open-source projects, including forking, branching, committing, and creating pull requests.
-
-    Feel free to explore and contribute to the Spring Music Player project to make it even better!
+Building a music player using HTML CSS and JavaScript is a fun and educational project for web developers. It allows to combine these three essential web technologies to create an interactive and visually appealing music player.
