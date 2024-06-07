@@ -8,6 +8,7 @@ import Section3 from "./components/Section3";
 import Genres from "./components/Genres";
 import TopCharts from "./components/TopCharts";
 import Aboutus from "./pages/Aboutus";
+import Terms from "./pages/Terms";
 
 import { FaUser } from "react-icons/fa";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -25,6 +26,7 @@ import Search from "./components/Search/Search";
 import Footer from "./components/Footer";
 import Contactus from "./pages/Contactus";
 import LikedSong from "./components/LikedSong";
+
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -302,8 +304,11 @@ const App = () => {
               </div>
             }
           />
-          <Route path="/aboutus" element={<Aboutus />} />
-          <Route path="/contactus" element={<Contactus />} />
+
+          <Route path="/aboutus" element={<Aboutus/>}/>
+          <Route path="/terms" element={<Terms/>}/>
+          <Route path="/contactus" element={<Contactus/>}/>
+
           <Route path="*" element={<PagenotFound />} />
         </Routes>
       </Router>
