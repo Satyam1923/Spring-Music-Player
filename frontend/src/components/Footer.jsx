@@ -3,7 +3,7 @@ import { IoIosCall } from "react-icons/io";
 import { HiOutlineMail } from "react-icons/hi";
 import { TiLocation } from "react-icons/ti";
 import { AiOutlineInstagram } from "react-icons/ai";
-import { AiOutlineTwitter } from "react-icons/ai";
+import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
@@ -57,7 +57,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <AiOutlineTwitter color="white" fontSize={27} className="ico" />
+                  <FaXTwitter color="white" fontSize={27} className="ico" />
 
                 </a></span>
                 <span  className='icons'><a
