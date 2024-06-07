@@ -10,7 +10,7 @@ import { BsYoutube } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 const Footer = () => {
-  const Year = new Date().getFullYear();
+
   return (
     <div className='h-[300px] w-full flex flex-col bgfooter sm:h-full'>
            {/* //for logo and social links */}
@@ -90,7 +90,7 @@ const Footer = () => {
 </div>
 <div class="divider md:h-[1.5px] sm:h-[1px] "></div>
 <div className='sec4 md:p-3 sm:text-[10px]'>
-© Spring Ltd. Year, All Rights Reserved
+© Spring Ltd. {new Date().getFullYear()}, All Rights Reserved
 </div>
         </div>
   )
