@@ -24,25 +24,18 @@ import Settings from "./components/Settings";
 import Search from "./components/Search/Search";
 import Footer from "./components/Footer";
 import Contactus from "./pages/Contactus";
-import LikedSong from "./components/LikedSong";
-
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
   const [searchVisiblity, setSearchVisiblity] = useState(true);
-
+  const [songSuggestion, setSongSuggestion] = useState([]);
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [topEnglishsongs, setTopEnglishsongs] = useState([]);
   const [isEnglishSong, setIsEnglishSong] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(true);
-
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
 
   // this is for debugging the ui
   const [debug, setDebug] = useState(false);
@@ -59,7 +52,38 @@ const App = () => {
       window.removeEventListener("keypress", handleKeypress);
     };
   }, []);
-
+  useEffect(() => {
+    const searchSongSuggestions = () => {
+      fetch(
+        `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(
+          searchQuery
+        )}`
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          } else {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          setSongSuggestion(data.data.results);
+        })
+        .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+        });
+    };
+    if (searchQuery.length === 1) {
+      searchSongSuggestions();
+    } else if (searchQuery.length > 1) {
+      let filtering = songSuggestion.filter((ele) =>
+        ele.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setSongSuggestion(filtering);
+    } else {
+      setSongSuggestion([]);
+    }
+  }, [searchQuery]);
   const decodeEntities = (str) => {
     return he.decode(str);
   };
@@ -133,18 +157,13 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/settings" element={<Settings />} />
-          <Route
-            path="/liked-song"
-            element={<LikedSong isExpanded={isExpanded} />}
-          />
+          <Route path="/liked-song" element={<LikedSong />} />
           <Route
             path="/"
             element={
               <div>
                 <div className="ui">
                   <Sidebar
-                    isExpanded={isExpanded}
-                    toggleSidebar={toggleSidebar}
                     handleFocus={handleFocus}
                     setSearchVisiblity={setSearchVisiblity}
                   />
@@ -181,6 +200,21 @@ const App = () => {
                               setSearchQuery(e.target.value);
                             }}
                           />
+
+                          <div id="searchResultsSuggestion">
+                            {songSuggestion?.map((item, index) => (
+                              <p
+                                key={`song_name${index}`}
+                                onClick={() => {
+                                  setSearchQuery(item.name);
+                                  setSongSuggestion([]);
+                                  fetchSongData();
+                                }}
+                              >
+                                {item.name}
+                              </p>
+                            ))}
+                          </div>
                         </div>
                       ) : (
                         ""
