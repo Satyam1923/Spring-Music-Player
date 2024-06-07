@@ -9,10 +9,9 @@ import Genres from "./components/Genres";
 import TopCharts from "./components/TopCharts";
 import Aboutus from "./pages/Aboutus";
 
-import { FaUser } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
-
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -25,6 +24,8 @@ import Settings from "./components/Settings";
 import Search from "./components/Search/Search";
 import Footer from "./components/Footer";
 import Contactus from "./pages/Contactus";
+import LikedSong from "./components/LikedSong";
+
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,20 +38,25 @@ const App = () => {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [topEnglishsongs, setTopEnglishsongs] = useState([]);
   const [isEnglishSong, setIsEnglishSong] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   // this is for debugging the ui
-  const [debug, setDebug] = useState(false)
+  const [debug, setDebug] = useState(false);
   useEffect(() => {
     // Event handler function
     const handleKeypress = (e) => {
       console.log(e.key);
-      if (e.key === '`') {
+      if (e.key === "`") {
         setDebug((prevDebug) => !prevDebug);
       }
     };
-    window.addEventListener('keypress', handleKeypress);
+    window.addEventListener("keypress", handleKeypress);
     return () => {
-      window.removeEventListener('keypress', handleKeypress);
+      window.removeEventListener("keypress", handleKeypress);
     };
   }, []);
 
@@ -59,31 +65,35 @@ const App = () => {
   };
 
   const fetchSongData = async () => {
-
-    fetch(`https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(searchQuery)}`)
-      .then(response => {
+    fetch(
+      `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(
+        searchQuery
+      )}`
+    )
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         } else {
           return response.json();
         }
       })
-      .then(data => {
+      .then((data) => {
         console.log("data");
         console.log(data.data.results);
         setData(data.data.results);
         setShowSearchResults(true);
       })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      })
-
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
   };
 
   useEffect(() => {
     const fetchTopSong = async () => {
       try {
-        const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
+        const response = await axios.get(
+          "https://jio-savaan-private.vercel.app/api/search/songs?query=top songs"
+        );
         setTopsongs(response.data.data.results);
       } catch (error) {
         console.error(error);
@@ -92,16 +102,16 @@ const App = () => {
     fetchTopSong();
     const fetchTopEnglish = async () => {
       try {
-        const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top english songs");
+        const response = await axios.get(
+          "https://jio-savaan-private.vercel.app/api/search/songs?query=top english songs"
+        );
         setTopEnglishsongs(response.data.data.results);
       } catch (error) {
         console.error(error);
       }
-    }
+    };
     fetchTopEnglish();
   }, []);
-
-  
 
   const playSong = (index) => {
     setCurrplaying(index);
@@ -116,121 +126,154 @@ const App = () => {
     }, 0);
   };
 
-
   if (debug) {
-    return <Search />
+    return <Search />;
   } else {
     return (
       <Router>
         <Routes>
           <Route path="/settings" element={<Settings />} />
-          <Route path="/" element={
-            <div>
-            <div className="ui">
-              <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
-              <div className="avatar">
-                <div className="logo">
-                  <FaUser fontSize="15px" color="white" />
+          <Route
+            path="/liked-song"
+            element={<LikedSong isExpanded={isExpanded} />}
+          />
+          <Route
+            path="/"
+            element={
+              <div>
+                <div className="ui">
+                  <Sidebar
+                    isExpanded={isExpanded}
+                    toggleSidebar={toggleSidebar}
+                    handleFocus={handleFocus}
+                    setSearchVisiblity={setSearchVisiblity}
+                  />
+                  <div className="avatar">
+                    <div className="logo">
+                      <FaUser fontSize="15px" color="white" />
+                    </div>
+                    <div className="text">Username</div>
+                  </div>
+                  <div className="section2">
+                    <div className="searchbar searchbar2">
+                      {searchVisiblity ? (
+                        <div className="search-container">
+                          <i className="fas fa-search search-icon"></i>
+                          <input
+                            type="search"
+                            placeholder="What do you want to play?"
+                            name="song"
+                            ref={inputRef}
+                            className="box1"
+                            required
+                            onKeyDown={(event) => {
+                              if (event.key === "Enter") {
+                                if (searchQuery !== "") {
+                                  console.log("started fetching song....");
+                                  fetchSongData();
+                                } else {
+                                  console.log("empty input query");
+                                }
+                              }
+                            }}
+                            onChange={(e) => {
+                              e.preventDefault();
+                              setSearchQuery(e.target.value);
+                            }}
+                          />
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
 
-                </div>
-                <div className="text">Username</div>
-              </div>
-              <div className="section2">
-                <div className="searchbar searchbar2">
-                  {
-                    searchVisiblity ? <div className="search-container">
-                      <i className="fas fa-search search-icon"></i>
-                      <input
-                        type="search"
-                        placeholder="What do you want to play?"
-                        name="song"
-                        ref={inputRef}
-                        className="box1"
-                        required
-                        onKeyDown={(event) => {
-                          if (event.key === 'Enter') {
-                            if (searchQuery !== "") {
-                              console.log("started fetching song....")
-                              fetchSongData();
-                            } else {
-                              console.log("empty input query");
-                            }
-                          }
-                        }}
-                        onChange={(e) => {
-                          e.preventDefault();
-                          setSearchQuery(e.target.value);
-                        }}
-                      />
-                    </div> : ''
-                  }
-                </div>
-
-                <TopArtists topsongs={topsongs} setTopSong={setTopSong} playSong={playSong}></TopArtists>
-                {
-                  showSearchResults ?
-                    <div className="song_content">
-                      <Swiper
-                        slidesPerView={4}
-                        spaceBetween={30}
-                        navigation={true}
-                        modules={[Pagination, Navigation]}
-                        className="mySwiper"
-                      >
-                        {data == null ? (
-                          ''
-                        ) : (
-                          data !== null &&
-                          data !== undefined &&
-                          data.map((element, index) => (
-                            <div key={element.id} onClick={() => {
-                              setTopSong(false);
-                              setIsEnglishSong(false);
-                              playSong(index)
-                            }}>
-                              <SwiperSlide className="song">
-                                <img
-                                  src={element.image[1].url}
-                                  alt={element.name}
+                    <TopArtists
+                      topsongs={topsongs}
+                      setTopSong={setTopSong}
+                      playSong={playSong}
+                    ></TopArtists>
+                    {showSearchResults ? (
+                      <div className="song_content">
+                        <Swiper
+                          slidesPerView={4}
+                          spaceBetween={30}
+                          navigation={true}
+                          modules={[Pagination, Navigation]}
+                          className="mySwiper"
+                        >
+                          {data == null
+                            ? ""
+                            : data !== null &&
+                              data !== undefined &&
+                              data.map((element, index) => (
+                                <div
+                                  key={element.id}
                                   onClick={() => {
                                     setTopSong(false);
                                     setIsEnglishSong(false);
-                                    playSong(index)
+                                    playSong(index);
                                   }}
-                                />
-                                <p onClick={() => {
-                                  setTopSong(false);
-                                  setIsEnglishSong(false);
-                                  playSong(index)
-                                }}>
-                                  {decodeEntities(element.name)}
-                                </p>
-                              </SwiperSlide>
-                            </div>
-                          ))
-                        )}
-                      </Swiper>
-                    </div>
-                    : <div className="genresAndTopcharts">
-                      <Genres />
-                      <TopCharts setTopSong={setTopSong} isEnglishSong={isEnglishSong} setIsEnglishSong={setIsEnglishSong} topEnglishsongs={topEnglishsongs} playSong={playSong} />
-                    </div>
-                }
-
+                                >
+                                  <SwiperSlide className="song">
+                                    <img
+                                      src={element.image[1].url}
+                                      alt={element.name}
+                                      onClick={() => {
+                                        setTopSong(false);
+                                        setIsEnglishSong(false);
+                                        playSong(index);
+                                      }}
+                                    />
+                                    <p
+                                      onClick={() => {
+                                        setTopSong(false);
+                                        setIsEnglishSong(false);
+                                        playSong(index);
+                                      }}
+                                    >
+                                      {decodeEntities(element.name)}
+                                    </p>
+                                  </SwiperSlide>
+                                </div>
+                              ))}
+                        </Swiper>
+                      </div>
+                    ) : (
+                      <div className="genresAndTopcharts">
+                        <Genres />
+                        <TopCharts
+                          setTopSong={setTopSong}
+                          isEnglishSong={isEnglishSong}
+                          setIsEnglishSong={setIsEnglishSong}
+                          topEnglishsongs={topEnglishsongs}
+                          playSong={playSong}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <Section3
+                    setIsEnglishSong={setIsEnglishSong}
+                    data={data}
+                    index={currplaying}
+                    playSong={playSong}
+                    topsongs={topsongs}
+                    isTopSong={isTopSong}
+                    setTopSong={setTopSong}
+                    isEnglishSong={isEnglishSong}
+                    topEnglishsongs={topEnglishsongs}
+                  />
+                </div>
+                <Footer />
               </div>
-              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
-            </div>
-             <Footer/>
-            </div>
-          } />
-          <Route path="/aboutus" element={<Aboutus/>}/>
-          <Route path="/contactus" element={<Contactus/>}/>
+            }
+          />
+          <Route path="/aboutus" element={<Aboutus />} />
+          <Route path="/contactus" element={<Contactus />} />
           <Route path="*" element={<PagenotFound />} />
         </Routes>
       </Router>
     );
   }
-
 };
 
 export default App;

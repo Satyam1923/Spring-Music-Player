@@ -60,14 +60,14 @@ const Sidebar = () => {
     }
   };
   
-  const renderIcon = (Icon, FilledIcon, page, label) => (
+  const renderIcon = (Icon, FilledIcon, page, label, link) => (
     <div
       className='icon-text'
       onMouseEnter={() => handleMouseEnter(page)}
       onMouseLeave={handleMouseLeave}
       onClick={() => handlePageChange(page)}
     >
-      <a href="javascript:void(0)">
+      <a href={link}>
         {activePage === page ? (
           <FilledIcon
             // fontSize={"50px"}
@@ -224,9 +224,9 @@ const Sidebar = () => {
       </div>
       <div className="option1">
         <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
-          {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
-          {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
-          {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
+          {renderIcon(GoHome, GoHomeFill, 'home', 'Home', '/')}
+          {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite','/liked-song')}
+          {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums', 'javascript.void(0)')}
         </div>
       </div>
       <div className="option1">
