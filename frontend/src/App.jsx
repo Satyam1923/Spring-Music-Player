@@ -24,6 +24,7 @@ import Settings from "./components/Settings";
 import Search from "./components/Search/Search";
 import Footer from "./components/Footer";
 import Contactus from "./pages/Contactus";
+import LikedSong from "./components/LikedSong";
 const App = () => {
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
