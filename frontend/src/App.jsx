@@ -31,7 +31,7 @@ const App = () => {
   const [currplaying, setCurrplaying] = useState(0);
   const [topsongs, setTopsongs] = useState([]);
   const [searchVisiblity, setSearchVisiblity] = useState(true);
-
+  const [songSuggestion,setSongSuggestion]=useState([])
   const [isTopSong, setTopSong] = useState(false);
   const inputRef = useRef(null);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -53,7 +53,34 @@ const App = () => {
       window.removeEventListener('keypress', handleKeypress);
     };
   }, []);
-
+  useEffect(()=>{
+    const searchSongSuggestions=()=>{
+      fetch(`https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(searchQuery)}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            } else {
+              return response.json();
+            }
+          })
+          .then(data => {
+            setSongSuggestion(data.data.results);
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          })
+    }
+    if(searchQuery.length===1){
+      searchSongSuggestions()
+    }
+    else if(searchQuery.length>1){
+      let filtering=songSuggestion.filter(ele=>ele.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      setSongSuggestion(filtering)
+    }
+    else{
+      setSongSuggestion([])
+    }
+    },[searchQuery])
   const decodeEntities = (str) => {
     return he.decode(str);
   };
@@ -162,6 +189,14 @@ const App = () => {
                           setSearchQuery(e.target.value);
                         }}
                       />
+                          
+<div id="searchResultsSuggestion">
+{
+  songSuggestion?.map((item,index)=>(
+    <p  key={`song_name${index}`} onClick={()=>{setSearchQuery(item.name);setSongSuggestion([]);fetchSongData();}}>{item.name}</p>
+  ))
+}
+</div>
                     </div> : ''
                   }
                 </div>
