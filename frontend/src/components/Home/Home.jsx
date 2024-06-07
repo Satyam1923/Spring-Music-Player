@@ -227,11 +227,11 @@ function TopArtists() {
   );
 }
 
-function Home() {
+function Home({ setCurrPage  }) {
   return (
     <div className="w-screen h-screen p-4 text-center">
       <div className="w-full h-full flex gap-4">
-        <Navbar />
+        <Navbar setCurrPage={setCurrPage}  />
         <Main />
       </div>
     </div>

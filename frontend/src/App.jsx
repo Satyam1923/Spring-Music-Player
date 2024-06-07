@@ -21,6 +21,7 @@ import { Pagination, Navigation } from "swiper/modules";
 import TopArtists from "./components/TopArtists";
 import Settings from "./components/Settings";
 import Search from "./components/Search/Search";
+import Home from "./components/Home/Home";
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -36,7 +37,7 @@ const App = () => {
   const [isEnglishSong, setIsEnglishSong] = useState(false);
 
   // this is for debugging the ui
-  const [debug, setDebug] = useState(false)
+  const [debug, setDebug] = useState(true)
   useEffect(() => {
     // Event handler function
     const handleKeypress = (e) => {
@@ -50,6 +51,11 @@ const App = () => {
       window.removeEventListener('keypress', handleKeypress);
     };
   }, []);
+  const [currPage, setCurrPage] = useState(null)
+
+  useEffect(() => {
+    setCurrPage(<Home setCurrPage={setCurrPage} />)
+  }, [])
 
   const decodeEntities = (str) => {
     return he.decode(str);
@@ -126,7 +132,7 @@ const App = () => {
   };
 
   if (debug) {
-    return <Search />
+    return currPage
   } else {
     return (
       <Router>
