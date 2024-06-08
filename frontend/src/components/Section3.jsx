@@ -7,18 +7,21 @@ import { IoSettings } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 
-const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong, setTopSong, isEnglishSong, topEnglishsongs }) => {
+const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong, setTopSong, isEnglishSong, topEnglishsongs, isPaused,setIsPaused}) => {
 
     const decodeEntities = (str) => {
         return he.decode(str);
     };
-
+    const togglePause = () => {
+        setIsPaused(true);
+      };
+      
     return (
         <div className='section3'>
             <div className="links">
                 <div className="link"><IoIosLogIn fontSize={"25px"} color={"white"} /></div>
                 <div className="link"><RiNotification3Fill fontSize={"25px"} color={"white"} /></div>
-                <Link to="/settings">
+                <Link to="/settings" onClick={togglePause}>
                     <div className="link"><IoSettings fontSize={"25px"} color={"white"} /></div>
                 </Link>
             </div>
@@ -60,7 +63,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
 
             {
                 isTopSong || data || isEnglishSong ?
-                    <div className="Card2">
+                    <div className="Card2 border-2">
                         <div className="details2">
 
                             {
@@ -131,7 +134,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                         <div className="audioplayer">
                             {
                                 isTopSong ? <AudioPlayer
-                                    autoPlay
+                                    autoPlay={!isPaused}
                                     src={topsongs && topsongs[index].downloadUrl[4].url}
                                     preload="metadata"
                                     onError={() => {
@@ -140,7 +143,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                                     style={{ height: "110px", backgroundColor: "#5773ff", color: "white", borderRadius: "7px" }}
                                 /> :
                                     isEnglishSong ? <AudioPlayer
-                                        autoPlay
+                                    autoPlay={!isPaused}
                                         src={topEnglishsongs && topEnglishsongs[index].downloadUrl[4].url}
                                         preload="metadata"
                                         onError={() => {
@@ -150,7 +153,7 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                                     /> :
                                         data && data.length > 0 && data[index] && (
                                             <AudioPlayer
-                                                autoPlay
+                                            autoPlay={!isPaused}
                                                 src={data && data[index].downloadUrl[4].url}
                                                 preload="metadata"
                                                 onError={() => {
