@@ -104,7 +104,7 @@ const Sidebar = () => {
       onMouseLeave={handleMouseLeave}
       // style={{ display: 'flex', alignItems: 'center' }}
     >
-      <a href="javascript:void(0)" >
+      <a href="#" >
         {activePage === playlist.id ? (
           <RiPlayListFill
             // fontSize={"50px"}
@@ -253,7 +253,7 @@ const Sidebar = () => {
             </div>
           ) : (
             <div className='icon-text' onMouseEnter={() => handleMouseEnter('newPlaylist')} onMouseLeave={handleMouseLeave} onClick={() => setIsCreatingPlaylist(true)}>
-              <a href="javascript:void(0)">
+              <a href="#">
                 {isExpanded && <p style={{ color: hoveredIcon === 'newPlaylist' ? "white" : "grey" }}>Create Playlist</p>}
                 {isExpanded && <BsPlusCircleFill
                   style={{
