@@ -163,15 +163,8 @@ const App = () => {
             <div>
               <div className="ui flex-row px-2 justify-end">
                 <Sidebar className='w-full' handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
-                {/* <div className="avatar">
-                  <div className="logo">
-                    <FaUser fontSize="15px" color="white" />
 
-                  </div>
-                  <div className="text">Username</div>
-                </div> */}
-
-                <div className="flex flex-row md:flex-col w-[95%] md:w-full py-2">
+                <div className="flex flex-row md:flex-col w-[95%] lgm:ml-0 ml-2 md:w-full py-2">
                   <div className="section2  w-8/12 md:w-full">
                     <div className="searchbar searchbar2">
                       {

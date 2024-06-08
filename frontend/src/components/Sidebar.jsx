@@ -171,113 +171,120 @@ const Sidebar = () => {
   );
 
   return (
-    <div className={`fixed top-0 left-0 h-full ${isExpanded ? 'w-64 bg-[#18181d]' : 'w-16'} transition-all duration-300 z-50`}>
+    <div className={`relative top-0 left-0 ${isExpanded ? 'w-64 bg-[#18181d] mt-2 ' : 'w-16'} transition-all duration-300 z-50 lgm:fixed lgm:w-64 lgm:mt-[0] mt-[-8rem] `}>
 
-      <div
-        className="toggle-button cursor-pointer p-2 md:p-0"
-        onMouseEnter={() => setHoveredIcon('toggle')}
-        onMouseLeave={() => setHoveredIcon('')}
-        onClick={toggleSidebar}
-      >
-        <IoReorderThreeOutline
-          fontSize={"45px"}
+  <div
+    className="toggle-button cursor-pointer p-2 md:p-0"
+    onMouseEnter={() => setHoveredIcon('toggle')}
+    onMouseLeave={() => setHoveredIcon('')}
+    onClick={toggleSidebar}
+  >
+    <IoReorderThreeOutline
+      fontSize={"45px"}
+      style={{
+        fill: hoveredIcon === 'toggle' ? "white" : "grey",
+        transition: "fill 0.1s ease-in-out",
+      }}
+    />
+  </div>
+
+  <div
+    className={`searchbar ${isExpanded ? 'expanded' : 'md:invisible'} flex items-center md:p-0`}
+    onMouseEnter={() => handleMouseEnter('search')}
+    onMouseLeave={handleMouseLeave}
+  >
+    {!isExpanded ? (
+      <div className="icon-text-container bg-[#18181d] rounded-lg p-4 flex items-center">
+        <FaSearch
+          className="search-icon"
           style={{
-            fill: hoveredIcon === 'toggle' ? "white" : "grey",
+            fontSize: "32px",
+            fill: hoveredIcon === 'search' ? "white" : "grey",
             transition: "fill 0.1s ease-in-out",
           }}
         />
       </div>
-
-      <div
-        className={`searchbar ${isExpanded ? 'expanded' : 'md:invisible'} flex items-center  md:p-0`}
-        onMouseEnter={() => handleMouseEnter('search')}
-        onMouseLeave={handleMouseLeave}
-      >
-        {!isExpanded ? (
-          <div className="icon-text-container bg-[#18181d] rounded-lg p-4 flex items-center">
-            <FaSearch
-              className="search-icon"
-              style={{
-                fontSize: "32px",
-                fill: hoveredIcon === 'search' ? "white" : "grey",
-                transition: "fill 0.1s ease-in-out",
-              }}
-            />
-          </div>
-        ) : (
-          <div className="flex items-center w-full">
-            <input
-              type="search"
-              placeholder="Search Song"
-              className="bg-transparent text-white outline-none flex-grow p-2 border-[#000000]"
-            />
-            <FaSearch
-              className="search-icon expanded-icon"
-              style={{
-                fontSize: "30px",
-                fill: hoveredIcon === 'search' ? "white" : "grey",
-                transition: "fill 0.1s ease-in-out",
-              }}
-            />
-          </div>
-        )}
+    ) : (
+      <div className="flex items-center w-full">
+        <input
+          type="search"
+          placeholder="Search Song"
+          className="bg-transparent text-white outline-none flex-grow p-2 border-[#000000]"
+        />
+        <FaSearch
+          className="search-icon expanded-icon"
+          style={{
+            fontSize: "30px",
+            fill: hoveredIcon === 'search' ? "white" : "grey",
+            transition: "fill 0.1s ease-in-out",
+          }}
+        />
       </div>
-      <div className={`option1 p-2 ${isExpanded ? 'expanded mb-2 md:mb-0' : 'md:invisible'}`}>
-        <div className={`icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col `}>
-          {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
-          {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
-          {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
-        </div>
-      </div>
-      <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'md:invisible'}`}>
-        <div className="icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col">
-          {playlists.map(playlist => renderPlaylist(playlist))}
-          {isCreatingPlaylist ? (
-            <div className="flex items-center ml-4">
-              <input
-                type="text"
-                value={newPlaylistName}
-                onChange={(e) => setNewPlaylistName(e.target.value)}
-                onBlur={handleCreatePlaylist}
-                placeholder="New Playlist"
-                onKeyPress={(e) => e.key === 'Enter' && handleCreatePlaylist()}
-                autoFocus
-                className="flex-grow text-white bg-transparent border-none outline-none"
-              />
-              <button
-                className="bg-transparent border-none outline-none text-white ml-2 cursor-pointer"
-                onClick={handleCreatePlaylist}
-              >
-                Create
-              </button>
-            </div>
-          ) : (
-            <div
-              className="icon-text cursor-pointer"
-              onMouseEnter={() => handleMouseEnter('newPlaylist')}
-              onMouseLeave={handleMouseLeave}
-              onClick={() => setIsCreatingPlaylist(true)}
-            >
-              <a href="javascript:void(0)" className='my-6 md:my-1'>
-                {isExpanded && (
-                  <p className={`text-${hoveredIcon === 'newPlaylist' ? "white" : "grey"}`}>
-                    Create Playlist
-                  </p>
-                )}
-                {isExpanded && (
-                  <BsPlusCircleFill
-                    className={`fill-${hoveredIcon === 'newPlaylist' ? "white" : "grey"} transition-all`}
-                    onMouseEnter={() => setNewPlaylistHovered(true)}
-                    onMouseLeave={() => setNewPlaylistHovered(false)}
-                    onClick={() => setNewPlaylistHovered(true)}
-                  />
-                )}
-              </a>
-            </div>
-          )}
-        </div>
-      </div>
+    )}
+  </div>
+  
+  <div className={`option1 p-2 ${isExpanded ? 'expanded mb-2 md:mb-0' : 'md:invisible'}`}>
+    <div className={`icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col`}>
+      {renderIcon(GoHome, GoHomeFill, 'home', 'Home')}
+      {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite')}
+      {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums')}
     </div>
+  </div>
+  
+  <div className={`option1 p-2 ${isExpanded ? 'expanded' : 'md:invisible'}`}>
+    <div className="icon-text-container bg-[#18181d] mr-2 rounded-lg flex flex-col">
+      {playlists.map(playlist => renderPlaylist(playlist))}
+      {isCreatingPlaylist ? (
+        <div className="flex items-center ml-4">
+          <input
+            type="text"
+            value={newPlaylistName}
+            onChange={(e) => setNewPlaylistName(e.target.value)}
+            onBlur={handleCreatePlaylist}
+            placeholder="New Playlist"
+            onKeyPress={(e) => e.key === 'Enter' && handleCreatePlaylist()}
+            autoFocus
+            className="flex-grow text-white bg-transparent border-none outline-none"
+          />
+          <button
+            className="bg-transparent border-none outline-none text-white ml-2 cursor-pointer"
+            onClick={handleCreatePlaylist}
+          >
+            Create
+          </button>
+        </div>
+      ) : (
+        <div
+          className="icon-text cursor-pointer"
+          onMouseEnter={() => handleMouseEnter('newPlaylist')}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => setIsCreatingPlaylist(true)}
+        >
+          <a href="javascript:void(0)" className='my-6 md:my-1'>
+            {isExpanded && (
+              <p className={`text-${hoveredIcon === 'newPlaylist' ? "white" : "grey"}`}>
+                Create Playlist
+              </p>
+            )}
+            {isExpanded && (
+              <BsPlusCircleFill
+                className={`fill-${hoveredIcon === 'newPlaylist' ? "white" : "grey"} transition-all`}
+                onMouseEnter={() => setNewPlaylistHovered(true)}
+                onMouseLeave={() => setNewPlaylistHovered(false)}
+                onClick={() => setNewPlaylistHovered(true)}
+              />
+            )}
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
+  
+  {/* <div className="mt-auto mb-4">
+    hello
+  </div> */}
+  
+</div>
 
   );
 };
