@@ -226,7 +226,7 @@ const Sidebar = () => {
         <div className="icon-text-container" style={{ background: "#18181D", marginRight: "7px", borderRadius: "6px"}}>
           {renderIcon(GoHome, GoHomeFill, 'home', 'Home', '/')}
           {renderIcon(MdOutlineFavoriteBorder, MdFavorite, 'favorite', 'Favorite','/liked-song')}
-          {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums', 'javascript.void(0)')}
+          {renderIcon(MdOutlineLibraryMusic, MdLibraryMusic, 'albums', 'Albums', '#')}
         </div>
       </div>
       <div className="option1">

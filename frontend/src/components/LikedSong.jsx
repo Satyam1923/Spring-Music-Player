@@ -1,7 +1,5 @@
-"use client";
-
-import React from "react";
-import Sidebar from "./Sidebar";
+import React from 'react';
+import './likedsong.css';
 
 import { FaPlay } from "react-icons/fa";
 import { IoPlaySkipForwardSharp, IoPlaySkipBack } from "react-icons/io5";
@@ -10,8 +8,7 @@ import { FaThumbsUp } from "react-icons/fa6";
 import { RiPlayListLine } from "react-icons/ri";
 
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
-
-import "./likedsong.css";
+import Sidebar from './Sidebar';
 
 const LikedSong = () => {
   const playlist = {
@@ -42,14 +39,10 @@ const LikedSong = () => {
 
   return (
     <div className="flex w-full min-h-screen">
-      {/* Sidebar */}
       <div className="w-0/6">
         <Sidebar />
       </div>
 
-      {/* btns */}
-
-      {/* Main Content */}
       <div className="w-5/6 p-6">
         <div className="btns flex gap-5 bg-neutral-800 rounded-md w-max p-5">
           <FaAngleLeft className="cursor-pointer" />
@@ -87,17 +80,13 @@ const LikedSong = () => {
                   </h1>
                 </div>
                 <div className="mr-2 flex gap-4">
-                  <RiPlayListLine size={30}/>
-                  <FaPlay size={30}/>
+                  <RiPlayListLine size={30} />
+                  <FaPlay size={30} />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Action Buttons */}
-          {/* <ActionButtons /> */}
-
-          {/* Songs Table */}
           <div className="mt-4">
             <div className="overflow-x-auto">
               <table className="min-w-full text-white">
@@ -158,7 +147,6 @@ const LikedSong = () => {
         </div>
       </div>
 
-      {/* Right Sidebar */}
       <div className="w-1/6 relative bottom-0 right-0 mt-auto rounded-md bg-neutral-800 mb-10">
         <div className="p-5">
           <div className="flex justify-between">
@@ -176,9 +164,8 @@ const LikedSong = () => {
               width={250}
             />
             <div className="mt-3">
-            <h1>Song Name</h1>
-            <h1>Artist Name Name</h1>
-
+              <h1>Song Name</h1>
+              <h1>Artist Name Name</h1>
             </div>
           </div>
 
