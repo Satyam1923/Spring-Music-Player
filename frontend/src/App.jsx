@@ -34,7 +34,7 @@ const App = () => {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [topEnglishsongs, setTopEnglishsongs] = useState([]);
   const [isEnglishSong, setIsEnglishSong] = useState(false);
-
+  const[isPaused,setIsPaused] = useState(false);
   // this is for debugging the ui
   const [debug, setDebug] = useState(false)
   useEffect(() => {
@@ -119,7 +119,7 @@ const App = () => {
     return (
       <Router>
         <Routes>
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/settings" element={<Settings/>} />
           <Route path="/" element={
             <div className="ui">
               <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
@@ -211,7 +211,7 @@ const App = () => {
                 }
 
               </div>
-              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs} />
+              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs}  isPaused={isPaused} setIsPaused={setIsPaused}/>
             </div>
           } />
           <Route path="*" element={<PagenotFound />} />
