@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import SearchBar from "./SearchBar";
 import UserIconSection from "../UserIconSection";
 import { FaPlayCircle } from "react-icons/fa";
 import MusicPlayer from "../MusicPlayer";
 import { FaPlay } from "react-icons/fa6";
+import { fetchSongData, fetchTopSongs, secIntoMinSec } from "../../Utils";
 
 function MusicTypeBlock({ name, color }) {
   return (
@@ -70,30 +71,41 @@ function Albums() {
   );
 }
 
-function SongElement({ songName, artistName, songDuration }) {
+function SongElement({ song, setCurrSong, number }) {
+  const duration = secIntoMinSec(song.duration);
+
   return (
-    <div className="flex flex-1 h-[20%] justify-between hover:cursor-pointer">
+    <div
+      className="flex h-[18%] justify-between hover:cursor-pointer"
+      onClick={() => {
+        setCurrSong(song);
+      }}
+    >
       <div className="flex gap-4">
-        <div className="flex items-center">01</div>
+        <div className="flex items-center">{number}</div>
         <div className="flex h-full aspect-square items-center]">
-          {/* <img src="" className="h-[80%] aspect-square rounded-lg object-fill bg-red-500" /> */}
-          <div className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"></div>
+          <img
+            src={song?.image?.[2]?.url || ""}
+            className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"
+          />
         </div>
-        <div className="flex h-full justify-center items-center flex-col gap-1">
-          <h2 className="font-medium text-white text-[0.9em]">{songName}</h2>
-          <h4 className="text-white font-medium text-[0.7em]">{artistName}</h4>
+        <div className="flex h-full justify-center flex-col gap-1">
+          <h2 className="font-medium text-left text-white text-[0.9em]">{song.name}</h2>
+          <h4 className="text-white font-medium text-left text-[0.7em]">
+            {song?.artists?.primary?.[0]?.name || "Unknow artist"}
+          </h4>
         </div>
       </div>
 
       <div className="flex gap-4 items-center">
-        <h2 className="text-white">{songDuration}</h2>
+        <h2 className="text-white">{duration}</h2>
         <FaPlayCircle />
       </div>
     </div>
   );
 }
 
-function Songs() {
+function Songs({ topSongs, setCurrSong }) {
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
       <div className="w-full h-full flex flex-col gap-1 pr-8 pb-3">
@@ -101,25 +113,27 @@ function Songs() {
           <h1 className="text-2xl text-white font-medium">Songs</h1>
         </div>
         {/* Top chart list */}
-        <div className="flex flex-col gap-2 justify-between h-full p-4 pr-6 rounded-xl bg-[#0E0C0C]">
-          <SongElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <SongElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <SongElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <SongElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <SongElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
+        <div className="flex flex-col gap-2 h-[82%] justify-between p-4 pr-6 rounded-xl bg-[#0E0C0C]">
+          {topSongs.map((song, index) => {
+            // because first song is already added to in the songs section
+            if (index > 0) {
+              return (
+                <SongElement key={index} number={index} song={song} setCurrSong={setCurrSong} />
+              );
+            }
+          })}
         </div>
       </div>
     </div>
   );
 }
 
-function SearchResultAll() {
+function SearchResultAll({ topSongs, setCurrSong }) {
   return (
     <div className="w-full h-full rounded-xl flex flex-col gap-4">
-
       {/* Search filters */}
       <div className="w-full h-20 flex justify-start gap-6">
-        <div className="bg-[#18181D] bg-white flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
+        <div className="bg-white flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
           <h2 className="text-3xl bg-transparent text-black text-center w-full font-medium">All</h2>
         </div>
         <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
@@ -144,14 +158,23 @@ function SearchResultAll() {
             {/* Song Image */}
             <div className="h-[70%] w-full">
               {/* replace this with the image */}
-              <div className="h-full rounded-xl aspect-square bg-[#D9D9D9]"></div>
+              {/* <div className="h-full rounded-xl aspect-square bg-[#D9D9D9]"></div> */}
+              <img
+                src={topSongs[0]?.image?.[2]?.url || ""}
+                className="h-full rounded-xl aspect-square bg-[#D9D9D9]"
+              />
             </div>
             <div className="flex justify-between h-[30%] w-full items-center">
               <div className="text-left">
-                <h1 className="md:text-2xl text-md font-medium">Song name</h1>
-                <h2 className="md:text-xl md:block hidden font-medium">Song . Album Name</h2>
+                <h1 className="text-2xl text-md font-medium">{topSongs[0]?.name || "Song name"}</h1>
+                <h2 className="text-lg font-medium">Song . {topSongs[0]?.album.name || "Album Name"}</h2>
               </div>
-              <div className="md:h-[70%] h-[50%]  aspect-square bg-[#83CE89] flex items-center justify-center rounded-[50%] hover:cursor-pointer">
+              <div
+                className="md:h-[70%] h-[50%]  aspect-square bg-[#83CE89] flex items-center justify-center rounded-[50%] hover:cursor-pointer"
+                onClick={() => {
+                  setCurrSong(topSongs[0]);
+                }}
+              >
                 <FaPlay className="w-[50%] h-[50%]" />
               </div>
             </div>
@@ -160,7 +183,7 @@ function SearchResultAll() {
         {/* Songs */}
         <div className="w-[70%] h-full">
           <div className="w-full h-full">
-            <Songs />
+            <Songs topSongs={topSongs} setCurrSong={setCurrSong} />
           </div>
         </div>
       </div>
@@ -175,6 +198,14 @@ function SearchResultAll() {
 }
 
 function Search({ setCurrPage }) {
+  const [currSong, setCurrSong] = useState([]);
+  const [topSongs, setTopSongs] = useState([]);
+
+  useEffect(() => {
+    fetchSongData("Mary on a Cross", setCurrSong);
+    fetchTopSongs(setTopSongs);
+  }, []);
+
   return (
     <div className="w-screen h-screen p-4 text-center">
       <div className="w-full h-full flex gap-4">
@@ -191,13 +222,13 @@ function Search({ setCurrPage }) {
               <div className="w-full h-full flex flex-col gap-2">
                 {/* Search main section */}
                 <div className="w-full h-full">
-                  <SearchResultAll />
+                  <SearchResultAll topSongs={topSongs} setCurrSong={setCurrSong} />
                 </div>
               </div>
               {/* Music player */}
               <div className="w-[25%] h-full rounded-lg flex flex-col">
-                <div className="w-full h-[60%]"></div>
-                <MusicPlayer songName="Reminder" artistName="The Weeknd" />
+                <div className="w-full h-[100%]"></div>
+                <MusicPlayer currSong={currSong} />
               </div>
             </div>
           </div>

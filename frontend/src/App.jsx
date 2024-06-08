@@ -13,8 +13,6 @@ import Terms from "./pages/Terms";
 import { FaUser } from 'react-icons/fa';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
-
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -62,7 +60,6 @@ const App = () => {
   useEffect(() => {
     setCurrPage(<Home setCurrPage={setCurrPage} />)
   }, [])
-
 
   useEffect(()=>{
     const searchSongSuggestions=()=>{
