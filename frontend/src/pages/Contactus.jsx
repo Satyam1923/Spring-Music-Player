@@ -6,29 +6,31 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
+
 function Contactus() {
   return (
     <>
-      <div id="contact">
+      <div id="contact" className="p-5">
         <div className="">
-          <h2 className="text-center text-white text-3xl font-bold ">
+          <h2 className="text-center text-white text-3xl font-bold">
             Contact Us
           </h2>
           <p className="text-center m-5 text-xl">
-            Get in touch with us in case of any queries,suggestions or feedback.
+            Get in touch with us in case of any queries, suggestions or
+            feedback.
           </p>
-          <div className="border-4 inline-block mx-80 my-5 bg-slate-900">
-            <div className="flex justify-center m-5">
-              <div>
-                <form action="" className="w-96">
+          <div className="border-4 mx-auto my-5 bg-slate-900 p-5 max-w-4xl">
+            <div className="flex md:flex-col justify-center items-center">
+              <div className="w-full p-5 order-1 lg:order-1">
+                <form action="" className="w-full">
                   <label
                     htmlFor="name-icon"
                     className="block mb-2 text-sm py-3 font-medium text-gray-900 dark:text-white"
                   >
                     Your Name
                   </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                  <div className="relative mb-4">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <svg
                         className="w-4 h-4 text-gray-500 dark:text-gray-400"
                         aria-hidden="true"
@@ -42,7 +44,7 @@ function Contactus() {
                     <input
                       type="text"
                       id="name-icon"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="John Gomes"
                     />
                   </div>
@@ -52,8 +54,8 @@ function Contactus() {
                   >
                     Your Email
                   </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                  <div className="relative mb-4">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                       <svg
                         className="w-4 h-4 text-gray-500 dark:text-gray-400"
                         aria-hidden="true"
@@ -68,7 +70,7 @@ function Contactus() {
                     <input
                       type="text"
                       id="email-address-icon"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="johngomes@user.com"
                     />
                   </div>
@@ -85,32 +87,29 @@ function Contactus() {
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Leave a comment..."
                   ></textarea>
-                  <div className="px-36 py-7">
+                  <div className="text-center py-7">
                     <button
                       type="button"
-                      className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                      className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5"
                     >
                       Submit
                     </button>
                   </div>
                 </form>
               </div>
-              <div className="">
+              <div className="w-full p-5 flex flex-col items-center order-2 lg:order-2">
                 <img
                   src={contactimg}
                   alt="contact-us"
-                  width={400}
-                  height={550}
-                  className="my-14 mx-4"
+                  className="my-14 mx-4 w-full max-w-xs lg:max-w-none"
                 />
-                <div className="  flex flex-wrap  justify-center items-center gap-5 md:gap-2">
+                <div className="flex flex-wrap justify-center items-center gap-5 lg:gap-2">
                   <span className="icons">
                     <a href="/" target="_blank" rel="noopener noreferrer">
-                      {" "}
                       <AiOutlineInstagram
                         color="white"
                         fontSize={25}
-                        className="ico "
+                        className="ico"
                       />
                     </a>
                   </span>
@@ -121,22 +120,20 @@ function Contactus() {
                   </span>
                   <span className="icons">
                     <a href="/" target="_blank" rel="noopener noreferrer">
-                      <BsYoutube color="white" size={26} className="ico " />
-                    </a>
-                  </span>
-                  <span className="icons">
-                    {" "}
-                    <a href="/" target="_blank" rel="noopener noreferrer">
-                      <FaLinkedinIn color="white" size={26} className="ico " />
+                      <BsYoutube color="white" size={26} className="ico" />
                     </a>
                   </span>
                   <span className="icons">
                     <a href="/" target="_blank" rel="noopener noreferrer">
-                      <FaFacebookF color="white" size={26} className="ico " />
+                      <FaLinkedinIn color="white" size={26} className="ico" />
                     </a>
                   </span>
                   <span className="icons">
-                    {" "}
+                    <a href="/" target="_blank" rel="noopener noreferrer">
+                      <FaFacebookF color="white" size={26} className="ico" />
+                    </a>
+                  </span>
+                  <span className="icons">
                     <a href="https://github.com/Satyam1923/Spring-Music-Player">
                       <FaGithub color="white" size={26} className="ico" />
                     </a>
@@ -149,8 +146,6 @@ function Contactus() {
       </div>
     </>
   );
-};
+}
 
 export default Contactus;
-
-
