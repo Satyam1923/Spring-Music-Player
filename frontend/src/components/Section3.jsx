@@ -110,9 +110,9 @@ const Section3 = ({ data, setIsEnglishSong, index, topsongs, playSong, isTopSong
                         height="100px"
                         width="100px"
                       />
-                      <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(element); }}>
-                  {isFavorite(element) ? <FaHeart className="heart-icon" style={{ color: "red" }} /> : <FaRegHeart className="heart-icon" style={{ color: "gray" }} />}
-                </div>
+             <div className="favorite-icon" onClick={(e) => { e.stopPropagation(); toggleFavorite(); }}>
+      {isFavorite ? <FaHeart className="heart-icon" style={{ color: "red" }} /> : <FaRegHeart className="heart-icon" style={{ color: "gray" }} />}
+    </div>
                     </div>
                     <p>
                       {topEnglishsongs &&
