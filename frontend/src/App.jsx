@@ -41,8 +41,10 @@ const App = () => {
   const [topEnglishsongs, setTopEnglishsongs] = useState([]);
   const [isEnglishSong, setIsEnglishSong] = useState(false);
   const[isPaused,setIsPaused] = useState(false);
+  
   // this is for debugging the ui
   const [debug, setDebug] = useState(false)
+  const [favorites, setFavorites] = useState([]);
   useEffect(() => {
     // Event handler function
     const handleKeypress = (e) => {
@@ -146,6 +148,14 @@ const App = () => {
     }, 0);
   };
 
+  const addToFavorites = (song, isLiked) => {
+    if (isLiked) {
+      setFavorites((prevFavorites) => [...prevFavorites, song]);
+    } else {
+      setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== song.id));
+    }
+  };
+
 
   if (debug) {
     return <Search />
@@ -157,7 +167,7 @@ const App = () => {
           <Route path="/" element={
             <div>
             <div className="ui">
-              <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity} />
+              <Sidebar handleFocus={handleFocus} setSearchVisiblity={setSearchVisiblity}  favorites={favorites} setFavorites={setFavorites}/>
               <div className="avatar">
                 <div className="logo">
                   <FaUser fontSize="15px" color="white" />
@@ -256,7 +266,7 @@ const App = () => {
                 }
 
               </div>
-              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs}  isPaused={isPaused} setIsPaused={setIsPaused}/>
+              <Section3 setIsEnglishSong={setIsEnglishSong} data={data} index={currplaying} playSong={playSong} topsongs={topsongs} isTopSong={isTopSong} setTopSong={setTopSong} isEnglishSong={isEnglishSong} topEnglishsongs={topEnglishsongs}  isPaused={isPaused} setIsPaused={setIsPaused} favorites={favorites} setFavorites={setFavorites}/>
             </div>
              <Footer/>
             </div>
@@ -273,3 +283,4 @@ const App = () => {
 };
 
 export default App;
+
