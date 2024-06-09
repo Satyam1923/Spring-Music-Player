@@ -44,7 +44,6 @@ const App = () => {
   useEffect(() => {
     // Event handler function
     const handleKeypress = (e) => {
-      console.log(e.key);
       if (e.key === '`') {
         setDebug((prevDebug) => !prevDebug);
       }

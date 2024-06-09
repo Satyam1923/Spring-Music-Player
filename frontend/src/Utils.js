@@ -27,6 +27,30 @@ export const fetchSongData = async (songName, setCurrSong) => {
     });
 };
 
+// fetch song by its name
+export const fetchSonsgByName = async (songName, setSongs, count = 6) => {
+  fetch(
+    `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(songName)}`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      } else {
+        return response.json();
+      }
+    })
+    .then((response) => {
+      const songs = [];
+      for (let i = 0; i < count; i++) {
+        songs.push(response.data.results[i]);
+      }
+      setSongs(songs);
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+};
+
 // fetch top songs
 export const fetchTopSongs = (setTopSongs, count = 6) => {
   try {
