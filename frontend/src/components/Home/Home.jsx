@@ -4,6 +4,7 @@ import { FaPlayCircle } from "react-icons/fa";
 import "react-h5-audio-player/lib/styles.css";
 import MusicPlayer from "../MusicPlayer";
 import UserIconSection from "../UserIconSection";
+import Footer from "../Footer";
 
 function Main() {
   return (
@@ -227,13 +228,14 @@ function TopArtists() {
   );
 }
 
-function Home({ setCurrPage  }) {
+function Home({ setCurrPage }) {
   return (
     <div className="w-screen h-screen p-4 text-center">
       <div className="w-full h-full flex gap-4">
-        <Navbar setCurrPage={setCurrPage}  />
+        <Navbar setCurrPage={setCurrPage} />
         <Main />
       </div>
+      <Footer />
     </div>
   );
 }

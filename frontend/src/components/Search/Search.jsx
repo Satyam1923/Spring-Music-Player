@@ -6,6 +6,7 @@ import { FaPlayCircle } from "react-icons/fa";
 import MusicPlayer from "../MusicPlayer";
 import { FaPlay } from "react-icons/fa6";
 import { fetchSongData, fetchTopSongs, secIntoMinSec } from "../../Utils";
+import Footer from "../Footer";
 
 function MusicTypeBlock({ name, color }) {
   return (
@@ -234,6 +235,7 @@ function Search({ setCurrPage }) {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
