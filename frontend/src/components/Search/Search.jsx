@@ -214,7 +214,7 @@ function Search({ setCurrPage }) {
           {/* Search bar */}
           <div className="rounded-lg flex w-full">
             <SearchBar setTopSongs={setTopSongs} />
-            <UserIconSection username="Agent47" />
+            <UserIconSection username="user" />
           </div>
           {/* Main section */}
           <div className="w-full h-full">
