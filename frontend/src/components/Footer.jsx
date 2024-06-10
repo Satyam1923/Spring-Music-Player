@@ -1,7 +1,4 @@
 import React from "react";
-import { IoIosCall } from "react-icons/io";
-import { HiOutlineMail } from "react-icons/hi";
-import { TiLocation } from "react-icons/ti";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
