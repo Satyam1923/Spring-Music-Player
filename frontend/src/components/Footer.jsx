@@ -1,4 +1,7 @@
 import React from "react";
+import { IoIosCall } from "react-icons/io";
+import { HiOutlineMail } from "react-icons/hi";
+import { TiLocation } from "react-icons/ti";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -6,7 +9,6 @@ import { FaFacebookF } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
@@ -22,8 +24,12 @@ const Footer = () => {
           <li>
             <Link to="/aboutus">About Us</Link>
           </li>
-          <li>Culture</li>
-          <li>Blog</li>
+          <li>
+            <Link to="/culture">Culture</Link>
+          </li>
+          <li>
+            <Link to="/blog">Blogs</Link>
+          </li>
           <li>
             <Link to="/terms">Terms and Policy</Link>
           </li>

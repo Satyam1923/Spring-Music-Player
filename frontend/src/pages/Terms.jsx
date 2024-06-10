@@ -6,7 +6,7 @@ const Terms = () => {
       <div className="mx-auto max-w-2xl px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-white text-center">
           Terms and Conditions
-          <div class="divider md:h-[1.5px] sm:h-[1px] my-2"></div>
+          <div className="divider md:h-[1.5px] sm:h-[1px] my-2"></div>
         </h1>
 
         <p className="mt-4 mb-8 text-slate-200">
