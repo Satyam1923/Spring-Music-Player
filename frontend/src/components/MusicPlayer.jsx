@@ -4,7 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
-function MusicPlayer({ currSong }) {
+function MusicPlayer({ currSong, shouldAutoPlay }) {
   const songName = currSong?.name || "Reminder";
   const songImage =
     currSong?.image?.[2]?.url || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
@@ -13,7 +13,7 @@ function MusicPlayer({ currSong }) {
   const audioPlayerRef = useRef(null);
 
   useEffect(() => {
-    if (audioPlayerRef.current) {
+    if (audioPlayerRef.current && !shouldAutoPlay) {
       audioPlayerRef.current.audio.current.pause();
     }
   }, [currSong]);

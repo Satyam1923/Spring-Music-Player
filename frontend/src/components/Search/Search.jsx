@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../Navbar";
 import SearchBar from "./SearchBar";
 import UserIconSection from "../UserIconSection";
@@ -72,7 +72,7 @@ function Albums() {
   );
 }
 
-function SongElement({ song, setCurrSong, number }) {
+function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
   const duration = secIntoMinSec(song.duration);
 
   return (
@@ -80,6 +80,7 @@ function SongElement({ song, setCurrSong, number }) {
       className="flex h-[18%] justify-between hover:cursor-pointer"
       onClick={() => {
         setCurrSong(song);
+        setShouldAutoPlay(true);
       }}
     >
       <div className="flex gap-4">
@@ -106,7 +107,7 @@ function SongElement({ song, setCurrSong, number }) {
   );
 }
 
-function Songs({ topSongs, setCurrSong }) {
+function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
       <div className="w-full h-full flex flex-col gap-1 pr-8 pb-3">
@@ -119,7 +120,7 @@ function Songs({ topSongs, setCurrSong }) {
             // because first song is already added to in the songs section
             if (index > 0) {
               return (
-                <SongElement key={index} number={index} song={song} setCurrSong={setCurrSong} />
+                <SongElement key={index} number={index} song={song} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
               );
             }
           })}
@@ -129,7 +130,7 @@ function Songs({ topSongs, setCurrSong }) {
   );
 }
 
-function SearchResultAll({ topSongs, setCurrSong }) {
+function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
   return (
     <div className="w-full h-full rounded-xl flex flex-col gap-4">
       {/* Search filters */}
@@ -174,6 +175,7 @@ function SearchResultAll({ topSongs, setCurrSong }) {
                 className="md:h-[70%] h-[50%]  aspect-square bg-[#83CE89] flex items-center justify-center rounded-[50%] hover:cursor-pointer"
                 onClick={() => {
                   setCurrSong(topSongs[0]);
+                  setShouldAutoPlay(true);
                 }}
               >
                 <FaPlay className="w-[50%] h-[50%]" />
@@ -184,7 +186,7 @@ function SearchResultAll({ topSongs, setCurrSong }) {
         {/* Songs */}
         <div className="w-[70%] h-full">
           <div className="w-full h-full">
-            <Songs topSongs={topSongs} setCurrSong={setCurrSong} />
+            <Songs topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
           </div>
         </div>
       </div>
@@ -201,6 +203,7 @@ function SearchResultAll({ topSongs, setCurrSong }) {
 function Search({ setCurrPage }) {
   const [currSong, setCurrSong] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
+  let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
   useEffect(() => {
     fetchSongData("Mary on a Cross", setCurrSong);
@@ -223,13 +226,13 @@ function Search({ setCurrPage }) {
               <div className="w-full h-full flex flex-col gap-2">
                 {/* Search main section */}
                 <div className="w-full h-full">
-                  <SearchResultAll topSongs={topSongs} setCurrSong={setCurrSong} />
+                  <SearchResultAll topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
                 </div>
               </div>
               {/* Music player */}
               <div className="w-[25%] h-full rounded-lg flex flex-col">
                 <div className="w-full h-[100%]"></div>
-                <MusicPlayer currSong={currSong} />
+                <MusicPlayer currSong={currSong} shouldAutoPlay={shouldAutoPlay} />
               </div>
             </div>
           </div>
