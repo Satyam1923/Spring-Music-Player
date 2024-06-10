@@ -36,6 +36,7 @@ function MusicPlayer({ currSong }) {
         {/* Audio Player */}
         <div className="h-[30%] rounded-lg">
           <AudioPlayer
+            autoPlay={false}
             className="rounded-lg bg-[#5773FF] text-white h-full"
             src={audioUrl}
           />
