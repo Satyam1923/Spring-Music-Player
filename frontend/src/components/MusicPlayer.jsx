@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { PiPlaylistBold } from "react-icons/pi";
 import { AiFillLike } from "react-icons/ai";
 import AudioPlayer from "react-h5-audio-player";
@@ -6,11 +6,17 @@ import "react-h5-audio-player/lib/styles.css";
 
 function MusicPlayer({ currSong }) {
   const songName = currSong?.name || "Reminder";
-  const songImage = currSong?.image?.[2]?.url || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
+  const songImage =
+    currSong?.image?.[2]?.url || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
   const artistName = currSong?.artists?.primary?.[0]?.name || "The Weeknd";
   const audioUrl = currSong?.downloadUrl?.[4]?.url || "";
+  const audioPlayerRef = useRef(null);
 
-  useEffect(() => {}, [currSong]);
+  useEffect(() => {
+    if (audioPlayerRef.current) {
+      audioPlayerRef.current.audio.current.pause();
+    }
+  }, [currSong]);
 
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
@@ -36,6 +42,7 @@ function MusicPlayer({ currSong }) {
         {/* Audio Player */}
         <div className="h-[30%] rounded-lg">
           <AudioPlayer
+            ref={audioPlayerRef}
             autoPlay={false}
             className="rounded-lg bg-[#5773FF] text-white h-full"
             src={audioUrl}
