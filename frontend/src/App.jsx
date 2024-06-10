@@ -26,6 +26,8 @@ import Settings from "./components/Settings";
 import Search from "./components/Search/Search";
 import Footer from "./components/Footer";
 import Contactus from "./pages/Contactus";
+import Blog from "./pages/Blog";
+import Culture from "./pages/Culture";
 
 
 const App = () => {
@@ -274,7 +276,8 @@ const App = () => {
           <Route path="/aboutus" element={<Aboutus/>}/>
           <Route path="/terms" element={<Terms/>}/>
           <Route path="/contactus" element={<Contactus/>}/>
-          <Route path="*" element={<PagenotFound />} />
+          <Route path="/blog" element={< Blog />} />
+          <Route path="/culture" element={< Culture/>}/>
         </Routes>
       </Router>
     );

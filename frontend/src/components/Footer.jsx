@@ -29,8 +29,8 @@ const Footer = () => {
             <ul className='company  sm:gap-[10px] sm:grid sm:grid-cols-1 sm:p-[10px] sm:text-center'>
             
                 <li><Link to="/aboutus">About Us</Link></li>
-                <li>Culture</li>
-                <li>Blog</li>
+                <li><Link to="/culture">Culture</Link></li>
+                <li><Link to="/blog">Blogs</Link></li>
                 <li><Link to="/terms">Terms and Policy</Link></li>
                 <li><Link to="/contactus">Help and Support</Link></li>
                 
