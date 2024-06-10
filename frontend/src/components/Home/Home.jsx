@@ -4,12 +4,13 @@ import { FaPlayCircle } from "react-icons/fa";
 import "react-h5-audio-player/lib/styles.css";
 import MusicPlayer from "../MusicPlayer";
 import UserIconSection from "../UserIconSection";
+import Footer from "../Footer";
 
 function Main() {
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
-      <UserIconSection username="Agent47" />
+      <UserIconSection username="user" />
 
       {/* Middle */}
       <div className="w-full h-[25%]">
@@ -227,13 +228,14 @@ function TopArtists() {
   );
 }
 
-function Home() {
+function Home({ setCurrPage }) {
   return (
     <div className="w-screen h-screen p-4 text-center">
       <div className="w-full h-full flex gap-4">
-        <Navbar />
+        <Navbar setCurrPage={setCurrPage} />
         <Main />
       </div>
+      <Footer />
     </div>
   );
 }
