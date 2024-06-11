@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Navbar";
 import { FaPlayCircle } from "react-icons/fa";
 import "react-h5-audio-player/lib/styles.css";
@@ -6,7 +6,7 @@ import MusicPlayer from "../MusicPlayer";
 import UserIconSection from "../UserIconSection";
 import Footer from "../Footer";
 
-function Main() {
+function Main({ songData, currSongIndex, setCurrSongIndex }) {
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
@@ -31,8 +31,13 @@ function Main() {
             </div>
           </div>
           {/* Right section */}
-          <div className="w-[30%] min-w-[300px]  relative">
-            <MusicPlayer songName="Reminder" artistName="The Weeknd" />
+          <div className="w-[30%] min-w-[300px] relative">
+            <MusicPlayer
+              songs={songData}
+              currSongIndex={currSongIndex}
+              shouldAutoPlay={false}
+              setCurrSongIndex={setCurrSongIndex}
+            />
           </div>
         </div>
       </div>
@@ -43,7 +48,10 @@ function Main() {
 function RecentlyPlayedElement({ name, image }) {
   return (
     <div className="flex gap-4 flex-1 items-center justify-start bg-[#18181D] rounded-md min-w-[150px] max-h-[70px] hover:cursor-pointer">
-      <img src={image} className="max-h-full aspect-square  rounded-md object-fill " />
+      <img
+        src={image}
+        className="max-h-full aspect-square  rounded-md object-fill "
+      />
       <h1 className="text-white font-medium">{name}</h1>
     </div>
   );
@@ -52,12 +60,16 @@ function RecentlyPlayedElement({ name, image }) {
 function RecentlyPlayed() {
   return (
     <div className=" w-full h-full rounded-lg flex flex-col gap-2">
-      <h1 className="text-2xl font-medium text-left ml-1 text-white p-1">Recently Played</h1>
+      <h1 className="text-2xl font-medium text-left ml-1 text-white p-1">
+        Recently Played
+      </h1>
       <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
         <div className="flex justify-between gap-4 flex-wrap">
           <RecentlyPlayedElement
             name="Deja Vu"
-            image={"https://i.scdn.co/image/ab67616d00001e02a91c10fe9472d9bd89802e5a"}
+            image={
+              "https://i.scdn.co/image/ab67616d00001e02a91c10fe9472d9bd89802e5a"
+            }
           />
           <RecentlyPlayedElement
             name="Deja Vu"
@@ -67,7 +79,9 @@ function RecentlyPlayed() {
           />
           <RecentlyPlayedElement
             name="Deja Vu"
-            image={"https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96"}
+            image={
+              "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96"
+            }
           />
           <RecentlyPlayedElement
             name="Deja Vu"
@@ -85,7 +99,9 @@ function RecentlyPlayed() {
           />
           <RecentlyPlayedElement
             name="Deja Vu"
-            image={"https://i.scdn.co/image/ab67616d0000b2736ca5c90113b30c3c43ffb8f4"}
+            image={
+              "https://i.scdn.co/image/ab67616d0000b2736ca5c90113b30c3c43ffb8f4"
+            }
           />
           <RecentlyPlayedElement
             name="Deja Vu"
@@ -183,10 +199,26 @@ function TopCharts() {
         </div>
         {/* Top chart list */}
         <div className="flex flex-col gap-2 justify-between h-full p-4 pr-6">
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
+          <TopChartsElement
+            songName="Havanna"
+            artistName="Camilia Cabello"
+            songDuration="3:00"
+          />
+          <TopChartsElement
+            songName="Havanna"
+            artistName="Camilia Cabello"
+            songDuration="3:00"
+          />
+          <TopChartsElement
+            songName="Havanna"
+            artistName="Camilia Cabello"
+            songDuration="3:00"
+          />
+          <TopChartsElement
+            songName="Havanna"
+            artistName="Camilia Cabello"
+            songDuration="3:00"
+          />
         </div>
       </div>
     </div>
@@ -200,7 +232,9 @@ function TopArtistElement({ name, playCount }) {
       <div className="h-[70%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"></div>
       <div className="flex h-[20%] flex-col gap-1">
         <h2 className="font-medium text-white text-[1em]">{name}</h2>
-        <h4 className="text-white font-medium text-[0.9em]">{playCount}M plays</h4>
+        <h4 className="text-white font-medium text-[0.9em]">
+          {playCount}M plays
+        </h4>
       </div>
     </div>
   );
@@ -229,11 +263,38 @@ function TopArtists() {
 }
 
 function Home({ setCurrPage }) {
+  const [currSongIndex, setCurrSongIndex] = useState(0);
+  const songData = [
+    {
+      name: "Reminder",
+      image: [
+        {},
+        {},
+        {
+          url: "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452",
+        },
+      ],
+      artists: { primary: [{ name: "The Weeknd" }] },
+      downloadUrl: [{}, {}, {}, {}, { url: "https://example.com/song1.mp3" }],
+    },
+    {
+      name: "Song 2",
+      image: [{}, {}, { url: "https://example.com/image2.jpg" }],
+      artists: { primary: [{ name: "Artist 2" }] },
+      downloadUrl: [{}, {}, {}, {}, { url: "https://example.com/song2.mp3" }],
+    },
+    // Add more songs here
+  ];
+
   return (
     <div className="w-screen h-screen p-4 text-center">
       <div className="w-full h-full flex gap-4">
         <Navbar setCurrPage={setCurrPage} />
-        <Main />
+        <Main
+          songData={songData}
+          currSongIndex={currSongIndex}
+          setCurrSongIndex={setCurrSongIndex}
+        />
       </div>
       <Footer />
     </div>
