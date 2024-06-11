@@ -1,0 +1,10 @@
+.pre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader{
+    width: 30vw;
+    height: 30vh;
+}
