@@ -383,6 +383,8 @@ input:-moz-autofill {
   overflow: hidden;
 }
 
+
+
 .topArtists .songresult img {
   width: 100%;
   height: auto;
@@ -491,6 +493,8 @@ input:-moz-autofill {
   margin-bottom: 10px;
   color: white;
 }
+
+
 
 .track-number {
   width: 30px;
