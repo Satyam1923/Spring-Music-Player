@@ -16,6 +16,25 @@ body {
 
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #212126;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #212126;
+}
+
 /*=================== Side bar ============== */
 
 aside {
@@ -372,7 +391,7 @@ input:-moz-autofill {
 .topArtists .search-details {
   text-align: center;
   padding: 5px;
-  overflow: scroll;
+  overflow: none;
   white-space: normal;
   text-overflow: ellipsis;
   display: -webkit-box;
