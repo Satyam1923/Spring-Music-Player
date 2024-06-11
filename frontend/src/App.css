@@ -15,26 +15,6 @@ body {
   background: #000000;
 
 }
-
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: #000000;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #212126;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #212126;
-}
-
 /*=================== Side bar ============== */
 
 aside {
@@ -327,6 +307,10 @@ input:-moz-autofill {
   margin-bottom: 10px;
 }
 
+.songresult:hover{
+  background-color: #101010;
+}
+
 .songresult img {
   width: 50px;
   height: 50px;
@@ -381,6 +365,10 @@ input:-moz-autofill {
   background-color: #18181d;
   height: 90%;
   overflow: hidden;
+}
+
+.topArtists .songresult:hover{
+  background-color: #101010;
 }
 
 .topArtists .songresult img {
@@ -490,6 +478,10 @@ input:-moz-autofill {
   border-radius: 5px;
   margin-bottom: 10px;
   color: white;
+}
+
+.track-item:hover{
+  background-color: #101010;
 }
 
 .track-number {
