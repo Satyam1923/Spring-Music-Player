@@ -28,7 +28,7 @@ export const fetchSongData = async (songName, setCurrSong) => {
 };
 
 // fetch song by its name
-export const fetchSonsgByName = async (songName, setSongs, count = 6) => {
+export const fetchSongsByName = async (songName, setSongs, count = 6) => {
   fetch(
     `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(songName)}`
   )
@@ -52,18 +52,16 @@ export const fetchSonsgByName = async (songName, setSongs, count = 6) => {
 };
 
 // fetch top songs
-export const fetchTopSongs = (setTopSongs, count = 6) => {
+export const fetchTopSongs = async (count = 20) => {
   try {
-    axios
-      .get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs")
-      .then((response) => {
-        const topSongs = [];
-        for (let i = 0; i < count; i++) {
-          topSongs.push(response.data.data.results[i]);
-        }
-        setTopSongs(topSongs);
-      });
+    const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
+    console.log(response);
+    if (response.status !== 200) {
+      throw new Error("Network response was not ok");
+    }
+    return response.data.data.results.slice(0, count);
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

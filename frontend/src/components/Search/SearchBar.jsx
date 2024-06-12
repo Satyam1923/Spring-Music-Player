@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import { fetchSonsgByName } from "../../Utils";
+import { fetchSongsByName } from "../../Utils";
 
 function SearchBar({ setTopSongs }) {
   const inputElement = useRef(null);
@@ -10,7 +10,7 @@ function SearchBar({ setTopSongs }) {
   useEffect(() => {
     const searchSong = (e) => {
       if (e.key == "Enter" && document.activeElement === inputElement.current) {
-        fetchSonsgByName(inputElement.current.value, setTopSongs);
+        fetchSongsByName(inputElement.current.value, setTopSongs);
       }
     };
 
