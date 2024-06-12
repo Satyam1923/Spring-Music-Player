@@ -8,6 +8,8 @@ import Blog from "./pages/Blog"
 import Terms from "./pages/Terms"
 import Contactus from "./pages/Contactus"
 import Culture from "./pages/Culture"
+import Login from "./components/LogIn";
+import SignUp from "./components/SignUp";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
         <Route path="/contactus" element={<Contactus />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/culture" element={<Culture />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </Router>
   );
