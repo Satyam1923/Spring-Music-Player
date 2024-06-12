@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function PagenotFound() {
     return (
     <div className="center">
-        <img src={pic} alt="404 pic" class="pic"/>
+        <img src={pic} alt="404 pic" className="pic"/>
         <button className="btn"><Link to="/">Go Back</Link></button>
     </div>
     )
