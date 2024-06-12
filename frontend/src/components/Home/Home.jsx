@@ -10,7 +10,7 @@ function Main() {
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
-      <UserIconSection username="user" />
+      <UserIconSection/>
 
       {/* Middle */}
       <div className="w-full h-[25%]">
