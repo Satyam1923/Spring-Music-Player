@@ -5,6 +5,220 @@
   font-family: "Poppins", sans-serif;
   color: white;
 }
+/* App.css */
+.dark-mode {
+  background-color: #18181d;
+  color: white;
+}
+
+.light-mode {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+.bgfooter-dark {
+  background-color: #18181d;
+  color: white;
+}
+
+.bgfooter-light {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.theme-toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-toggle .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.theme-toggle .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.theme-toggle input:checked + .slider {
+  background-color: #2196f3;
+}
+
+.theme-toggle input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.theme-toggle .slider.round {
+  border-radius: 34px;
+}
+
+.theme-toggle .slider.round:before {
+  border-radius: 50%;
+}
+
+.theme-toggle .sun-icon {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  color: #ffdd00;
+  font-size: 16px;
+}
+
+.theme-toggle .moon-icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: #f1c40f;
+  font-size: 16px;
+}
+
+/* App.css */
+.dark-mode {
+  background-color: #18181d;
+  color: white;
+}
+
+.light-mode {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+.bgfooter-dark {
+  background-color: #18181d;
+  color: white;
+}
+
+.bgfooter-light {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.theme-toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.theme-toggle .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.theme-toggle .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.theme-toggle input:checked + .slider {
+  background-color: #2196f3;
+}
+
+.theme-toggle input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.theme-toggle .slider.round {
+  border-radius: 34px;
+}
+
+.theme-toggle .slider.round:before {
+  border-radius: 50%;
+}
+
+/* App.css */
+.dark-mode {
+  background-color: #18181d;
+  color: white;
+}
+
+.light-mode {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.theme-toggle button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dark-mode .theme-toggle button {
+  background-color: white;
+  color: black;
+}
+
+.light-mode .theme-toggle button {
+  background-color: black;
+  color: white;
+}
 
 body {
   display: flex;
