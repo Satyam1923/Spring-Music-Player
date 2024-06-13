@@ -1,12 +1,12 @@
 import express from "express";
 import axios from "axios";
 import bodyParser from "body-parser";
-
+import cors from "cros";
 const app = express();
 const PORT = 3030;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cors());
 app.get("/", (req, res) => {
     res.send("Welcome to the music search API");
 });
