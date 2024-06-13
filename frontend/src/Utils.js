@@ -7,63 +7,32 @@ export function secIntoMinSec(timeInSeconds) {
   return `${minutes}:${formattedSeconds}`;
 }
 
-// fetch song by its name
+
 export const fetchSongData = async (songName, setCurrSong) => {
-  fetch(
-    `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(songName)}`
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      } else {
-        return response.json();
-      }
-    })
-    .then((data) => {
-      setCurrSong(data.data.results[0]);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
-};
-
-// fetch song by its name
-export const fetchSonsgByName = async (songName, setSongs, count = 6) => {
-  fetch(
-    `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(songName)}`
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      } else {
-        return response.json();
-      }
-    })
-    .then((response) => {
-      const songs = [];
-      for (let i = 0; i < count; i++) {
-        songs.push(response.data.results[i]);
-      }
-      setSongs(songs);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
-};
-
-// fetch top songs
-export const fetchTopSongs = (setTopSongs, count = 6) => {
   try {
-    axios
-      .get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs")
-      .then((response) => {
-        const topSongs = [];
-        for (let i = 0; i < count; i++) {
-          topSongs.push(response.data.data.results[i]);
-        }
-        setTopSongs(topSongs);
-      });
+    const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/api/search/songs?query=${encodeURIComponent(songName)}`);
+    setCurrSong(response.data.data.results[0]);
   } catch (error) {
-    console.error(error);
+    console.error("There was a problem with the fetch operation:", error);
+  }
+};
+
+export const fetchSonsgByName = async (songName, setSongs, count = 6) => {
+  try {
+    const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/api/search/songs?query=${encodeURIComponent(songName)}`);
+    const songs = response.data.data.results.slice(0, count);
+    setSongs(songs);
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
+};
+
+export const fetchTopSongs = async (setTopSongs, count = 6) => {
+  try {
+    const response = await axios.get("https://spring-music-player-3hyj.vercel.app/api/search/songs?query=top songs");
+    const topSongs = response.data.data.results.slice(0, count);
+    setTopSongs(topSongs);
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
   }
 };
