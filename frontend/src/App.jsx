@@ -9,6 +9,8 @@ import Terms from "./pages/Terms"
 import Contactus from "./pages/Contactus"
 import Culture from "./pages/Culture"
 import Login from "./components/Auth/Login";
+import Signup from "./components/Auth/SignUp";
+
 const App = () => {
   return (
     <Router>
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/culture" element={<Culture />} />
         <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
       </Routes>
     </Router>
   );
