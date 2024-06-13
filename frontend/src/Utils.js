@@ -52,14 +52,14 @@ export const fetchSongsByName = async (songName, setSongs, count = 6) => {
 };
 
 // fetch top songs
-export const fetchTopSongs = async (count = 20) => {
+export const fetchTopSongs = async (setTopSongs, count = 20) => {
   try {
     const response = await axios.get("https://jio-savaan-private.vercel.app/api/search/songs?query=top songs");
     console.log(response);
     if (response.status !== 200) {
       throw new Error("Network response was not ok");
     }
-    return response.data.data.results.slice(0, count);
+    return setTopSongs(response.data.data.results.slice(0, count));
   } catch (error) {
     console.error(error);
     throw error;

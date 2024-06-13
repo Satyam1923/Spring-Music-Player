@@ -5,7 +5,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { fetchTopSongs } from "../Utils";
 
-function MusicPlayer({ shouldAutoPlay }) {
+function MusicPlayer({ currSong, shouldAutoPlay }) {
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,20 +14,28 @@ function MusicPlayer({ shouldAutoPlay }) {
   const audioPlayerRef = useRef(null);
 
   useEffect(() => {
-    const loadTopSongs = async () => {
-      try {
-        setIsLoading(true);
-        const topSongs = await fetchTopSongs();
-        setSongs(topSongs);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setIsLoading(false);
-      }
-    };
-    loadTopSongs();
-  }, []);
+    if (!currSong) {
+      const loadTopSongs = async () => {
+        try {
+          setIsLoading(true);
+          await fetchTopSongs(setSongs);
+          setIsLoading(false);
+        } catch (error) {
+          setError(error.message);
+          setIsLoading(false);
+        }
+      };
+      loadTopSongs();
+    } else {
+      setIsLoading(false);
+    }
+  }, [currSong]);
 
+  useEffect(() => {
+    if (audioPlayerRef.current && shouldAutoPlay) {
+      audioPlayerRef.current.audio.current.play();
+    }
+  }, [currSong, shouldAutoPlay]);
 
   useEffect(() => {
     if (audioPlayerRef.current && !shouldAutoPlay) {
@@ -42,7 +50,6 @@ function MusicPlayer({ shouldAutoPlay }) {
     }
   }, [currentSongIndex, shouldAutoPlay]);
 
-  
   const handleClickPrevious = () => {
     setCurrentSongIndex((prevIndex) =>
       prevIndex === 0 ? songs.length - 1 : prevIndex - 1
@@ -66,9 +73,7 @@ function MusicPlayer({ shouldAutoPlay }) {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  // console.log("Current song URL:", songs[currentSongIndex].downloadUrl[0].url);
-  // console.log("Current song Image:", songs[currentSongIndex].image[2].url);
-  // console.log("Current song artist:", songs[currentSongIndex].artists.primary[0].name);
+  const songToDisplay = currSong || songs[currentSongIndex];
 
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
@@ -80,11 +85,13 @@ function MusicPlayer({ shouldAutoPlay }) {
           </div>
           {/* Song Image */}
           <div className="flex flex-col justify-start gap-4 h-full w-[60%]">
-            <img src={songs[currentSongIndex].image[2].url} alt="song image" className="rounded-2xl w-full aspect-square" />
+            {songToDisplay?.image && (
+              <img src={songToDisplay.image[2].url} alt="song image" className="rounded-2xl w-full aspect-square" />
+            )}
             <div className="flex flex-col gap-1">
-              <h2 className="text-white font-medium text-2xl">{songs[currentSongIndex].name}</h2>
-              <h3 className="text-white">{songs[currentSongIndex].artists.primary[0].name}</h3>
-              <h4 className="text-white">{songs[currentSongIndex].year}</h4>
+              <h2 className="text-white font-medium text-2xl">{songToDisplay?.name || "Unknown Song"}</h2>
+              <h3 className="text-white">{songToDisplay?.artists?.primary?.[0]?.name || "Unknown Artist"}</h3>
+              <h4 className="text-white">{songToDisplay?.year || "Unknown Year"}</h4>
             </div>
           </div>
           <div className="flex justify-center h-full w-[20%]">
@@ -97,7 +104,7 @@ function MusicPlayer({ shouldAutoPlay }) {
             ref={audioPlayerRef}
             autoPlay={shouldAutoPlay}
             className="rounded-lg bg-[#5773FF] text-white h-full"
-            src={songs[currentSongIndex].downloadUrl[0].url}
+            src={songToDisplay?.downloadUrl?.[0]?.url || ""}
             onClickPrevious={handleClickPrevious}
             onClickNext={handleClickNext}
             showSkipControls
@@ -112,4 +119,3 @@ function MusicPlayer({ shouldAutoPlay }) {
 }
 
 export default MusicPlayer;
-
