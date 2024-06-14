@@ -32,7 +32,7 @@ function Main() {
           </div>
           {/* Right section */}
           <div className="w-[30%] min-w-[300px]  relative">
-            <MusicPlayer songName="Reminder" artistName="The Weeknd" />
+            <MusicPlayer currSong="Reminder" artistName="The Weeknd" />
           </div>
         </div>
       </div>
