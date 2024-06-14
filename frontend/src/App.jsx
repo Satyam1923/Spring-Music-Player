@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
 import Search from "./components/Search/Search";
 import Home from "./components/Home/Home";

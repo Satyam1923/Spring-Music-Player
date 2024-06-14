@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { fetchSonsgByName } from "../../Utils";
-import debounce from "lodash/debounce";
-
 
 function SearchBar({ setTopSongs }) {
   const inputElement = useRef(null);
