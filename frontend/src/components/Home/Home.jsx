@@ -11,7 +11,6 @@ function Main({ songData, currSongIndex, setCurrSongIndex }) {
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
       <UserIconSection/>
-
       {/* Middle */}
       <div className="w-full h-[25%]">
         <RecentlyPlayed />
@@ -38,7 +37,9 @@ function Main({ songData, currSongIndex, setCurrSongIndex }) {
               shouldAutoPlay={false}
               setCurrSongIndex={setCurrSongIndex}
             />
-          </div>
+//           <div className="w-[30%] min-w-[300px]  relative">
+//             <MusicPlayer currSong="Reminder" artistName="The Weeknd" />
+//           </div>
         </div>
       </div>
     </div>

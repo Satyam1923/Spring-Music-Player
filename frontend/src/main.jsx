@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <React.StrictMode>
-        <Preloader/>
+        <App></App>
       </React.StrictMode>
     </PersistGate>
   </Provider>

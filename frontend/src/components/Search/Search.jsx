@@ -8,6 +8,8 @@ import { FaPlay } from "react-icons/fa6";
 import { fetchSongData, fetchTopSongs, secIntoMinSec } from "../../Utils";
 import Footer from "../Footer";
 
+
+
 function MusicTypeBlock({ name, color }) {
   return (
     <div
@@ -86,7 +88,7 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
         <div className="flex items-center">{number}</div>
         <div className="flex h-full aspect-square items-center]">
           <img
-            src={song?.image?.[2]?.url || ""}
+            src={song.img || ""}
             className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"
           />
         </div>
@@ -150,7 +152,7 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
           <div className=" bg-[#0E0C0C] w-full h-[90%] rounded-xl flex flex-col gap-4 p-6">
             <div className="h-[70%] w-full">
               <img
-                src={topSongs[0]?.image?.[2]?.url || ""}
+                src={topSongs[0]?.img }
                 className="h-full rounded-xl aspect-square bg-[#D9D9D9]"
               />
             </div>
@@ -192,8 +194,9 @@ function Search({ setCurrPage }) {
   const [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
   useEffect(() => {
-    fetchSongData("Mary on a Cross", setCurrSong);
     fetchTopSongs(setTopSongs);
+    fetchSongData("top songs", setCurrSong);
+    
   }, []);
 
   return (
