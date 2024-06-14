@@ -21,7 +21,6 @@ function SearchBar({ setTopSongs }) {
     const value = e.target.value;
     setSearchValue(value);
     localStorage.setItem('searchValue', value);
-    debouncedSearch(value);
   };
 
   useEffect(() => {
