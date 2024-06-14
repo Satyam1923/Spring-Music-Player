@@ -8,6 +8,8 @@ import { FaPlay } from "react-icons/fa6";
 import { fetchSongData, fetchTopSongs, secIntoMinSec } from "../../Utils";
 import Footer from "../Footer";
 
+
+
 function MusicTypeBlock({ name, color }) {
   return (
     <div
@@ -208,6 +210,7 @@ function Search({ setCurrPage }) {
   useEffect(() => {
     fetchTopSongs(setTopSongs);
     fetchSongData("top songs", setCurrSong);
+    
   }, []);
 
   return (

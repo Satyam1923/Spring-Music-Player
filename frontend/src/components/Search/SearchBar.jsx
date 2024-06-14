@@ -1,16 +1,33 @@
-import React, { useEffect, useRef } from "react";
-import { FaAngleLeft } from "react-icons/fa6";
-import { FaAngleRight } from "react-icons/fa6";
+import React, { useEffect, useRef, useState } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { fetchSonsgByName } from "../../Utils";
+import debounce from "lodash/debounce";
+
 
 function SearchBar({ setTopSongs }) {
   const inputElement = useRef(null);
+  const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    const storedSearchValue = localStorage.getItem('searchValue');
+    if (storedSearchValue) {
+      setSearchValue(storedSearchValue);
+      fetchSonsgByName(storedSearchValue,setTopSongs);
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    localStorage.setItem('searchValue', value);
+    debouncedSearch(value);
+  };
 
   useEffect(() => {
     const searchSong = (e) => {
-      if (e.key == "Enter" && document.activeElement === inputElement.current) {
-        fetchSonsgByName(inputElement.current.value, setTopSongs);
+      if (e.key === "Enter" && document.activeElement === inputElement.current) {
+        fetchSonsgByName(searchValue, setTopSongs);
       }
     };
 
@@ -18,7 +35,7 @@ function SearchBar({ setTopSongs }) {
     return () => {
       window.removeEventListener("keypress", searchSong);
     };
-  }, []);
+  }, [searchValue, setTopSongs]);
 
   return (
     <div className="flex gap-2 w-full h-full">
@@ -38,6 +55,8 @@ function SearchBar({ setTopSongs }) {
         <input
           ref={inputElement}
           type="text"
+          value={searchValue}
+          onChange={handleChange}
           className="rounded-lg w-full h-full bg-transparent text-white pl-14"
           placeholder="What do you want to play?"
         />
