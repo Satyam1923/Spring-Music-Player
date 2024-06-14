@@ -11,7 +11,6 @@ function Main() {
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
       <UserIconSection/>
-
       {/* Middle */}
       <div className="w-full h-[25%]">
         <RecentlyPlayed />
