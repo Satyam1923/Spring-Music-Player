@@ -12,18 +12,18 @@ import Login from "./components/Auth/Login";
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/search" element={<Search />} />
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<PagenotFound />} />
-        <Route path="/aboutus" element={<Aboutus />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/contactus" element={<Contactus />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/culture" element={<Culture />} />
-        <Route path="/login" element={<Login/>}/>
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="search" element={<Search />} />
+      <Route path="" element={<Home />} />
+      <Route path="aboutus" element={<Aboutus />} />
+      <Route path="terms" element={<Terms />} />
+      <Route path="contactus" element={<Contactus />} />
+      <Route path="blog" element={<Blog />} />
+      <Route path="culture" element={<Culture />} />
+      <Route path="login" element={<Login />} />
+      <Route path="*" element={<PagenotFound />} /> 
+    </Routes>
+  </Router>  
   );
 };
 
