@@ -87,14 +87,14 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
         <div className="flex items-center">{number}</div>
         <div className="flex h-full aspect-square items-center]">
           <img
-            src={song?.image?.[2]?.url || ""}
+            src={song.img || ""}
             className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"
           />
         </div>
         <div className="flex h-full justify-center flex-col gap-1">
           <h2 className="font-medium text-left text-white text-[0.9em]">{song.name}</h2>
           <h4 className="text-white font-medium text-left text-[0.7em]">
-            {song?.artists?.primary?.[0]?.name || "Unknow artist"}
+            {song.artist || "Unknow artist"}
           </h4>
         </div>
       </div>
@@ -162,7 +162,7 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
               {/* replace this with the image */}
               {/* <div className="h-full rounded-xl aspect-square bg-[#D9D9D9]"></div> */}
               <img
-                src={topSongs[0]?.image?.[2]?.url || ""}
+                src={topSongs[0]?.img }
                 className="h-full rounded-xl aspect-square bg-[#D9D9D9]"
               />
             </div>
@@ -206,8 +206,8 @@ function Search({ setCurrPage }) {
   let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
   useEffect(() => {
-    fetchSongData("Mary on a Cross", setCurrSong);
     fetchTopSongs(setTopSongs);
+    fetchSongData("top songs", setCurrSong);
   }, []);
 
   return (
