@@ -3,14 +3,14 @@ import Navbar from "../Navbar";
 import { FaPlayCircle } from "react-icons/fa";
 import "react-h5-audio-player/lib/styles.css";
 import MusicPlayer from "../MusicPlayer";
-// import UserIconSection from "../UserIconSection";
+import UserIconSection from "../UserIconSection";
 import Footer from "../Footer";
 
 function Main({ songData, currSongIndex, setCurrSongIndex }) {
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
-      {/* <UserIconSection/> */}
+      <UserIconSection/>
 
       {/* Middle */}
       <div className="w-full h-[25%]">
@@ -38,9 +38,9 @@ function Main({ songData, currSongIndex, setCurrSongIndex }) {
               shouldAutoPlay={false}
               setCurrSongIndex={setCurrSongIndex}
             />
-          </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

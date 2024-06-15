@@ -133,12 +133,7 @@ function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
   );
 }
 
-function SearchResultAll({
-  topSongs,
-  currentSongIndex,
-  setCurrSong,
-  setShouldAutoPlay,
-}) {
+function SearchResultAll({ topSongs, currentSongIndex, setCurrSong, setShouldAutoPlay }) {
   const handleClickPlay = (index) => {
     setCurrSong(topSongs[index]);
     setShouldAutoPlay(true);
@@ -148,37 +143,25 @@ function SearchResultAll({
     <div className="w-full h-full rounded-xl flex flex-col gap-4">
       <div className="w-full h-20 flex justify-start gap-6">
         <div className="bg-white flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-          <h2 className="text-3xl bg-transparent text-black text-center w-full font-medium">
-            All
-          </h2>
+          <h2 className="text-3xl bg-transparent text-black text-center w-full font-medium">All</h2>
         </div>
         <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-          <h2 className="text-2xl bg-transparent text-center w-full font-medium">
-            Songs
-          </h2>
+          <h2 className="text-2xl bg-transparent text-center w-full font-medium">Songs</h2>
         </div>
         <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-          <h2 className="text-2xl bg-transparent text-center w-full font-medium">
-            Albums
-          </h2>
+          <h2 className="text-2xl bg-transparent text-center w-full font-medium">Albums</h2>
         </div>
         <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-          <h2 className="text-2xl bg-transparent text-center w-full font-medium">
-            Playlist
-          </h2>
+          <h2 className="text-2xl bg-transparent text-center w-full font-medium">Playlist</h2>
         </div>
         <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-          <h2 className="text-2xl bg-transparent text-center w-full font-medium">
-            Artists
-          </h2>
+          <h2 className="text-2xl bg-transparent text-center w-full font-medium">Artists</h2>
         </div>
       </div>
       <div className="flex gap-4 w-full h-1/2 bg-[#18181D]">
         {/* Top Results section */}
         <div className="flex flex-col w-[30%] h-full p-4 gap-4">
-          <h2 className="w-full text-2xl h-[10%] ml-4 text-left font-medium">
-            Top Results
-          </h2>
+          <h2 className="w-full text-2xl h-[10%] ml-4 text-left font-medium">Top Results</h2>
           <div className="bg-[#0E0C0C] w-full h-[90%] rounded-xl flex flex-col gap-4 p-6">
             {/* Song Image */}
             <div className="h-[70%] w-full">
@@ -189,12 +172,8 @@ function SearchResultAll({
             </div>
             <div className="flex justify-between h-[30%] w-full items-center">
               <div className="text-left">
-                <h1 className="text-2xl text-md font-medium">
-                  {topSongs[0]?.name || "Song name"}
-                </h1>
-                <h2 className="text-lg font-medium">
-                  Song . {topSongs[0]?.album.name || "Album Name"}
-                </h2>
+                <h1 className="text-2xl text-md font-medium">{topSongs[0]?.name || "Song name"}</h1>
+                <h2 className="text-lg font-medium">Song . {topSongs[0]?.album.name || "Album Name"}</h2>
               </div>
               <div
                 className="md:h-[70%] h-[50%] aspect-square bg-[#83CE89] flex items-center justify-center rounded-[50%] hover:cursor-pointer"
@@ -207,11 +186,7 @@ function SearchResultAll({
         </div>
         <div className="w-[70%] h-full">
           <div className="w-full h-full">
-            <Songs
-              topSongs={topSongs}
-              setCurrSong={setCurrSong}
-              setShouldAutoPlay={setShouldAutoPlay}
-            />
+            <Songs topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
           </div>
         </div>
       </div>
@@ -223,6 +198,7 @@ function SearchResultAll({
     </div>
   );
 }
+
 
 function Search({ setCurrPage }) {
   const [currSong, setCurrSong] = useState(null);
@@ -237,18 +213,20 @@ function Search({ setCurrPage }) {
     setCurrentSongIndex(index);
   };
 
+   // Function to handle clicking previous song
   const handleClickPrevious = () => {
     setCurrentSongIndex((prevIndex) =>
       prevIndex === 0 ? topSongs.length - 1 : prevIndex - 1
     );
-    setShouldAutoPlay(true); // Ensure autoplay is enabled
+    setShouldAutoPlay(true);
   };
 
+  // Function to handle clicking next song
   const handleClickNext = () => {
     setCurrentSongIndex((prevIndex) =>
       prevIndex === topSongs.length - 1 ? 0 : prevIndex + 1
     );
-    setShouldAutoPlay(true); // Ensure autoplay is enabled
+    setShouldAutoPlay(true);
   };
 
   // Effect hook to fetch top songs and set initial song data
