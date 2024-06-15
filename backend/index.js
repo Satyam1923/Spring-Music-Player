@@ -1,91 +1,47 @@
 import express from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
-import fetch from 'node-fetch';
 
+import bodyParser from "body-parser";
 import cors from "cors";
 
-
-const cache = new Map();
+import search from "./routes/search.js";
+import getAlbum from "./routes/getAlbums.js";
+import getAlbumById from "./routes/getAlbumById.js";
+import getPlaylist from "./routes/getPlaylist.js";
+import getPlaylistById from "./routes/getPlaylistById.js";
+import getArtists from "./routes/getArtists.js";
+import getArtistsById from "./routes/getArtistById.js";
 
 const app = express();
 const PORT = 3030;
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(cors());
 
 app.get("/", (req, res) => {
-    res.send("Welcome to the music search API");
+  res.send("Welcome to the music search API");
 });
 
+//search songs
+app.use("/search", search);
 
+//get albums
+app.use("/search/albums", getAlbum);
 
-app.get('/search', async (req, res) => {
-    try {
-        const { song } = req.query;
-        const language = req.query.language;
-        console.log("Name is", song);
-        // console.log("Language is", language);
+//get album by id
+app.use("/search/album", getAlbumById);
 
-        const apiUrl = `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(song)}`;
-        console.log(apiUrl);
+//get playlists
+app.use("/search/playlists", getPlaylist);
 
+//get playlist by id
+app.use("/search/playlist", getPlaylistById);
 
-        //correct till here,now manipulate data and send it:
-        try {
+//get artists
+app.use("/search/artists", getArtists);
 
-            const response = await fetch(apiUrl);
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch data from the external API');
-            }
-
-            const data = await response.json();
-
-            if (
-                response && response.data && response.data.data &&
-                response.data.data.results &&
-                response.data.data.results.length > 0
-            ) {
-                const musicArray = response.data.data.results.map((result) => ({
-                    url: result.downloadUrl[4]?.url || "",
-                    name: result.name || "",
-                    year: result.year || "",
-                    artist:
-                        result.artists.primary[0]?.name.replace(
-                            /&amp;/g,
-                            "&"
-                        ) || "",
-                    img: result.image[2]?.url || "",
-                    language: result.language || ""
-                }));
-                // cache.set(song, musicArray);
-                const filteredMusic = language === "all" ? musicArray : musicArray.filter(m => m.language === language);
-                res.json(filteredMusic);
-            } else {
-                console.log("response.data.data");
-                console.log(response);
-                res.json([]);
-            }
-
-        } catch (error) {
-            console.log("gjdjss error");
-            console.log(error);
-            res.json([]);
-        }
-
-
-        // res.json(data);
-    } catch (error) {
-        // Handle errors
-        console.error('Error occurred while processing the request:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
-
+//get artist by id
+app.use("/search/artist", getArtistsById);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});                                                                                                                                                 
+  console.log(`Server is running on port ${PORT}`);
+});

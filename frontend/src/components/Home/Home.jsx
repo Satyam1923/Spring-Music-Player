@@ -10,8 +10,7 @@ function Main() {
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
-      <UserIconSection username="user" />
-
+      <UserIconSection/>
       {/* Middle */}
       <div className="w-full h-[25%]">
         <RecentlyPlayed />
@@ -32,7 +31,7 @@ function Main() {
           </div>
           {/* Right section */}
           <div className="w-[30%] min-w-[300px]  relative">
-            <MusicPlayer songName="Reminder" artistName="The Weeknd" />
+            <MusicPlayer currSong="Reminder" artistName="The Weeknd" />
           </div>
         </div>
       </div>
@@ -183,10 +182,10 @@ function TopCharts() {
         </div>
         {/* Top chart list */}
         <div className="flex flex-col gap-2 justify-between h-full p-4 pr-6">
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
-          <TopChartsElement songName="Havanna" artistName="Camilia Cabello" songDuration="3:00" />
+          <TopChartsElement songName="Havanna" artistName="Camlia Cabello" songDuration="3:00" />
+          <TopChartsElement songName="Havanna" artistName="Camlia Cabello" songDuration="3:00" />
+          <TopChartsElement songName="Havanna" artistName="Camlia Cabello" songDuration="3:00" />
+          <TopChartsElement songName="Havanna" artistName="Camlia Cabello" songDuration="3:00" />
         </div>
       </div>
     </div>
