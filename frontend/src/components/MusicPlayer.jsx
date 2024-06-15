@@ -5,7 +5,7 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { fetchTopSongs } from "../Utils";
 
-function MusicPlayer({ currSong, shouldAutoPlay }) {
+function MusicPlayer({ currSong, shouldAutoPlay, handleClickPrevious, handleClickNext }) {
   const [songs, setSongs] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -14,17 +14,18 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
   const audioPlayerRef = useRef(null);
 
   useEffect(() => {
+    const loadTopSongs = async () => {
+      try {
+        setIsLoading(true);
+        await fetchTopSongs(setSongs);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+
     if (!currSong) {
-      const loadTopSongs = async () => {
-        try {
-          setIsLoading(true);
-          await fetchTopSongs(setSongs);
-          setIsLoading(false);
-        } catch (error) {
-          setError(error.message);
-          setIsLoading(false);
-        }
-      };
       loadTopSongs();
     } else {
       setIsLoading(false);
@@ -38,37 +39,22 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
   }, [currSong, shouldAutoPlay]);
 
   useEffect(() => {
-    if (audioPlayerRef.current && !shouldAutoPlay) {
-      const audio = audioPlayerRef.current.audio.current;
-      if (audio.readyState >= 2) {
-        audio.play();
-      } else {
-        audio.addEventListener('loadeddata', () => {
-          audio.play();
-        });
-      }
-    }
-  }, [currentSongIndex, shouldAutoPlay]);
-
-  const handleClickPrevious = () => {
-    setCurrentSongIndex((prevIndex) =>
-      prevIndex === 0 ? songs.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleClickNext = () => {
-    setCurrentSongIndex((prevIndex) =>
-      prevIndex === songs.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  useEffect(() => {
-    if (audioPlayerRef.current && !shouldAutoPlay) {
+    if (audioPlayerRef.current && songs.length > 0) {
       audioPlayerRef.current.audio.current.pause();
       audioPlayerRef.current.audio.current.load();
       audioPlayerRef.current.audio.current.play();
     }
-  }, [currentSongIndex]);
+  }, [currentSongIndex, songs]);
+
+  const handlePrevClick = () => {
+    setCurrentSongIndex((prevIndex) => (prevIndex === 0 ? songs.length - 1 : prevIndex - 1));
+    handleClickPrevious();
+  };
+
+  const handleNextClick = () => {
+    setCurrentSongIndex((prevIndex) => (prevIndex === songs.length - 1 ? 0 : prevIndex + 1));
+    handleClickNext();
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -105,8 +91,8 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
             autoPlay={shouldAutoPlay}
             className="rounded-lg bg-[#5773FF] text-white h-full"
             src={songToDisplay?.downloadUrl?.[0]?.url || ""}
-            onClickPrevious={handleClickPrevious}
-            onClickNext={handleClickNext}
+            onClickPrevious={handlePrevClick}
+            onClickNext={handleNextClick}
             showSkipControls
             onPlay={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}
@@ -119,3 +105,5 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
 }
 
 export default MusicPlayer;
+
+
