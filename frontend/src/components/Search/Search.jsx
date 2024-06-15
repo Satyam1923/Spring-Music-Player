@@ -26,17 +26,17 @@ function SearchDefault() {
     <div className="w-full h-full bg-[#18181D] rounded-lg">
       <div className="grid gap-6 p-6 h-full grid-cols-4 grid-rows-3">
         <MusicTypeBlock name="Pop" color="#F12E2E" />
-        <MusicTypeBlock name="Pop" color="#D98131" />
-        <MusicTypeBlock name="Pop" color="#7BB94A" />
-        <MusicTypeBlock name="Pop" color="#2EB1C3" />
-        <MusicTypeBlock name="Pop" color="#1B6FEE" />
-        <MusicTypeBlock name="Pop" color="#985AE7" />
-        <MusicTypeBlock name="Pop" color="#2A8152" />
-        <MusicTypeBlock name="Pop" color="#05658E" />
-        <MusicTypeBlock name="Pop" color="#000000" />
-        <MusicTypeBlock name="Pop" color="#000000" />
-        <MusicTypeBlock name="Pop" color="#000000" />
-        <MusicTypeBlock name="Pop" color="#000000" />
+        <MusicTypeBlock name="Rock" color="#D98131" />
+        <MusicTypeBlock name="Jazz" color="#7BB94A" />
+        <MusicTypeBlock name="Hip-Hop" color="#2EB1C3" />
+        <MusicTypeBlock name="Classical" color="#1B6FEE" />
+        <MusicTypeBlock name="EDM" color="#985AE7" />
+        <MusicTypeBlock name="Country" color="#2A8152" />
+        <MusicTypeBlock name="Reggae" color="#05658E" />
+        <MusicTypeBlock name="Blues" color="#000000" />
+        <MusicTypeBlock name="Soul" color="#000000" />
+        <MusicTypeBlock name="Metal" color="#000000" />
+        <MusicTypeBlock name="Folk" color="#000000" />
       </div>
     </div>
   );
@@ -45,7 +45,7 @@ function SearchDefault() {
 function AlbumElement({ name, playCount }) {
   return (
     <div className="flex flex-1 flex-col gap-2 hover:cursor-pointer">
-      <div className="h-[70%]  rounded-lg bg-[#D9D9D9]"></div>
+      <div className="h-[70%] rounded-lg bg-[#D9D9D9]"></div>
       <div className="flex h-[20%] flex-col gap-1">
         <h2 className="font-medium text-white text-[1em]">{name}</h2>
         <h4 className="text-white font-medium text-[0.9em]">year. artist name</h4>
@@ -58,10 +58,10 @@ function Albums() {
   return (
     <div className="bg-[#18181D] p-2 md:pl-6 md:pr-6 w-full h-full rounded-lg">
       <div className="flex flex-col pl-4 pr-4 gap-2 pt-2 w-full h-full">
-        <div className="flex h-[15%] justify-between items-center text-center p-1">
-          <h1 className="text-2xl text-white font-medium">Albums</h1>
+        <div className="flex h-[5%] justify-between items-center text-center p-1">
+          <h1 className="text-lg md:text-2xl text-white font-medium">Albums</h1>
         </div>
-        <div className="flex h-full gap-8">
+        <div className="flex h-[90%] gap-8 md:gap-8 flex-wrap">
           <AlbumElement name="Album Name" />
           <AlbumElement name="Album Name" />
           <AlbumElement name="Album Name" />
@@ -73,12 +73,13 @@ function Albums() {
   );
 }
 
+
 function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
   const duration = secIntoMinSec(song.duration);
 
   return (
     <div
-      className="flex h-[18%] justify-between hover:cursor-pointer"
+      className="flex h-[18%] justify-between cursor-pointer p-4 rounded-lg hover:bg-gray-700 hover:shadow-lg"
       onClick={() => {
         setCurrSong(song);
         setShouldAutoPlay(false);
@@ -86,10 +87,10 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
     >
       <div className="flex gap-4">
         <div className="flex items-center">{number}</div>
-        <div className="flex h-full aspect-square items-center]">
+        <div className="flex h-full  items-center">
           <img
             src={song.img || ""}
-            className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"
+            className="h-10 w-10  rounded-md object-fill"
           />
         </div>
         <div className="flex h-full justify-center flex-col gap-1">
@@ -108,6 +109,7 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
   );
 }
 
+
 function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
@@ -124,6 +126,7 @@ function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
     </div>
   );
 }
+
 
 function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
   return (
@@ -146,8 +149,11 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
         </div>
       </div>
 
-      <div className="flex gap-4 w-full h-1/2  bg-[#18181D]">
-        <div className="flex flex-col w-[30%] h-full p-4 gap-4">
+       {/*Results section*/}
+      <div className="flex flex-col w-full h-[77vh] gap-5 overflow-y-auto">
+      <div className="flex gap-4 w-full h-[44vh]  rounded-lg bg-[#18181D]">
+        {/* Top Results section */}
+        <div className="flex flex-col w-[30%] mb-auto h-full p-4 gap-4">
           <h2 className="w-full text-2xl h-[10%] ml-4 text-left font-medium">Top Results</h2>
           <div className=" bg-[#0E0C0C] w-full h-[90%] rounded-xl flex flex-col gap-4 p-6">
             <div className="h-[70%] w-full">
@@ -173,8 +179,9 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
             </div>
           </div>
         </div>
-        <div className="w-[70%] h-full">
-          <div className="w-full h-full">
+        {/* Songs */}
+        <div className="w-[70%] h-full ">
+          <div className="w-full h-full ">
             <Songs topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
           </div>
         </div>
@@ -183,6 +190,7 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
         <div className="w-full h-full">
           <Albums />
         </div>
+      </div>
       </div>
     </div>
   );
