@@ -79,18 +79,18 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
 
   return (
     <div
-      className="flex h-[18%] justify-between cursor-pointer p-4 rounded-lg hover:bg-gray-700 hover:shadow-lg"
+      className="flex h-[18%] justify-between cursor-pointer p-4 rounded-lg hover:bg-gray-700 hover:shadow-lg overflow-hidden"
       onClick={() => {
         setCurrSong(song);
         setShouldAutoPlay(true);
       }}
     >
       <div className="flex gap-4">
-        <div className="flex items-center">{number}</div>
-        <div className="flex h-full aspect-square items-center">
+        <div className="flex items-center">{number+1}</div>
+        <div className="flex h-full items-center">
           <img
             src={song?.image?.[2]?.url || ""}
-            className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"
+            className="h-10 w-10 rounded-lg object-fill bg-[#D9D9D9]"
           />
         </div>
         <div className="flex h-full justify-center flex-col gap-1">
@@ -232,12 +232,6 @@ function Search({ setCurrPage }) {
     );
     setShouldAutoPlay(true);
   };
-
-  // Effect hook to fetch top songs and set initial song data
-  useEffect(() => {
-    fetchTopSongs(setTopSongs);
-    fetchSongData("Mary on a Cross", setCurrSong); // Adjust this as per your actual data fetching logic
-  }, []);
 
   useEffect(() => {
     if (topSongs.length > 0) {
