@@ -61,7 +61,7 @@ function Albums() {
         <div className="flex h-[5%] justify-between items-center text-center p-1">
           <h1 className="text-lg md:text-2xl text-white font-medium">Albums</h1>
         </div>
-        <div className="flex h-[90%] gap-4 md:gap-8 flex-wrap overflow-y-auto">
+        <div className="flex h-[90%] gap-8 md:gap-8 flex-wrap">
           <AlbumElement name="Album Name" />
           <AlbumElement name="Album Name" />
           <AlbumElement name="Album Name" />
@@ -87,10 +87,10 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
     >
       <div className="flex gap-4">
         <div className="flex items-center">{number}</div>
-        <div className="flex h-full aspect-square items-center">
+        <div className="flex h-full  items-center">
           <img
             src={song.img || ""}
-            className="h-26 w-26  rounded-lg object-fill bg-gray-900"
+            className="h-10 w-10  rounded-md object-fill"
           />
         </div>
         <div className="flex h-full justify-center flex-col gap-1">
@@ -160,9 +160,11 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
         </div>
       </div>
 
-      <div className="flex gap-4 w-full h-1/2  bg-[#18181D]">
+       {/*Results section*/}
+      <div className="flex flex-col w-full h-[77vh] gap-5 overflow-y-auto">
+      <div className="flex gap-4 w-full h-[44vh]  rounded-lg bg-[#18181D]">
         {/* Top Results section */}
-        <div className="flex flex-col w-[30%] h-full p-4 gap-4">
+        <div className="flex flex-col w-[30%] mb-auto h-full p-4 gap-4">
           <h2 className="w-full text-2xl h-[10%] ml-4 text-left font-medium">Top Results</h2>
           <div className=" bg-[#0E0C0C] w-full h-[90%] rounded-xl flex flex-col gap-4 p-6">
             {/* Song Image */}
@@ -192,8 +194,8 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
           </div>
         </div>
         {/* Songs */}
-        <div className="w-[70%] h-full">
-          <div className="w-full h-full">
+        <div className="w-[70%] h-full ">
+          <div className="w-full h-full ">
             <Songs topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
           </div>
         </div>
@@ -203,6 +205,7 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
         <div className="w-full h-full">
           <Albums />
         </div>
+      </div>
       </div>
     </div>
   );
