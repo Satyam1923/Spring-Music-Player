@@ -9,6 +9,7 @@ import { RiPlayListLine } from "react-icons/ri";
 
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import Sidebar from './Sidebar';
+import Navbar from './Navbar';
 
 const LikedSong = () => {
   const playlist = {
@@ -40,7 +41,7 @@ const LikedSong = () => {
   return (
     <div className="flex w-full min-h-screen">
       <div className="w-0/6">
-        <Sidebar />
+        <Navbar />
       </div>
 
       <div className="w-5/6 p-6">

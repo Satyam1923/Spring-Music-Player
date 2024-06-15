@@ -24,7 +24,9 @@ function Navbar() {
           <Link to="/" className="w-full h-full hover:cursor-pointer">
             <IoMdHome className="w-full h-full" />
           </Link>
-          <FaHeart className="w-full h-full scale-[0.8] hover:cursor-pointer" />
+          <Link to="/liked-song" className="w-full h-full hover:cursor-pointer">
+            <FaHeart className="w-full h-full scale-[0.8] hover:cursor-pointer" />
+          </Link>
           <IoIosAlbums className="w-full h-full scale-[0.8] hover:cursor-pointer" />
         </div>
         <div className="bg-[#18181D] flex p-4 pt-6 pb-6 flex-col gap-8 rounded-lg items-center justify-center">
