@@ -26,24 +26,31 @@ import Contactus from "./pages/Contactus";
 import LikedSong from "./components/LikedSong";
 
 import Home from "./components/Home/Home";
-import Blog from "./pages/Blog";
-import Culture from "./pages/Culture";
+import Aboutus from "./pages/Aboutus"
+import Blog from "./pages/Blog"
+import Terms from "./pages/Terms"
+import Contactus from "./pages/Contactus"
+import Culture from "./pages/Culture"
+import Login from "./components/Auth/Login";
+import SignUp from "./components/Auth/SignUp";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/search" element={<Search />} />
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<PagenotFound />} />
-        <Route path="/aboutus" element={<Aboutus />} />
-        <Route path="/liked-song" element={<LikedSong />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/contactus" element={<Contactus />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/culture" element={<Culture />} />
-      </Routes>
-    </Router>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/search" element={<Search />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/aboutus" element={<Aboutus />} />
+      <Route path="/liked-song" element={<LikedSong />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/contactus" element={<Contactus />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/culture" element={<Culture />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp/>}/>
+      <Route path="*" element={<PagenotFound />} /> 
+    </Routes>
+  </BrowserRouter>  
   );
 };
 

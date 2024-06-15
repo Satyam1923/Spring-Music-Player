@@ -5,11 +5,11 @@ import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
 function MusicPlayer({ currSong, shouldAutoPlay }) {
-  const songName = currSong?.name || "Reminder";
+  const songName = currSong.name || "Reminder";
   const songImage =
-    currSong?.image?.[2]?.url || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
-  const artistName = currSong?.artists?.primary?.[0]?.name || "The Weeknd";
-  const audioUrl = currSong?.downloadUrl?.[4]?.url || "";
+    currSong.img || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
+  const artistName = currSong.artist || "The Weeknd";
+  const audioUrl = currSong.url || "";
   const audioPlayerRef = useRef(null);
 
   useEffect(() => {
