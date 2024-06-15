@@ -1,41 +1,38 @@
 import "./App.css";
-import Aboutus from "./pages/Aboutus";
-import Terms from "./pages/Terms";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
 import Search from "./components/Search/Search";
 import Contactus from "./pages/Contactus";
 import LikedSong from "./components/LikedSong";
 import Home from "./components/Home/Home";
-import Aboutus from "./pages/Aboutus"
-import Blog from "./pages/Blog"
-import Terms from "./pages/Terms"
-import Contactus from "./pages/Contactus"
-import Culture from "./pages/Culture"
+import Aboutus from "./pages/Aboutus";
+import Blog from "./pages/Blog";
+import Terms from "./pages/Terms";
+import Culture from "./pages/Culture";
 import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 
 const App = () => {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/search" element={<Search />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/aboutus" element={<Aboutus />} />
-      <Route path="/liked-song" element={<LikedSong />} />
-      <Route path="/terms" element={<Terms />} />
-      <Route path="/contactus" element={<Contactus />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/culture" element={<Culture />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp/>}/>
-      <Route path="*" element={<PagenotFound />} /> 
-    </Routes>
-  </BrowserRouter>  
+    <Router>
+      <Routes>
+        <Route path="/search" element={<Search />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/aboutus" element={<Aboutus />} />
+        <Route path="/liked-song" element={<LikedSong />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contactus" element={<Contactus />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/culture" element={<Culture />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="*" element={<PagenotFound />} />
+      </Routes>
+    </Router>
   );
 };
 
