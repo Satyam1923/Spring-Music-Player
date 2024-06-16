@@ -3,8 +3,13 @@
 	"builds": [
 		{
 			"src": "index.js",
-			"use": "@vercel/node",
-			"cron": "52 0 * * *"
+			"use": "@vercel/node"
+		}
+	],
+	"crons":[
+		{
+			"path":"/start-cron",
+			"schedule":"30 0 * * *"
 		}
 	],
 	"routes": [
