@@ -9,7 +9,6 @@ import getPlaylist from "./routes/getPlaylist.js";
 import getPlaylistById from "./routes/getPlaylistById.js";
 import getArtists from "./routes/getArtists.js";
 import getArtistsById from "./routes/getArtistById.js";
-// import schedulerRouter from './routes/schedulerRouter.js';
 import cron from "node-cron";
 import axios from "axios";
 import admin from "firebase-admin"
@@ -56,11 +55,7 @@ app.use("/search/artists", getArtists);
 //get artist by id
 app.use("/search/artist", getArtistsById);
 
-//Use the scheduler router
-app.get('/scheduler', (req, res) => {
-  schedulerRouter.get('/start', () => {}); 
-  res.send('Cron job started manually.');
-});
+
 
 
 app.get('/putData', async (req, res) => {

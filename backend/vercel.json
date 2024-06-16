@@ -11,11 +11,5 @@
 			"src": "/(.*)",
 			"dest": "/"
 		}
-	],
-	"cron": {
-		"35 19 * * *": {
-			"command": "node index.js putData",
-			"tz": "Asia/Kolkata" 
-		}
-	}
+	]
 }
