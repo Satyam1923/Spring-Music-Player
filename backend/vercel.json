@@ -6,16 +6,16 @@
 			"use": "@vercel/node"
 		}
 	],
-	"crons":[
-		{
-			"path":"/start-cron",
-			"schedule":"5 1 * * *"
-		}
-	],
 	"routes": [
 		{
 			"src": "/(.*)",
 			"dest": "/"
 		}
-	]
+	],
+	"cron": {
+		"35 19 * * *": {
+			"command": "node index.js putData",
+			"tz": "Asia/Kolkata" 
+		}
+	}
 }
