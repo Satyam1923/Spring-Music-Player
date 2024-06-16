@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import axios from "axios";
 import admin from "firebase-admin"
-import serviceAccount from "../spring-music-player-2f810-firebase-adminsdk-qrwgq-25bf782565.json" assert{type:'json'};
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
   });
