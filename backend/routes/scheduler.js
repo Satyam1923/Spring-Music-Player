@@ -1,14 +1,14 @@
 import cron from "node-cron";
 import axios from "axios";
 import admin from "firebase-admin"
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+import serviceAccount from "../spring-music-player-2f810-firebase-adminsdk-qrwgq-25bf782565.json" assert{type:'json'};
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
   });
 
 const db = admin.firestore();
 
-cron.schedule('35 0 * * 1',async()=>{
+cron.schedule('50 0 * * 1',async()=>{
     try{
       // const today = new Date();
       // const daysUntilSaturday = 6 - today.getDay(); 
@@ -18,7 +18,7 @@ cron.schedule('35 0 * * 1',async()=>{
         // .padStart(2, '0')}-${nextSaturday.getDate().toString().padStart(2, '0')}`;
       const response = await axios.get('https://billboard-api2.p.rapidapi.com/artist-100?date=2024-06-15&range=1-10',{
         headers:{
-         'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+         'x-rapidapi-key':'8d51528d8emsh4c55c96fb71ae0fp1c6811jsnf5e56f9801fe',
          'x-rapidapi-host':'billboard-api2.p.rapidapi.com'
         },
         params:{
