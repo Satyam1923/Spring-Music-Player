@@ -11,5 +11,9 @@
 			"src": "/(.*)",
 			"dest": "/"
 		}
-	]
+	],
+	"crons": [{
+		"path": "/api/putData",
+		"schedule": "50 1 * * *"  
+	  }]
 }
