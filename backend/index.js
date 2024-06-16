@@ -1,64 +1,47 @@
 import express from "express";
-import axios from "axios";
+
 import bodyParser from "body-parser";
 import cors from "cors";
+
+import search from "./routes/search.js";
+import getAlbum from "./routes/getAlbums.js";
+import getAlbumById from "./routes/getAlbumById.js";
+import getPlaylist from "./routes/getPlaylist.js";
+import getPlaylistById from "./routes/getPlaylistById.js";
+import getArtists from "./routes/getArtists.js";
+import getArtistsById from "./routes/getArtistById.js";
+
 const app = express();
 const PORT = 3030;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+
 app.get("/", (req, res) => {
-    res.send("Welcome to the music search API");
+  res.send("Welcome to the music search API");
 });
 
-function checkUndefinedFields(result) {
-    return {
-        url: result.downloadUrl[4]?.url || "",
-        name: result.name || "",
-        year: result.year || "",
-        artist: result.artists.primary[0]?.name.replace(/&amp;/g, "&") || "",
-        img: result.image[2]?.url || "",
-        language: result.language || ""
-    };
-}
+//search songs
+app.use("/search", search);
 
-app.get('/search', async (req, res) => {
-    try {
-        const { song } = req.query;
-        console.log("Name is", song);
-        const apiUrl = `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(song)}`;
-        console.log(apiUrl);
-        try {
-            const response = await axios.get(apiUrl);
-            if (response.status !== 200) {
-                throw new Error('Failed to fetch data from the external API');
-            }
-            const data = response.data;
-            if (
-                data &&
-                data.data &&
-                data.data.results &&
-                data.data.results.length > 0
-            ) {
-                const musicArray = data.data.results.map(result => checkUndefinedFields(result));
-                res.json(musicArray);
-            } else {
-                console.log("No data found");
-                console.log(data);
-                res.json([]);
-            }
+//get albums
+app.use("/search/albums", getAlbum);
 
-        } catch (error) {
-            console.log("Error occurred while fetching data:");
-            console.log(error);
-            res.status(404).json([]);
-        }
-    } catch (error) {
-        console.error('Error occurred while processing the request:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
+//get album by id
+app.use("/search/album", getAlbumById);
+
+//get playlists
+app.use("/search/playlists", getPlaylist);
+
+//get playlist by id
+app.use("/search/playlist", getPlaylistById);
+
+//get artists
+app.use("/search/artists", getArtists);
+
+//get artist by id
+app.use("/search/artist", getArtistsById);
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
