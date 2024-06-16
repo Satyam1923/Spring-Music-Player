@@ -24,7 +24,7 @@ cron.schedule('0 0 * * 0',async()=>{
          'x-rapidapi-host':'billboard-api2.p.rapidapi.com'
         },
         params:{
-          'date':'2024-06-15',
+          'date':formattedDate,
           'range':'1-10'
         }
       })
