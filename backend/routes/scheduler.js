@@ -8,7 +8,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-cron.schedule('50 0 * * 1',async()=>{
+cron.schedule('5 1 * * 1',async()=>{
     try{
       // const today = new Date();
       // const daysUntilSaturday = 6 - today.getDay(); 
