@@ -4,13 +4,12 @@
 		{
 			"src": "index.js",
 			"use": "@vercel/node",
-			"cron":"50 0 * * 1"
+			"cron": "52 0 * * *"
 		}
 	],
 	"routes": [
 		{
 			"src": "/(.*)",
-
 			"dest": "/"
 		}
 	]
