@@ -9,7 +9,7 @@
 	"crons":[
 		{
 			"path":"/start-cron",
-			"schedule":"30 0 * * *"
+			"schedule":"5 1 * * *"
 		}
 	],
 	"routes": [
