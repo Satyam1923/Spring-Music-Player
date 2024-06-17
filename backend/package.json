@@ -11,6 +11,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"axios": "^1.6.8",
+		"billboard-top-100": "^2.6.5",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.5",
 		"ejs": "^3.1.10",
