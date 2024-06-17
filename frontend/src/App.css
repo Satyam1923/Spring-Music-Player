@@ -755,4 +755,7 @@ margin-top: 50px;
   color: rgb(255, 255, 255);
 
 }
+.hov:hover{
+  color: aqua;
+}
 

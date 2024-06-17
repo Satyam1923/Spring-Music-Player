@@ -21,6 +21,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to the music search API");
 });
 
+
+
 //search songs
 app.use("/search", search);
 
@@ -47,5 +49,5 @@ app.use("/top-artists", getTopArtists);
 
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port${PORT}`);
 });
