@@ -6,25 +6,16 @@ import { fetchSonsgByName } from "../../Utils";
 function SearchBar({ setTopSongs }) {
   const inputElement = useRef(null);
   const [searchValue, setSearchValue] = useState('');
-
-  useEffect(() => {
-    const storedSearchValue = localStorage.getItem('searchValue');
-    if (storedSearchValue) {
-      setSearchValue(storedSearchValue);
-      fetchSonsgByName(storedSearchValue,setTopSongs);
-    }
-  }, []);
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
-    localStorage.setItem('searchValue', value);
+  
+  const handleFetchSongs = () => {
+    fetchSonsgByName(searchValue, setTopSongs);
+    setSearchValue('');
   };
 
   useEffect(() => {
     const searchSong = (e) => {
       if (e.key === "Enter" && document.activeElement === inputElement.current) {
-        fetchSonsgByName(searchValue, setTopSongs);
+        handleFetchSongs();
       }
     };
 
@@ -53,7 +44,7 @@ function SearchBar({ setTopSongs }) {
           ref={inputElement}
           type="text"
           value={searchValue}
-          onChange={handleChange}
+          onChange={(e)=>setSearchValue(e.target.value)}
           className="rounded-lg w-full h-full bg-transparent text-white pl-14"
           placeholder="What do you want to play?"
         />
