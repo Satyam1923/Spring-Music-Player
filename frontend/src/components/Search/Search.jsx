@@ -58,7 +58,6 @@ function AlbumElement({ album }) {
 }
 
 function Albums(albums) {
-  console.log(albums.albums);
   return (
     <div className="bg-[#18181D] p-2  w-full h-full rounded-lg">
       <div className="flex flex-col p-2 gap-5 w-full h-full">
