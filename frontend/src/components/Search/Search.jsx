@@ -5,8 +5,9 @@ import UserIconSection from "../UserIconSection";
 import { FaPlayCircle } from "react-icons/fa";
 import MusicPlayer from "../MusicPlayer";
 import { FaPlay } from "react-icons/fa6";
-import { fetchSongData, fetchTopSongs, secIntoMinSec } from "../../Utils";
+import { fetchSongData, fetchTopSongs, secIntoMinSec ,fetchAlbumsbySongName } from "../../Utils";
 import Footer from "../Footer";
+import { PiLayout } from "react-icons/pi";
 
 
 
@@ -42,36 +43,39 @@ function SearchDefault() {
   );
 }
 
-function AlbumElement({ name, playCount }) {
+function AlbumElement({ album }) {
   return (
-    <div className="flex flex-1 flex-col gap-2 hover:cursor-pointer">
-      <div className="h-[70%] rounded-lg bg-[#D9D9D9]"></div>
-      <div className="flex h-[20%] flex-col gap-1">
-        <h2 className="font-medium text-white text-[1em]">{name}</h2>
-        <h4 className="text-white font-medium text-[0.9em]">year. artist name</h4>
+    <div className="flex flex-1 flex-col gap-3 hover:cursor-pointer">
+      <div className=" rounded-lg">
+        <img className="h-32 w-32 rounded-lg" src={album.images[2].url} alt="" />
+      </div>
+      <div className="flex  flex-col gap-1">
+        <h2 className=" text-sm text-white ">{album.name}</h2>
+        <h4 className= "text-xs text-white  ">{`${album.primaryArtists[0].name} - ${album.year}`}</h4>
       </div>
     </div>
   );
 }
 
-function Albums() {
+function Albums(albums) {
+  console.log(albums.albums);
   return (
-    <div className="bg-[#18181D] p-2 md:pl-6 md:pr-6 w-full h-full rounded-lg">
-      <div className="flex flex-col pl-4 pr-4 gap-2 pt-2 w-full h-full">
+    <div className="bg-[#18181D] p-2  w-full h-full rounded-lg">
+      <div className="flex flex-col p-2 gap-5 w-full h-full">
         <div className="flex h-[5%] justify-between items-center text-center p-1">
-          <h1 className="text-lg md:text-2xl text-white font-medium">Albums</h1>
+          <h1 className="text-2xl md:text-2xl text-white font-medium">Albums</h1>
         </div>
-        <div className="flex h-[90%] gap-8 md:gap-8 flex-wrap">
-          <AlbumElement name="Album Name" />
-          <AlbumElement name="Album Name" />
-          <AlbumElement name="Album Name" />
-          <AlbumElement name="Album Name" />
-          <AlbumElement name="Album Name" />
+        <div className="flex h-[90%] gap-4 md:gap-8 flex-warp">
+        {albums.albums.map((album, index) => (
+            <AlbumElement key={index} album={album}/> 
+          ))} 
         </div>
       </div>
     </div>
   );
 }
+
+
 
 
 function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
@@ -95,7 +99,7 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
         </div>
         <div className="flex h-full justify-center flex-col gap-1">
           <h2 className="font-medium text-left text-white text-[0.9em]">{song.name}</h2>
-          <h4 className="text-white font-medium text-left text-[0.7em]">
+          <h4 className="text-white  text-left text-[0.7em]">
             {song.artist || "Unknown artist"}
           </h4>
         </div>
@@ -138,7 +142,7 @@ function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
 }
 
 
-function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
+function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay ,albums }) {
   return (
     <div className="w-full h-full rounded-xl flex flex-col gap-4">
       {/* Search filters */}
@@ -161,7 +165,7 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
       </div>
 
        {/*Results section*/}
-      <div className="flex flex-col w-full h-[77vh] gap-5 overflow-y-auto">
+      <div className="flex flex-col w-full h-[77vh] gap-5 ">
       <div className="flex gap-4 w-full h-[44vh]  rounded-lg bg-[#18181D]">
         {/* Top Results section */}
         <div className="flex flex-col w-[30%] mb-auto h-full p-3 gap-2">
@@ -203,7 +207,7 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
       {/* Albums */}
       <div className="w-full h-1/2">
         <div className="w-full h-full">
-          <Albums />
+          <Albums albums={albums}/>
         </div>
       </div>
       </div>
@@ -214,22 +218,23 @@ function SearchResultAll({ topSongs, setCurrSong, setShouldAutoPlay }) {
 function Search({ setCurrPage }) {
   const [currSong, setCurrSong] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
+  const [albums,setAlbums] = useState([]);
   let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
   useEffect(() => {
     fetchTopSongs(setTopSongs);
     fetchSongData("top songs", setCurrSong);
-    
+    fetchAlbumsbySongName("top songs",setAlbums);
   }, []);
 
   return (
-    <div className="w-screen h-screen p-4 text-center">
+    <div className="w-screen h-screen p-4 text-center overflow-y-auto">
       <div className="w-full h-full flex gap-4">
         <Navbar setCurrPage={setCurrPage} />
         <div className="w-full h-full flex flex-col gap-3">
           {/* Search bar */}
           <div className="rounded-lg flex w-full">
-            <SearchBar setTopSongs={setTopSongs} />
+            <SearchBar setTopSongs={setTopSongs} setAlbums={setAlbums} />
             <UserIconSection username="user" />
           </div>
           {/* Main section */}
@@ -237,8 +242,8 @@ function Search({ setCurrPage }) {
             <div className="w-full h-full flex gap-4">
               <div className="w-full h-full flex flex-col gap-2">
                 {/* Search main section */}
-                <div className="w-full h-full">
-                  <SearchResultAll topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} />
+                <div className="w-full h-full overflow-auto">
+                  <SearchResultAll topSongs={topSongs} setCurrSong={setCurrSong} setShouldAutoPlay={setShouldAutoPlay} albums={albums}/>
                 </div>
               </div>
               {/* Music player */}
@@ -249,7 +254,7 @@ function Search({ setCurrPage }) {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer className=" fixed bottom-0 w-full p-4 "/>
     </div>
   );
 }
