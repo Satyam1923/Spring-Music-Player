@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import { fetchSonsgByName } from "../../Utils";
+import { fetchSonsgByName ,fetchAlbumsbySongName } from "../../Utils";
 
-function SearchBar({ setTopSongs }) {
+function SearchBar({ setTopSongs ,setAlbums }) {
   const inputElement = useRef(null);
   const [searchValue, setSearchValue] = useState('');
   
   const handleFetchSongs = () => {
     fetchSonsgByName(searchValue, setTopSongs);
+    fetchAlbumsbySongName(searchValue,setAlbums);
     setSearchValue('');
   };
 
