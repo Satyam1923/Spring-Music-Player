@@ -59,23 +59,23 @@ function AlbumElement({ album }) {
   );
 }
 
-
-function Albums({albums}) {
+function Albums({ albums }) {
   return (
-    <div className="bg-[#18181D] p-2  w-full h-full rounded-lg">
+    <div className="bg-[#18181D] p-2 w-full h-full rounded-lg">
       <div className="flex flex-col p-2 gap-5 w-full h-full">
         <div className="flex h-[5%] justify-between items-center text-center p-1">
           <h1 className="text-2xl md:text-2xl text-white font-medium">Albums</h1>
         </div>
-        <div className="flex h-[90%] gap-4 md:gap-8 flex-warp">
-        {albums.map((album, index) => (
-            <AlbumElement key={index} album={album}/> 
-          ))} 
+        <div className="flex h-[90%] gap-4 md:gap-8 flex-wrap">
+          {albums.map((album, index) => (
+            <AlbumElement key={index} album={album} />
+          ))}
         </div>
       </div>
     </div>
   );
 }
+
 
 function ArtistElement({artist }) {
   return (
