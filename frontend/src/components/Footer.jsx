@@ -15,7 +15,7 @@ const Footer = () => {
 
     <div className="h-[300px] w-full flex flex-col bgfooter sm:h-full" style={{padding:"66px",marginTop:"13rem"}}>
 
-    <div className="h-[300px] w-full flex flex-col bgfooter sm:h-full" >
+  
 
       {/* //for logo and social links */}
       <div className="sec1  xs:text-[36px]">
