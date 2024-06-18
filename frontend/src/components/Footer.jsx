@@ -12,7 +12,11 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
+
     <div className="h-[300px] w-full flex flex-col bgfooter sm:h-full" style={{padding:"66px",marginTop:"13rem"}}>
+
+    <div className="h-[300px] mt-56 w-full flex flex-col bgfooter sm:h-full">
+
       {/* //for logo and social links */}
       <div className="sec1  xs:text-[36px]">
         <div>SPRING</div>
@@ -22,19 +26,19 @@ const Footer = () => {
       <div className="sec2 ">
         <ul className="company  sm:gap-[10px] sm:grid sm:grid-cols-1 sm:p-[10px] sm:text-center">
           <li>
-            <Link to="/aboutus">About Us</Link>
+            <Link to="/aboutus" className="hov" >About Us</Link>
           </li>
           <li>
-            <Link to="/culture">Culture</Link>
+            <Link to="/culture" className="hov" >Culture</Link>
           </li>
           <li>
-            <Link to="/blog">Blogs</Link>
+            <Link to="/blog" className="hov" >Blogs</Link>
           </li>
           <li>
-            <Link to="/terms">Terms and Policy</Link>
+            <Link to="/terms" className="hov" >Terms and Policy</Link>
           </li>
           <li>
-            <Link to="/contactus">Help and Support</Link>
+            <Link to="/contactus" className="hov" >Help and Support</Link>
           </li>
         </ul>
       </div>
