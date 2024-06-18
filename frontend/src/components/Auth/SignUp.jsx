@@ -100,13 +100,13 @@ const SignUp = () => {
                             required
                         />
                     </div>
-                    <div className="w-full flex items-center gap-2 justify-between p-2">
+                    <div className="w-full flex items-center justify-between p-2">
                         <label htmlFor="password" className="font-bold">Password:</label>
-                        <div className="flex items-center w-full">
+                        <div className="relative w-full">
                             <input
                                 id="password"
                                 type={passwordVisible ? "text" : "password"}
-                                className="p-2 text-black w-full"
+                                className="p-2 text-black w-full pr-10"
                                 placeholder="Enter password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -114,7 +114,7 @@ const SignUp = () => {
                             />
                             <button
                                 type="button"
-                                className="ml-2"
+                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
                                 onClick={togglePasswordVisibility}
                             >
                                 {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
