@@ -1,17 +1,19 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from './firebase';
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { setDoc, doc } from 'firebase/firestore';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, Link } from 'react-router-dom';
-import { Oval } from 'react-loader-spinner'; 
+import { Oval } from 'react-loader-spinner';
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
@@ -20,7 +22,7 @@ const SignUp = () => {
 
         if (!name || !email || !password) {
             toast.error("Please fill in all the fields.");
-            setLoading(false); 
+            setLoading(false);
             return;
         }
 
@@ -39,23 +41,29 @@ const SignUp = () => {
             toast.error(err.message);
             console.log(err.message);
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
+
     const fetchUserData = async () => {
-        auth.onAuthStateChanged((async (user) => {
-          console.log(user);
-          if (user) {
-            navigate('/')
-          }
-        }))
-      }
-      useEffect(() => {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                navigate('/');
+            }
+        });
+    };
+
+    useEffect(() => {
         fetchUserData();
-      }, [])
+    }, []);
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
+
     return (
         <div>
-            <ToastContainer 
+            <ToastContainer
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -94,15 +102,24 @@ const SignUp = () => {
                     </div>
                     <div className="w-full flex items-center gap-2 justify-between p-2">
                         <label htmlFor="password" className="font-bold">Password:</label>
-                        <input
-                            id="password"
-                            type="password"
-                            className="p-2 text-black"
-                            placeholder="Enter password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className="flex items-center w-full">
+                            <input
+                                id="password"
+                                type={passwordVisible ? "text" : "password"}
+                                className="p-2 text-black w-full"
+                                placeholder="Enter password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="ml-2"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                            </button>
+                        </div>
                     </div>
                     <button
                         type="submit"
