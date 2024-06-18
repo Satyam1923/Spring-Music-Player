@@ -17,7 +17,7 @@ function Main() {
       {/* Middle */}
       <div className="w-full  mb-6  h-[25%]">
         <RecentlyPlayed />
-      </div>
+    </div>
 
       {/* Bottom */}
       <div className="h-[75%]  w-full">
@@ -54,7 +54,7 @@ function RecentlyPlayedElement({ name, image }) {
 function RecentlyPlayed() {
   return (
     <div className=" w-full h-full rounded-lg flex flex-col gap-2">
-      <h1 className="text-2xl font-medium text-left ml-1 text-white p-1">Recently Played</h1>
+      <h1 className="text-2xl w-[40%] font-medium text-left ml-1 text-white p-1">Recently Played</h1>
       <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
         <div className="flex justify-between gap-4 flex-wrap">
           <RecentlyPlayedElement
