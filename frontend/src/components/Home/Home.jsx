@@ -15,7 +15,7 @@ function Main() {
       {/* Top user section */}
       <UserIconSection/>
       {/* Middle */}
-      <div className="w-full  mb-20  h-[25%]">
+      <div className="w-full  mb-6  h-[25%]">
         <RecentlyPlayed />
       </div>
 
@@ -152,25 +152,22 @@ function Genres() {
   );
 }
 
-function TopChartsElement({ song,img, artistName, songDuration,setCurrentSong }) {
+function TopChartsElement({index, song,img, artistName, songDuration,setCurrentSong }) {
   // console.log(song)
   return (
-    <div onClick={()=>setCurrentSong(song)} className="flex flex-1 h-[20%] justify-between hover:cursor-pointer">
+    <div onClick={()=>setCurrentSong(song)} className="flex justify-between items-center p-2 hover:cursor-pointer">
       <div className="flex gap-4">
-        <div className="flex items-center">01</div>
-        <div className="flex h-full aspect-square items-center]">
-          <img src={img} />
-          {/* <div className="h-[80%] aspect-square rounded-lg object-fill bg-[#D9D9D9]"></div> */}
-        </div>
-        <div className="flex h-full justify-center items-center flex-col gap-1">
-          <h2 className="font-medium text-white text-[0.9em]">{song.name}</h2>
-          <h4 className="text-white font-medium text-[0.7em]">{artistName}</h4>
+
+        <div>{index}</div>
+        <img src={img} className="w-10 h-10 object-cover"/>
+        <div className="text-sm">
+          <div>{song.name}</div>
+          <div>{artistName}</div>
         </div>
       </div>
-
-      <div className="flex gap-4 items-center">
-        <h2 className="text-white">{songDuration}</h2>
-        <FaPlayCircle />
+      <div className="flex items-center gap-2">
+        <div>{songDuration}</div>
+        <FaPlayCircle/>
       </div>
     </div>
   );
@@ -183,7 +180,7 @@ function TopCharts({ currentArtist ,setCurrentSong}) {
   useEffect(() => {
     const fetchData = async () => {
       if (currentArtist) {
-        const artistData = await fetchSonsgByName(currentArtist,setTopSongs);
+        await fetchSonsgByName(currentArtist,setTopSongs);
         setTitle(currentArtist);
       } else {
          await fetchTopSongs(setTopSongs);
@@ -206,10 +203,11 @@ function TopCharts({ currentArtist ,setCurrentSong}) {
           <h3 className="text-white text-lg">See all</h3>
         </div>
         {/* Top chart list */}
-        <div className="flex flex-col gap-10 justify-between h-[60%] p-4 pr-6">
-          {topSongs.slice(0,4).map((song, index) => (
+        <div className="flex flex-col gap-2 overflow-scroll  p-2">
+          {topSongs.map((song, index) => (
             <TopChartsElement
               key={index}
+              index={index+1}
               song={song}
               img={song.img}
               artistName={song.artist}
