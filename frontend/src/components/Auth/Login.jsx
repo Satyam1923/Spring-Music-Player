@@ -6,13 +6,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner';
 import { doc, setDoc } from 'firebase/firestore';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -45,7 +46,7 @@ const Login = () => {
     };
 
     const fetchUserData = async () => {
-        auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged(async (user) => {
             if (user) {
                 navigate('/');
             }
@@ -55,10 +56,6 @@ const Login = () => {
     useEffect(() => {
         fetchUserData();
     }, []);
-
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
-    };
 
     return (
         <div>
@@ -77,36 +74,30 @@ const Login = () => {
             <div className="bg-[#18181D] gap-4 flex flex-col p-4">
                 <form className="flex flex-col items-center p-10 gap-5" onSubmit={handleLogin}>
                     <div className="w-full flex items-center justify-between p-2">
-                        <label htmlFor="email" className="font-bold">Email:</label>
+                        <label htmlFor="email" className="font-bold text-red-500">Email:</label>
                         <input
                             id="email"
                             type="email"
-                            className="p-2 text-black"
+                            className="p-2 text-black flex-grow"
                             placeholder="Enter email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
-                    <div className="w-full flex items-center justify-between p-2">
-                        <label htmlFor="password" className="font-bold">Password:</label>
-                        <div className="relative w-full">
-                            <input
-                                id="password"
-                                type={passwordVisible ? "text" : "password"}
-                                className="p-2 text-black w-full pr-10"
-                                placeholder="Enter password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                            </button>
+                    <div className="w-full flex items-center justify-between p-2 relative">
+                        <label htmlFor="password" className="font-bold text-red-500">Password:</label>
+                        <input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            className="p-2 text-black flex-grow"
+                            placeholder="Enter password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <div className="absolute right-2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
                         </div>
                     </div>
                     <button
@@ -131,7 +122,7 @@ const Login = () => {
                 </form>
                 <p className='text-sm text-gray-200 text-center'>- Or continue with -</p>
                 <div className="flex items-center justify-center ">
-                    <button className="flex items-center bg-[#0f0f11] border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-black" onClick={goggleLogin}>
+                    <button className="flex items-center bg-[#0f0f11] border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-black " onClick={goggleLogin}>
                         <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1">
                             <title>Google-color</title>
                             <desc>Created with Sketch.</desc>
