@@ -1,30 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import { fetchSonsgByName ,fetchAlbumsbySongName } from "../../Utils";
+import { fetchSonsgByName ,fetchAlbumsbySongName,fetchArtistsbySongName } from "../../Utils";
 
-function SearchBar({ setTopSongs ,setAlbums }) {
+function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
   const inputElement = useRef(null);
   const [searchValue, setSearchValue] = useState('');
-  
-  const handleFetchSongs = () => {
-    fetchSonsgByName(searchValue, setTopSongs);
-    fetchAlbumsbySongName(searchValue,setAlbums);
-    setSearchValue('');
+
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleSearch = async () => {
+    if (searchValue.trim() !== '') {
+      await fetchSonsgByName(searchValue, setTopSongs);
+      await fetchAlbumsbySongName(searchValue, setAlbums);
+      await fetchArtistsbySongName(searchValue, setArtist);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+      setSearchValue('');
+    }
   };
 
   useEffect(() => {
-    const searchSong = (e) => {
-      if (e.key === "Enter" && document.activeElement === inputElement.current) {
-        handleFetchSongs();
-      }
-    };
+    const timeoutId = setTimeout(handleSearch, 200);
+  }, [searchValue, setTopSongs, setAlbums, setArtist]);
 
-    window.addEventListener("keypress", searchSong);
-    return () => {
-      window.removeEventListener("keypress", searchSong);
-    };
-  }, [searchValue, setTopSongs]);
 
   return (
     <div className="flex gap-2 w-full h-full">
@@ -45,7 +50,8 @@ function SearchBar({ setTopSongs ,setAlbums }) {
           ref={inputElement}
           type="text"
           value={searchValue}
-          onChange={(e)=>setSearchValue(e.target.value)}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
           className="rounded-lg w-full h-full bg-transparent text-white pl-14"
           placeholder="What do you want to play?"
         />
