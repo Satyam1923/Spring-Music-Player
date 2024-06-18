@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="h-[300px] w-full flex flex-col bgfooter sm:h-full">
+    <div className="h-[300px] w-full flex flex-col bgfooter sm:h-full" style={{padding:"66px",marginTop:"13rem"}}>
       {/* //for logo and social links */}
       <div className="sec1  xs:text-[36px]">
         <div>SPRING</div>
