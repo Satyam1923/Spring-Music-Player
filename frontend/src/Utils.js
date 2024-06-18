@@ -39,11 +39,21 @@ export const fetchTopSongs = async (setTopSongs) => {
   }
 };
 
-export const fetchAlbumsbySongName = async (songName,setAlbums,count=8)=>{
+export const fetchAlbumsbySongName = async (songName,setAlbums)=>{
   try{
-    const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/search/albums?query=${songName}`);
+    const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/search/albums?query=${encodeURIComponent(songName)}`);
     const jsonData = response.data.slice(0,6);
     setAlbums(jsonData);
+  }catch(error){
+    console.error("There was a problem with the fetch operation:", error);
+  }
+}
+
+export const fetchArtistsbySongName = async (artistName,setArtists)=>{
+  try{
+    const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/search/artists?query=${encodeURIComponent(artistName)}`);
+    const jsonData = response.data.data.results.slice(0,6);
+    setArtists(jsonData);
   }catch(error){
     console.error("There was a problem with the fetch operation:", error);
   }

@@ -5,7 +5,13 @@ import UserIconSection from "../UserIconSection";
 import { FaPlayCircle } from "react-icons/fa";
 import MusicPlayer from "../MusicPlayer";
 import { FaPlay } from "react-icons/fa6";
-import { fetchSongData, fetchTopSongs, secIntoMinSec, fetchAlbumsbySongName } from "../../Utils";
+import {
+  fetchSongData,
+  fetchTopSongs,
+  secIntoMinSec,
+  fetchAlbumsbySongName,
+  fetchArtistsbySongName,
+} from "../../Utils";
 import Footer from "../Footer";
 import { PiLayout } from "react-icons/pi";
 import { Link, Outlet, useOutletContext } from "react-router-dom";
@@ -43,29 +49,65 @@ function SearchDefault() {
 }
 
 function AlbumElement({ album }) {
+  const imageUrl = album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
+  const artistName =
+    album.primaryArtists && album.primaryArtists[0]
+      ? album.primaryArtists[0].name
+      : "Unknown Artist";
   return (
-    <div className="flex flex-1 flex-col gap-3 hover:cursor-pointer">
-      <div className=" rounded-lg">
-        <img className="h-32 w-32 rounded-lg" src={album.images[2].url} alt="" />
+    <div className="flex flex-1 flex-col max-w-full gap-3 hover:cursor-pointer">
+      <div className="flex justify-center rounded-lg">
+        <img className="h-32 w-32 rounded-lg" src={imageUrl} alt={`${album.name} album cover`} />
       </div>
-      <div className="flex  flex-col gap-1">
-        <h2 className=" text-sm text-white ">{album.name}</h2>
-        <h4 className="text-xs text-white  ">{`${album.primaryArtists[0].name} - ${album.year}`}</h4>
+      <div className="flex flex-col gap-1">
+        <h2 className="text-sm text-white">{album.name}</h2>
+        <h4 className="text-xs text-white">{`${artistName} - ${album.year}`}</h4>
       </div>
     </div>
   );
 }
 
-function Albums(albums) {
+function Albums({ albums }) {
   return (
-    <div className="bg-[#18181D] p-2  w-full h-full rounded-lg">
+    <div className="bg-[#18181D] p-2 w-full h-full rounded-lg">
       <div className="flex flex-col p-2 gap-5 w-full h-full">
         <div className="flex h-[5%] justify-between items-center text-center p-1">
           <h1 className="text-2xl md:text-2xl text-white font-medium">Albums</h1>
         </div>
-        <div className="flex h-[90%] gap-4 md:gap-8 flex-warp">
-          {albums.albums.map((album, index) => (
+        <div className="flex h-[90%] gap-4 md:gap-8 flex-wrap">
+          {albums.map((album, index) => (
             <AlbumElement key={index} album={album} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ArtistElement({ artist }) {
+  return (
+    <div className="flex flex-1 flex-col gap-3 hover:cursor-pointer">
+      <div className="flex justify-center rounded-lg">
+        <img className="h-32 w-32 rounded-lg" src={artist.image[1].url} alt="" />
+      </div>
+      <div className="flex  flex-col gap-1">
+        <h2 className=" text-sm text-white ">{artist.name}</h2>
+      </div>
+    </div>
+  );
+}
+
+function Artists({ artists }) {
+  //console.log(artists);
+  return (
+    <div className="bg-[#18181D] p-2  w-full h-full rounded-lg">
+      <div className="flex flex-col p-2 gap-5 w-full h-full">
+        <div className="flex h-[5%] justify-between items-center text-center p-1">
+          <h1 className="text-2xl md:text-2xl text-white font-medium">Artists</h1>
+        </div>
+        <div className="flex h-[90%] gap-4 md:gap-8 flex-warp">
+          {artists.map((artist, index) => (
+            <ArtistElement key={index} artist={artist} />
           ))}
         </div>
       </div>
@@ -136,6 +178,7 @@ export function SearchResultAll() {
   const setCurrSong = context.setCurrSong;
   const setShouldAutoPlay = context.setShouldAutoPlay;
   const albums = context.albums;
+  const artists = context.artists;
 
   return (
     <div className="w-full h-full rounded-xl flex flex-col gap-4">
@@ -193,6 +236,13 @@ export function SearchResultAll() {
             <Albums albums={albums} />
           </div>
         </div>
+        <div className="w-full h-1/2">
+          {artists.length > 0 && (
+            <div className="w-full h-full">
+              <Artists artists={artists} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -202,22 +252,29 @@ function Search({ setCurrPage }) {
   const [currSong, setCurrSong] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
+  const [artists, setArtist] = useState([]);
   let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
   useEffect(() => {
     fetchTopSongs(setTopSongs);
     fetchSongData("top songs", setCurrSong);
     fetchAlbumsbySongName("top songs", setAlbums);
+    fetchArtistsbySongName("arijit singh", setArtist);
   }, []);
 
   return (
-    <div className="w-screen h-screen p-4 text-center overflow-y-auto">
+    <div className="w-screen h-screen p-4 text-center ">
       <div className="w-full h-full flex gap-4">
         <Navbar setCurrPage={setCurrPage} />
         <div className="w-full h-full flex flex-col gap-3">
           {/* Search bar */}
           <div className="rounded-lg flex w-full">
-            <SearchBar setTopSongs={setTopSongs} setAlbums={setAlbums} />
+            <SearchBar
+              setTopSongs={setTopSongs}
+              setAlbums={setAlbums}
+              setArtist={setArtist}
+              topSongs={topSongs}
+            />
             <UserIconSection username="user" />
           </div>
           {/* Main section */}
@@ -266,9 +323,18 @@ function Search({ setCurrPage }) {
                       </div>
                     </div>
                   </div>
-                  <Outlet
-                    context={{ topSongs, setCurrSong, shouldAutoPlay, setShouldAutoPlay, albums }}
-                  />
+                  <div className="w-full h-full overflow-scroll ">
+                    <Outlet
+                      context={{
+                        topSongs,
+                        setCurrSong,
+                        shouldAutoPlay,
+                        setShouldAutoPlay,
+                        albums,
+                        artists,
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               {/* Music player */}
