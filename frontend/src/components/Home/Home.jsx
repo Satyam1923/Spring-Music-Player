@@ -15,25 +15,25 @@ function Main() {
       {/* Top user section */}
       <UserIconSection/>
       {/* Middle */}
-      <div className="w-full h-[25%]">
+      <div className="w-full  mb-20  h-[25%]">
         <RecentlyPlayed />
       </div>
 
       {/* Bottom */}
-      <div className="h-[75%] w-full">
+      <div className="h-[75%]  w-full">
         <div className="flex h-full gap-4">
           {/* Left section */}
           <div className="flex flex-col gap-4 w-full h-full">
             <div className="h-[40%]">
               <TopArtists setCurrentArtist={setCurrentArtist} />
             </div>
-            <div className="flex h-[60%] gap-4 w-full">
+            <div className="flex h-[60%]  gap-4 w-full">
               <Genres />
               <TopCharts currentArtist={currentArtist} setCurrentSong={setCurrentSong}/>
             </div>
           </div>
           {/* Right section */}
-          <div className="w-[30%] min-w-[300px] h-[80%]  relative">
+          <div className="w-[30%]  min-w-[300px] h-[80%]  relative">
             <MusicPlayer currSong={currentSong} shouldAutoPlay={true} />
           </div>
         </div>
@@ -199,7 +199,7 @@ function TopCharts({ currentArtist ,setCurrentSong}) {
   
 
   return (
-    <div className="bg-[#18181D] w-full h-full rounded-lg">
+    <div className="bg-[#18181D]  w-full h-full rounded-lg">
       <div className="w-full h-full flex flex-col">
         <div className="flex h-[15%] justify-between items-center text-center p-1 ml-4 mr-4 mt-2">
           <h1 className="text-2xl text-white font-medium">{title}</h1>
