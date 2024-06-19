@@ -15,7 +15,7 @@ return (
      
             loading ?
             <div className='pre'>
-                <Lottie className="preloader" animationData={pre}/>
+                <Lottie className="preloader" animationData={pre} color="#83ce89"/>
             </div>
             
              :

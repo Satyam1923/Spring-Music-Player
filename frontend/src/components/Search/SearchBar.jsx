@@ -1,38 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import { fetchSonsgByName } from "../../Utils";
+import { fetchSonsgByName ,fetchAlbumsbySongName,fetchArtistsbySongName } from "../../Utils";
 
-function SearchBar({ setTopSongs }) {
+function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
   const inputElement = useRef(null);
   const [searchValue, setSearchValue] = useState('');
 
-  useEffect(() => {
-    const storedSearchValue = localStorage.getItem('searchValue');
-    if (storedSearchValue) {
-      setSearchValue(storedSearchValue);
-      fetchSonsgByName(storedSearchValue,setTopSongs);
-    }
-  }, []);
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+  };
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
-    localStorage.setItem('searchValue', value);
+  const handleSearch = async () => {
+    if (searchValue.trim() !== '') {
+      await fetchSonsgByName(searchValue, setTopSongs);
+      await fetchAlbumsbySongName(searchValue, setAlbums);
+      await fetchArtistsbySongName(searchValue, setArtist);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+      setSearchValue('');
+    }
   };
 
   useEffect(() => {
-    const searchSong = (e) => {
-      if (e.key === "Enter" && document.activeElement === inputElement.current) {
-        fetchSonsgByName(searchValue, setTopSongs);
-      }
-    };
+    const timeoutId = setTimeout(handleSearch, 200);
+  }, [searchValue, setTopSongs, setAlbums, setArtist]);
 
-    window.addEventListener("keypress", searchSong);
-    return () => {
-      window.removeEventListener("keypress", searchSong);
-    };
-  }, [searchValue, setTopSongs]);
 
   return (
     <div className="flex gap-2 w-full h-full">
@@ -53,7 +50,8 @@ function SearchBar({ setTopSongs }) {
           ref={inputElement}
           type="text"
           value={searchValue}
-          onChange={handleChange}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
           className="rounded-lg w-full h-full bg-transparent text-white pl-14"
           placeholder="What do you want to play?"
         />
