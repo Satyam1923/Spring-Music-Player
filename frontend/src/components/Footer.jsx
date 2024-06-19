@@ -39,6 +39,25 @@ const Footer = () => {
         </ul>
       </div>
       <div className="divider md:h-[1.5px] sm:h-[1px]"></div>
+      {/* Newsletter subscription */}
+      <div className="sec3 md:p-3 sm:p-2">
+        <span className="sm:text-[14px]">SUBSCRIBE TO OUR NEWSLETTER:</span>
+        <form className="flex flex-col items-center sm:flex-row sm:justify-center gap-2 mt-2">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="p-2 rounded-md sm:w-1/2"
+            required
+          />
+          <button
+            type="submit"
+            className="p-2 bg-blue-500 text-white rounded-md sm:w-1/6"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+      <div className="divider md:h-[1.5px] sm:h-[1px]"></div>
       <div className="sec3 md:p-3  ">
         <span className="sm:text-[14px]">FOLLOW US AT:</span>
         <div className="  flex flex-wrap  justify-center items-center gap-5 md:gap-2">
