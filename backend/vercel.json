@@ -9,8 +9,11 @@
 	"routes": [
 		{
 			"src": "/(.*)",
-
 			"dest": "/"
 		}
-	]
+	],
+	"crons": [{
+		"path": "/putData",
+		"schedule": "10 20 * * *"  
+	  }]
 }
