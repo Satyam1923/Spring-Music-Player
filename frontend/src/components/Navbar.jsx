@@ -1,5 +1,5 @@
 import React from "react";
-import { IoMdHome } from "react-icons/io";
+import { IoIosAlbums, IoMdHome } from "react-icons/io";
 import { GoHomeFill, GoHome } from "react-icons/go";
 import { MdOutlineFavoriteBorder, MdFavorite, MdLibraryMusic, MdOutlineLibraryMusic } from "react-icons/md";
 import { FaHeart, FaSearch } from "react-icons/fa";

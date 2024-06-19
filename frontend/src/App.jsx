@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PagenotFound from "./components/PagenotFound";
 import "swiper/css";
 import "swiper/css/pagination";
