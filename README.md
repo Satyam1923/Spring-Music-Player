@@ -21,7 +21,7 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 **Server:** Node, Express, Firebase, Axios
 
-**API:** JioSaavn API (unofficial) - [API Link](http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app)
+**API:** [API Link](http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app)
 
 <hr>
 

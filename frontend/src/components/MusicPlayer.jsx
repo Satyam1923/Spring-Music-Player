@@ -4,6 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/src/styles.scss";
 import "./styles.scss";
+import {CirclePlay,CirclePause,Rewind,VolumeX,Volume2,FastForward,Repeat2} from "lucide-react";
 
 function MusicPlayer({ currSong, shouldAutoPlay }) {
   const songName = currSong.name || "Reminder";
@@ -12,12 +13,23 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
   const artistName = currSong.artist || "The Weeknd";
   const audioUrl = currSong.url || "";
   const audioPlayerRef = useRef(null);
+  
 
   useEffect(() => {
     if (audioPlayerRef.current && !shouldAutoPlay) {
       audioPlayerRef.current.audio.current.pause();
     }
   }, [currSong]);
+
+  const customIcons={
+    play:<CirclePlay />,
+    pause:<CirclePause />,
+    rewind:<Rewind />,
+    forward: <FastForward />,
+    loop:<Repeat2 />,
+    volume:<Volume2 />,
+    volumeMute: <VolumeX />
+  }
 
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
@@ -47,6 +59,7 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
             autoPlay={false}
             className="rounded-lg bg-[#83ce89] text-black h-full"
             src={audioUrl}
+            customIcons={customIcons}
           />
         </div>
       </div>

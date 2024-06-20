@@ -45,8 +45,7 @@ app.use("/search/artists", getArtists);
 app.use("/search/artist", getArtistsById);
 
 //get top artists
-app.use("/top-artists", getTopArtists);
-
+app.use("/top-artists",getTopArtists)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port${PORT}`);
