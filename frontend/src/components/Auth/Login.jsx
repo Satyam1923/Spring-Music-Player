@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth,db } from './firebase';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Oval } from 'react-loader-spinner';
+import { doc, getDoc,setDoc } from 'firebase/firestore';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import logo from "../assets/logo2.png";
