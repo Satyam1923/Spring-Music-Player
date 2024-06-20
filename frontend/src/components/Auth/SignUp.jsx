@@ -12,8 +12,8 @@ const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
@@ -48,7 +48,7 @@ const SignUp = () => {
     const fetchUserData = async () => {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                navigate('/');
+                navigate('/')
             }
         });
     };
@@ -56,10 +56,6 @@ const SignUp = () => {
     useEffect(() => {
         fetchUserData();
     }, []);
-
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
-    };
 
     return (
         <div>
@@ -77,50 +73,69 @@ const SignUp = () => {
             />
             <div className="bg-[#18181D] flex flex-col p-4">
                 <form className="flex flex-col items-center p-10 gap-5" onSubmit={handleSignUp}>
-                    <div className="w-full flex items-center justify-between p-2">
-                        <label htmlFor="name" className="font-bold">Full Name:</label>
-                        <input
-                            id="name"
-                            className="p-2 text-black"
-                            placeholder="Enter your full name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="w-full flex items-center justify-between p-2">
-                        <label htmlFor="email" className="font-bold">Email:</label>
-                        <input
-                            id="email"
-                            type="email"
-                            className="p-2 text-black"
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="w-full flex items-center justify-between p-2">
-                        <label htmlFor="password" className="font-bold">Password:</label>
-                        <div className="relative w-full">
-                            <input
-                                id="password"
-                                type={passwordVisible ? "text" : "password"}
-                                className="p-2 text-black w-full pr-10"
-                                placeholder="Enter password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700"
-                                onClick={togglePasswordVisibility}
-                            >
-                                {passwordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
-                            </button>
-                        </div>
-                    </div>
+                    <table style={{ borderCollapse: "separate", borderSpacing: "0 1em" }}>
+                        <tbody>
+                            <tr>
+                                <td style={{ textAlign: "right", paddingRight: "10px" }}>
+                                    <label htmlFor="name" className="font-bold text-white-500">Full Name:</label>
+                                </td>
+                                <td>
+                                    <input
+                                        id="name"
+                                        className="p-2 text-black"
+                                        style={{ width: "250px" }}
+                                        placeholder="Enter your full name"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        required
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{ textAlign: "right", paddingRight: "10px" }}>
+                                    <label htmlFor="email" className="font-bold text-white-500">Email:</label>
+                                </td>
+                                <td>
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        className="p-2 text-black"
+                                        style={{ width: "250px" }}
+                                        placeholder="Enter email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style={{ textAlign: "right", paddingRight: "10px" }}>
+                                    <label htmlFor="password" className="font-bold text-white-500">Password:</label>
+                                </td>
+                                <td style={{ display: "flex", alignItems: "center" }}>
+                                    <input
+                                        id="password"
+                                        type={showPassword ? "text" : "password"}
+                                        className="p-2 text-black"
+                                        style={{ width: "250px" }}
+                                        placeholder="Enter password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <span
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        style={{
+                                            marginLeft: "10px",
+                                            cursor: "pointer"
+                                        }}
+                                    >
+                                        {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <button
                         type="submit"
                         className="bg-[#0f0f11] p-3 rounded-xl px-10 hover:bg-black"
