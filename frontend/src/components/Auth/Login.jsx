@@ -1,152 +1,187 @@
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import React, { useState, useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { auth, db } from './firebase';
-import { toast, ToastContainer } from 'react-toastify';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Oval } from 'react-loader-spinner';
-import { doc, setDoc } from 'firebase/firestore';
-import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+import logo from "../assets/logo2.png";
+import Loader from "../components/Loader/Loader"; // Ensure this path is correct
+import { useAuth } from "../authContext";
 
-const Login = () => {
-    const navigate = useNavigate();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    accountType: "",
+    password: "",
+  });
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            toast.success("User Logged In Successfully!");
-            navigate('/');
-        } catch (err) {
-            toast.error(err.message);
-            console.log(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const { checkAuthentication } = useAuth();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-    const goggleLogin = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then(async (result) => {
-            const user = result.user;
-            if (result.user) {
-                toast.success("User logged in successfully");
-                await setDoc(doc(db, "Users", user.uid), {
-                    email: user.email,
-                    name: user.displayName,
-                    photo: user.photoURL
-                });
-            }
-        });
-    };
+  const navigate = useNavigate();
 
-    const fetchUserData = async () => {
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                navigate('/');
-            }
-        });
-    };
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("rememberedEmail");
+    if (storedEmail) {
+      setFormData((prevData) => ({
+        ...prevData,
+        email: storedEmail,
+      }));
+      setRememberMe(true);
+    }
+  }, []);
 
-    useEffect(() => {
-        fetchUserData();
-    }, []);
+  function changeHandler(event) {
+    setFormData((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
+  }
 
-    return (
-        <div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                theme='dark'
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            <div className="bg-[#18181D] gap-4 flex flex-col p-4">
-                <form className="flex flex-col items-center p-10 gap-5" onSubmit={handleLogin}>
-                    <div className="w-full flex items-center justify-between p-2">
-                        <label htmlFor="email" className="font-bold text-red-500">Email:</label>
-                        <input
-                            id="email"
-                            type="email"
-                            className="p-2 text-black flex-grow"
-                            placeholder="Enter email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="w-full flex items-center justify-between p-2 relative">
-                        <label htmlFor="password" className="font-bold text-red-500">Password:</label>
-                        <input
-                            id="password"
-                            type={showPassword ? "text" : "password"}
-                            className="p-2 text-black flex-grow"
-                            placeholder="Enter password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <div className="absolute right-2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-                            {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
-                        </div>
-                    </div>
-                    <button
-                        type="submit"
-                        className="bg-[#0f0f11] p-3 rounded-xl px-10 hover:bg-black"
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <div className="flex justify-center mt-4">
-                                <Oval
-                                    height={40}
-                                    width={40}
-                                    color="#00BFFF"
-                                    visible={true}
-                                    ariaLabel='loading'
-                                />
-                            </div>
-                        ) : (
-                            <>Submit</>
-                        )}
-                    </button>
-                </form>
-                <p className='text-sm text-gray-200 text-center'>- Or continue with -</p>
-                <div className="flex items-center justify-center ">
-                    <button className="flex items-center bg-[#0f0f11] border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-black " onClick={goggleLogin}>
-                        <svg className="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1">
-                            <title>Google-color</title>
-                            <desc>Created with Sketch.</desc>
-                            <defs></defs>
-                            <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                                <g id="Color-" transform="translate(-401.000000, -860.000000)">
-                                    <g id="Google" transform="translate(401.000000, 860.000000)">
-                                        <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"></path>
-                                        <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"></path>
-                                        <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"></path>
-                                        <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"></path>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                        <span>Sign in with Google</span>
-                    </button>
-                </div>
-                <p className='flex justify-end gap-2'>
-                    Don't have an account? <Link to="/signup" className='font-bold hover:text-blue-200 hover:underline'>Register Here</Link>
-                </p>
+  function rememberMeHandler(event) {
+    setRememberMe(event.target.checked);
+    if (!event.target.checked) {
+      localStorage.removeItem("rememberedEmail");
+    }
+  }
+
+  async function submitHandler(event) {
+    event.preventDefault();
+    setLoading(true);
+
+    if (rememberMe) {
+      localStorage.setItem("rememberedEmail", formData.email);
+    }
+
+    const apiUrl =
+      formData.accountType === "User"
+        ? `${process.env.REACT_APP_BASE_URL}/studentLogin`
+        : `${process.env.REACT_APP_BASE_URL}/canteenLogin`;
+
+    try {
+      const response = await axios.post(apiUrl, formData);
+      toast.success("User Logged in");
+      if (formData.accountType === "User") {
+        navigate("/home");
+      } else {
+        navigate(`/section/${response.data.cantId}`);
+      }
+    } catch (error) {
+      toast.error("Failed to login");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="relative h-screen md:flex">
+          <div className="absolute top-0 right-0 m-3">
+            <Link to="/contact">
+              <button className="hover:shadow-blue-950 hover:shadow-sm text-white py-1 px-2 w-full h-auto text-l relative z-0 rounded-full transition-all duration-200 hover:scale-110">
+                <img src="/c4.png" className="h-10 w-10" />
+              </button>
+            </Link>
+          </div>
+          <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-t from-blue-950 via-blue-950 to-gray-900 bg-no-repeat justify-around items-center hidden">
+            <div>
+              <img src={logo} alt="logo" className="w-48 h-12 mb-2" />
+              <p className="text-white mt-1 ml-3">
+                Connecting You to Your College Canteens
+              </p>
             </div>
+            <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+            <div className="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+            <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+            <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
+          </div>
+          <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
+            <form className="bg-white p-8 rounded shadow-lg w-80" onSubmit={submitHandler}>
+              <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
+              <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
+              <div className="mb-4">
+                <input
+                  required
+                  className="w-full py-2 px-3 border border-gray-300 rounded-2xl"
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={changeHandler}
+                />
+              </div>
+              <div className="mb-4">
+                <select
+                  required
+                  name="accountType"
+                  onChange={changeHandler}
+                  value={formData.accountType}
+                  className="mt-1 p-2 w-full border rounded-2xl"
+                >
+                  <option value="" disabled hidden>
+                    Login as
+                  </option>
+                  <option value="User">User</option>
+                  <option value="Canteen">Canteen</option>
+                </select>
+              </div>
+              <div className="relative mb-4">
+                <input
+                  required
+                  className="w-full py-2 px-3 border border-gray-300 rounded-2xl"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={changeHandler}
+                />
+                <span
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? (
+                    <AiOutlineEyeInvisible size={20} />
+                  ) : (
+                    <AiOutlineEye size={20} />
+                  )}
+                </span>
+              </div>
+              <div className="remember-me mb-4">
+                <input
+                  type="checkbox"
+                  id="remember-me"
+                  checked={rememberMe}
+                  onChange={rememberMeHandler}
+                />
+                <label htmlFor="remember-me"> Remember me</label>
+              </div>
+              <div className="mb-4 flex justify-center text-red-400">
+                <Link to="/forgotPassword">
+                  <h1 className="font-medium">Forgot Password ?</h1>
+                </Link>
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-t from-blue-950 via-blue-950 to-gray-900 py-2 rounded-2xl text-white font-semibold mb-2"
+                disabled={loading}
+              >
+                Login
+              </button>
+              <Link to="/signup">
+                <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">
+                  Don't have an account? Sign Up
+                </span>
+              </Link>
+            </form>
+          </div>
         </div>
-    );
-};
+      )}
+    </>
+  );
+}
 
 export default Login;
