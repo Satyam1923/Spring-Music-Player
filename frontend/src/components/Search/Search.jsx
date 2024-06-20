@@ -75,7 +75,7 @@ function Albums({ albums }) {
           <h1 className="text-2xl md:text-2xl text-white font-medium">Albums</h1>
         </div>
         <div className="flex h-[90%] gap-4 md:gap-8 flex-wrap">
-          {albums.map((album, index) => (
+          {albums.slice(0, 6).map((album, index) => (
             <AlbumElement key={index} album={album} />
           ))}
         </div>
