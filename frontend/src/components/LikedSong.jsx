@@ -1,5 +1,5 @@
-import React from 'react';
-import './likedsong.css';
+import React, { useEffect, useState } from "react";
+import "./likedsong.css";
 
 import { FaPlay } from "react-icons/fa";
 import { IoPlaySkipForwardSharp, IoPlaySkipBack } from "react-icons/io5";
@@ -8,8 +8,10 @@ import { FaThumbsUp } from "react-icons/fa6";
 import { RiPlayListLine } from "react-icons/ri";
 
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import Sidebar from "./Sidebar";
+import Navbar from "./Navbar";
+import MusicPlayer from "./MusicPlayer";
+import { fetchAlbumsbySongName, fetchArtistsbySongName, fetchSongData, fetchTopSongs } from "../Utils";
 
 const LikedSong = () => {
   const playlist = {
@@ -37,6 +39,19 @@ const LikedSong = () => {
       ],
     },
   };
+
+  const [currSong, setCurrSong] = useState([]);
+  const [topSongs, setTopSongs] = useState([]);
+  const [albums, setAlbums] = useState([]);
+  const [artists, setArtist] = useState([]);
+  let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+
+  useEffect(() => {
+    fetchTopSongs(setTopSongs);
+    fetchSongData("top songs", setCurrSong);
+    fetchAlbumsbySongName("top songs", setAlbums);
+    fetchArtistsbySongName("arijit singh", setArtist);
+  }, []);
 
   return (
     <div className="flex w-full min-h-screen">
@@ -149,7 +164,7 @@ const LikedSong = () => {
       </div>
 
       <div className="w-1/6 relative bottom-0 right-0 mt-auto rounded-md bg-neutral-800 mb-10">
-        <div className="p-5">
+        {/* <div className="p-5">
           <div className="flex justify-between">
             <FaThumbsUp size={30} />
             <RiPlayListLine size={30} />
@@ -182,8 +197,9 @@ const LikedSong = () => {
               <TbPlaylistAdd size={30} />
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
+            <MusicPlayer currSong={currSong} shouldAutoPlay={true} />
+            </div>
     </div>
   );
 };

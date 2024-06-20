@@ -35,7 +35,6 @@ function Navbar() {
           </Link>
           <IoIosAlbums className="w-full h-full scale-[0.8] hover:cursor-pointer" />
           <AiFillLike className="w-full h-full scale-[0.8] hover:cursor-pointer" />
-          <IoAlbums className="w-full h-full scale-[0.8] hover:cursor-pointer" />
         </div>
         <div className="bg-[#18181D] flex p-4 pt-6 pb-6 flex-col gap-8 rounded-lg items-center justify-center hover:bg-gray-800">
           <PiPlaylistBold className="w-full h-full scale-[0.8] hover:cursor-pointer" />
