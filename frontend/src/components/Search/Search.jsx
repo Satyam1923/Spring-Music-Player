@@ -285,7 +285,7 @@ function Search({ setCurrPage }) {
                 <div className="w-full h-full gap-2 flex flex-col">
                   <div className="w-full p-2">
                     {/* Search filters */}
-                    <div className="w-full h-20 flex justify-start gap-6">
+                    <div className="w-full h-14 flex justify-start gap-6">
                       <div className="bg-white flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
                         <Link to="all">
                           <h2 className="text-3xl bg-transparent text-black text-center w-full font-medium">
