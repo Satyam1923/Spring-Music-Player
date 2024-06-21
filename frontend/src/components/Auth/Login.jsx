@@ -1,10 +1,10 @@
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth,db } from './firebase';
+import { auth, db } from './firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner';
-import { doc, getDoc,setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -16,9 +16,17 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
             toast.success("User Logged In Successfully!");
             navigate('/');
+            
+            // Store user data in Firestore
+            await setDoc(doc(db, "Users", user.uid), {
+                email: user.email,
+                name: user.displayName || "Anonymous",
+                photo: user.photoURL || "default-photo-url"
+            }, { merge: true }); // Use merge: true to avoid overwriting existing data
         } catch (err) {
             toast.error(err.message);
             console.log(err.message);
@@ -26,34 +34,38 @@ const Login = () => {
             setLoading(false);
         }
     };
+
     const goggleLogin = () => {
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider).then(async (result) => {
-            console.log(result)
-            const user=result.user
-            if (result.user) {
-                toast.success("User logged in successfully")
+            const user = result.user;
+            if (user) {
+                toast.success("User logged in successfully");
                 await setDoc(doc(db, "Users", user.uid), {
                     email: user.email,
                     name: user.displayName,
                     photo: user.photoURL
-                });
+                }, { merge: true }); // Use merge: true to avoid overwriting existing data
+                navigate('/');
             }
-        })
-
-    }
+        }).catch((err) => {
+            toast.error(err.message);
+            console.log(err.message);
+        });
+    };
 
     const fetchUserData = async () => {
-        auth.onAuthStateChanged((async (user) => {
-            //   console.log(user);
+        auth.onAuthStateChanged((user) => {
             if (user) {
-                navigate('/')
+                navigate('/');
             }
-        }))
-    }
+        });
+    };
+
     useEffect(() => {
         fetchUserData();
-    }, [])
+    }, []);
+
     return (
         <div>
             <ToastContainer
