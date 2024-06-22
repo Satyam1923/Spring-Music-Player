@@ -1,9 +1,10 @@
 {
-  "name": "spring-music-player",
+  "name": "clear",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "react-scripts start",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -53,8 +54,17 @@
     "jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
     "postcss": "^8.4.38",
+    "react-scripts": "^5.0.1",
     "sass": "^1.77.5",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0"
-  }
+  },
+  "description": "c",
+  "main": "C",
+  "repository": {
+    "type": "git",
+    "url": "^C"
+  },
+  "author": "",
+  "license": "ISC"
 }
