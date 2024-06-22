@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     }
     const apiUrl = `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(
       song
-    )}`;
+    )}&limit=30`;
     console.log(apiUrl);
     try {
       const response = await axios.get(apiUrl);
