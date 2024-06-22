@@ -32,7 +32,7 @@ export const fetchSonsgByName = async (songName, setSongs) => {
 export const fetchTopSongs = async (setTopSongs) => {
   try {
     const response = await axios.get("https://spring-music-player-3hyj.vercel.app/search?song=top songs");
-    const jsonData = response.data.slice(0,5);
+    const jsonData = response.data.slice(0,20);
     const topSongs = jsonData;
     setTopSongs(topSongs);
   } catch (error) {
