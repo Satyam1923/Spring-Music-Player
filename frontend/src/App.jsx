@@ -15,6 +15,7 @@ import Culture from "./pages/Culture";
 import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 import { SearchResultAll } from "./components/Search/Search";
+import Album from "./components/Album";
 
 function ComingSoon() {
   return <div className="flex w-full h-full justify-center items-center">Coming soon...</div>;
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/contactus" element={<Contactus />} />
         <Route path="/liked-song" element={<LikedSong />} />
+        <Route path="/album/:id" element={<Album />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/culture" element={<Culture />} />
         <Route path="/login" element={<Login />} />
