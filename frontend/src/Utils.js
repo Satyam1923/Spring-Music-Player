@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 export function secIntoMinSec(timeInSeconds) {
@@ -31,7 +32,7 @@ export const fetchSonsgByName = async (songName, setSongs) => {
 export const fetchTopSongs = async (setTopSongs) => {
   try {
     const response = await axios.get("https://spring-music-player-3hyj.vercel.app/search?song=top songs");
-    const jsonData = response.data.slice(0,5);
+    const jsonData = response.data.slice(0,20);
     const topSongs = jsonData;
     setTopSongs(topSongs);
   } catch (error) {
@@ -42,7 +43,7 @@ export const fetchTopSongs = async (setTopSongs) => {
 export const fetchAlbumsbySongName = async (songName,setAlbums)=>{
   try{
     const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/search/albums?query=${encodeURIComponent(songName)}`);
-    const jsonData = response.data.slice(0,6);
+    const jsonData = response.data.slice(0, 20);
     setAlbums(jsonData);
   }catch(error){
     console.error("There was a problem with the fetch operation:", error);

@@ -14,7 +14,7 @@ import {
 } from "../../Utils";
 import Footer from "../Footer";
 import { PiLayout } from "react-icons/pi";
-import { Link, Outlet, useOutletContext } from "react-router-dom";
+import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 function MusicTypeBlock({ name, color }) {
   return (
@@ -75,7 +75,7 @@ function Albums({ albums }) {
           <h1 className="text-2xl md:text-2xl text-white font-medium">Albums</h1>
         </div>
         <div className="flex h-[90%] gap-4 md:gap-8 flex-wrap">
-          {albums.map((album, index) => (
+          {albums.slice(0, 6).map((album, index) => (
             <AlbumElement key={index} album={album} />
           ))}
         </div>
@@ -255,11 +255,23 @@ function Search({ setCurrPage }) {
   const [artists, setArtist] = useState([]);
   let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
 
+  const searchAllNavLinkElement = useRef(null);
+
+  function removeAllAsActive() {
+    if (searchAllNavLinkElement) {
+      searchAllNavLinkElement.current.classList.remove("active")
+    }
+  }
+
   useEffect(() => {
     fetchTopSongs(setTopSongs);
     fetchSongData("top songs", setCurrSong);
     fetchAlbumsbySongName("top songs", setAlbums);
     fetchArtistsbySongName("arijit singh", setArtist);
+    if (searchAllNavLinkElement) {
+      searchAllNavLinkElement.current.classList.add("active")
+      console.log(searchAllNavLinkElement.current)
+    }
   }, []);
 
   return (
@@ -285,41 +297,41 @@ function Search({ setCurrPage }) {
                 <div className="w-full h-full gap-2 flex flex-col">
                   <div className="w-full p-2">
                     {/* Search filters */}
-                    <div className="w-full h-20 flex justify-start gap-6">
-                      <div className="bg-white flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <Link to="all">
-                          <h2 className="text-3xl bg-transparent text-black text-center w-full font-medium">
+                    <div className="search-filter-nav w-full h-14 flex justify-start gap-6">
+                      <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
+                        <NavLink ref={searchAllNavLinkElement}  to="all">
+                          <h2 className="text-3xl bg-transparent text-center w-full font-medium">
                             All
                           </h2>
-                        </Link>
+                        </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <Link to="songs">
+                        <NavLink onClick={() => removeAllAsActive()}  to="songs">
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Songs
                           </h2>
-                        </Link>
+                        </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <Link to="albums">
+                        <NavLink onClick={() => removeAllAsActive()}  to="albums">
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Albums
                           </h2>
-                        </Link>
+                        </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <Link to="playlist">
+                        <NavLink onClick={() => removeAllAsActive()}  to="playlist">
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Playlist
                           </h2>
-                        </Link>
+                        </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <Link to="artists">
+                        <NavLink onClick={() => removeAllAsActive()}  to="artists">
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Artists
                           </h2>
-                        </Link>
+                        </NavLink>
                       </div>
                     </div>
                   </div>
