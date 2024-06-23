@@ -59,7 +59,6 @@ const Album = () => {
           "https://spring-music-player-3hyj.vercel.app/top-artists"
         );
         const data = await res.json();
-        console.log("Fetched data:", data);
 
         // Assuming data is an object with an array of artists inside
         const artistsArray = Array.isArray(data) ? data.songs : data.songs;
@@ -69,7 +68,6 @@ const Album = () => {
         );
 
         if (filteredArtist.length > 0) {
-          console.log("Set data:", filteredArtist[0]);
           setArtists(filteredArtist[0]);
         } else {
           setArtists("");
