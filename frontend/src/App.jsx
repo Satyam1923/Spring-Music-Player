@@ -17,6 +17,8 @@ import SignUp from "./components/Auth/SignUp";
 import { SearchResultAll } from "./components/Search/Search";
 import Album from "./components/Album";
 import SearchAlbums from "./components/Search/SearchAlbums"
+import SearchSongs from "./components/Search/SearchSongs"
+
 
 function ComingSoon() {
   return <div className="flex w-full h-full justify-center items-center">Coming soon...</div>;
