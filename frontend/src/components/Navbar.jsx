@@ -1,8 +1,8 @@
 import React from "react";
-import { IoMdHome } from "react-icons/io";
+import { IoIosAlbums, IoMdHome } from "react-icons/io";
 import { GoHomeFill, GoHome } from "react-icons/go";
 import { MdOutlineFavoriteBorder, MdFavorite, MdLibraryMusic, MdOutlineLibraryMusic } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
+import { FaHeart, FaSearch } from "react-icons/fa";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { PiPlaylistBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
@@ -30,8 +30,10 @@ function Navbar() {
           <Link to="/" className="w-full h-full hover:cursor-pointer">
             <HiHome className="w-full h-full" />
           </Link>
-          <AiFillLike className="w-full h-full scale-[0.8] hover:cursor-pointer" />
-          <IoAlbums className="w-full h-full scale-[0.8] hover:cursor-pointer" />
+          <Link to="/liked-song" className="w-full h-full hover:cursor-pointer">
+            <FaHeart className="w-full h-full scale-[0.8] hover:cursor-pointer" />
+          </Link>
+          <IoIosAlbums className="w-full h-full scale-[0.8] hover:cursor-pointer" />
         </div>
         <div className="bg-[#18181D] flex p-4 pt-6 pb-6 flex-col gap-8 rounded-lg items-center justify-center hover:bg-gray-800">
           <PiPlaylistBold className="w-full h-full scale-[0.8] hover:cursor-pointer" />
