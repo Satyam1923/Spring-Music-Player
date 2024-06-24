@@ -17,43 +17,20 @@ import { useParams } from "react-router-dom";
 const Album = () => {
   const params = useParams();
 
-  const playlist = {
-    tracks: {
-      items: [
-        {
-          title: "Song 1",
-          album: "Album 1",
-          dateAdded: "2023-06-01",
-          duration: "3:45",
-        },
-        {
-          title: "Song 2",
-          album: "Album 2",
-          dateAdded: "2023-06-02",
-          duration: "4:30",
-        },
-        {
-          title: "Song 3",
-          album: "Album 3",
-          dateAdded: "2023-06-03",
-          duration: "5:00",
-        },
-        // Add more songs as needed
-      ],
-    },
-  };
-
   const [currSong, setCurrSong] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState(null);
 
   useEffect(() => {
-    fetchTopSongs(setTopSongs);
     fetchSongData("top songs", setCurrSong);
     fetchAlbumsbySongName("top songs", setAlbums);
 
     const fetchData = async () => {
+      const response = await fetchTopSongs(setTopSongs);
+      console.log("res", response);
+      setTopSongs(response);
+
       try {
         const res = await fetch(
           "https://spring-music-player-3hyj.vercel.app/top-artists"
@@ -156,7 +133,7 @@ const Album = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {playlist.tracks.items.map((song, index) => (
+                  {topSongs.slice(0,10).map((song, index) => (
                     <tr
                       key={index}
                       className="border-b border-gray-600 hover:bg-gray-700"
@@ -164,20 +141,15 @@ const Album = () => {
                       <td className="px-4 py-2">{index + 1}</td>
                       <div className="flex items-center">
                         <div className="img">
-                          <img
-                            src="https://i.pinimg.com/564x/69/b7/70/69b770366d3c4a22e33885b5b3c58668.jpg"
-                            height={50}
-                            width={50}
-                            alt=""
-                          />
+                          <img src={song.img} height={50} width={50} alt="" />
                         </div>
                         <div className="detail flex flex-col py-2 mr-40">
-                          <td className="px-4 ">{song.title}</td>
-                          <td className="px-4">artist</td>
+                          <td className="px-4 ">{song.name}</td>
+                          <td className="px-4">{song.artist}</td>
                         </div>
                       </div>
-                      <td className="px-4 py-2">{song.album}</td>
-                      <td className="px-4 py-2">{song.dateAdded}</td>
+                      <td className="px-4 py-2">{song.album.name}</td>
+                      <td className="px-4 py-2">{song.year}</td>
                       <td className="px-4 py-2">{song.duration}</td>
                     </tr>
                   ))}
@@ -189,40 +161,6 @@ const Album = () => {
       </div>
 
       <div className="w-1/6 relative bottom-0 right-0 mt-auto rounded-md bg-neutral-800 mb-10">
-        {/* <div className="p-5">
-      <div className="flex justify-between">
-        <FaThumbsUp size={30} />
-        <RiPlayListLine size={30} />
-      </div>
-      <div className="flex flex-col items-center mb-6 justify-center py-3">
-        <img
-          src={
-            "https://i.pinimg.com/564x/69/b7/70/69b770366d3c4a22e33885b5b3c58668.jpg"
-          }
-          className="rounded-xl object-cover"
-          alt=""
-          height={250}
-          width={250}
-        />
-        <div className="mt-3">
-          <h1>Song Name</h1>
-          <h1>Artist Name Name</h1>
-        </div>
-      </div>
-
-      <div className="action-buttons flex flex-col justify-center items-center min-h-[100px] mt-5 rounded-lg bg-green-500">
-        <div className="px-6 w-full">
-          <div className="bg-white p-1 w-full px-5 mb-3"></div>
-        </div>
-        <div className="flex gap-4">
-          <TbPlaylistAdd size={30} />
-          <IoPlaySkipBack size={30} />
-          <FaPlay size={25} />
-          <IoPlaySkipForwardSharp size={30} />
-          <TbPlaylistAdd size={30} />
-        </div>
-      </div>
-    </div> */}
         <MusicPlayer currSong={currSong} shouldAutoPlay={true} />
       </div>
     </div>

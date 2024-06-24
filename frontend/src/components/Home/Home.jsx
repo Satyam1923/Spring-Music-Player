@@ -167,7 +167,7 @@ function Genres() {
   );
 }
 
-function TopChartsElement({
+export function TopChartsElement({
   index,
   song,
   img,
