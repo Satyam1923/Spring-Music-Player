@@ -244,26 +244,29 @@ function TopCharts({ currentArtist, setCurrentSong }) {
   );
 }
 
-function TopArtistElement({ id, name, weeks_on_chart, img, onClick, key, album }) {
+function TopArtistElement({
+  id,
+  name,
+  weeks_on_chart,
+  img,
+  onClick,
+  key,
+  album,
+}) {
   return (
-    <Link to={`/album/${album.rank}`} onClick={() => console.log(album)}>
-      <div
-        key={id}
-        className="flex flex-1 p-2 flex-col gap-2 hover:cursor-pointer"
-        onClick={() => onClick(name)}
-      >
-        <img
-          src={img}
-          className="h-[60%] aspect-square rounded-lg object-fill"
-        />
-        <div className="flex h-[20%] flex-col gap-1">
-          <h2 className="font-medium text-white text-[1em]">
-            {name.toUpperCase()}
-          </h2>
-          {/* <h4 className="text-white font-medium text-[0.9em]">top charts: {weeks_on_chart} </h4> */}
-        </div>
+    <div
+      key={id}
+      className="flex flex-1 p-2 flex-col gap-2 hover:cursor-pointer"
+      onClick={() => onClick(name)}
+    >
+      <img src={img} className="h-[60%] aspect-square rounded-lg object-fill" />
+      <div className="flex h-[20%] flex-col gap-1">
+        <h2 className="font-medium text-white text-[1em]">
+          {name.toUpperCase()}
+        </h2>
+        {/* <h4 className="text-white font-medium text-[0.9em]">top charts: {weeks_on_chart} </h4> */}
       </div>
-    </Link>
+    </div>
   );
 }
 

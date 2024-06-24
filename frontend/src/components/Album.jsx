@@ -12,6 +12,7 @@ import {
   fetchTopSongs,
 } from "../Utils";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 // when user click on particular album, this page will be rendered
 const Album = () => {
@@ -31,28 +32,23 @@ const Album = () => {
       console.log("res", response);
       setTopSongs(response);
 
+      console.log("Song id is " + params.id);
+
+      const apiUrl = `https://saavn.dev/api/albums?id=${encodeURIComponent(params.id)}`;
+      
       try {
-        const res = await fetch(
-          "https://spring-music-player-3hyj.vercel.app/top-artists"
-        );
-        const data = await res.json();
-
-        // Assuming data is an object with an array of artists inside
-        const artistsArray = Array.isArray(data) ? data.songs : data.songs;
-
-        const filteredArtist = artistsArray.filter(
-          (artist) => artist.rank == params.id
-        );
-
-        if (filteredArtist.length > 0) {
-          setArtists(filteredArtist[0]);
+        const respone = await axios.get(apiUrl);
+        setArtists(respone.data.data);
+        console.log("another", respone.data);
+        if (respone.status != 200) {
+          throw new Error("Failed to fetch data from the external API");
         } else {
-          setArtists("");
+          res.status(200).json(respone.data);
         }
       } catch (error) {
-        console.error("Error fetching artists:", error);
+        res.status(500).json({ error: "Internal server error" });
       }
-    };
+    }
 
     fetchData();
   }, [params.id]);
@@ -73,7 +69,7 @@ const Album = () => {
           <div className="flex bg-cyan-500 rounded-xl">
             <div className="playlist-img px-3 py-4">
               <img
-                src={artists && artists.cover}
+                src={artists && artists.image[1].url}
                 className="rounded-xl object-cover"
                 alt=""
                 height={250}
@@ -81,21 +77,15 @@ const Album = () => {
               />
             </div>
             <div className="playlist-info text-white w-full mt-auto mb-4">
-              <h1 className="text-8xl font-sans font-bold mb-4">Album</h1>
+              <h1 className="text-8xl font-sans font-bold mb-4">{artists && artists.name}</h1>
               <div className="flex items-center mt-2 justify-between">
                 <div className="flex px-2">
                   <h1 className="font-bold hover:underline hover:cursor-pointer">
                     {artists && artists.artist}
                   </h1>
                   <li className="hover:underline hover:cursor-pointer ml-5">
-                    2020
+                   { artists && artists.description}
                   </li>
-                  <li className="hover:underline hover:cursor-pointer ml-5">
-                    200 songs ,
-                  </li>
-                  <h1 className=" hover:underline hover:cursor-pointer ml-2">
-                    About 2 hours 3 minutes
-                  </h1>
                 </div>
                 <div className="mr-2 flex gap-4">
                   <RiPlayListLine size={30} />
@@ -114,13 +104,11 @@ const Album = () => {
                     <th className="px-4 py-2 text-left">Title</th>
                     <th className="px-4 py-2 text-left">Album</th>
                     <th className="px-4 py-2 text-left">Date Added</th>
-                    <th className="px-4 py-2 text-left">
-                      Duration
-                    </th>
+                    <th className="px-4 py-2 text-left">Duration</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {topSongs.slice(0,10).map((song, index) => (
+                  {topSongs.slice(0, 10).map((song, index) => (
                     <tr
                       key={index}
                       className="border-b border-gray-600 hover:bg-gray-700"
