@@ -24,33 +24,30 @@ const Album = () => {
   const [artists, setArtists] = useState(null);
 
   useEffect(() => {
-    fetchSongData("top songs", setCurrSong);
     fetchAlbumsbySongName("top songs", setAlbums);
 
     const fetchData = async () => {
-      const response = await fetchTopSongs(setTopSongs);
-      console.log("res", response);
-      setTopSongs(response);
+      // const response = await fetchTopSongs(setTopSongs);
+      // console.log("res", response);
 
       console.log("Song id is " + params.id);
 
-      const apiUrl = `https://saavn.dev/api/albums?id=${encodeURIComponent(params.id)}`;
-      
+      const apiUrl = `https://saavn.dev/api/albums?id=${encodeURIComponent(
+        params.id
+      )}`;
+
       try {
         const respone = await axios.get(apiUrl);
         setArtists(respone.data.data);
         console.log("another", respone.data);
-        if (respone.status != 200) {
-          throw new Error("Failed to fetch data from the external API");
-        } else {
-          res.status(200).json(respone.data);
-        }
+        setTopSongs(respone.data.data.songs);
       } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+        response.json({ error: "Internal server error" });
       }
-    }
+    };
 
     fetchData();
+    // getAlbumsSong();
   }, [params.id]);
 
   return (
@@ -77,14 +74,16 @@ const Album = () => {
               />
             </div>
             <div className="playlist-info text-white w-full mt-auto mb-4">
-              <h1 className="text-8xl font-sans font-bold mb-4">{artists && artists.name}</h1>
+              <h1 className="text-8xl font-sans font-bold mb-4">
+                {artists && artists.name}
+              </h1>
               <div className="flex items-center mt-2 justify-between">
                 <div className="flex px-2">
                   <h1 className="font-bold hover:underline hover:cursor-pointer">
                     {artists && artists.artist}
                   </h1>
                   <li className="hover:underline hover:cursor-pointer ml-5">
-                   { artists && artists.description}
+                    {artists && artists.description}
                   </li>
                 </div>
                 <div className="mr-2 flex gap-4">
@@ -111,12 +110,17 @@ const Album = () => {
                   {topSongs.slice(0, 10).map((song, index) => (
                     <tr
                       key={index}
-                      className="border-b border-gray-600 hover:bg-gray-700"
+                      className="border-b border-gray-600 py-2 hover:bg-gray-700"
                     >
                       <td className="px-4 py-2">{index + 1}</td>
                       <div className="flex items-center">
                         <div className="img">
-                          <img src={song.img} height={50} width={50} alt="" />
+                          <img
+                            src={song.image[0].url}
+                            height={50}
+                            width={50}
+                            alt=""
+                          />
                         </div>
                         <div className="detail flex flex-col py-2 mr-40">
                           <td className="px-4 ">{song.name}</td>
