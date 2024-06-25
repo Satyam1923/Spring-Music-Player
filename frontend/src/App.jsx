@@ -24,6 +24,7 @@ function ComingSoon() {
 
 const App = () => {
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route path="/search" element={<Search />}>
@@ -46,6 +47,16 @@ const App = () => {
         <Route path="*" element={<PagenotFound />} />
       </Routes>
     </BrowserRouter>
+      <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/Aboutus" component={Aboutus} />
+        <Route path="/Culture" component={Culture}/>
+        <Route path="/Contactus" component={Contactus}/>
+        <Route path="/Terms" component={Terms}/>
+      </Switch>
+    </Router>
+    </>
   );
 };
 

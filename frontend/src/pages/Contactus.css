@@ -101,3 +101,10 @@ input, textarea {
     background-color: #45a049;
 } */
 
+.back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+  }
