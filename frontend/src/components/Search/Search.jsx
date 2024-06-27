@@ -56,8 +56,8 @@ function AlbumElement({ album }) {
       ? album.primaryArtists[0].name
       : "Unknown Artist";
   return (
-    <Link to={`/album/${album.id}`} onClick={() => console.log(album)}>
-      <div className="flex flex-1 flex-col max-w-full gap-3 hover:cursor-pointer">
+    <div className="flex flex-1 flex-col max-w-full min-w-0 gap-3 hover:cursor-pointer">
+      <Link to={`/album/${album.id}`} onClick={() => console.log(album)}>
         <div className="flex justify-center rounded-lg">
           <img
             className="h-32 w-32 rounded-lg"
@@ -69,8 +69,8 @@ function AlbumElement({ album }) {
           <h2 className="text-sm text-white">{album.name}</h2>
           <h4 className="text-xs text-white">{`${artistName} - ${album.year}`}</h4>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
