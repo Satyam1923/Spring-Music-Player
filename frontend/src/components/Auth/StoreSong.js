@@ -1,16 +1,35 @@
 // StoreSong.js
-import { collection, addDoc, setDoc, doc, writeBatch } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, writeBatch, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "./firebase";
+import { useState } from "react";
 
 async function storeSong(song) {
   try {
+    let songId;
     if (song.id) {
       const songRef = doc(db, "songs", song.id);
       await setDoc(songRef, song);
-      console.log("Song added with ID: ", song.id);
+      songId = song.id;
     } else {
       const docRef = await addDoc(collection(db, "songs"), song);
-      console.log("Song added with ID: ", docRef.id);
+      songId = docRef.id;
+    }
+
+    let userData = localStorage.getItem('user'); 
+    
+    const user = JSON.parse(userData);
+
+    console.log("user found", user)
+    if (user) {
+      console.log("inside ")
+
+      const userRef = doc(db, "Users", user.uid);
+      await updateDoc(userRef, {
+        songIds: arrayUnion(songId)
+      });
+      console.log("Song added with ID: ", songId);
+    } else {
+      console.log("User details not available, cannot update song IDs");
     }
   } catch (e) {
     console.error("Error adding song: ", e);
