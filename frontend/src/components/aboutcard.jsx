@@ -11,7 +11,12 @@ export const HoverEffect = ({ items, className }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <div className={cn("grid grid-cols-1 px-10 py-10", className)}>
+    <div
+      className={cn(
+        "grid grid-cols-1 cardmin:grid-cols-2 px-10 py-10",
+        className
+      )}
+    >
       {items.map((item, idx) => (
         <div
           key={idx}
