@@ -12,7 +12,7 @@ export default {
         xs: { max: "480px" },
         minmd: "1700px",
         minlg: "2100px",
-        cardmin: "500px",
+        cardmin: { min: "500px" },
       },
     },
   },
