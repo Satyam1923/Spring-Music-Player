@@ -19,17 +19,12 @@ export const auth = createSlice({
             return {
                 value : {
                     isAuth:true,
-                    email:action.payload.email
-                }
+                    username: action.payload.username,
+                    email: action.payload.email                }
             }
         },
-        setUsername:(state,action) => {
-            return {
-                value : {
-                    isAuth:true,
-                    username:action.payload.username
-                }
-            }
+        setUsername:(state, action) => {
+            state.value.username = action.payload.username;
         }
     }
 })
