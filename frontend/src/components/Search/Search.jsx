@@ -50,20 +50,27 @@ function SearchDefault() {
 }
 
 function AlbumElement({ album }) {
-  const imageUrl = album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
+  const imageUrl =
+    album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
   const artistName =
     album.primaryArtists && album.primaryArtists[0]
       ? album.primaryArtists[0].name
       : "Unknown Artist";
   return (
-    <div className="flex flex-1 flex-col max-w-full gap-3 hover:cursor-pointer">
-      <div className="flex justify-center rounded-lg">
-        <img className="h-32 w-32 rounded-lg" src={imageUrl} alt={`${album.name} album cover`} />
-      </div>
-      <div className="flex flex-col gap-1">
-        <h2 className="text-sm text-white">{album.name}</h2>
-        <h4 className="text-xs text-white">{`${artistName} - ${album.year}`}</h4>
-      </div>
+    <div className="flex flex-1 flex-col max-w-full min-w-0 gap-3 hover:cursor-pointer">
+      <Link to={`/album/${album.id}`} onClick={() => console.log(album)}>
+        <div className="flex justify-center rounded-lg">
+          <img
+            className="h-32 w-32 rounded-lg"
+            src={imageUrl}
+            alt={`${album.name} album cover`}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <h2 className="text-sm text-white">{album.name}</h2>
+          <h4 className="text-xs text-white">{`${artistName} - ${album.year}`}</h4>
+        </div>
+      </Link>
     </div>
   );
 }
@@ -73,7 +80,9 @@ function Albums({ albums }) {
     <div className="bg-[#18181D] p-2 w-full h-full rounded-lg">
       <div className="flex flex-col p-2 gap-5 w-full h-full">
         <div className="flex h-[5%] justify-between items-center text-center p-1">
-          <h1 className="text-2xl md:text-2xl text-white font-medium">Albums</h1>
+          <h1 className="text-2xl md:text-2xl text-white font-medium">
+            Albums
+          </h1>
         </div>
         <div className="flex h-[90%] gap-4 md:gap-8 flex-wrap">
           {albums.slice(0, 6).map((album, index) => (
@@ -89,7 +98,11 @@ function ArtistElement({ artist }) {
   return (
     <div className="flex flex-1 flex-col gap-3 hover:cursor-pointer">
       <div className="flex justify-center rounded-lg">
-        <img className="h-32 w-32 rounded-lg" src={artist.image[1].url} alt="" />
+        <img
+          className="h-32 w-32 rounded-lg"
+          src={artist.image[1].url}
+          alt=""
+        />
       </div>
       <div className="flex  flex-col gap-1">
         <h2 className=" text-sm text-white ">{artist.name}</h2>
@@ -104,7 +117,9 @@ function Artists({ artists }) {
     <div className="bg-[#18181D] p-2  w-full h-full rounded-lg">
       <div className="flex flex-col p-2 gap-5 w-full h-full">
         <div className="flex h-[5%] justify-between items-center text-center p-1">
-          <h1 className="text-2xl md:text-2xl text-white font-medium">Artists</h1>
+          <h1 className="text-2xl md:text-2xl text-white font-medium">
+            Artists
+          </h1>
         </div>
         <div className="flex h-[90%] gap-4 md:gap-8 flex-warp">
           {artists.map((artist, index) => (
@@ -131,11 +146,18 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
       <div className="flex gap-4">
         <div className="flex items-center">{number}</div>
         <div className="flex h-full  items-center">
-          <img src={song.img || ""} className="h-10 w-10  rounded-md object-fill" />
+          <img
+            src={song.img || ""}
+            className="h-10 w-10  rounded-md object-fill"
+          />
         </div>
         <div className="flex h-full justify-center flex-col gap-1">
-          <h2 className="font-medium text-left text-white text-[0.9em]">{song.name}</h2>
-          <h4 className="text-white  text-left text-[0.7em]">{song.artist || "Unknown artist"}</h4>
+          <h2 className="font-medium text-left text-white text-[0.9em]">
+            {song.name}
+          </h2>
+          <h4 className="text-white  text-left text-[0.7em]">
+            {song.artist || "Unknown artist"}
+          </h4>
         </div>
       </div>
 
@@ -190,7 +212,9 @@ export function SearchResultAll() {
         <div className="flex gap-4 w-full h-[44vh]  rounded-lg bg-[#18181D]">
           {/* Top Results section */}
           <div className="flex flex-col w-[30%] mb-auto h-full p-3 gap-2">
-            <h2 className="w-full text-2xl h-[10%] ml-3 text-left font-medium">Top Results</h2>
+            <h2 className="w-full text-2xl h-[10%] ml-3 text-left font-medium">
+              Top Results
+            </h2>
             <div className="bg-[#0E0C0C] w-full h-[88%] rounded-xl flex flex-col gap-4 p-4">
               {/* Song Image */}
               <div className="h-[70%] w-full">
@@ -263,7 +287,7 @@ function Search({ setCurrPage }) {
 
   function removeAllAsActive() {
     if (searchAllNavLinkElement) {
-      searchAllNavLinkElement.current.classList.remove("active")
+      searchAllNavLinkElement.current.classList.remove("active");
     }
   }
 
@@ -273,8 +297,8 @@ function Search({ setCurrPage }) {
     fetchAlbumsbySongName("top songs", setAlbums);
     fetchArtistsbySongName("arijit singh", setArtist);
     if (searchAllNavLinkElement) {
-      searchAllNavLinkElement.current.classList.add("active")
-      console.log(searchAllNavLinkElement.current)
+      searchAllNavLinkElement.current.classList.add("active");
+      console.log(searchAllNavLinkElement.current);
     }
   }, []);
 
@@ -303,35 +327,44 @@ function Search({ setCurrPage }) {
                     {/* Search filters */}
                     <div className="search-filter-nav w-full h-14 flex justify-start gap-6">
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <NavLink ref={searchAllNavLinkElement}  to="all">
+                        <NavLink ref={searchAllNavLinkElement} to="all">
                           <h2 className="text-3xl bg-transparent text-center w-full font-medium">
                             All
                           </h2>
                         </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <NavLink onClick={() => removeAllAsActive()}  to="songs">
+                        <NavLink onClick={() => removeAllAsActive()} to="songs">
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Songs
                           </h2>
                         </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <NavLink onClick={() => removeAllAsActive()}  to="albums">
+                        <NavLink
+                          onClick={() => removeAllAsActive()}
+                          to="albums"
+                        >
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Albums
                           </h2>
                         </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <NavLink onClick={() => removeAllAsActive()}  to="playlist">
+                        <NavLink
+                          onClick={() => removeAllAsActive()}
+                          to="playlist"
+                        >
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Playlist
                           </h2>
                         </NavLink>
                       </div>
                       <div className="bg-[#18181D] flex items-center justify-center hover:cursor-pointer min-w-[70px] rounded-lg pl-4 pr-4">
-                        <NavLink onClick={() => removeAllAsActive()}  to="artists">
+                        <NavLink
+                          onClick={() => removeAllAsActive()}
+                          to="artists"
+                        >
                           <h2 className="text-2xl bg-transparent text-center w-full font-medium">
                             Artists
                           </h2>
@@ -355,7 +388,10 @@ function Search({ setCurrPage }) {
               </div>
               {/* Music player */}
               <div className="w-[30%] min-w-[300px] h-[64vh] rounded-lg mt-[20vh]">
-                <MusicPlayer currSong={currSong} shouldAutoPlay={shouldAutoPlay} />
+                <MusicPlayer
+                  currSong={currSong}
+                  shouldAutoPlay={shouldAutoPlay}
+                />
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 function SearchAlbums() {
   const context = useOutletContext();
@@ -24,24 +24,27 @@ function SearchAlbums() {
 }
 
 function AlbumElement({ album }) {
-  const imageUrl = album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
+  const imageUrl =
+    album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
   const artistName =
     album.primaryArtists && album.primaryArtists[0]
       ? album.primaryArtists[0].name
       : "Unknown Artist";
   return (
     <div className="flex flex-1 flex-col max-w-full justify-center  gap-3 hover:cursor-pointer">
-      <div className="flex justify-center rounded-lg p-4">
-        <img
-          className="h-full w-full rounded-lg"
-          src={imageUrl}
-          alt={`${album.name} album cover`}
-        />
-      </div>
-      <div className="flex flex-col gap-1">
-        <h2 className="text-sm text-white">{album.name}</h2>
-        <h4 className="text-xs text-white">{`${artistName} - ${album.year}`}</h4>
-      </div>
+      <Link to={`/album/${album.id}`}>
+        <div className="flex justify-center rounded-lg p-4">
+          <img
+            className="h-full w-full rounded-lg"
+            src={imageUrl}
+            alt={`${album.name} album cover`}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <h2 className="text-sm text-white">{album.name}</h2>
+          <h4 className="text-xs text-white">{`${artistName} - ${album.year}`}</h4>
+        </div>
+      </Link>
     </div>
   );
 }
