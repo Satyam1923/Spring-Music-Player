@@ -139,9 +139,12 @@ const Album = () => {
         </div>
       </div>
 
-      <div className="w-1/6 relative bottom-0 right-0 mt-auto rounded-md bg-neutral-800 mb-10">
-        <MusicPlayer currSong={currSong} shouldAutoPlay={true} />
-      </div>
+      <div className="w-[30%] min-w-[300px] h-[64vh] rounded-lg mt-[20vh]">
+                <MusicPlayer
+                  currSong={currSong}
+                  shouldAutoPlay={true}
+                />
+              </div>
     </div>
   );
 };
