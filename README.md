@@ -128,6 +128,8 @@ npm run dev
 4. **Access the local server**
 You will receive a link in your terminal.
 
+5. Make dummy firebase project and Use it's config in firebase.js
+
 ## Contributing Readme.
 
 ### For someone working on backend
@@ -156,6 +158,7 @@ npm install .
 ```sh
 npm run dev
 ```
+4. Make dummy firebase project and Use it's config in firebase.js
 
 ## For someone working on backend+frontend
 1. Change directory
@@ -182,6 +185,7 @@ npm install .
 ```sh
 cd  src
 ```
+7. Make dummy firebase project and Use it's config in firebase.js
 
 <hr>
 
