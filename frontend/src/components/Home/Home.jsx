@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { FaPlayCircle } from "react-icons/fa";
@@ -46,9 +47,9 @@ function Main() {
 }
 
 function RecentlyPlayedElement({ name, singer, image }) {
-  return ( 
-    <div className="bg-[#18181D] p-7 rounded-[20px]">
-      <div className="flex items-center gap-10 flex-wrap ">
+  return (
+    <div className="bg-[#18181D] p-4 rounded-[20px]">
+      <div className="flex items-center gap-5 flex-wrap ">
         <img
           src={image}
           alt="LogoMusicImage"
@@ -60,7 +61,7 @@ function RecentlyPlayedElement({ name, singer, image }) {
           <p className="opacity-65">{singer}</p>
         </div>
       </div>
-    </div> 
+    </div>
   );
 }
 
@@ -71,7 +72,7 @@ function RecentlyPlayed() {
         Recently Played
       </h1>
       <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
-        <div className="flex justify-between gap-4 flex-wrap">
+        <div className="flex justify-between gap-1 flex-wrap">
           <RecentlyPlayedElement
             name="Yaar Haryana te"
             image={
@@ -79,6 +80,7 @@ function RecentlyPlayed() {
             }
             singer="Khasa Aala"
           />
+
           <RecentlyPlayedElement
             name="IMA"
             image={
@@ -92,6 +94,13 @@ function RecentlyPlayed() {
             image={
               "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             }
+          />
+          <RecentlyPlayedElement
+            name="Yaar Haryana te"
+            image={
+              "https://a10.gaanacdn.com/gn_img/albums/NOXWVRgWkq/XWVRedAMWk/size_m.jpg"
+            }
+            singer="Khasa Aala"
           />
           <RecentlyPlayedElement
             name="Deja Vu"
@@ -240,7 +249,9 @@ function TopArtistElement({ id, name, weeks_on_chart, img, onClick }) {
         <h2 className="font-medium text-white text-[1em]">
           {name.toUpperCase()}
         </h2>
-        {/* <h4 className="text-white font-medium text-[0.9em]">top charts: {weeks_on_chart} </h4> */}
+        <h4 className="text-white font-medium text-[0.9em]">
+          top charts: {weeks_on_chart}{" "}
+        </h4>
       </div>
     </div>
   );
