@@ -35,6 +35,7 @@ export const fetchTopSongs = async (setTopSongs) => {
     const jsonData = response.data.slice(0,20);
     const topSongs = jsonData;
     setTopSongs(topSongs);
+    return topSongs
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
   }

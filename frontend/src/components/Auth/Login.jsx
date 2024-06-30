@@ -5,19 +5,23 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner';
 import { doc, getDoc,setDoc } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../redux/auth-slice';
 
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-
+const dispatch=useDispatch()
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
+            const user = userCredential.user;
             toast.success("User Logged In Successfully!");
+            dispatch(logIn({ username: user.displayName, email: user.email }));
             navigate('/');
         } catch (err) {
             toast.error(err.message);
@@ -26,22 +30,25 @@ const Login = () => {
             setLoading(false);
         }
     };
-    const goggleLogin = () => {
+    const goggleLogin = async () => {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then(async (result) => {
-            console.log(result)
-            const user=result.user
-            if (result.user) {
-                toast.success("User logged in successfully")
-                await setDoc(doc(db, "Users", user.uid), {
-                    email: user.email,
-                    name: user.displayName,
-                    photo: user.photoURL
-                });
-            }
-        })
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            toast.success("User logged in successfully");
+            await setDoc(doc(db, "Users", user.uid), {
+                email: user.email,
+                name: user.displayName,
+                photo: user.photoURL
+            });
+            dispatch(logIn({ username: user.displayName, email: user.email }));
+            navigate('/');
+        } catch (err) {
+            toast.error(err.message);
+            console.log(err.message);
+        }
+    };
 
-    }
 
     const fetchUserData = async () => {
         auth.onAuthStateChanged((async (user) => {
