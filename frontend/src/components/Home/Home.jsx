@@ -16,7 +16,7 @@ function Main() {
       {/* Top user section */}
       <UserIconSection />
       {/* Middle */}
-      <div className="w-full  mb-6  h-[25%] z-50">
+      <div className="w-full  mb-6  h-full z-50">
         <RecentlyPlayed />
       </div>
 
@@ -71,7 +71,7 @@ function RecentlyPlayed() {
       <h1 className="text-2xl w-[40%] font-medium text-left ml-1 text-white p-1">
         Recently Played
       </h1>
-      <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
+      <div className="flex flex-col gap-2 p-3 h-[80%] justify-between">
         <div className="flex justify-between gap-1 flex-wrap">
           <RecentlyPlayedElement
             name="Yaar Haryana te"
@@ -102,6 +102,43 @@ function RecentlyPlayed() {
             }
             singer="Khasa Aala"
           />
+          <RecentlyPlayedElement
+            name="Apna Bana Le"
+            singer="Sachin-Jigar"
+            image={
+              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+          />
+          <RecentlyPlayedElement
+            name="Yaar Haryana te"
+            image={
+              "https://a10.gaanacdn.com/gn_img/albums/NOXWVRgWkq/XWVRedAMWk/size_m.jpg"
+            }
+            singer="Khasa Aala"
+          />
+          <RecentlyPlayedElement
+            name="Yaar Haryana te"
+            image={
+              "https://a10.gaanacdn.com/gn_img/albums/NOXWVRgWkq/XWVRedAMWk/size_m.jpg"
+            }
+            singer="Khasa Aala"
+          />
+
+          <RecentlyPlayedElement
+            name="IMA"
+            image={
+              "https://source.boomplaymusic.com/group10/M00/08/22/ab61dab13b1947d3bd695288db08e04e.jpg"
+            }
+            singer="Ranbir Thouna"
+          />
+          <RecentlyPlayedElement
+            name="Apna Bana Le"
+            singer="Sachin-Jigar"
+            image={
+              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+          />
+
           <RecentlyPlayedElement
             name="Deja Vu"
             image={
