@@ -18,6 +18,7 @@ import { SearchResultAll } from "./components/Search/Search";
 import Album from "./components/Album";
 import SearchAlbums from "./components/Search/SearchAlbums"
 import SearchSongs from "./components/Search/SearchSongs"
+import Artist from "./components/Artist";
 
 
 function ComingSoon() {
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/contactus" element={<Contactus />} />
         <Route path="/liked-song" element={<LikedSong />} />
         <Route path="/album/:id" element={<Album />} />
+          <Route path="/artist/:id" element={<Artist />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/culture" element={<Culture />} />
         <Route path="/login" element={<Login />} />
