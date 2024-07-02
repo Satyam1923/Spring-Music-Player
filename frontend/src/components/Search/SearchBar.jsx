@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { fetchSonsgByName ,fetchAlbumsbySongName,fetchArtistsbySongName } from "../../Utils";
+import './SearchBar.css'
 
 function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
   const inputElement = useRef(null);
@@ -42,19 +43,18 @@ function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
         </div>
       </div>
       {/* Search bar */}
-      <div className="relative text-center rounded-lg border-4 border-[#18181D] bg-transparent">
-        <div className="absolute top-1/2 -translate-y-1/2 left-5 scale-[1.6] bg-transparent">
-          <IoSearch />
+      <div className="w-[400px] p-2">
+        <div className="custom-input-group">
+          <input
+            ref={inputElement}
+            type="text"
+            value={searchValue}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            className="input-searchbar"
+          />
+          <label className="input-label">Search Songs</label>
         </div>
-        <input
-          ref={inputElement}
-          type="text"
-          value={searchValue}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          className="rounded-lg w-full h-full bg-transparent text-white pl-14"
-          placeholder="What do you want to play?"
-        />
       </div>
     </div>
   );
