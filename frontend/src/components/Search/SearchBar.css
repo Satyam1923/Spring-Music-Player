@@ -35,3 +35,24 @@
   padding: 0 0.2em;
   color: #83ce89;
 }
+/* buttons */
+
+.search-button { 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 0px 4px rgba(109, 109, 109, 0.253);
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+ 
+
+.search-button:hover {
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: #83ce89; 
+}

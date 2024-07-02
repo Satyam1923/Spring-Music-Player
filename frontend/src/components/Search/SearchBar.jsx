@@ -1,19 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
-import { fetchSonsgByName ,fetchAlbumsbySongName,fetchArtistsbySongName } from "../../Utils";
-import './SearchBar.css'
+import {
+  fetchSonsgByName,
+  fetchAlbumsbySongName,
+  fetchArtistsbySongName,
+} from "../../Utils";
+import "./SearchBar.css";
 
-function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
+function SearchBar({ setTopSongs, setAlbums, setArtist, topSongs }) {
   const inputElement = useRef(null);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   const handleInputChange = (e) => {
     setSearchValue(e.target.value);
   };
 
   const handleSearch = async () => {
-    if (searchValue.trim() !== '') {
+    if (searchValue.trim() !== "") {
       await fetchSonsgByName(searchValue, setTopSongs);
       await fetchAlbumsbySongName(searchValue, setAlbums);
       await fetchArtistsbySongName(searchValue, setArtist);
@@ -21,9 +25,9 @@ function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSearch();
-      setSearchValue('');
+      setSearchValue("");
     }
   };
 
@@ -31,18 +35,15 @@ function SearchBar({ setTopSongs ,setAlbums ,setArtist , topSongs}) {
     const timeoutId = setTimeout(handleSearch, 200);
   }, [searchValue, setTopSongs, setAlbums, setArtist]);
 
-
   return (
-    <div className="flex gap-2 w-full h-full">
-      <div className="flex rounded-lg items-center max-w-[150px] bg-[#18181D] h-full">
-        <div className="w-[90%] h-[90%] p-2 pl-4 hover:cursor-pointer">
-          <FaAngleLeft className="w-full h-full" />
-        </div>
-        <div className="w-[90%] h-[90%] p-2 pr-4 hover:cursor-pointer">
-          <FaAngleRight className="w-full h-full" />
-        </div>
-      </div>
-      {/* Search bar */}
+    <div className="flex items-center  gap-2 w-full h-full">
+      
+        <button className="search-button mx-2">
+          <FaAngleLeft className="w-[50%] h-[50%]" />
+        </button>
+        <button className="search-button mx-2">
+          <FaAngleRight className="w-[50%] h-[50%]" />
+        </button> 
       <div className="w-[400px] p-2">
         <div className="custom-input-group">
           <input
