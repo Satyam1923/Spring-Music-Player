@@ -125,7 +125,7 @@ npm install .
 ```sh
 npm run dev
 ```
-4. **Access the local server**
+4. **Access the local server.**
 You will receive a link in your terminal.
 
 5. Make dummy firebase project and Use it's config in firebase.js
@@ -195,7 +195,7 @@ Contributions are what make the open source community such an amazing place to l
 
 - If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it.
 - Please ensure your pull request adheres to good practices and standards.
-- Pleae ensure your pull request have reference to the issue assigned.
+- Please ensure your pull request have reference to the issue assigned.
 - Please make sure you check your spelling and grammar.
 - Create individual Pull Requests for each issues.
 
