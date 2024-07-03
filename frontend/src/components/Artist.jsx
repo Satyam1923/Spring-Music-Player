@@ -12,7 +12,6 @@ import {
 } from "../Utils";
 import { useParams } from "react-router-dom";
 
-// when user click on particular album, this page will be rendered
 const Artist = () => {
   const params = useParams();
 
@@ -21,12 +20,7 @@ const Artist = () => {
   const [artists, setArtists] = useState(null);
 
   useEffect(() => {
-    // fetchAlbumsbySongName("top songs", setAlbums);
-
     const fetchData = async () => {
-      // const response = await fetchTopSongs(setTopSongs);
-      // console.log("res", response);
-
       console.log("Song id is " + params.id);
 
       try {
@@ -36,13 +30,16 @@ const Artist = () => {
         console.log("my response", apiUrl);
         setTopSongs(apiUrl);
       } catch (error) {
-        response.json({ error: "Internal server error" });
+        console.error("Internal server error", error);
       }
     };
 
     fetchData();
-    // getAlbumsSong();
   }, [params.id]);
+
+  const handleSongClick = (song) => {
+    setCurrSong(song);
+  };
 
   return (
     <div className="flex w-full min-h-screen">
@@ -104,7 +101,8 @@ const Artist = () => {
                   {topSongs && topSongs.slice(0, 10).map((song, index) => (
                     <tr
                       key={index}
-                      className="border-b border-gray-600 py-2 hover:bg-gray-700"
+                      className="border-b border-gray-600 py-2 hover:bg-gray-700 cursor-pointer"
+                      onClick={() => handleSongClick(song)}
                     >
                       <td className="px-4 py-2">{index + 1}</td>
                       <div className="flex items-center">
