@@ -18,6 +18,7 @@ import { SearchResultAll } from "./components/Search/Search";
 import Album from "./components/Album";
 import SearchAlbums from "./components/Search/SearchAlbums"
 import SearchSongs from "./components/Search/SearchSongs"
+import Contributors from "./pages/Contributors";
 
 
 function ComingSoon() {
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/culture" element={<Culture />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/contributors" element={<Contributors/>}/>
         <Route path="*" element={<PagenotFound />} />
       </Routes>
     </BrowserRouter>
