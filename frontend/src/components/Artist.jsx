@@ -65,7 +65,7 @@ const Artist = () => {
               />
             </div>
             <div className="playlist-info text-white w-full mt-auto mb-4">
-              <h1 className="text-8xl font-sans font-bold mb-4">
+              <h1 className="text-6xl font-sans font-bold mb-4">
                 {artists && artists.name}
               </h1>
               <div className="flex items-center mt-2 justify-between">
@@ -85,7 +85,7 @@ const Artist = () => {
             </div>
           </div>
 
-          <div className="mt-4">
+          <div className="mt-4 h-[500px] overflow-auto">
             <div className="overflow-x-auto">
               <table className="min-w-full text-white">
                 <thead className="border-b border-gray-600">
