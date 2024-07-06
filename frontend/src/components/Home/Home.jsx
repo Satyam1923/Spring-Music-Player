@@ -63,7 +63,10 @@ function Main() {
       <UserIconSection />
       {/* Middle */}
       <div className="w-full  mb-6  h-[25%]">
-        <RecentlyPlayed recentlyPlayedSongs={recentlyPlayedSongs} />
+        <RecentlyPlayed
+          setCurrentSong={setCurrentSong}
+          recentlyPlayedSongs={recentlyPlayedSongs}
+        />
       </div>
 
       {/* Bottom */}
@@ -92,7 +95,7 @@ function Main() {
   );
 }
 
-function RecentlyPlayed({ recentlyPlayedSongs }) {
+function RecentlyPlayed({ setCurrentSong, recentlyPlayedSongs }) {
   return (
     <div className="w-full h-full rounded-lg flex flex-col gap-2">
       <h1 className="text-2xl w-[40%] font-medium text-left ml-1 text-white p-1">
@@ -103,9 +106,11 @@ function RecentlyPlayed({ recentlyPlayedSongs }) {
           <div className="flex  gap-4 flex-wrap">
             {recentlyPlayedSongs.map((song, index) => (
               <RecentlyPlayedElement
+                song={song}
                 key={index}
                 name={song.name}
                 image={song.img}
+                setCurrentSong={setCurrentSong}
                 singer={song.artist}
               />
             ))}
@@ -118,11 +123,14 @@ function RecentlyPlayed({ recentlyPlayedSongs }) {
   );
 }
 
-function RecentlyPlayedElement({ name, image, singer }) {
-  return ( 
+function RecentlyPlayedElement({ setCurrentSong, song, name, image, singer }) {
+  console.log(song);
+  console.log(setCurrentSong);
+  return (
     <div className="bg-[#18181D] p-4 rounded-[20px]">
       <div className="flex items-center gap-5 flex-wrap ">
         <img
+          onClick={() => setCurrentSong(song)}
           src={image}
           alt="LogoMusicImage"
           className="w-20 h-20 object-cover rounded-[10px] cursor-pointer"
