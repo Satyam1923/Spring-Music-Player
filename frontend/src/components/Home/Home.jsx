@@ -6,18 +6,67 @@ import MusicPlayer from "../MusicPlayer";
 import UserIconSection from "../UserIconSection";
 import Footer from "../Footer";
 import { fetchTopSongs, fetchSonsgByName, secIntoMinSec } from "../../Utils";
-import { Link } from "react-router-dom";
+import { db } from "../Auth/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function Main() {
   const [currentArtist, setCurrentArtist] = useState(null);
   const [currentSong, setCurrentSong] = useState([]);
+  const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState([]);
+
+  useEffect(() => {
+    const fetchRecentlyPlayedSongs = async () => {
+      try {
+        let userData = localStorage.getItem("user");
+        const user = JSON.parse(userData);
+
+        if (user) {
+          const userDocRef = doc(db, "Users", user.uid);
+          const userDocSnapshot = await getDoc(userDocRef);
+
+          if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            const songIds = userData.songIds || [];
+
+            const songsPromises = songIds.map(async (songId) => {
+              const songRef = doc(db, "songs", songId);
+              const songDocSnapshot = await getDoc(songRef);
+
+              if (songDocSnapshot.exists()) {
+                return songDocSnapshot.data();
+              } else {
+                console.log(`Song with ID ${songId} not found`);
+                return null;
+              }
+            });
+
+            const songs = await Promise.all(songsPromises);
+            console.log("Recently played songs:", songs);
+            setRecentlyPlayedSongs(songs.filter((song) => song !== null));
+          } else {
+            console.log("User document does not exist");
+          }
+        } else {
+          console.log("User details not available");
+        }
+      } catch (error) {
+        console.error("Error fetching recently played songs:", error);
+      }
+    };
+
+    fetchRecentlyPlayedSongs();
+  }, []);
+
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
       <UserIconSection />
       {/* Middle */}
       <div className="w-full  mb-6  h-[25%]">
-        <RecentlyPlayed />
+        <RecentlyPlayed
+          setCurrentSong={setCurrentSong}
+          recentlyPlayedSongs={recentlyPlayedSongs}
+        />
       </div>
 
       {/* Bottom */}
@@ -46,76 +95,50 @@ function Main() {
   );
 }
 
-function RecentlyPlayedElement({ name, image }) {
+function RecentlyPlayed({ setCurrentSong, recentlyPlayedSongs }) {
   return (
-    <div className="flex gap-4 flex-1 items-center justify-start bg-[#18181D] rounded-md min-w-[150px] max-h-[70px] hover:cursor-pointer">
-      <img
-        src={image}
-        className="max-h-full aspect-square  rounded-md object-fill "
-      />
-      <h1 className="text-white font-medium">{name}</h1>
-    </div>
-  );
-}
-
-function RecentlyPlayed() {
-  return (
-    <div className=" w-full h-full rounded-lg flex flex-col gap-2">
+    <div className="w-full h-full rounded-lg flex flex-col gap-2">
       <h1 className="text-2xl w-[40%] font-medium text-left ml-1 text-white p-1">
         Recently Played
       </h1>
       <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
-        <div className="flex justify-between gap-4 flex-wrap">
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://i.scdn.co/image/ab67616d00001e02a91c10fe9472d9bd89802e5a"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-        </div>
-        <div className="flex justify-between gap-4 flex-wrap">
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://i.scdn.co/image/ab67616d0000b2736ca5c90113b30c3c43ffb8f4"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
+        {recentlyPlayedSongs.length > 0 ? (
+          <div className="flex  gap-4 flex-wrap">
+            {recentlyPlayedSongs.map((song, index) => (
+              <RecentlyPlayedElement
+                song={song}
+                key={index}
+                name={song.name}
+                image={song.img}
+                setCurrentSong={setCurrentSong}
+                singer={song.artist}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-white">No songs played recently.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function RecentlyPlayedElement({ setCurrentSong, song, name, image, singer }) {
+  console.log(song);
+  console.log(setCurrentSong);
+  return (
+    <div className="bg-[#18181D] p-4 rounded-[20px]">
+      <div className="flex items-center gap-5 flex-wrap ">
+        <img
+          onClick={() => setCurrentSong(song)}
+          src={image}
+          alt="LogoMusicImage"
+          className="w-20 h-20 object-cover rounded-[10px] cursor-pointer"
+        />
+
+        <div>
+          <h1>{name}</h1>
+          <p className="opacity-65">{singer}</p>
         </div>
       </div>
     </div>
