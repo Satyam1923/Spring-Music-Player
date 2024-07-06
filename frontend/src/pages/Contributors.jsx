@@ -18,13 +18,13 @@ function Contributors() {
   return (
     <div className="w-full h-full mb-8 pt-8 overflow-hidden bg-black">
       <h1 className="text-center text-4xl font-semibold text-gray-200 mb-8 uppercase">
-         Contributors
+        Contributors
       </h1>
       <div className="flex flex-wrap justify-center gap-8">
         {contributors.map((contributor) => (
           <div
             key={contributor.id}
-            className="w-full md:w-1/3 lg:w-1/4 flex flex-col items-center bg-white border border-gray-300 rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 hover:shadow-xl"
+            className="w-full md:w-1/3 lg:w-1/4 flex flex-col items-center bg-gray-800 border border-gray-300 rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 hover:shadow-xl"
           >
             <a
               href={contributor.html_url}
@@ -38,8 +38,10 @@ function Contributors() {
                 className="w-24 h-24 rounded-full object-cover mb-4"
               />
             </a>
-            <h2 className="text-lg font-medium text-gray-900 mb-2">{contributor.login}</h2>
-            <p className="text-gray-700">
+            <h2 className="text-lg font-medium text-gray-100 mb-2">
+              {contributor.login}
+            </h2>
+            <p className="text-gray-300">
               Contributions: {contributor.contributions}
             </p>
           </div>
@@ -50,6 +52,8 @@ function Contributors() {
 }
 
 export default Contributors;
+
+
 
 
 
