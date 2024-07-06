@@ -4,16 +4,17 @@ import { AiFillLike } from "react-icons/ai";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/src/styles.scss";
 import "./styles.scss";
-import {CirclePlay,CirclePause,Rewind,VolumeX,Volume2,FastForward,Repeat2} from "lucide-react";
+import { CirclePlay, CirclePause, Rewind, VolumeX, Volume2, FastForward, Repeat2 } from "lucide-react";
+import db from './Auth/firebase'; // Import Firestore instance from firebase.js
+import { collection, addDoc } from "firebase/firestore"; // Import Firestore methods
+import { LikesSong } from "./Auth/StoreSong";
 
 function MusicPlayer({ currSong, shouldAutoPlay }) {
   const songName = currSong.name || "Reminder";
-  const songImage =
-    currSong.img || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
+  const songImage = currSong.img || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
   const artistName = currSong.artist || "The Weeknd";
   const audioUrl = currSong.url || "";
   const audioPlayerRef = useRef(null);
-  
 
   useEffect(() => {
     if (audioPlayerRef.current && !shouldAutoPlay) {
@@ -21,15 +22,16 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
     }
   }, [currSong]);
 
-  const customIcons={
-    play:<CirclePlay />,
-    pause:<CirclePause />,
-    rewind:<Rewind />,
+  const customIcons = {
+    play: <CirclePlay />,
+    pause: <CirclePause />,
+    rewind: <Rewind />,
     forward: <FastForward />,
-    loop:<Repeat2 />,
-    volume:<Volume2 />,
+    loop: <Repeat2 />,
+    volume: <Volume2 />,
     volumeMute: <VolumeX />
-  }
+  };
+
 
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
@@ -37,7 +39,10 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
         {/* Image and like details */}
         <div className="flex h-full pt-6">
           <div className="flex justify-center h-full w-[20%]">
-            <AiFillLike className="scale-[1.5] mt-2 hover:cursor-pointer" />
+            <AiFillLike
+              className="scale-[1.5] mt-2 hover:cursor-pointer hover:bg-green-500"
+              onClick={() => LikesSong(currSong)} // Attach click handler
+            />
           </div>
           {/* Song Image */}
           <div className="flex flex-col justify-start gap-4 h-full w-[60%]">
