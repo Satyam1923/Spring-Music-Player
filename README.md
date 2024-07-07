@@ -191,6 +191,8 @@ cd  src
 
 ## 🤝 Contributing
 
+[![GitHub repo Good Issues for newbies](https://img.shields.io/github/issues/Satyam1923/Spring-Music-Player/good%20first%20issue?style=flat&logo=github&logoColor=green&label=Good%20First%20issues)](https://github.com/Satyam1923/Spring-Music-Player/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) [![GitHub Help Wanted issues](https://img.shields.io/github/issues/Satyam1923/Spring-Music-Player/help%20wanted?style=flat&logo=github&logoColor=b545d1&label=%22Help%20Wanted%22%20issues)](https://github.com/Satyam1923/Spring-Music-Player/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) [![GitHub Help Wanted PRs](https://img.shields.io/github/issues-pr/Satyam1923/Spring-Music-Player/help%20wanted?style=flat&logo=github&logoColor=b545d1&label=%22Help%20Wanted%22%20PRs)](https://github.com/Satyam1923/Spring-Music-Player/pulls?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) [![GitHub repo Issues](https://img.shields.io/github/issues/Satyam1923/Spring-Music-Player?style=flat&logo=github&logoColor=red&label=Issues)](https://github.com/Satyam1923/Spring-Music-Player/issues?q=is%3Aopen)
+
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 - If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it.
