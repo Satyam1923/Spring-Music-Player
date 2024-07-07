@@ -14,6 +14,7 @@ import {
 } from "../../Utils";
 import Footer from "../Footer";
 import { PiLayout } from "react-icons/pi";
+import { storeAlbum, storeSong } from "../Auth/StoreSong";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 function MusicTypeBlock({ name, color }) {
@@ -141,7 +142,8 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
       onClick={() => {
         setCurrSong(song);
         setShouldAutoPlay(true);
-      }}
+        storeSong(song);
+    console.log("song", song);    }}
     >
       <div className="flex gap-4">
         <div className="flex items-center">{number}</div>
@@ -181,11 +183,12 @@ function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
             if (index > 0) {
               return (
                 <SongElement
-                  key={index}
-                  number={index}
-                  song={song}
-                  setCurrSong={setCurrSong}
-                  setShouldAutoPlay={setShouldAutoPlay}
+                key={index}
+                number={index}
+                song={song}
+                setCurrSong={setCurrSong}
+                setShouldAutoPlay={setShouldAutoPlay}
+                onClick={() => storeSong(song)}
                 />
               );
             }
@@ -238,7 +241,8 @@ export function SearchResultAll() {
                   onClick={() => {
                     setCurrSong(topSongs[0]);
                     setShouldAutoPlay(true);
-                  }}
+
+                    storeAlbum(topSongs)                  }}
                 >
                   <FaPlay className="w-[50%] h-[50%]" />
                 </div>
