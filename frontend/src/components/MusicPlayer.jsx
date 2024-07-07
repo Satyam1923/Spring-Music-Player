@@ -12,7 +12,7 @@ import {
   Volume2,
   FastForward,
   Repeat2,
-} from "lucide-react"; 
+} from "lucide-react";
 
 function MusicPlayer({ currSong, shouldAutoPlay }) {
   const songName = currSong.name || "Reminder";
@@ -42,9 +42,7 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
   return (
     <div className="player ">
       <div className="wrapper">
-        <a target="_blank" href="https://www.instagram.com/correiamendsss/">
-          <img className="playerimg" src={songImage} alt="LogoMusicImage" />
-        </a>
+        <img className="playerimg" src={songImage} alt="LogoMusicImage" />
         <div className="info">
           <h1>{songName}</h1>
           <p>{artistName}</p>
@@ -61,7 +59,6 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
         </div>
       </div>
     </div>
-
   );
 }
 
