@@ -35,9 +35,33 @@ const Footer = () => {
   }, [showScroll]);
 
   return (
-    <div className="h-[300px] mt-56 w-full flex flex-col bgfooter sm:h-full">
-      {/* //for logo and social links */}
-      <div className="sec1  xs:text-[36px]">
+    <div className="h-[300px] mt-56 w-full flex flex-col bg-footer sm:h-full relative  ">
+      {/* Scroll to Top Button */}
+      <FaArrowUp
+        className="scrollTop hover:-translate-y-2.5 "
+        onClick={scrollTop}
+        style={{
+          height: 50,
+          width: 50,
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+          display: showScroll ? "flex" : "none",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "darkkhaki",
+          color: "white",
+          borderRadius: "80%",
+          boxShadow: "0 4px 8px",
+          cursor: "pointer",
+          zIndex: 1000,
+          transition: "all 0.5s ease",
+        }}
+      />
+
+      {/* for logo and social links */}
+
+      <div className="sec1 xs:text-[36px]">
         <div>SPRING</div>
       </div>
       <div className="divider md:h-[1.5px] sm:h-[1px]"></div>
