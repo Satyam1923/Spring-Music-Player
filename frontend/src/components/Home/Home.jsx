@@ -79,7 +79,7 @@ function Main() {
             </div>
             <div className="flex h-[60%]  gap-4 w-full">
               <Genres />
-              <TopCharts
+              <TopSongs
                 currentArtist={currentArtist}
                 setCurrentSong={setCurrentSong}
               />
@@ -190,7 +190,7 @@ function Genres() {
   );
 }
 
-export function TopChartsElement({
+export function TopSongsElement({
   index,
   song,
   img,
@@ -204,15 +204,17 @@ export function TopChartsElement({
       onClick={() => setCurrentSong(song)}
       className="flex justify-between items-center p-2 hover:cursor-pointer"
     >
-      <div className="flex gap-4">
-        <div>{index}</div>
-        <img src={img} className="w-10 h-10 object-cover" />
-        <div className="text-sm">
-          <div>{song.name}</div>
-          <div>{artistName}</div>
+      <div className="flex gap-4 justify-start">
+        <div className="text-center m-auto">{index}</div>
+        <div className="flex gap-4">
+          <img src={img} className="w-10 h-10 object-cover rounded-sm" />
+          <div className="text-sm text-start">
+            <div>{song.name}</div>
+            <div className="text-xs">{artistName}</div>
+          </div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <div>{songDuration}</div>
         <FaPlayCircle />
       </div>
@@ -220,7 +222,7 @@ export function TopChartsElement({
   );
 }
 
-function TopCharts({ currentArtist, setCurrentSong }) {
+function TopSongs({ currentArtist, setCurrentSong }) {
   const [topSongs, setTopSongs] = useState([]);
   const [title, setTitle] = useState("Top Songs");
 
@@ -251,7 +253,7 @@ function TopCharts({ currentArtist, setCurrentSong }) {
         {/* Top chart list */}
         <div className="flex flex-col gap-2 overflow-scroll  p-2">
           {topSongs.map((song, index) => (
-            <TopChartsElement
+            <TopSongsElement
               key={index}
               index={index + 1}
               song={song}
