@@ -10,6 +10,7 @@ import { BsYoutube } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
+import { MdOutlineKeyboardDoubleArrowUp } from "react-icons/md";
 
 const Footer = () => {
   const [showScroll, setShowScroll] = useState(false);
@@ -37,22 +38,22 @@ const Footer = () => {
   return (
     <div className="h-[300px] mt-56 w-full flex flex-col bg-footer sm:h-full relative  ">
       {/* Scroll to Top Button */}
-      <FaArrowUp
+      <MdOutlineKeyboardDoubleArrowUp
         className="scrollTop hover:-translate-y-2.5 "
         onClick={scrollTop}
         style={{
-          height: 50,
-          width: 50,
+          height: 40,
+          width: 40,
           position: "fixed",
           bottom: 20,
           right: 20,
           display: showScroll ? "flex" : "none",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "darkkhaki",
-          color: "white",
-          borderRadius: "80%",
-          boxShadow: "0 4px 8px",
+          backgroundColor: "black",
+          color: "lightgrey",
+          borderRadius: "50%",
+          boxShadow: " 2px 4px 8px",
           cursor: "pointer",
           zIndex: 1000,
           transition: "all 0.5s ease",
