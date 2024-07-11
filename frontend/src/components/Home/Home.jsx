@@ -252,7 +252,7 @@ function TopSongs({ currentArtist, setCurrentSong }) {
         </div>
         {/* Top chart list */}
         <div className="flex flex-col gap-2 overflow-scroll  p-2">
-          {topSongs.map((song, index) => (
+          {topSongs.slice(0, 10).map((song, index) => (
             <TopSongsElement
               key={index}
               index={index + 1}
