@@ -9,10 +9,14 @@ import { fetchTopSongs, fetchSonsgByName, secIntoMinSec } from "../../Utils";
 import { db } from "../Auth/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
-function Main() {
+function Main({ topSongs }) {
   const [currentArtist, setCurrentArtist] = useState(null);
   const [currentSong, setCurrentSong] = useState([]);
   const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState([]);
+
+  useEffect(() => {
+    setCurrentSong(topSongs.length > 0 ? topSongs[0] : topSongs)
+  }, [topSongs])
 
   useEffect(() => {
     const fetchRecentlyPlayedSongs = async () => {
@@ -46,9 +50,8 @@ function Main() {
           } else {
             console.log("User document does not exist");
           }
-        } else {
-          console.log("User details not available");
         }
+        console.log("User details not available");
       } catch (error) {
         console.error("Error fetching recently played songs:", error);
       }
@@ -80,6 +83,7 @@ function Main() {
             <div className="flex h-[60%]  gap-4 w-full">
               <Genres />
               <TopSongs
+                topSongs={topSongs}
                 currentArtist={currentArtist}
                 setCurrentSong={setCurrentSong}
               />
@@ -222,8 +226,7 @@ export function TopSongsElement({
   );
 }
 
-function TopSongs({ currentArtist, setCurrentSong }) {
-  const [topSongs, setTopSongs] = useState([]);
+function TopSongs({ topSongs, currentArtist, setCurrentSong }) {
   const [title, setTitle] = useState("Top Songs");
 
   useEffect(() => {
@@ -232,7 +235,6 @@ function TopSongs({ currentArtist, setCurrentSong }) {
         await fetchSonsgByName(currentArtist, setTopSongs);
         setTitle(currentArtist);
       } else {
-        await fetchTopSongs(setTopSongs);
         // setTopSongs(topSongsData);
         setTitle("Top Songs");
       }
@@ -280,7 +282,6 @@ function TopArtistElement({
 }) {
   return (
     <div
-      key={id}
       className="flex flex-1 p-2 flex-col gap-2 hover:cursor-pointer"
       onClick={() => onClick(name)}
     >
@@ -321,9 +322,9 @@ function TopArtists({ setCurrentArtist }) {
           {artists &&
             artists.songs
               .slice(0, 8)
-              .map((artist) => (
+              .map((artist, index) => (
                 <TopArtistElement
-                  key={artist.rank}
+                  key={index}
                   id={artist.id}
                   name={artist.artist}
                   weeks_on_chart={artist.position.weeksOnChart}
@@ -339,11 +340,20 @@ function TopArtists({ setCurrentArtist }) {
 }
 
 function Home({ setCurrPage }) {
+  const [topSongs, setTopSongs] = useState([]);
+
+  useEffect(() => {
+    const fetchTopSongsData = async () => {
+      await fetchTopSongs(setTopSongs);
+    };
+    fetchTopSongsData();
+  }, [])
+
   return (
     <div className="w-screen h-screen p-4 text-center">
       <div className="w-full h-full flex gap-4">
         <Navbar setCurrPage={setCurrPage} />
-        <Main />
+        <Main topSongs={topSongs} />
       </div>
       <Footer />
     </div>
