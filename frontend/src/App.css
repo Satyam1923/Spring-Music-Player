@@ -759,3 +759,11 @@ margin-top: 50px;
   color: aqua;
 }
 
+/* Styling for search-filter navigation in search page  */
+.search-filter-nav > div:has(> a.active) {
+  background-color: white;
+}
+
+.search-filter-nav > div:has(> a.active) > a > h2 {
+  color: black;
+}

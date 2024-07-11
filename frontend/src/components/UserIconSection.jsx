@@ -12,7 +12,9 @@ function UserIconSection() {
   const [userDetails, setUserDetails] = useState(null)
   const fetchUserData = async () => {
     auth.onAuthStateChanged((async (user) => {
-      // console.log(user);
+      console.log(user);
+      localStorage.setItem("user", JSON.stringify
+        (user))
       if (user) {
         const docRef = doc(db, "Users", user.uid);
         const docSnap = await getDoc(docRef)

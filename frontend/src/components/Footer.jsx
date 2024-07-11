@@ -40,6 +40,9 @@ const Footer = () => {
           <li>
             <Link to="/contactus" className="hov" >Help and Support</Link>
           </li>
+          <li>
+            <Link to="/contributors" className="hov">Our Contributors</Link>
+          </li>
         </ul>
       </div>
       <div className="divider md:h-[1.5px] sm:h-[1px]"></div>

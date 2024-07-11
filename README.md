@@ -21,7 +21,7 @@ The Spring Music Player with JioSaavn API Integration is a web application that 
 
 **Server:** Node, Express, Firebase, Axios
 
-**API:** JioSaavn API (unofficial) - [API Link](http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app)
+**API:** [API Link](http://jiosaavn-olj6ym1v4-thesumitkolhe.vercel.app)
 
 <hr>
 
@@ -125,8 +125,10 @@ npm install .
 ```sh
 npm run dev
 ```
-4. **Access the local server**
+4. **Access the local server.**
 You will receive a link in your terminal.
+
+5. Make dummy firebase project and Use it's config in firebase.js
 
 ## Contributing Readme.
 
@@ -156,6 +158,7 @@ npm install .
 ```sh
 npm run dev
 ```
+4. Make dummy firebase project and Use it's config in firebase.js
 
 ## For someone working on backend+frontend
 1. Change directory
@@ -182,16 +185,19 @@ npm install .
 ```sh
 cd  src
 ```
+7. Make dummy firebase project and Use it's config in firebase.js
 
 <hr>
 
 ## 🤝 Contributing
 
+[![GitHub repo Good Issues for newbies](https://img.shields.io/github/issues/Satyam1923/Spring-Music-Player/good%20first%20issue?style=flat&logo=github&logoColor=green&label=Good%20First%20issues)](https://github.com/Satyam1923/Spring-Music-Player/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) [![GitHub Help Wanted issues](https://img.shields.io/github/issues/Satyam1923/Spring-Music-Player/help%20wanted?style=flat&logo=github&logoColor=b545d1&label=%22Help%20Wanted%22%20issues)](https://github.com/Satyam1923/Spring-Music-Player/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) [![GitHub Help Wanted PRs](https://img.shields.io/github/issues-pr/Satyam1923/Spring-Music-Player/help%20wanted?style=flat&logo=github&logoColor=b545d1&label=%22Help%20Wanted%22%20PRs)](https://github.com/Satyam1923/Spring-Music-Player/pulls?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) [![GitHub repo Issues](https://img.shields.io/github/issues/Satyam1923/Spring-Music-Player?style=flat&logo=github&logoColor=red&label=Issues)](https://github.com/Satyam1923/Spring-Music-Player/issues?q=is%3Aopen)
+
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 - If you have any suggestions for the projects, like reporting a bug, improving UI/UX, or enhancing the README.md file, feel free to **open an issue** to discuss it.
 - Please ensure your pull request adheres to good practices and standards.
-- Pleae ensure your pull request have reference to the issue assigned.
+- Please ensure your pull request have reference to the issue assigned.
 - Please make sure you check your spelling and grammar.
 - Create individual Pull Requests for each issues.
 

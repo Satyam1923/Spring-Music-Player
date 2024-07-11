@@ -1,23 +1,73 @@
-import {useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { FaPlayCircle } from "react-icons/fa";
 import "react-h5-audio-player/lib/styles.css";
 import MusicPlayer from "../MusicPlayer";
 import UserIconSection from "../UserIconSection";
 import Footer from "../Footer";
-import { fetchTopSongs, fetchSonsgByName,secIntoMinSec} from "../../Utils";
+import { fetchTopSongs, fetchSonsgByName, secIntoMinSec } from "../../Utils";
+import { db } from "../Auth/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function Main() {
-  const [currentArtist,setCurrentArtist]=useState(null);
-  const [currentSong,setCurrentSong]=useState([]);
+  const [currentArtist, setCurrentArtist] = useState(null);
+  const [currentSong, setCurrentSong] = useState([]);
+  const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState([]);
+
+  useEffect(() => {
+    const fetchRecentlyPlayedSongs = async () => {
+      try {
+        let userData = localStorage.getItem("user");
+        const user = JSON.parse(userData);
+
+        if (user) {
+          const userDocRef = doc(db, "Users", user.uid);
+          const userDocSnapshot = await getDoc(userDocRef);
+
+          if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            const songIds = userData.songIds || [];
+
+            const songsPromises = songIds.map(async (songId) => {
+              const songRef = doc(db, "songs", songId);
+              const songDocSnapshot = await getDoc(songRef);
+
+              if (songDocSnapshot.exists()) {
+                return songDocSnapshot.data();
+              } else {
+                console.log(`Song with ID ${songId} not found`);
+                return null;
+              }
+            });
+
+            const songs = await Promise.all(songsPromises);
+            console.log("Recently played songs:", songs);
+            setRecentlyPlayedSongs(songs.filter((song) => song !== null));
+          } else {
+            console.log("User document does not exist");
+          }
+        } else {
+          console.log("User details not available");
+        }
+      } catch (error) {
+        console.error("Error fetching recently played songs:", error);
+      }
+    };
+
+    fetchRecentlyPlayedSongs();
+  }, []);
+
   return (
     <div className="flex flex-col h-full gap-4 w-full">
       {/* Top user section */}
-      <UserIconSection/>
+      <UserIconSection />
       {/* Middle */}
       <div className="w-full  mb-6  h-[25%]">
-        <RecentlyPlayed />
-    </div>
+        <RecentlyPlayed
+          setCurrentSong={setCurrentSong}
+          recentlyPlayedSongs={recentlyPlayedSongs}
+        />
+      </div>
 
       {/* Bottom */}
       <div className="h-[75%]  w-full">
@@ -29,7 +79,10 @@ function Main() {
             </div>
             <div className="flex h-[60%]  gap-4 w-full">
               <Genres />
-              <TopCharts currentArtist={currentArtist} setCurrentSong={setCurrentSong}/>
+              <TopSongs
+                currentArtist={currentArtist}
+                setCurrentSong={setCurrentSong}
+              />
             </div>
           </div>
           {/* Right section */}
@@ -42,65 +95,50 @@ function Main() {
   );
 }
 
-function RecentlyPlayedElement({ name, image }) {
+function RecentlyPlayed({ setCurrentSong, recentlyPlayedSongs }) {
   return (
-    <div className="flex gap-4 flex-1 items-center justify-start bg-[#18181D] rounded-md min-w-[150px] max-h-[70px] hover:cursor-pointer">
-      <img src={image} className="max-h-full aspect-square  rounded-md object-fill " />
-      <h1 className="text-white font-medium">{name}</h1>
+    <div className="w-full h-full rounded-lg flex flex-col gap-2">
+      <h1 className="text-2xl w-[40%] font-medium text-left ml-1 text-white p-1">
+        Recently Played
+      </h1>
+      <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
+        {recentlyPlayedSongs.length > 0 ? (
+          <div className="flex  gap-4 flex-wrap">
+            {recentlyPlayedSongs.map((song, index) => (
+              <RecentlyPlayedElement
+                song={song}
+                key={index}
+                name={song.name}
+                image={song.img}
+                setCurrentSong={setCurrentSong}
+                singer={song.artist}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-white">No songs played recently.</p>
+        )}
+      </div>
     </div>
   );
 }
 
-function RecentlyPlayed() {
+function RecentlyPlayedElement({ setCurrentSong, song, name, image, singer }) {
+  console.log(song);
+  console.log(setCurrentSong);
   return (
-    <div className=" w-full h-full rounded-lg flex flex-col gap-2">
-      <h1 className="text-2xl w-[40%] font-medium text-left ml-1 text-white p-1">Recently Played</h1>
-      <div className="flex flex-col gap-2 p-1 h-[80%] justify-between">
-        <div className="flex justify-between gap-4 flex-wrap">
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={"https://i.scdn.co/image/ab67616d00001e02a91c10fe9472d9bd89802e5a"}
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={"https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96"}
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-        </div>
-        <div className="flex justify-between gap-4 flex-wrap">
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={"https://i.scdn.co/image/ab67616d0000b2736ca5c90113b30c3c43ffb8f4"}
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
-          <RecentlyPlayedElement
-            name="Deja Vu"
-            image={
-              "https://images.unsplash.com/photo-1523169054-66018b90af5e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-          />
+    <div className="bg-[#18181D] p-4 rounded-[20px]">
+      <div className="flex items-center gap-5 flex-wrap ">
+        <img
+          onClick={() => setCurrentSong(song)}
+          src={image}
+          alt="LogoMusicImage"
+          className="w-20 h-20 object-cover rounded-[10px] cursor-pointer"
+        />
+
+        <div>
+          <h1>{name}</h1>
+          <p className="opacity-65">{singer}</p>
         </div>
       </div>
     </div>
@@ -152,38 +190,49 @@ function Genres() {
   );
 }
 
-function TopChartsElement({index, song,img, artistName, songDuration,setCurrentSong }) {
+export function TopSongsElement({
+  index,
+  song,
+  img,
+  artistName,
+  songDuration,
+  setCurrentSong,
+}) {
   // console.log(song)
   return (
-    <div onClick={()=>setCurrentSong(song)} className="flex justify-between items-center p-2 hover:cursor-pointer">
-      <div className="flex gap-4">
-
-        <div>{index}</div>
-        <img src={img} className="w-10 h-10 object-cover"/>
-        <div className="text-sm">
-          <div>{song.name}</div>
-          <div>{artistName}</div>
+    <div
+      onClick={() => setCurrentSong(song)}
+      className="flex justify-between items-center p-2 hover:cursor-pointer"
+    >
+      <div className="flex gap-4 justify-start">
+        <div className="text-center m-auto">{index}</div>
+        <div className="flex gap-4">
+          <img src={img} className="w-10 h-10 object-cover rounded-sm" />
+          <div className="text-sm text-start">
+            <div>{song.name}</div>
+            <div className="text-xs">{artistName}</div>
+          </div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <div>{songDuration}</div>
-        <FaPlayCircle/>
+        <FaPlayCircle />
       </div>
     </div>
   );
 }
 
-function TopCharts({ currentArtist ,setCurrentSong}) {
+function TopSongs({ currentArtist, setCurrentSong }) {
   const [topSongs, setTopSongs] = useState([]);
   const [title, setTitle] = useState("Top Songs");
 
   useEffect(() => {
     const fetchData = async () => {
       if (currentArtist) {
-        await fetchSonsgByName(currentArtist,setTopSongs);
+        await fetchSonsgByName(currentArtist, setTopSongs);
         setTitle(currentArtist);
       } else {
-         await fetchTopSongs(setTopSongs);
+        await fetchTopSongs(setTopSongs);
         // setTopSongs(topSongsData);
         setTitle("Top Songs");
       }
@@ -193,7 +242,6 @@ function TopCharts({ currentArtist ,setCurrentSong}) {
   }, [currentArtist]);
   // console.log(currentArtist)
   // console.log(topSongs)
-  
 
   return (
 
@@ -208,10 +256,10 @@ function TopCharts({ currentArtist ,setCurrentSong}) {
         </div>
         {/* Top chart list */}
         <div className="flex flex-col gap-2 overflow-scroll  p-2">
-          {topSongs.map((song, index) => (
-            <TopChartsElement
+          {topSongs.slice(0, 10).map((song, index) => (
+            <TopSongsElement
               key={index}
-              index={index+1}
+              index={index + 1}
               song={song}
               img={song.img}
               artistName={song.artist}
@@ -225,13 +273,26 @@ function TopCharts({ currentArtist ,setCurrentSong}) {
   );
 }
 
-
-function TopArtistElement({ id, name, weeks_on_chart, img, onClick }) {
+function TopArtistElement({
+  id,
+  name,
+  weeks_on_chart,
+  img,
+  onClick,
+  key,
+  album,
+}) {
   return (
-    <div key={id} className="flex flex-1 p-2 flex-col gap-2 hover:cursor-pointer" onClick={() => onClick(name)}>
+    <div
+      key={id}
+      className="flex flex-1 p-2 flex-col gap-2 hover:cursor-pointer"
+      onClick={() => onClick(name)}
+    >
       <img src={img} className="h-[60%] aspect-square rounded-lg object-fill" />
       <div className="flex h-[20%] flex-col gap-1">
-        <h2 className="font-medium text-white text-[1em]">{name.toUpperCase()}</h2>
+        <h2 className="font-medium text-white text-[1em]">
+          {name.toUpperCase()}
+        </h2>
         {/* <h4 className="text-white font-medium text-[0.9em]">top charts: {weeks_on_chart} </h4> */}
       </div>
     </div>
@@ -244,8 +305,10 @@ function TopArtists({ setCurrentArtist }) {
   useEffect(() => {
     const fetchData = async () => {
       await fetch("https://spring-music-player-3hyj.vercel.app/top-artists")
-        .then((res)=>{return res.json()})
-        .then((data)=>setArtists(data))
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => setArtists(data));
     };
 
     fetchData();
@@ -263,21 +326,25 @@ function TopArtists({ setCurrentArtist }) {
           <h3 className="text-white text-lg">See all</h3>
         </div>
         <div className="flex h-[85%] gap-4">
-          {artists && artists.songs.slice(0,8).map((artist) => (
-            <TopArtistElement
-              key={artist.rank}
-              name={artist.artist}
-              weeks_on_chart={artist.position.weeksOnChart}
-              img={artist.cover}
-              onClick={setCurrentArtist}
-            />
-          ))}
+          {artists &&
+            artists.songs
+              .slice(0, 8)
+              .map((artist) => (
+                <TopArtistElement
+                  key={artist.rank}
+                  id={artist.id}
+                  name={artist.artist}
+                  weeks_on_chart={artist.position.weeksOnChart}
+                  img={artist.cover}
+                  onClick={setCurrentArtist}
+                  album={artist}
+                />
+              ))}
         </div>
       </div>
     </div>
   );
 }
-
 
 function Home({ setCurrPage }) {
   return (
