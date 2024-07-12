@@ -21,7 +21,7 @@
     "dotenv": "^16.4.5",
     "dotenv-webpack": "^8.1.0",
     "firebase": "^10.12.2",
-    "framer-motion": "^11.2.10",
+    "framer-motion": "^11.2.13",
     "he": "^1.2.0",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
