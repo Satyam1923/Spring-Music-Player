@@ -32,7 +32,7 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
   }
 
   return (
-    <div className="bg-[#18181D] w-full h-full rounded-lg">
+    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{marginTop:"2rem",height:"34.8rem"}}>
       <div className="flex flex-col h-full justify-between p-2">
         {/* Image and like details */}
         <div className="flex h-full pt-6">
