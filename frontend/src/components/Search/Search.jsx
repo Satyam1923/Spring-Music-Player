@@ -97,16 +97,18 @@ function Albums({ albums }) {
 function ArtistElement({ artist }) {
   return (
     <div className="flex flex-1 flex-col gap-3 hover:cursor-pointer">
-      <div className="flex justify-center rounded-lg">
-        <img
-          className="h-32 w-32 rounded-lg"
-          src={artist.image[1].url}
-          alt=""
-        />
-      </div>
-      <div className="flex  flex-col gap-1">
-        <h2 className=" text-sm text-white ">{artist.name}</h2>
-      </div>
+      <Link to={`/artist/${artist.name}`}>
+        <div className="flex justify-center rounded-lg">
+          <img
+            className="h-32 w-32 rounded-lg"
+            src={artist.image[1].url}
+            alt=""
+          />
+        </div>
+        <div className="flex  flex-col gap-1">
+          <h2 className=" text-sm text-white ">{artist.name}</h2>
+        </div>
+      </Link>
     </div>
   );
 }

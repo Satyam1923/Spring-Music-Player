@@ -24,6 +24,7 @@ export const fetchSonsgByName = async (songName, setSongs) => {
     const jsonData = response.data;
     const songs = jsonData;
     setSongs(songs);
+    return songs;
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
   }
@@ -56,6 +57,7 @@ export const fetchArtistsbySongName = async (artistName,setArtists)=>{
     const response = await axios.get(`https://spring-music-player-3hyj.vercel.app/search/artists?query=${encodeURIComponent(artistName)}`);
     const jsonData = response.data.data.results.slice(0,6);
     setArtists(jsonData);
+    return jsonData;
   }catch(error){
     console.error("There was a problem with the fetch operation:", error);
   }
