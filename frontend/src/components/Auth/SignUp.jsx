@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from './firebase';
-import React, { useState ,useEffect} from 'react';
+import { useState ,useEffect} from 'react';
 import { setDoc, doc } from 'firebase/firestore';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -54,7 +54,7 @@ const SignUp = () => {
         fetchUserData();
       }, [])
     return (
-        <div>
+        <div className='flex flex-col justify-center items-center'>
             <ToastContainer 
                 position="top-right"
                 autoClose={5000}
@@ -67,13 +67,14 @@ const SignUp = () => {
                 draggable
                 pauseOnHover
             />
-            <div className="bg-[#18181D] flex flex-col p-4">
-                <form className="flex flex-col items-center p-10 gap-5" onSubmit={handleSignUp}>
+            <div className="flex flex-col items-center justify-center p-10 gap-5 w-3/4 max-w-sm bg-[#20242A] bg-opacity-75">
+            <div className='flex flex-col items-start justify-start font-bold'>sign up</div>
+                <form className="flex flex-col items-center justify-center p-5 gap-5 max-w-sm" onSubmit={handleSignUp}>
                     <div className="w-full flex items-center justify-between p-2">
                         <label htmlFor="name" className="font-bold">Full Name:</label>
                         <input
                             id="name"
-                            className="p-2 text-black"
+                            className="p-2  border border-t-emerald-200 bg-transparent"
                             placeholder="Enter your full name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -85,7 +86,7 @@ const SignUp = () => {
                         <input
                             id="email"
                             type="email"
-                            className="p-2 text-black"
+                            className="p-2  border border-t-emerald-200 bg-transparent"
                             placeholder="Enter email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -97,7 +98,7 @@ const SignUp = () => {
                         <input
                             id="password"
                             type="password"
-                            className="p-2 text-black"
+                            className="p-2  border border-t-emerald-200 bg-transparent"
                             placeholder="Enter password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
