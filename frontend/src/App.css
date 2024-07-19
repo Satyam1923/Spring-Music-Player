@@ -767,3 +767,91 @@ margin-top: 50px;
 .search-filter-nav > div:has(> a.active) > a > h2 {
   color: black;
 }
+/* //music player css  */
+@keyframes oscillate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  75% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: translateX(0);
+    
+  }
+}
+@keyframes verticalLine {
+  0% {
+    height: 8px;
+    opacity: 0;
+    
+  }
+  100% {
+    height: 0;
+    opacity: 1;
+  }
+}
+.likeIconOuter {
+  position: relative;
+}
+
+.likeIcon {
+  cursor: pointer;
+  transition: transform 0.2s;
+  
+}
+
+.likeIcon.clicked {
+  transform: scale(1);
+  animation: oscillate 0.8s ease-in-out;
+}
+
+.vertical-line {
+  position: absolute;
+  top: 0px;
+  width: 2px;
+  height: 100px;
+  opacity: 0;
+  animation: verticalLine 0.8s forwards;
+  display: none;
+}
+
+.vertical-line-1 {
+  left: 20%;
+  top: 15%;
+  background-color: rgb(250, 48, 206);
+  transform: skewX(70deg);
+}
+
+.vertical-line-2 {
+  left: 30%;
+  background-color: rgb(68, 250, 48);
+  transform: skewX(40deg);
+}
+
+.vertical-line-3 {
+  left: 50%;
+  background-color: rgb(48, 226, 250);
+  transform: skewX(0deg);
+}
+.vertical-line-4 {
+  left: 70%;
+  background-color: rgb(250, 48, 88);
+  transform: skewX(-40deg);
+}
+.vertical-line-5 {
+  left: 80%;
+  top: 15%;
+  background-color: rgb(250, 172, 48);
+  transform: skewX(-70deg);
+}
+
+.likeIconOuter.clicked .vertical-line {
+  display: block;
+}
