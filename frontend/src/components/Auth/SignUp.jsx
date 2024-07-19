@@ -67,7 +67,7 @@ const SignUp = () => {
                 draggable
                 pauseOnHover
             />
-            <div className="flex flex-col items-center justify-center p-10 gap-5 w-3/4 max-w-sm bg-[#20242A] bg-opacity-75">
+            <div className="flex flex-col items-center justify-center p-10 gap-5  max-w-sm bg-[#20242A] bg-opacity-75">
             <div className='flex flex-col items-start justify-start font-bold'>sign up</div>
                 <form className="flex flex-col items-center justify-center p-5 gap-5 max-w-sm" onSubmit={handleSignUp}>
                     <div className="w-full flex items-center justify-between p-2">
