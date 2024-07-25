@@ -6,7 +6,7 @@ import "react-h5-audio-player/src/styles.scss";
 import "./styles.scss";
 import {CirclePlay,CirclePause,Rewind,VolumeX,Volume2,FastForward,Repeat2} from "lucide-react";
 
-function MusicPlayer({ currSong, shouldAutoPlay }) {
+function MusicPlayer({ currSong, shouldAutoPlay, setSongHasEnded }) {
   const songName = currSong.name || "Reminder";
   const songImage =
     currSong.img || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
@@ -60,6 +60,9 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
             className="rounded-lg bg-[#83ce89] text-black h-full"
             src={audioUrl}
             customIcons={customIcons}
+            onEnded={() => {
+              setSongHasEnded(true)
+            }}
           />
         </div>
       </div>

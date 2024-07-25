@@ -13,7 +13,6 @@ import {
   fetchArtistsbySongName,
 } from "../../Utils";
 import Footer from "../Footer";
-import { PiLayout } from "react-icons/pi";
 import { storeAlbum, storeSong } from "../Auth/StoreSong";
 import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 
@@ -50,8 +49,7 @@ function SearchDefault() {
 }
 
 function AlbumElement({ album }) {
-  const imageUrl =
-    album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
+  const imageUrl = album.images && album.images[2] ? album.images[2].url : "defaultImageUrl";
   const artistName =
     album.primaryArtists && album.primaryArtists[0]
       ? album.primaryArtists[0].name
@@ -133,17 +131,19 @@ function Artists({ artists }) {
   );
 }
 
-function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
+function SongElement({ song, setCurrSong, number, setShouldAutoPlay, currSongIdx }) {
   const duration = secIntoMinSec(song.duration);
 
   return (
     <div
       className="flex h-[18%] justify-between cursor-pointer p-4 rounded-lg hover:bg-gray-700 hover:shadow-lg"
       onClick={() => {
+        currSongIdx.current = number;
         setCurrSong(song);
         setShouldAutoPlay(true);
         storeSong(song);
-    console.log("song", song);    }}
+        console.log("song", song);
+      }}
     >
       <div className="flex gap-4">
         <div className="flex items-center">{number}</div>
@@ -171,7 +171,7 @@ function SongElement({ song, setCurrSong, number, setShouldAutoPlay }) {
   );
 }
 
-function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
+function Songs({ topSongs, setCurrSong, setShouldAutoPlay, currSongIdx }) {
   return (
     <div className="bg-[#18181D] w-full h-full rounded-lg">
       <div className="w-full h-full flex flex-col gap-1 pr-8 pb-3">
@@ -183,12 +183,13 @@ function Songs({ topSongs, setCurrSong, setShouldAutoPlay }) {
             if (index > 0) {
               return (
                 <SongElement
-                key={index}
-                number={index}
-                song={song}
-                setCurrSong={setCurrSong}
-                setShouldAutoPlay={setShouldAutoPlay}
-                onClick={() => storeSong(song)}
+                  currSongIdx={currSongIdx}
+                  key={index}
+                  number={index}
+                  song={song}
+                  setCurrSong={setCurrSong}
+                  setShouldAutoPlay={setShouldAutoPlay}
+                  onClick={() => storeSong(song)}
                 />
               );
             }
@@ -206,6 +207,21 @@ export function SearchResultAll() {
   const setShouldAutoPlay = context.setShouldAutoPlay;
   const albums = context.albums;
   const artists = context.artists;
+  const songHasEnded = context.songHasEnded;
+  const setSongHasEnded = context.setSongHasEnded;
+
+  let currSongIdx = useRef(0); // TODO: maybe this should be a state variable as well
+
+  // auto play next song when song ends
+  useEffect(() => {
+    if (songHasEnded) {
+      if (currSongIdx.current < topSongs.length - 1) {
+        currSongIdx.current++;
+        setCurrSong(topSongs[currSongIdx.current]); // next song it not playing as current index is not updating
+        setSongHasEnded(false);
+      }
+    }
+  }, [songHasEnded]);
 
   return (
     <div className="w-full h-full rounded-xl flex flex-col gap-4">
@@ -241,8 +257,8 @@ export function SearchResultAll() {
                   onClick={() => {
                     setCurrSong(topSongs[0]);
                     setShouldAutoPlay(true);
-
-                    storeAlbum(topSongs)                  }}
+                    storeAlbum(topSongs);
+                  }}
                 >
                   <FaPlay className="w-[50%] h-[50%]" />
                 </div>
@@ -253,6 +269,7 @@ export function SearchResultAll() {
           <div className="w-[70%] h-full ">
             <div className="w-full h-full ">
               <Songs
+                currSongIdx={currSongIdx}
                 topSongs={topSongs}
                 setCurrSong={setCurrSong}
                 setShouldAutoPlay={setShouldAutoPlay}
@@ -284,6 +301,7 @@ function Search({ setCurrPage }) {
   const [albums, setAlbums] = useState([]);
   const [artists, setArtist] = useState([]);
   let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+  const [songHasEnded, setSongHasEnded] = useState(false);
 
   const searchAllNavLinkElement = useRef(null);
 
@@ -383,6 +401,8 @@ function Search({ setCurrPage }) {
                         setShouldAutoPlay,
                         albums,
                         artists,
+                        songHasEnded,
+                        setSongHasEnded,
                       }}
                     />
                   </div>
@@ -393,6 +413,7 @@ function Search({ setCurrPage }) {
                 <MusicPlayer
                   currSong={currSong}
                   shouldAutoPlay={shouldAutoPlay}
+                  setSongHasEnded={setSongHasEnded}
                 />
               </div>
             </div>
