@@ -255,7 +255,8 @@ export function SearchResultAll() {
                 <div
                   className="h-12 aspect-square bg-[#83CE89] flex items-center justify-center rounded-[50%] hover:cursor-pointer"
                   onClick={() => {
-                    setCurrSong(topSongs[0]);
+                    const newSong = { ...topSongs[0] };
+                    setCurrSong(newSong);
                     setShouldAutoPlay(true);
                     storeAlbum(topSongs);
                   }}
