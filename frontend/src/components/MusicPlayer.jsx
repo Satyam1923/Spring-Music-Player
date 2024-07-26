@@ -1,19 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PiPlaylistBold } from "react-icons/pi";
 import { AiFillLike } from "react-icons/ai";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/src/styles.scss";
 import "./styles.scss";
-import {CirclePlay,CirclePause,Rewind,VolumeX,Volume2,FastForward,Repeat2} from "lucide-react";
+import "../App.css";
+import { CirclePlay, CirclePause, Rewind, VolumeX, Volume2, FastForward, Repeat2 } from "lucide-react";
 
 function MusicPlayer({ currSong, shouldAutoPlay }) {
+  const [isLiked, setIsLiked] = useState(false);
   const songName = currSong.name || "Reminder";
   const songImage =
     currSong.img || "https://i.scdn.co/image/ab67616d0000b2734718e2b124f79258be7bc452";
   const artistName = currSong.artist || "The Weeknd";
   const audioUrl = currSong.url || "";
   const audioPlayerRef = useRef(null);
-  
 
   useEffect(() => {
     if (audioPlayerRef.current && !shouldAutoPlay) {
@@ -21,23 +22,37 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
     }
   }, [currSong]);
 
-  const customIcons={
-    play:<CirclePlay />,
-    pause:<CirclePause />,
-    rewind:<Rewind />,
+  const handleLikeClick = () => {
+    setIsLiked(true);
+    setTimeout(() => setIsLiked(false), 1000); // Reset after 1 second
+  };
+
+  const customIcons = {
+    play: <CirclePlay />,
+    pause: <CirclePause />,
+    rewind: <Rewind />,
     forward: <FastForward />,
-    loop:<Repeat2 />,
-    volume:<Volume2 />,
-    volumeMute: <VolumeX />
-  }
+    loop: <Repeat2 />,
+    volume: <Volume2 />,
+    volumeMute: <VolumeX />,
+  };
 
   return (
-    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{marginTop:"2rem",height:"34.8rem"}}>
+    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{ marginTop: "2rem", height: "34.8rem" }}>
       <div className="flex flex-col h-full justify-between p-2">
         {/* Image and like details */}
         <div className="flex h-full pt-6">
-          <div className="flex justify-center h-full w-[20%]">
-            <AiFillLike className="scale-[1.5] mt-2 hover:cursor-pointer" />
+          <div className={`flex justify-center likeIconOuter w-[20%] h-[20%] ${isLiked ? "clicked" : ""}`}>
+            <AiFillLike
+              className={` mt-2 likeIcon ${isLiked ? "clicked" : ""}`}
+              onClick={handleLikeClick} 
+              style={{ color: isLiked ? 'red' : 'currentColor', fontSize: '27px' }}
+            />
+            <div className="vertical-line vertical-line-1"></div>
+            <div className="vertical-line vertical-line-2"></div>
+            <div className="vertical-line vertical-line-3"></div>
+            <div className="vertical-line vertical-line-4"></div>
+            <div className="vertical-line vertical-line-5"></div>
           </div>
           {/* Song Image */}
           <div className="flex flex-col justify-start gap-4 h-full w-[60%]">
