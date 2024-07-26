@@ -19,6 +19,8 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
   useEffect(() => {
     if (audioPlayerRef.current && !shouldAutoPlay) {
       audioPlayerRef.current.audio.current.pause();
+    } else {
+      audioPlayerRef.current.audio.current.play();
     }
   }, [currSong]);
 
