@@ -7,7 +7,7 @@ import "./styles.scss";
 import "../App.css";
 import { CirclePlay, CirclePause, Rewind, VolumeX, Volume2, FastForward, Repeat2 } from "lucide-react";
 
-function MusicPlayer({ currSong, shouldAutoPlay }) {
+function MusicPlayer({ currSong, shouldAutoPlay, setSongHasEnded }) {
   const [isLiked, setIsLiked] = useState(false);
   const songName = currSong.name || "Reminder";
   const songImage =
@@ -77,6 +77,9 @@ function MusicPlayer({ currSong, shouldAutoPlay }) {
             className="rounded-lg bg-[#83ce89] text-black h-full"
             src={audioUrl}
             customIcons={customIcons}
+            onEnded={() => {
+              setSongHasEnded(true)
+            }}
           />
         </div>
       </div>
