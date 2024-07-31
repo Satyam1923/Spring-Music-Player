@@ -21,6 +21,8 @@ import SearchSongs from "./components/Search/SearchSongs"
 import Artist from "./components/Artist";
 import Contributors from "./pages/Contributors";
 
+import { MusicPlayerProvider } from "./MusicPlayerContext";
+
 
 function ComingSoon() {
   return <div className="flex w-full h-full justify-center items-center">Coming soon...</div>;
@@ -28,7 +30,11 @@ function ComingSoon() {
 
 const App = () => {
   return (
+   
+    <div>
+        <MusicPlayerProvider>
     <BrowserRouter>
+   
       <Routes>
         <Route path="/search" element={<Search />}>
           <Route index element={<SearchResultAll />} />
@@ -51,8 +57,12 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contributors" element={<Contributors/>}/>
         <Route path="*" element={<PagenotFound />} />
+       
       </Routes>
+      
     </BrowserRouter>
+    </MusicPlayerProvider>
+    </div>
   );
 };
 

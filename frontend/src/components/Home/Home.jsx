@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+// Main.js
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { FaPlayCircle } from "react-icons/fa";
 import "react-h5-audio-player/lib/styles.css";
 import MusicPlayer from "../MusicPlayer";
 import UserIconSection from "../UserIconSection";
 import Footer from "../Footer";
-import { fetchTopSongs, fetchSonsgByName, secIntoMinSec } from "../../Utils";
+import { fetchTopSongs, secIntoMinSec } from "../../Utils";
 import { db } from "../Auth/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { useMusicPlayer } from "../../MusicPlayerContext";
 
-function Main() {
+export function Main() {
+  const { currentSong, setCurrentSong } = useMusicPlayer();
   const [currentArtist, setCurrentArtist] = useState(null);
-  const [currentSong, setCurrentSong] = useState([]);
   const [recentlyPlayedSongs, setRecentlyPlayedSongs] = useState([]);
 
   useEffect(() => {
@@ -62,7 +64,7 @@ function Main() {
       {/* Top user section */}
       <UserIconSection />
       {/* Middle */}
-      <div className="w-full  mb-6  h-[25%]">
+      <div className="w-full mb-6 h-[25%]">
         <RecentlyPlayed
           setCurrentSong={setCurrentSong}
           recentlyPlayedSongs={recentlyPlayedSongs}
@@ -70,14 +72,14 @@ function Main() {
       </div>
 
       {/* Bottom */}
-      <div className="h-[75%]  w-full">
+      <div className="h-[75%] w-full">
         <div className="flex h-full gap-4">
           {/* Left section */}
           <div className="flex flex-col gap-4 w-full h-full">
             <div className="h-[40%]">
               <TopArtists setCurrentArtist={setCurrentArtist} />
             </div>
-            <div className="flex h-[60%]  gap-4 w-full">
+            <div className="flex h-[60%] gap-4 w-full">
               <Genres />
               <TopSongs
                 currentArtist={currentArtist}
@@ -86,7 +88,7 @@ function Main() {
             </div>
           </div>
           {/* Right section */}
-          <div className="w-[30%]  min-w-[300px] h-[80%]  relative">
+          <div className="w-[30%] min-w-[300px] h-[80%] relative">
             <MusicPlayer currSong={currentSong} shouldAutoPlay={true} />
           </div>
         </div>
