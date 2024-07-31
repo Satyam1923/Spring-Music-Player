@@ -12,8 +12,10 @@ import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import MusicPlayer from "./MusicPlayer";
 import { fetchAlbumsbySongName, fetchArtistsbySongName, fetchSongData, fetchTopSongs } from "../Utils";
+import { useMusicPlayer } from "../MusicPlayerContext";
 
 const LikedSong = () => {
+  const { currentSong, setCurrentSong, shouldAutoPlay, setShouldAutoPlay } = useMusicPlayer();
   const playlist = {
     tracks: {
       items: [
@@ -44,7 +46,7 @@ const LikedSong = () => {
   const [topSongs, setTopSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtist] = useState([]);
-  let [shouldAutoPlay, setShouldAutoPlay] = useState(false);
+ 
 
   useEffect(() => {
     fetchTopSongs(setTopSongs);
@@ -198,7 +200,7 @@ const LikedSong = () => {
             </div>
           </div>
         </div> */}
-            <MusicPlayer currSong={currSong} shouldAutoPlay={true} />
+            <MusicPlayer currSong={currentSong} shouldAutoPlay={true} />
             </div>
     </div>
   );

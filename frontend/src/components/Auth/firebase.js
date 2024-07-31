@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
+Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
@@ -13,12 +13,6 @@ const firebaseConfig = {
   databaseURL: import.meta.env.VITE_DATABASE_URL, 
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export default app;
-
 // const firebaseConfig = {
 //   apiKey: "AIzaSyBNZqJmtwAqYuE0zrtdSMdgcoXZSoRdMew",
 //   authDomain: "opensource-2faad.firebaseapp.com",
@@ -28,3 +22,9 @@ export default app;
 //   appId: "1:1060453831050:web:4e94554bd4ec6e9f37f873",
 //   measurementId: "G-QL0FTXFWEH"
 // };
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export default app;
+
