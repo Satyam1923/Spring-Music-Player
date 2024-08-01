@@ -15,7 +15,7 @@ import { RiHome5Fill } from "react-icons/ri";
 function Navbar() {
 
   return (
-    <div className="w-[5%] min-w-[70px] max-w-[80px] h-full rounded-lg">
+    <div className="min-w-[70px] max-w-[80px] h-full rounded-lg">
       <div className="flex flex-col gap-3 w-full h-full">
         <div className="flex p-4 flex-col gap-6 rounded-lg items-center justify-center hover:bg-gray-800">
           <IoReorderThreeOutline className="w-full h-full scale-[1.2] hover:cursor-pointer" />

@@ -58,11 +58,14 @@ function Main() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full gap-4 w-full">
+    <div
+      className="flex flex-col h-auto gap-4 w-full"
+      style={{ maxWidth: "calc(100vw - 80px)" }}
+    >
       {/* Top user section */}
       <UserIconSection />
       {/* Middle */}
-      <div className="w-full  mb-6  h-[25%]">
+      <div className="w-full mb-6 h-auto">
         <RecentlyPlayed
           setCurrentSong={setCurrentSong}
           recentlyPlayedSongs={recentlyPlayedSongs}
@@ -70,25 +73,23 @@ function Main() {
       </div>
 
       {/* Bottom */}
-      <div className="h-[75%]  w-full">
-        <div className="flex h-full gap-4">
-          {/* Left section */}
-          <div className="flex flex-col gap-4 w-full h-full">
-            <div className="h-[40%]">
-              <TopArtists setCurrentArtist={setCurrentArtist} />
-            </div>
-            <div className="flex h-[60%]  gap-4 w-full">
-              <Genres />
-              <TopSongs
-                currentArtist={currentArtist}
-                setCurrentSong={setCurrentSong}
-              />
-            </div>
+      <div className="flex flex-row xs:flex-col-reverse h-auto w-full gap-4  ">
+        {/* Left section */}
+        <div className="flex flex-col gap-4  w-auto sm:w-[50%] xs:w-full  ">
+          <div className=" w-full h-auto">
+            <TopArtists setCurrentArtist={setCurrentArtist} />
           </div>
-          {/* Right section */}
-          <div className="w-[30%]  min-w-[300px] h-[80%]  relative">
-            <MusicPlayer currSong={currentSong} shouldAutoPlay={true} />
+          <div className="flex h-auto flex-row sm:flex-col gap-4 w-full">
+            <Genres />
+            <TopSongs
+              currentArtist={currentArtist}
+              setCurrentSong={setCurrentSong}
+            />
           </div>
+        </div>
+        {/* Right section */}
+        <div className="w-[30%] md:w-[40%] sm:w-[50%] max-w-[300px]  sm:max-w-none xs:w-full ">
+          <MusicPlayer currSong={currentSong} shouldAutoPlay={true} />
         </div>
       </div>
     </div>
@@ -147,16 +148,16 @@ function RecentlyPlayedElement({ setCurrentSong, song, name, image, singer }) {
 
 function Genres() {
   return (
-    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{marginTop:"50px"}}>
-      <div className="h-full w-full flex flex-col p-2">
-        <div className="flex h-[15%] justify-between items-center text-center pl-4 pr-4">
+    <div className="bg-[#18181D]  w-[45%] sm:w-full max-h-fit  rounded-lg">
+      <div className="w-full flex flex-col p-4">
+        <div className="flex justify-between items-center ">
           <h1 className="text-2xl text-white font-medium">Genres</h1>
           <h3 className="text-white text-lg">See all</h3>
         </div>
-        <div className="h-full p-2">
-          <div className="flex gap-4 h-full flex-col flex-1 p-2 pl-4 pr-4">
+        <div className="flex w-full">
+          <div className="flex gap-4 w-full flex-col pt-4">
             {/* Genre boxes */}
-            <div className="flex h-full gap-4">
+            <div className="flex w-full  gap-4">
               <div className="bg-[#E76E67] flex flex-1 justify-center text-xl font-medium items-center rounded-lg">
                 Dance/Electric
               </div>
@@ -206,7 +207,7 @@ export function TopSongsElement({
     >
       <div className="flex gap-4 justify-start">
         <div className="text-center m-auto">{index}</div>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <img src={img} className="w-10 h-10 object-cover rounded-sm" />
           <div className="text-sm text-start">
             <div>{song.name}</div>
@@ -244,18 +245,14 @@ function TopSongs({ currentArtist, setCurrentSong }) {
   // console.log(topSongs)
 
   return (
-
-    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{marginTop:"50px"}}>
-
-  
-
+    <div className="bg-[#18181D] w-full max-h-80  py-4 px-1 rounded-lg">
       <div className="w-full h-full flex flex-col">
-        <div className="flex h-[15%] justify-between items-center text-center p-1 ml-4 mr-4 mt-2">
+        <div className="flex justify-between items-center px-4 mb-2">
           <h1 className="text-2xl text-white font-medium">{title}</h1>
           <h3 className="text-white text-lg">See all</h3>
         </div>
         {/* Top chart list */}
-        <div className="flex flex-col gap-2 overflow-scroll  p-2">
+        <div className="flex flex-col gap-2 overflow-y-auto ">
           {topSongs.slice(0, 10).map((song, index) => (
             <TopSongsElement
               key={index}
@@ -285,14 +282,12 @@ function TopArtistElement({
   return (
     <div
       key={id}
-      className="flex flex-1 p-2 flex-col gap-2 hover:cursor-pointer"
+      className="flex p-2  flex-col gap-2 hover:cursor-pointer"
       onClick={() => onClick(name)}
     >
-      <img src={img} className="h-[60%] aspect-square rounded-lg object-fill" />
+      <img src={img} className=" w-14 h-14 object-cover rounded-lg " />
       <div className="flex h-[20%] flex-col gap-1">
-        <h2 className="font-medium text-white text-[1em]">
-          {name.toUpperCase()}
-        </h2>
+        <h2 className="font-medium text-white text-sm">{name.toUpperCase()}</h2>
         {/* <h4 className="text-white font-medium text-[0.9em]">top charts: {weeks_on_chart} </h4> */}
       </div>
     </div>
@@ -315,17 +310,13 @@ function TopArtists({ setCurrentArtist }) {
   }, []);
 
   return (
-
-    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{height:"14rem",padding:"2rem",marginTop:"2rem"}}>
-
-    
-
-      <div className="flex flex-col h-[100%] pl-4 pr-4 gap-2 pt-2">
-        <div className="flex h-[15%] justify-between items-center text-center p-1">
+    <div className="bg-[#18181D] w-full h-auto  rounded-lg mt-8 p-4">
+      <div className="flex flex-col gap-2 ">
+        <div className="flex justify-between items-center">
           <h1 className="text-2xl text-white font-medium">Top Artists</h1>
           <h3 className="text-white text-lg">See all</h3>
         </div>
-        <div className="flex h-[85%] gap-4">
+        <div className="flex overflow-x-auto w-full gap-4">
           {artists &&
             artists.songs
               .slice(0, 8)
@@ -348,8 +339,8 @@ function TopArtists({ setCurrentArtist }) {
 
 function Home({ setCurrPage }) {
   return (
-    <div className="w-screen h-screen p-4 text-center">
-      <div className="w-full h-full flex gap-4">
+    <div className="max-w-screen h-auto p-4 text-center">
+      <div className="max-w-screen  h-auto flex gap-4">
         <Navbar setCurrPage={setCurrPage} />
         <Main />
       </div>
