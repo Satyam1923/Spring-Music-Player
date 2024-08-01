@@ -40,15 +40,22 @@ function MusicPlayer({ currSong, shouldAutoPlay, setSongHasEnded }) {
   };
 
   return (
-    <div className="bg-[#18181D] w-full h-full rounded-lg" style={{ marginTop: "2rem", height: "34.8rem" }}>
+    <div className="bg-[#18181D] w-full h-full rounded-lg mt-8 ">
       <div className="flex flex-col h-full justify-between p-2">
         {/* Image and like details */}
         <div className="flex h-full pt-6">
-          <div className={`flex justify-center likeIconOuter w-[20%] h-[20%] ${isLiked ? "clicked" : ""}`}>
+          <div
+            className={`flex justify-center likeIconOuter w-[20%] h-[20%] ${
+              isLiked ? "clicked" : ""
+            }`}
+          >
             <AiFillLike
               className={` mt-2 likeIcon ${isLiked ? "clicked" : ""}`}
-              onClick={handleLikeClick} 
-              style={{ color: isLiked ? 'red' : 'currentColor', fontSize: '27px' }}
+              onClick={handleLikeClick}
+              style={{
+                color: isLiked ? "red" : "currentColor",
+                fontSize: "27px",
+              }}
             />
             <div className="vertical-line vertical-line-1"></div>
             <div className="vertical-line vertical-line-2"></div>
@@ -58,7 +65,11 @@ function MusicPlayer({ currSong, shouldAutoPlay, setSongHasEnded }) {
           </div>
           {/* Song Image */}
           <div className="flex flex-col justify-start gap-4 h-full w-[60%]">
-            <img src={songImage} alt="song image" className="rounded-2xl w-full aspect-square" />
+            <img
+              src={songImage}
+              alt="song image"
+              className="rounded-2xl w-full aspect-square"
+            />
             <div className="flex flex-col gap-1">
               <h2 className="text-white font-medium text-2xl">{songName}</h2>
               <h3 className="text-white">{artistName}</h3>
@@ -78,7 +89,7 @@ function MusicPlayer({ currSong, shouldAutoPlay, setSongHasEnded }) {
             src={audioUrl}
             customIcons={customIcons}
             onEnded={() => {
-              setSongHasEnded(true)
+              setSongHasEnded(true);
             }}
           />
         </div>

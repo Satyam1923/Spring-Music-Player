@@ -5,10 +5,10 @@ export default {
     extend: {
       screens: {
         "h-md": { raw: "(max-height: 768px)" },
-        sm: { max: "690px" },
-        lg: { max: "1800px" },
+        sm: { max: "769px" },
+        lg: { max: "1280px" },
         lgm: { max: "1140px" },
-        md: { max: "990px" },
+        md: { max: "1080px" },
         xs: { max: "480px" },
         minmd: "1700px",
         minlg: "2100px",

@@ -12,11 +12,10 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-
-    <div className="h-[300px] w-full flex flex-col bgfooter sm:h-full" style={{padding:"66px",marginTop:"13rem"}}>
-
-  
-
+    <div
+      className="h-[300px] w-screen flex flex-col bgfooter sm:h-full"
+      style={{ padding: "66px", marginTop: "13rem" }}
+    >
       {/* //for logo and social links */}
       <div className="sec1  xs:text-[36px]">
         <div>SPRING</div>
@@ -26,22 +25,34 @@ const Footer = () => {
       <div className="sec2 ">
         <ul className="company  sm:gap-[10px] sm:grid sm:grid-cols-1 sm:p-[10px] sm:text-center">
           <li>
-            <Link to="/aboutus" className="hov" >About Us</Link>
+            <Link to="/aboutus" className="hov">
+              About Us
+            </Link>
           </li>
           <li>
-            <Link to="/culture" className="hov" >Culture</Link>
+            <Link to="/culture" className="hov">
+              Culture
+            </Link>
           </li>
           <li>
-            <Link to="/blog" className="hov" >Blogs</Link>
+            <Link to="/blog" className="hov">
+              Blogs
+            </Link>
           </li>
           <li>
-            <Link to="/terms" className="hov" >Terms and Policy</Link>
+            <Link to="/terms" className="hov">
+              Terms and Policy
+            </Link>
           </li>
           <li>
-            <Link to="/contactus" className="hov" >Help and Support</Link>
+            <Link to="/contactus" className="hov">
+              Help and Support
+            </Link>
           </li>
           <li>
-            <Link to="/contributors" className="hov">Our Contributors</Link>
+            <Link to="/contributors" className="hov">
+              Our Contributors
+            </Link>
           </li>
         </ul>
       </div>
@@ -52,7 +63,11 @@ const Footer = () => {
           <span className="icons">
             <a href="/" target="_blank" rel="noopener noreferrer">
               {" "}
-              <AiOutlineInstagram color="white" fontSize={25} className="ico " />
+              <AiOutlineInstagram
+                color="white"
+                fontSize={25}
+                className="ico "
+              />
             </a>
           </span>
           <span className="icons">
