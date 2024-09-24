@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const playlist = req.query.query;
-  const apiUrl = `https://saavn.dev/api/search/playlists?query=${encodeURIComponent(
+  const apiUrl = `https://jio-savaan-private.vercel.app/api/search/playlists?query=${encodeURIComponent(
     playlist
   )}`;
   try {

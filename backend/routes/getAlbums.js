@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const album = req.query.query;
   console.log("Album name is: " + album);
-  const apiUrl = `https://saavn.dev/api/search/albums?query=${encodeURIComponent(
+  const apiUrl = `https://jio-savaan-private.vercel.app/search/albums?query=${encodeURIComponent(
     album
   )}`;
   try {
