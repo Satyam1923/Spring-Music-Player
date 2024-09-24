@@ -32,7 +32,7 @@ const Album = () => {
 
       console.log("Song id is " + params.id);
 
-      const apiUrl = `https://saavn.dev/api/albums?id=${encodeURIComponent(
+      const apiUrl = `https://jio-savaan-private.vercel.app/api/albums?id=${encodeURIComponent(
         params.id
       )}`;
 
