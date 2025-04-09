@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
       console.log("Returning cached data");
       return res.json(cache[song]);
     }
-    const apiUrl = `https://jio-savaan-private.vercel.app/api/search/songs?query=${encodeURIComponent(
+    const apiUrl = `https://jio-savaan-new.vercel.app/api/search/songs?query=${encodeURIComponent(
       song
     )}&limit=30`;
     console.log(apiUrl);

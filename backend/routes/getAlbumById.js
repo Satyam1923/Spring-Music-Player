@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const id = req.query.id;
   console.log("Song id is " + id);
-  const apiUrl = `https://jio-savaan-private.vercel.app/api/albums?id=${encodeURIComponent(id)}`;
+  const apiUrl = `https://jio-savaan-new.vercel.app/api/albums?id=${encodeURIComponent(id)}`;
   try {
     const respone = await axios.get(apiUrl);
     if (respone.status != 200) {

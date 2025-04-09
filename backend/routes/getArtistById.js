@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const id = req.query.id;
-  const apiUrl = `https://jio-savaan-private.vercel.app/api/artists/${encodeURIComponent(id)}`;
+  const apiUrl = `https://jio-savaan-new.vercel.app/api/artists/${encodeURIComponent(id)}`;
   try {
     const respone = await axios.get(apiUrl);
     if (respone.status != 200) {
