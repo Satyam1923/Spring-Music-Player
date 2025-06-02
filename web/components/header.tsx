@@ -1,12 +1,19 @@
-'use client'
+"use client";
+import { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Image from "next/image";
 
 export default function Header() {
   const { user } = useSelector((state: RootState) => state.auth);
-  
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   return (
     <div className="fixed top-0 z-50 w-full bg-black">
       <div className="flex items-center justify-between h-16 px-4">
@@ -25,10 +32,12 @@ export default function Header() {
           />
         </div>
         <div className="flex-1 text-right px-2">
-          {user?.photoURL ? (
-            <img
+          {hasMounted && user?.photoURL ? (
+            <Image
               src={user.photoURL}
               alt="User profile"
+              width={35}
+              height={35}
               className="inline-block w-8 h-8 rounded-full object-cover"
             />
           ) : (

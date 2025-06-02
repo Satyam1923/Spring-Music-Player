@@ -12,7 +12,7 @@ export default function MusicCard({
   artistName,
 }: MusicCardProps) {
   return (
-    <div className="w-48 p-2 flex flex-col items-center text-center">
+    <div className="w-48 rounded-xl p-2 flex flex-col items-center text-center hover:bg-neutral-900">
       <div className="h-36 w-36 bg-neutral-800 mb-2 flex items-center justify-center text-white overflow-hidden rounded">
         <Image
           src={imageUrl}

@@ -1,89 +1,90 @@
+"use client";
+import { decode } from "he";
+import { fetchSongs } from "@/lib/fetchSong";
 import MusicCard from "@/components/Cards/musicCard";
 import MusicPlayer from "@/components/musicPlayer/musicPlayer";
 import Sidebar from "@/components/sidebar";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setTracks,
+  setCurrentTrackIndex,
+  play,
+} from "@/store/features/musicPlayer/musicPlayer";
+import type { RootState } from "@/store/store";
+
 export default function Home() {
+  const dispatch = useDispatch();
+  const tracks = useSelector((state: RootState) => state.musicPlayer.tracks);
+  const [songs, setSongs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadTrendingSongs() {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await fetchSongs("top songs");
+        setSongs(data.data.results || []);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadTrendingSongs();
+  }, []);
+
+  const handleSongClick = (song: any) => {
+    const track = {
+      title: decode(song.name || "Unknown Title"),
+      album: decode(song.album?.name || song.albumName || "Unknown Album"),
+      photo: song.image?.[2]?.url || "",
+      url: song.downloadUrl?.[4]?.url || "",
+    };
+
+    if (!track.url) {
+      console.warn("No audio URL found for track:", track);
+      return;
+    }
+    const updatedTracks = [...tracks, track];
+    dispatch(setTracks(updatedTracks));
+    dispatch(setCurrentTrackIndex(updatedTracks.length - 1));
+    dispatch(play());
+  };
   return (
     <div className="flex flex-col h-screen">
       <div className="flex flex-1 overflow-hidden pt-16">
         <Sidebar />
         <div className="flex-1 bg-black p-5 text-white overflow-y-auto">
-          <h1 className="text-2xl">Trending Now</h1>
+          <h1 className="text-2xl mb-4">Trending Now</h1>
+
+          {loading && <p>Loading songs...</p>}
+          {error && <p className="text-red-500">Error: {error}</p>}
+
           <div className="m-2 flex flex-wrap gap-4">
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/839/Mismatched-Season-3-Soundtrack-from-the-Netflix-Series-Hindi-2024-20241217204803-500x500.jpg"
-              songName="Ishq Hai"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
+            {songs.map((song: any) => {
+              const imageUrl = song.image?.[2]?.url || "";
+              const songName = decode(song.name || "Unknown Title");
+              const artistName = decode(
+                song.artists?.primary?.[0]?.name || "Unknown Artist"
+              );
+              return (
+                <div
+                  key={song.id}
+                  onClick={() => handleSongClick(song)}
+                  className="cursor-pointer"
+                >
+                  <MusicCard
+                    imageUrl={imageUrl}
+                    songName={songName}
+                    artistName={artistName}
+                  />
+                </div>
+              );
+            })}
           </div>
-          <h1 className="text-2xl">Recent Played</h1>
-          <div className="m-2 flex flex-wrap gap-4">
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-            <MusicCard
-              imageUrl="https://c.saavncdn.com/994/Tamasha-Hindi-2015-500x500.jpg"
-              songName="Agar Tum Saath Ho"
-              artistName="Arijit Singh"
-            />
-          </div>
-          <div className="m-2 flex flex-wrap gap-4"></div>
         </div>
       </div>
       <MusicPlayer />

@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         hostname: 'c.saavncdn.com',
       },
       {
+        protocol:'https',
+        hostname:'lh3.googleusercontent.com',
+      },
+      {
         protocol: 'https',
         hostname: 'via.placeholder.com',
       },
