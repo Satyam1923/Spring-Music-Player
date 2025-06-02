@@ -2,7 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['c.saavncdn.com', 'via.placeholder.com'], // add all external domains you use
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'c.saavncdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
+      },
+    ],
   },
 };
 

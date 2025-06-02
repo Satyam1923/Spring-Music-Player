@@ -100,13 +100,13 @@ export default function MusicPlayer() {
         ref={seekbarRef}
       >
         <div
-          className="absolute top-0 left-0 h-1 bg-white"
+          className="absolute top-0 left-0 h-1 bg-[#EFCADF]"
           style={{ width: progressPercent }}
         />
       </div>
 
       {/* Music Player Main Panel */}
-      <div className="h-16 w-full bg-neutral-900 text-white flex justify-between items-center px-6">
+      <div className="h-16 w-full bg-[#202020] text-white flex justify-between items-center px-6">
         {/* Track Info */}
         <div className="flex items-center gap-4">
           <img
