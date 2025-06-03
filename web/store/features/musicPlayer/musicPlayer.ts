@@ -16,6 +16,7 @@ interface MusicPlayerState {
   currentTime: number;
   duration: number;
   repeatMode: RepeatMode;
+  volume:number
 }
 
 const initialState: MusicPlayerState = {
@@ -25,6 +26,7 @@ const initialState: MusicPlayerState = {
   currentTime: 0,
   duration: 0,
   repeatMode: "off",
+  volume:1
 };
 
 const musicPlayerSlice = createSlice({
@@ -76,6 +78,9 @@ const musicPlayerSlice = createSlice({
         state.isPlaying = true;
       }
     },
+    setVolume(state,action:PayloadAction<number>){
+      state.volume = Math.min(1,Math.max(0,action.payload));
+    },
     playNext(state) {
       if (state.tracks.length > 0) {
         if (state.repeatMode === "one") {
@@ -96,6 +101,13 @@ const musicPlayerSlice = createSlice({
           state.isPlaying = false;
         }
       }
+    },
+    clearQueue(state){
+      state.tracks = [];
+      state.currentTrackIndex = -1;
+      state.isPlaying = false;
+      state.currentTime = 0;
+      state.duration = 0;
     },
     playPrev(state) {
       if (state.tracks.length > 0) {
@@ -136,6 +148,7 @@ export const {
   setDuration,
   toggleRepeatMode,
   shuffle,
+  clearQueue
 } = musicPlayerSlice.actions;
 
 export default musicPlayerSlice.reducer;

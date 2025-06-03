@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "../components/header";
 import { usePathname } from "next/navigation";
 import { ClientProvider } from "../components/clientProvider";
+import MusicPlayer from "@/components/musicPlayer/musicPlayer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -28,7 +29,22 @@ export default function RootLayout({
       >
         <ClientProvider>
           {!isAuthRoute && <Header />}
-          {children}
+          <div className="pb-8">
+            {children}
+          </div>
+          {!isAuthRoute && (
+            <div
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                zIndex: 1000,
+              }}
+            >
+              <MusicPlayer />
+            </div>
+          )}
         </ClientProvider>
       </body>
     </html>

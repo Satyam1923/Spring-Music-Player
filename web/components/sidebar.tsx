@@ -15,16 +15,13 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-56 h-full bg-black text-white p-6 flex flex-col">
+    <div className="w-56 h-full pb-20 bg-black text-white p-6 flex flex-col">
       <nav className="flex flex-col gap-4 mb-8">
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        <a href="/" className="hover:text-pink-400 transition-colors">
           Home
         </a>
         <a href="#" className="hover:text-pink-400 transition-colors">
           Explore
-        </a>
-        <a href="#" className="hover:text-pink-400 transition-colors">
-          Search
         </a>
       </nav>
       <nav className="flex flex-col gap-4">

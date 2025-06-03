@@ -2,7 +2,6 @@
 import { decode } from "he";
 import { fetchSongs } from "@/lib/fetchSong";
 import MusicCard from "@/components/Cards/musicCard";
-import MusicPlayer from "@/components/musicPlayer/musicPlayer";
 import Sidebar from "@/components/sidebar";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -70,16 +69,19 @@ export default function Home() {
               const artistName = decode(
                 song.artists?.primary?.[0]?.name || "Unknown Artist"
               );
+              const handlePlayClick = (e: React.MouseEvent) => {
+                e.stopPropagation(); 
+                handleSongClick(song);
+              };
               return (
                 <div
                   key={song.id}
-                  onClick={() => handleSongClick(song)}
-                  className="cursor-pointer"
                 >
                   <MusicCard
                     imageUrl={imageUrl}
                     songName={songName}
                     artistName={artistName}
+                    onPlayClick={handlePlayClick}
                   />
                 </div>
               );
@@ -87,7 +89,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <MusicPlayer />
     </div>
   );
 }

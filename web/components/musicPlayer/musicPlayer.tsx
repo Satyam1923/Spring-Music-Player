@@ -1,13 +1,20 @@
 "use client";
-
+import Image from "next/image";
 import React, { useRef, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { AnimatePresence, motion } from "motion/react";
 import { IoMdRepeat, IoMdShuffle } from "react-icons/io";
+import { HiMiniQueueList } from "react-icons/hi2";
+import {
+  TbRepeat,
+} from "react-icons/tb";
 import {
   TbPlayerSkipBackFilled,
   TbPlayerSkipForwardFilled,
 } from "react-icons/tb";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { MdClearAll } from "react-icons/md";
+import { HiOutlineQueueList } from "react-icons/hi2";
 import { MdRepeatOne } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -18,14 +25,17 @@ import {
   setDuration,
   toggleRepeatMode,
   shuffle,
-} from "@/store/features/musicPlayer/musicPlayer"; 
+  setCurrentTrackIndex,
+  clearQueue
+} from "@/store/features/musicPlayer/musicPlayer";
 import type { RootState } from "@/store/store";
+import { useState } from "react";
 
 export default function MusicPlayer() {
   const dispatch = useDispatch();
   const audioRef = useRef<HTMLAudioElement>(null);
   const seekbarRef = useRef<HTMLDivElement>(null);
-
+  const [queueVisible, setQueueVisible] = useState<boolean>(false);
   const {
     tracks,
     currentTrackIndex,
@@ -66,7 +76,6 @@ export default function MusicPlayer() {
       } else if (repeatMode === "all") {
         dispatch(playNext());
       } else {
-
         if (currentTrackIndex < tracks.length - 1) {
           dispatch(playNext());
         }
@@ -141,14 +150,66 @@ export default function MusicPlayer() {
   };
 
   if (!currentTrack) {
-    return <div className="text-white p-4">No tracks loaded</div>;
-  }
+    return (
+      <div
+        className="w-full h-16 flex items-center justify-between px-6 gap-4 rounded-lg text-gray-500 select-none cursor-not-allowed"
+        style={{
+          background: "rgba(10, 10, 10, 0.3)",
+          boxShadow: "0 15px 35px rgba(0, 0, 0, 0.9)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          borderRadius: "15px",
+          border: "1px solid rgba(255, 255, 255, 0.07)",
+        }}
+      >
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-neutral-700 rounded animate-pulse" />
+          <div className="flex flex-col gap-1">
+            <div className="w-32 h-4 bg-neutral-700 rounded animate-pulse" />
+            <div className="w-20 h-3 bg-neutral-600 rounded animate-pulse" />
+          </div>
+        </div>
 
+        <div className="flex items-center gap-4">
+          <button
+            disabled
+            aria-label="Repeat"
+            className="opacity-50 cursor-not-allowed"
+          >
+            <TbRepeat size={25} />
+          </button>
+          <button disabled className="opacity-50 cursor-not-allowed">
+            <TbPlayerSkipBackFilled size={25} />
+          </button>
+          <button disabled className="p-2 opacity-50 cursor-not-allowed">
+            <FaPlay size={25} />
+          </button>
+          <button disabled className="opacity-50 cursor-not-allowed">
+            <TbPlayerSkipForwardFilled size={25} />
+          </button>
+          <button disabled className="opacity-50 cursor-not-allowed">
+            <IoMdShuffle size={25} />
+          </button>
+        </div>
+        <div className="flex items-center gap-4 text-xs text-gray-400">
+          <span className="opacity-50 select-none">--:-- / --:--</span>
+          <button disabled className="opacity-50 cursor-not-allowed">
+            <HiOutlineQueueList size={25} />
+          </button>
+          <button disabled className="opacity-50 cursor-not-allowed">
+            <HiDotsHorizontal size={25} />
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+  
   return (
     <>
       <audio ref={audioRef} src={currentTrack.url} />
       <div
-        className="w-full h-1 bg-black relative cursor-pointer"
+        className="w-full h-1 bg-neutral-900 relative cursor-pointer"
         onClick={handleSeek}
         ref={seekbarRef}
       >
@@ -157,7 +218,78 @@ export default function MusicPlayer() {
           style={{ width: progressPercent }}
         />
       </div>
-      <div className="h-16 w-full bg-neutral-950 text-white flex items-center justify-between px-6 gap-4">
+      <AnimatePresence>
+        {queueVisible && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              background: "rgba(10, 10, 10, 0.3)",
+              boxShadow: "0 15px 35px rgba(0, 0, 0, 0.9)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              borderRadius: "15px",
+              border: "1px solid rgba(255, 255, 255, 0.07)",
+            }}
+            className="absolute bottom-20 w-72 right-4 text-white p-4 rounded-2xl shadow-lg z-50"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-lg font-semibold">Queue</h2>
+              <button
+                className="text-gray-300 hover:text-white transition-colors duration-200 p-1 rounded-md hover:bg-neutral-800"
+                aria-label="Clear Queue"
+              >
+                <MdClearAll size={22} onClick={()=>{
+                  dispatch(clearQueue());
+                }} />
+              </button>
+            </div>
+            <ul className="max-h-60 overflow-y-auto text-sm space-y-2">
+              {tracks.map((track, index) => (
+                <li
+                  key={index}
+                  className="p-2 flex items-center gap-3 rounded cursor-pointer hover:bg-neutral-800"
+                  onClick={() => dispatch(setCurrentTrackIndex(index))}
+                >
+                  <div className="relative w-10 h-10">
+                    <Image
+                      src={track.photo}
+                      alt={track.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded"
+                    />
+                    {index === currentTrackIndex && (
+                      <div className="absolute inset-0 flex items-center justify-center rounded">
+                        <FaPlay className="text-white text-xs" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-medium">{track.title}</span>
+                    <span className="text-xs font-extralight text-white">
+                      {track.album}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div
+        className="h-16 w-full text-white flex items-center justify-between px-6 gap-4 rounded-lg"
+        style={{
+          background: "rgba(10, 10, 10, 0.3)",
+          boxShadow: "0 15px 35px rgba(0, 0, 0, 0.9)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          borderRadius: "15px",
+          border: "1px solid rgba(255, 255, 255, 0.07)",
+        }}
+      >
         <div className="flex items-center gap-4">
           <img
             src={currentTrack.photo}
@@ -170,26 +302,45 @@ export default function MusicPlayer() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <button onClick={repeatClickHandler}>{getRepeatIcon()}</button>
-          <button onClick={playPrevHandler}>
-            <TbPlayerSkipBackFilled size={25} />
+        <div className="flex items-center gap-4 cursor-pointer">
+          <button className="cursor-pointer" onClick={repeatClickHandler}>
+            {getRepeatIcon()}
           </button>
-          <button onClick={togglePlayPauseHandler} className="p-2">
+          <button onClick={playPrevHandler}>
+            <TbPlayerSkipBackFilled size={25} className="cursor-pointer" />
+          </button>
+          <button
+            onClick={togglePlayPauseHandler}
+            className="p-2 cursor-pointer"
+          >
             {isPlaying ? <FaPause size={25} /> : <FaPlay size={25} />}
           </button>
-          <button onClick={playNextHandler}>
+          <button onClick={playNextHandler} className="cursor-pointer">
             <TbPlayerSkipForwardFilled size={25} />
           </button>
-          <button onClick={shuffleClickHandler}>
+          <button className="cursor-pointer" onClick={shuffleClickHandler}>
             <IoMdShuffle size={25} />
           </button>
         </div>
-        <div className="flex items-center gap-2 text-xs text-gray-300">
+        <div className="flex items-center gap-4 text-xs text-gray-300">
           <span>
             {formatTime(currentTime)} / {formatTime(duration)}
           </span>
-          <button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              setQueueVisible(!queueVisible);
+            }}
+          >
+            {queueVisible ? (
+              <HiMiniQueueList size={25} />
+            ) : (
+              <HiOutlineQueueList size={25} />
+            )}
+          </motion.button>
+          <button className="cursor-pointer"></button>
+          <button className="cursor-pointer">
             <HiDotsHorizontal size={25} />
           </button>
         </div>
