@@ -212,6 +212,14 @@ export default function MusicPlayer() {
         className="w-full h-1 bg-neutral-900 relative cursor-pointer"
         onClick={handleSeek}
         ref={seekbarRef}
+        style={{
+          background: "rgba(10, 10, 10, 0.3)",
+          boxShadow: "0 15px 35px rgba(0, 0, 0, 0.9)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          borderRadius: "15px",
+          border: "1px solid rgba(255, 255, 255, 0.07)",
+        }}
       >
         <div
           className="absolute top-0 left-0 h-1 bg-[#EFCADF]"
@@ -241,9 +249,12 @@ export default function MusicPlayer() {
                 className="text-gray-300 hover:text-white transition-colors duration-200 p-1 rounded-md hover:bg-neutral-800"
                 aria-label="Clear Queue"
               >
-                <MdClearAll size={22} onClick={()=>{
-                  dispatch(clearQueue());
-                }} />
+                <MdClearAll
+                  size={22}
+                  onClick={() => {
+                    dispatch(clearQueue());
+                  }}
+                />
               </button>
             </div>
             <ul className="max-h-60 overflow-y-auto text-sm space-y-2">

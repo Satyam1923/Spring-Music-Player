@@ -11,7 +11,7 @@ import {
   play,
 } from "@/store/features/musicPlayer/musicPlayer";
 import type { RootState } from "@/store/store";
-
+import MusicCardPlaceholder from "@/components/Cards/musicCardPlaceHolder";
 export default function Home() {
   const dispatch = useDispatch();
   const tracks = useSelector((state: RootState) => state.musicPlayer.tracks);
@@ -58,11 +58,34 @@ export default function Home() {
         <Sidebar />
         <div className="flex-1 bg-black p-5 text-white overflow-y-auto">
           <h1 className="text-2xl mb-4">Trending Now</h1>
-
-          {loading && <p>Loading songs...</p>}
           {error && <p className="text-red-500">Error: {error}</p>}
 
           <div className="m-2 flex flex-wrap gap-4">
+            {loading
+              ? Array.from({ length: 18 }).map((_, idx) => (
+                  <MusicCardPlaceholder key={idx} />
+                ))
+              : songs.map((song: any) => {
+                  const imageUrl = song.image?.[2]?.url || "";
+                  const songName = decode(song.name || "Unknown Title");
+                  const artistName = decode(
+                    song.artists?.primary?.[0]?.name || "Unknown Artist"
+                  );
+                  const handlePlayClick = (e: React.MouseEvent) => {
+                    e.stopPropagation();
+                    handleSongClick(song);
+                  };
+                  return (
+                    <div key={song.id}>
+                      <MusicCard
+                        imageUrl={imageUrl}
+                        songName={songName}
+                        artistName={artistName}
+                        onPlayClick={handlePlayClick}
+                      />
+                    </div>
+                  );
+                })}
             {songs.map((song: any) => {
               const imageUrl = song.image?.[2]?.url || "";
               const songName = decode(song.name || "Unknown Title");
@@ -70,13 +93,11 @@ export default function Home() {
                 song.artists?.primary?.[0]?.name || "Unknown Artist"
               );
               const handlePlayClick = (e: React.MouseEvent) => {
-                e.stopPropagation(); 
+                e.stopPropagation();
                 handleSongClick(song);
               };
               return (
-                <div
-                  key={song.id}
-                >
+                <div key={song.id}>
                   <MusicCard
                     imageUrl={imageUrl}
                     songName={songName}

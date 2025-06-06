@@ -1,4 +1,3 @@
-// lib/jioSaavan.ts
 export async function fetchSongs(song: string) {
     const res = await fetch(`/api/songs?song=${encodeURIComponent(song)}`);
     
@@ -10,3 +9,6 @@ export async function fetchSongs(song: string) {
     return data;
   }
   
+export async function globalSearch(query:string) {
+  // const res = await fetch()
+}

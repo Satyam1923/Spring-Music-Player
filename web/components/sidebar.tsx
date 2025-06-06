@@ -9,11 +9,6 @@ export default function Sidebar() {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    router.push("/login"); 
-  };
-
   return (
     <div className="w-56 h-full pb-20 bg-black text-white p-6 flex flex-col">
       <nav className="flex flex-col gap-4 mb-8">
@@ -46,12 +41,6 @@ export default function Sidebar() {
         <a href="#" className="hover:text-pink-400 transition-colors">
           Settings
         </a>
-        <button
-          onClick={handleLogout}
-          className="text-left px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-md transition-colors"
-        >
-          Logout
-        </button>
       </div>
     </div>
   );
