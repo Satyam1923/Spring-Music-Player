@@ -86,27 +86,6 @@ export default function Home() {
                     </div>
                   );
                 })}
-            {songs.map((song: any) => {
-              const imageUrl = song.image?.[2]?.url || "";
-              const songName = decode(song.name || "Unknown Title");
-              const artistName = decode(
-                song.artists?.primary?.[0]?.name || "Unknown Artist"
-              );
-              const handlePlayClick = (e: React.MouseEvent) => {
-                e.stopPropagation();
-                handleSongClick(song);
-              };
-              return (
-                <div key={song.id}>
-                  <MusicCard
-                    imageUrl={imageUrl}
-                    songName={songName}
-                    artistName={artistName}
-                    onPlayClick={handlePlayClick}
-                  />
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>
