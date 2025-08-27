@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import MusicCardPlaceholder from "@/components/Cards/musicCardPlaceHolder";
 import AlbumCard from "@/components/Cards/AlbumCard";
+import ArtistCard from "@/components/Cards/ArtistCard";
 import {
   setTracks,
   setCurrentTrackIndex,
@@ -202,7 +203,8 @@ export default function Search() {
     const matchesFilter =
       itemType === filterType ||
       (filterType === "songs" && itemType === "song") ||
-      (filterType === "albums" && itemType === "album");
+      (filterType === "albums" && itemType === "album") ||
+      (filterType === "artists" && itemType === "artist");
     return matchesFilter && matchesQuery;
   });
 
@@ -298,39 +300,35 @@ export default function Search() {
                             "Unknown Artist";
 
                       return (
-                        <AlbumCard  key={`${item.type}-${item.id}`}
+                        <AlbumCard
+                          key={`${item.type}-${item.id}`}
                           imageUrl={
                             item.image.find((img) => img.quality === "500x500")
                               ?.url || ""
                           }
                           albumName={decode(name)}
                           artistName={decode(artistName)}
-                         />
+                        />
                       );
                     })}
                   {activeFilter === "Artists" &&
-                    filteredData.map((item) => (
-                      <div
-                        key={`${item.type}-${item.id}`}
-                        className="p-4 bg-neutral-800 rounded-lg text-center"
-                      >
-                        <img
-                          src={
+                    filteredData.map((item) => {
+                      const name = "name" in item ? item.name : "Unknown Title";
+                      console.log(
+                        item.image.find((img) => img.quality === "500x500")?.url
+                      );
+                      return (
+                        <ArtistCard
+                          key={`${item.type}-${item.id}`}
+                          imageUrl={
                             item.image.find((img) => img.quality === "500x500")
                               ?.url || ""
                           }
-                          alt={decode(
-                            "name" in item ? item.name : "Unknown Artist"
-                          )}
-                          className="w-24 h-24 rounded-full mx-auto mb-2"
+                          artistName={decode(name)}
                         />
-                        <h3 className="text-sm font-semibold">
-                          {decode(
-                            "name" in item ? item.name : "Unknown Artist"
-                          )}
-                        </h3>
-                      </div>
-                    ))}
+                      );
+                    })}
+
                   {activeFilter === "Playlists" &&
                     filteredData.map((item) => (
                       <div
