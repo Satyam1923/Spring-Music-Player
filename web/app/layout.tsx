@@ -1,10 +1,12 @@
-'use client'
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../components/header";
 import { usePathname } from "next/navigation";
 import { ClientProvider } from "../components/clientProvider";
 import MusicPlayer from "@/components/musicPlayer/musicPlayer";
+import ProtectedLayout from "@/components/protectedRoute";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,7 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const isAuthRoute = pathname.startsWith("/login");
+  const isAuthRoute =
+    pathname.startsWith("/login") || pathname.startsWith("/signup");
+
   return (
     <html lang="en">
       <body
@@ -30,7 +34,11 @@ export default function RootLayout({
         <ClientProvider>
           {!isAuthRoute && <Header />}
           <div className="pb-8">
-            {children}
+            {isAuthRoute ? (
+              children
+            ) : (
+              <ProtectedLayout>{children}</ProtectedLayout>
+            )}
           </div>
           {!isAuthRoute && (
             <div

@@ -6,17 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loginWithGoogle,
   loginWithEmail,
-  registerWithEmail,
-  logout,
 } from "@/store/features/auth/authSlice";
 import { AppDispatch, RootState } from "@/store/store";
 import { FcGoogle } from "react-icons/fc";
-import { BiShow } from "react-icons/bi";
-import { BiHide } from "react-icons/bi";
+import { BiShow, BiHide } from "react-icons/bi";
+import Image from "next/image";
+
 export default function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  const { user, status, error } = useSelector((state: RootState) => state.auth);
+  const { user, error } = useSelector((state: RootState) => state.auth);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -30,79 +30,100 @@ export default function LoginPage() {
   const handleGoogleLogin = () => dispatch(loginWithGoogle());
   const handleEmailLogin = () => dispatch(loginWithEmail({ email, password }));
   const toggleShowPassword = () => setShowPassword((prev) => !prev);
-  const handleSignup = ()=>{
-    router.push("/signup")
-  }
+  const handleSignup = () => router.push("/signup");
+
   return (
-    <div className="flex">
-      <div className="h-screen justify-center w-156 bg-black flex flex-col p-15 space-y-4">
-        <div className="text-white font-bold text-2xl mb-6">Welcome to Spring</div>
-
-        <label htmlFor="email" className="text-white">
-          E-mail
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="p-2 rounded"
-          placeholder="Enter your email"
-        />
-
-        <label htmlFor="password" className="text-white">
-          Password
-        </label>
-        <div className="relative flex items-center">
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="p-2 rounded w-full"
-            placeholder="Enter your password"
-          />
-          <button
-            type="button"
-            onClick={toggleShowPassword}
-            className="absolute right-2 top-2 text-sm text-white"
-          >
-            {showPassword ? <BiHide size={25} /> : <BiShow size={25} />}
-          </button>
+    <div className="flex items-center justify-center min-h-screen bg-black relative overflow-hidden">
+      {/* Glass Card */}
+      <div className="z-10 h-auto w-[380px] bg-neutral-900/40 backdrop-blur-xl border border-white/10 shadow-2xl rounded-2xl p-8 space-y-6 transition hover:shadow-[0_0_35px_rgba(255,255,255,0.15)]">
+        {/* Logo / Title */}
+        <div className="text-center">
+          <h1 className="text-white font-extrabold text-3xl">
+            Welcome to Spring
+          </h1>
+          <p className="text-sm text-neutral-400">Sign in to continue</p>
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+        {/* Email */}
+        <div>
+          <label
+            htmlFor="email"
+            className="text-white/80 text-sm font-medium block mb-2"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            className="w-full p-3 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
+        {/* Password */}
+        <div>
+          <label
+            htmlFor="password"
+            className="text-white/80 text-sm font-medium block mb-2"
+          >
+            Password
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className="w-full p-3 rounded-lg bg-white/5 text-white placeholder-neutral-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-pink-400"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={toggleShowPassword}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-pink-400"
+            >
+              {showPassword ? <BiHide size={22} /> : <BiShow size={22} />}
+            </button>
+          </div>
+        </div>
+
+        {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+
+        {/* Login Button */}
         <button
           onClick={handleEmailLogin}
-          className="bg-[#EFCADF] text-black p-2 rounded hover:bg-[#F695C5]"
+          className="w-full p-3 rounded-lg bg-gradient-to-r from-pink-400 to-purple-500 text-white font-semibold shadow-lg hover:opacity-90 transition disabled:opacity-50"
         >
           Login
         </button>
-        <div className="text-sm text-white font-light mt-4">
-          Don’t have an account?{" "}
+
+        {/* Sign Up Link */}
+        <p className="text-sm text-neutral-400 text-center">
+          Don’t have an account?
           <button
             onClick={handleSignup}
-            className="text-blue-400 hover:text-blue-600 font-medium underline ml-1"
+            className="ml-1 text-pink-300 hover:text-pink-400 font-medium underline underline-offset-2"
           >
             Sign Up
           </button>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="text-white font-light">Sign Up with</div>
-          <button
-            onClick={handleGoogleLogin}
-            className="text-white rounded-full p-2 bg-neutral-700 hover:bg-neutral-600 flex items-center justify-center"
-          >
-            <FcGoogle size={15} />
-          </button>
-        </div>
-      </div>
+        </p>
 
-      <div className="h-screen w-full bg-neutral-900 text-white flex items-center justify-center">
-        <div>Right bar</div>
+        {/* Divider */}
+        <div className="flex items-center gap-4">
+          <span className="flex-1 h-px bg-white/10"></span>
+          <span className="text-white/50 text-xs uppercase">OR</span>
+          <span className="flex-1 h-px bg-white/10"></span>
+        </div>
+
+        {/* Google Button */}
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full flex items-center justify-center gap-3 p-3 border border-white/10 bg-white/5 rounded-lg text-white hover:bg-white/10 transition"
+        >
+          <FcGoogle size={22} /> Continue with Google
+        </button>
       </div>
     </div>
   );
