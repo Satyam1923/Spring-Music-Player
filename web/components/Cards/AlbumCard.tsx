@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
-import { FaPlay } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+
 interface AlbumCardProps {
+  id: string; 
   imageUrl: string;
   albumName: string;
   artistName: string;
@@ -8,13 +11,23 @@ interface AlbumCardProps {
 }
 
 export default function AlbumCard({
+  id,
   imageUrl,
   albumName,
   artistName,
   onPlayClick,
 }: AlbumCardProps) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/search/album/${id}`);
+  };
+
   return (
-    <div className="w-48 rounded-xl p-2 flex flex-col on items-center text-center transition-transform duration-300 hover:scale-105 group cursor-pointer">
+    <div
+      onClick={handleClick} 
+      className="w-48 rounded-xl p-2 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 group cursor-pointer"
+    >
       <div className="relative h-42 w-42 mb-2 flex items-center justify-center text-white overflow-hidden rounded-xl bg-neutral-800">
         <Image
           src={imageUrl}

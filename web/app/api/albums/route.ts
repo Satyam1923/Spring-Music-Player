@@ -5,7 +5,7 @@ export async function GET(req: NextRequest){
     const searchParams = req.nextUrl.searchParams;
     const query = searchParams.get("album");
     if (!query) {
-        return Response.json({ error: "Missing 'song' query parameter" }, { status: 400 });
+        return Response.json({ error: "Missing 'album' query parameter" }, { status: 400 });
       }
     
       const baseUrl = process.env.JIO_SAAVAN_API_BASE_URL;
