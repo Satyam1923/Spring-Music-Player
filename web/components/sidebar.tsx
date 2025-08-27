@@ -15,8 +15,8 @@ export default function Sidebar() {
         <Link href="/" className="hover:text-pink-400 transition-colors">
           Home
         </Link>
-        <Link href="#" className="hover:text-pink-400 transition-colors">
-          Explore
+        <Link href="/search " className="hover:text-pink-400 transition-colors">
+          Search
         </Link>
       </nav>
       <nav className="flex flex-col gap-4">

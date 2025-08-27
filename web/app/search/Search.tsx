@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MusicCardPlaceholder from "@/components/Cards/musicCardPlaceHolder";
 import AlbumCard from "@/components/Cards/AlbumCard";
 import ArtistCard from "@/components/Cards/ArtistCard";
+import PlaylistCard from "@/components/Cards/PlaylistCard";
 import {
   setTracks,
   setCurrentTrackIndex,
@@ -204,7 +205,8 @@ export default function Search() {
       itemType === filterType ||
       (filterType === "songs" && itemType === "song") ||
       (filterType === "albums" && itemType === "album") ||
-      (filterType === "artists" && itemType === "artist");
+      (filterType === "artists" && itemType === "artist") ||
+      (filterType === "playlists" && itemType === "playlist");
     return matchesFilter && matchesQuery;
   });
 
@@ -330,28 +332,20 @@ export default function Search() {
                     })}
 
                   {activeFilter === "Playlists" &&
-                    filteredData.map((item) => (
-                      <div
-                        key={`${item.type}-${item.id}`}
-                        className="p-4 bg-neutral-800 rounded-lg"
-                      >
-                        <img
-                          src={
+                    filteredData.map((item) => {
+                      const name =
+                        "name" in item ? item.name : "Unknown Playlist";
+                      return (
+                        <PlaylistCard
+                          key={`${item.type}-${item.id}`}
+                          imageUrl={
                             item.image.find((img) => img.quality === "500x500")
                               ?.url || ""
                           }
-                          alt={decode(
-                            "name" in item ? item.name : "Unknown Playlist"
-                          )}
-                          className="w-full h-40 object-cover rounded-md mb-2"
+                          name={decode(name)}
                         />
-                        <h3 className="text-sm font-semibold">
-                          {decode(
-                            "name" in item ? item.name : "Unknown Playlist"
-                          )}
-                        </h3>
-                      </div>
-                    ))}
+                      );
+                    })}
                 </>
               ) : (
                 <p className="text-neutral-400 col-span-full text-center py-8">
