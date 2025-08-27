@@ -7,7 +7,6 @@ interface AlbumCardProps {
   imageUrl: string;
   albumName: string;
   artistName: string;
-  onPlayClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function AlbumCard({
@@ -15,7 +14,6 @@ export default function AlbumCard({
   imageUrl,
   albumName,
   artistName,
-  onPlayClick,
 }: AlbumCardProps) {
   const router = useRouter();
 

@@ -323,6 +323,7 @@ export default function Search() {
                       return (
                         <ArtistCard
                           key={`${item.type}-${item.id}`}
+                          id={item.id}
                           imageUrl={
                             item.image.find((img) => img.quality === "500x500")
                               ?.url || ""
