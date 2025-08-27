@@ -339,6 +339,7 @@ export default function Search() {
                         "name" in item ? item.name : "Unknown Playlist";
                       return (
                         <PlaylistCard
+                        id={item.id}
                           key={`${item.type}-${item.id}`}
                           imageUrl={
                             item.image.find((img) => img.quality === "500x500")
