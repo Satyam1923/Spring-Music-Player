@@ -84,7 +84,10 @@ interface Track {
   photo: string;
   url: string;
 }
-
+interface SongsResponse {
+  success: boolean;
+  songs: MusicItem[];
+}
 export default function Search() {
   const searchParams = useSearchParams();
   const query: string = searchParams?.get("q")?.trim().toLowerCase() || "";
@@ -123,8 +126,8 @@ export default function Search() {
         let results: (MusicItem | AlbumItem | ArtistItem | PlaylistItem)[] = [];
 
         if (activeFilter === "Songs") {
-          const response = await axios.get<SearchResponse<MusicItem>>(endpoint);
-          results = response.data.data.results || [];
+          const response = await axios.get<SongsResponse>(endpoint);
+          results = response.data.songs || [];
         } else if (activeFilter === "Albums") {
           const response = await axios.get<SearchResponse<AlbumItem>>(endpoint);
           results = response.data.data.results || [];

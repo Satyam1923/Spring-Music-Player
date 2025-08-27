@@ -25,7 +25,7 @@ export default function Home() {
       setError(null);
       try {
         const data = await fetchSongs("top songs");
-        setSongs(data.data.results || []);
+        setSongs(data.songs || []);
       } catch (err: any) {
         setError(err.message);
       } finally {
