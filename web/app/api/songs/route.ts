@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     return Response.json({ error: "API base URL not configured" }, { status: 500 });
   }
 
-  const apiUrl = `${baseUrl}/search/songs?query=${encodeURIComponent(song)}&limit=30`;
+  const apiUrl = `${baseUrl}/search/songs?query=${encodeURIComponent(song)}&limit=60`;
 
   try {
     const response = await axios.get(apiUrl);
