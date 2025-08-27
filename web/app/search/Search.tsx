@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import MusicCard from "@/components/Cards/musicCard";
@@ -8,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import MusicCardPlaceholder from "@/components/Cards/musicCardPlaceHolder";
+import AlbumCard from "@/components/Cards/AlbumCard";
 import {
   setTracks,
   setCurrentTrackIndex,
@@ -69,14 +69,6 @@ interface PlaylistItem {
   type: string;
 }
 
-interface TopQueryItem {
-  id: string;
-  name: string;
-  image: Image[];
-  artists?: { primary: Artist[] };
-  type: string;
-}
-
 interface SearchResponse<T> {
   success: boolean;
   data: {
@@ -94,10 +86,10 @@ interface Track {
 export default function Search() {
   const searchParams = useSearchParams();
   const query: string = searchParams?.get("q")?.trim().toLowerCase() || "";
-  const filters: string[] = ["Top Results", "Songs", "Albums", "Artists", "Playlists"];
-  const [activeFilter, setActiveFilter] = useState<string>("Top Results");
+  const filters: string[] = ["Songs", "Albums", "Artists", "Playlists"];
+  const [activeFilter, setActiveFilter] = useState<string>("Songs");
   const [searchResults, setSearchResults] = useState<
-    (MusicItem | AlbumItem | ArtistItem | PlaylistItem | TopQueryItem)[]
+    (MusicItem | AlbumItem | ArtistItem | PlaylistItem)[]
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -117,17 +109,16 @@ export default function Search() {
       setError(null);
       const baseUrl = process.env.NEXT_PUBLIC_API_URL;
       const endpoints: Record<string, string> = {
-        "Top Results": `${baseUrl}/globalSearch?query=${encodeURIComponent(query)}`,
         Songs: `${baseUrl}/songs?song=${encodeURIComponent(query)}`,
         Albums: `${baseUrl}/albums?album=${encodeURIComponent(query)}`,
         Artists: `${baseUrl}/artists?artist=${encodeURIComponent(query)}`,
         Playlists: `${baseUrl}/playlists?playlist=${encodeURIComponent(query)}`,
       };
 
-      const endpoint = endpoints[activeFilter] || endpoints["Top Results"];
+      const endpoint = endpoints[activeFilter];
 
       try {
-        let results: (MusicItem | AlbumItem | ArtistItem | PlaylistItem | TopQueryItem)[] = [];
+        let results: (MusicItem | AlbumItem | ArtistItem | PlaylistItem)[] = [];
 
         if (activeFilter === "Songs") {
           const response = await axios.get<SearchResponse<MusicItem>>(endpoint);
@@ -136,25 +127,28 @@ export default function Search() {
           const response = await axios.get<SearchResponse<AlbumItem>>(endpoint);
           results = response.data.data.results || [];
         } else if (activeFilter === "Artists") {
-          const response = await axios.get<SearchResponse<ArtistItem>>(endpoint);
+          const response = await axios.get<SearchResponse<ArtistItem>>(
+            endpoint
+          );
           results = response.data.data.results || [];
         } else if (activeFilter === "Playlists") {
-          const response = await axios.get<SearchResponse<PlaylistItem>>(endpoint);
-          results = response.data.data.results || [];
-        } else {
-          const response = await axios.get<
-            SearchResponse<MusicItem | AlbumItem | ArtistItem | PlaylistItem | TopQueryItem>
-          >(endpoint);
+          const response = await axios.get<SearchResponse<PlaylistItem>>(
+            endpoint
+          );
           results = response.data.data.results || [];
         }
 
         const uniqueResults = Array.from(
-          new Map(results.map((item) => [`${item.type}-${item.id}`, item])).values()
+          new Map(
+            results.map((item) => [`${item.type}-${item.id}`, item])
+          ).values()
         );
         setSearchResults(uniqueResults);
       } catch (err: unknown) {
         const errorMessage =
-          err instanceof Error ? err.message : "Failed to fetch search results.";
+          err instanceof Error
+            ? err.message
+            : "Failed to fetch search results.";
         console.error("Error fetching search results:", err);
         setError(errorMessage);
         setSearchResults([]);
@@ -186,29 +180,29 @@ export default function Search() {
   };
 
   const filteredData = searchResults.filter((item) => {
-    const name = "name" in item ? item.name :"";
+    const name = "name" in item ? item.name : "";
     const decodedName = decode(name).toLowerCase();
 
     let matchesQuery = !query || decodedName.includes(query.toLowerCase());
 
     if (activeFilter === "Songs" && "primaryArtists" in item) {
-      const artistName = item.primaryArtists || item.artists?.primary?.[0]?.name || "";
+      const artistName =
+        item.primaryArtists || item.artists?.primary?.[0]?.name || "";
       const decodedPrimaryArtist = decode(artistName).toLowerCase();
-      matchesQuery = matchesQuery || decodedPrimaryArtist.includes(query.toLowerCase());
-    } else if (
-      (activeFilter === "Albums" || activeFilter === "Top Results") &&
-      "artists" in item
-    ) {
+      matchesQuery =
+        matchesQuery || decodedPrimaryArtist.includes(query.toLowerCase());
+    } else if (activeFilter === "Albums" && "artists" in item) {
       const artistName = item.artists?.primary?.[0]?.name || "";
       const decodedPrimaryArtist = decode(artistName).toLowerCase();
-      matchesQuery = matchesQuery || decodedPrimaryArtist.includes(query.toLowerCase());
+      matchesQuery =
+        matchesQuery || decodedPrimaryArtist.includes(query.toLowerCase());
     }
-
+    const itemType = item.type.toLowerCase();
+    const filterType = activeFilter.toLowerCase();
     const matchesFilter =
-      activeFilter === "Songs" ||
-      item.type.toLowerCase() === activeFilter.toLowerCase() ||
-      (activeFilter === "Albums" && item.type.toLowerCase() === "album");
-    
+      itemType === filterType ||
+      (filterType === "songs" && itemType === "song") ||
+      (filterType === "albums" && itemType === "album");
     return matchesFilter && matchesQuery;
   });
 
@@ -268,10 +262,7 @@ export default function Search() {
                         }
                       };
 
-                      const name =
-                        "name" in item
-                          ? item.name
-                          :  "Unknown Title";
+                      const name = "name" in item ? item.name : "Unknown Title";
                       const artistName =
                         "primaryArtists" in item && item.primaryArtists
                           ? item.primaryArtists
@@ -298,39 +289,25 @@ export default function Search() {
                     })}
                   {activeFilter === "Albums" &&
                     filteredData.map((item) => {
+                      const name = "name" in item ? item.name : "Unknown Title";
+                      const artistName =
+                        "primaryArtists" in item && item.primaryArtists
+                          ? item.primaryArtists
+                          : ("artists" in item &&
+                              item.artists?.primary?.[0]?.name) ||
+                            "Unknown Artist";
+
                       return (
-                        <div
-                          key={`${item.type}-${item.id}`}
-                          className="p-4 bg-neutral-800 rounded-lg"
-                        >
-                          <img
-                            src={
-                              item.image.find(
-                                (img) => img.quality === "500x500"
-                              )?.url || ""
-                            }
-                            alt={decode(
-                              "name" in item ? item.name : "Unknown Album"
-                            )}
-                            className="w-full h-40 object-cover rounded-md mb-2"
-                          />
-                          <h3 className="text-sm font-semibold">
-                            {decode(
-                              "name" in item ? item.name : "Unknown Album"
-                            )}
-                          </h3>
-                          <p className="text-xs text-neutral-400">
-                            {decode(
-                              "artists" in item &&
-                                item.artists?.primary?.[0]?.name
-                                ? item.artists.primary[0].name
-                                : "Unknown Artist"
-                            )}
-                          </p>
-                        </div>
+                        <AlbumCard  key={`${item.type}-${item.id}`}
+                          imageUrl={
+                            item.image.find((img) => img.quality === "500x500")
+                              ?.url || ""
+                          }
+                          albumName={decode(name)}
+                          artistName={decode(artistName)}
+                         />
                       );
                     })}
-
                   {activeFilter === "Artists" &&
                     filteredData.map((item) => (
                       <div
@@ -343,13 +320,13 @@ export default function Search() {
                               ?.url || ""
                           }
                           alt={decode(
-                            "title" in item ? item.name : "Unknown Artist"
+                            "name" in item ? item.name : "Unknown Artist"
                           )}
                           className="w-24 h-24 rounded-full mx-auto mb-2"
                         />
                         <h3 className="text-sm font-semibold">
                           {decode(
-                            "title" in item ? item.name : "Unknown Artist"
+                            "name" in item ? item.name : "Unknown Artist"
                           )}
                         </h3>
                       </div>
@@ -366,55 +343,17 @@ export default function Search() {
                               ?.url || ""
                           }
                           alt={decode(
-                            "title" in item ? item.name : "Unknown Playlist"
+                            "name" in item ? item.name : "Unknown Playlist"
                           )}
                           className="w-full h-40 object-cover rounded-md mb-2"
                         />
                         <h3 className="text-sm font-semibold">
                           {decode(
-                            "title" in item ? item.name : "Unknown Playlist"
+                            "name" in item ? item.name : "Unknown Playlist"
                           )}
                         </h3>
                       </div>
                     ))}
-                  {activeFilter === "Top Results" &&
-                    filteredData.map((item) => {
-                      const handlePlayClick = (e: React.MouseEvent) => {
-                        e.stopPropagation();
-                        if (
-                          ["song", "track"].includes(item.type.toLowerCase())
-                        ) {
-                          handleSongClick(item as MusicItem);
-                        }
-                      };
-                      const name =
-                        "name" in item
-                          ? item.name
-                          :  "Unknown Title";
-                      const artistName =
-                        "primaryArtists" in item && item.primaryArtists
-                          ? item.primaryArtists
-                          : ("artists" in item &&
-                              item.artists?.primary?.[0]?.name) ||
-                            "Unknown Artist";
-
-                      return (
-                        <MusicCard
-                          key={`${item.type}-${item.id}`}
-                          imageUrl={
-                            item.image.find((img) => img.quality === "500x500")
-                              ?.url || ""
-                          }
-                          songName={decode(name)}
-                          artistName={decode(artistName)}
-                          onPlayClick={
-                            ["song", "track"].includes(item.type.toLowerCase())
-                              ? handlePlayClick
-                              : undefined
-                          }
-                        />
-                      );
-                    })}
                 </>
               ) : (
                 <p className="text-neutral-400 col-span-full text-center py-8">

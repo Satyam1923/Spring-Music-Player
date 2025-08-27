@@ -38,28 +38,6 @@ export default function AlbumCard({
             duration-300
           "
         />
-
-        <button
-          onClick={onPlayClick}
-          className="
-          absolute left-2 bottom-2
-          opacity-0 invisible
-          group-hover:opacity-100 group-hover:visible
-        transition-all duration-200
-       bg-white
-       p-2
-      rounded-full
-      shadow-lg
-       text-black
-      flex items-center justify-center
-      w-10 h-10
-      cursor-pointer
-      hover:scale-110
-  "
-          aria-label={`Play ${albumName}`}
-        >
-          <FaPlay />
-        </button>
       </div>
       <p>{albumName}</p>
       <p className="text-sm text-gray-400">{artistName}</p>
