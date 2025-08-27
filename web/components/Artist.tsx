@@ -33,11 +33,10 @@ export default function Artist({ id }: { id: string }) {
         );
         if (!res.ok) throw new Error("Failed to fetch artist");
         const data = await res.json();
-        console.log("Artist API response:", data.data);
-
-        setArtistName(data.data?.name || "Unknown Artist"); 
-        setArtistImage(data.data?.image?.[2]?.url || ""); 
-        setSongs(data.data?.topSongs || []);
+        console.log("Artist API response:", data);
+        setArtistName(data.songs[0]?.artists?.primary[0].name || "Unknown Artist"); 
+        setArtistImage(data.songs[0]?.artists?.primary[0].image[2]?.url || ""); 
+        setSongs(data.songs || []);
       } catch (err: any) {
         setError(err.message);
       } finally {
