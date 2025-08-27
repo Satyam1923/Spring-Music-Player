@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import MusicCard from "@/components/Cards/musicCard";
-import MusicPlayer from "@/components/musicPlayer/musicPlayer";
 import Sidebar from "@/components/sidebar";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import MusicCardPlaceholder from "@/components/Cards/musicCardPlaceHolder";
 import {
   setTracks,
   setCurrentTrackIndex,
@@ -82,10 +82,10 @@ export default function Search() {
 
       setIsLoading(true);
       setError(null);
-
+      const url = process.env.NEXT_PUBLIC_API_URL;
       try {
         const response = await axios.get<SearchResponse>(
-          `http://localhost:3000/api/songs?song=${encodeURIComponent(query)}`
+          `${url}/songs?song=${encodeURIComponent(query)}`
         );
 
         const songResults: MusicItem[] = response.data.data.results || [];
@@ -148,7 +148,6 @@ const filteredData: MusicItem[] = searchResults.filter((item) => {
     item.artists?.primary[0]?.name || ""
   ).toLowerCase();
   const decodedPrimaryArtists = decode(item.primaryArtists || "").toLowerCase();
-
   const matchesFilter =
     activeFilter === "Top Results" || item.type.toLowerCase() === "song";
 
@@ -187,9 +186,11 @@ const filteredData: MusicItem[] = searchResults.filter((item) => {
           </div>
 
           {isLoading && (
-            <p className="text-neutral-400 col-span-full text-center py-8">
-              Loading...
-            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              {Array.from({ length: 18 }).map((_, idx) => (
+                <MusicCardPlaceholder key={idx} />
+              ))}
+            </div>
           )}
           {error && (
             <p className="text-red-500 col-span-full text-center py-8">
@@ -205,7 +206,7 @@ const filteredData: MusicItem[] = searchResults.filter((item) => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {filteredData.length > 0 ? (
-              filteredData.map((item) =>{ 
+              filteredData.map((item) => {
                 const handlePlayClick = (e: React.MouseEvent) => {
                   e.stopPropagation();
                   handleSongClick(item);
@@ -217,15 +218,16 @@ const filteredData: MusicItem[] = searchResults.filter((item) => {
                       item.image.find((img) => img.quality === "500x500")
                         ?.url || ""
                     }
-                    songName={item.name}
-                    artistName={
+                    songName={decode(item.name || "Unknown Title")}
+                    artistName={decode(
                       item.artists?.primary[0]?.name ||
-                      item.primaryArtists ||
-                      "Unknown Artist"
-                    }
+                        item.primaryArtists ||
+                        "Unknown Artist"
+                    )}
                     onPlayClick={handlePlayClick}
                   />
-                );})
+                );
+              })
             ) : (
               <p className="text-neutral-400 col-span-full text-center py-8">
                 {query

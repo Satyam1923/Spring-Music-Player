@@ -2,8 +2,8 @@
 
 import { AppDispatch } from "@/store/store";
 import { useDispatch } from "react-redux";
-import { logout } from "@/store/features/auth/authSlice";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Sidebar() {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,35 +12,35 @@ export default function Sidebar() {
   return (
     <div className="w-42 h-full pb-20 bg-black text-white p-6 flex flex-col">
       <nav className="flex flex-col gap-4 mb-8">
-        <a href="/" className="hover:text-pink-400 transition-colors">
+        <Link href="/" className="hover:text-pink-400 transition-colors">
           Home
-        </a>
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        </Link>
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Explore
-        </a>
+        </Link>
       </nav>
       <nav className="flex flex-col gap-4">
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Library
-        </a>
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        </Link>
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Liked Songs
-        </a>
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        </Link>
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Recent
-        </a>
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        </Link>
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Playlists
-        </a>
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        </Link>
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Albums
-        </a>
+        </Link>
       </nav>
       <div className="flex-grow" />
       <div className="flex flex-col gap-4 pt-6 border-t border-gray-700">
-        <a href="#" className="hover:text-pink-400 transition-colors">
+        <Link href="#" className="hover:text-pink-400 transition-colors">
           Settings
-        </a>
+        </Link>
       </div>
     </div>
   );
